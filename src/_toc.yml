@@ -1,0 +1,16 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+parts:
+  - caption: 2023Spring Test
+    chapters:
+    - file: lab1-ja
+    - file: lab2-ja
+    - file: lab3-ja
+    - file: lab4-ja
+    - file: lab5-ja
+
+
+
