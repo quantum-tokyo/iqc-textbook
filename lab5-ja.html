@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Challenge 5: 127 量子ビットを使う &#8212; IBM Quantum Challengeで学ぶ量子コンピューティング</title>
+    <title>6. Challenge 5: 127 量子ビットを使う &#8212; IBM Quantum Challengeで学ぶ量子コンピューティング</title>
   
   
   
@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'lab5-ja';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Lab 4: エラー訂正" href="lab4-ja.html" />
+    <link rel="prev" title="5. Lab 4: エラー訂正" href="lab4-ja.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -147,21 +147,26 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Welcome to your Jupyter Book
+                    Welcome to IQC Textbook
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">2023Spring Test</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">第２章 量子コンピューターの計算ルール</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2019-w1-adder.html">Week1 量子回路における加算器</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Test: 2023Spring</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="lab1-ja.html">IBM Quantum Challenge: Spring 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab1-ja.html">1. IBM Quantum Challenge: Spring 2023</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="lab2-ja.html">Lab 2: 量子テレポーテーション</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab3-ja.html">Lab 3: 反復位相推定</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab4-ja.html">Lab 4: エラー訂正</a></li>
-
-
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Challenge 5: 127 量子ビットを使う</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab2-ja.html">3. Lab 2: 量子テレポーテーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab3-ja.html">4. Lab 3: 反復位相推定</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab4-ja.html">5. Lab 4: エラー訂正</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Challenge 5: 127 量子ビットを使う</a></li>
 
 </ul>
 
@@ -356,27 +361,27 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Challenge 5: 127 量子ビットを使う</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-ghz">Step 1: 大きなGHZ状態を作る</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">6. Challenge 5: 127 量子ビットを使う</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-ghz">6.1. Step 1: 大きなGHZ状態を作る</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">6.1.1. Exercise 1</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2">Step 2: サイズを半分にする</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2">6.2. Step 2: サイズを半分にする</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">6.2.1. Exercise 2</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3">Step 3: 準備し、実デバイスで実行する</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-ghz">Step 4: GHZ状態のテスト</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">Exercise 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3">6.3. Step 3: 準備し、実デバイスで実行する</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-ghz">6.4. Step 4: GHZ状態のテスト</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">6.4.1. Exercise 3</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">ボーナス: エラー訂正への道</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1">Step 1: 実際の状態はどの程度よかったのか？</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Step 2: なぜ単一のスタビライザーだけでは不十分なのか</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Step 3: エラーを増やさないためにはどうするか？</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4">Step 4: 何ができるでしょうか？</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">7. ボーナス: エラー訂正への道</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1">7.1. Step 1: 実際の状態はどの程度よかったのか？</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">7.2. Step 2: なぜ単一のスタビライザーだけでは不十分なのか</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">7.3. Step 3: エラーを増やさないためにはどうするか？</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4">7.4. Step 4: 何ができるでしょうか？</a></li>
 </ul>
 </li>
 </ul>
@@ -392,7 +397,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="challenge-5-127">
-<h1>Challenge 5: 127 量子ビットを使う<a class="headerlink" href="#challenge-5-127" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">6. </span>Challenge 5: 127 量子ビットを使う<a class="headerlink" href="#challenge-5-127" title="Permalink to this heading">#</a></h1>
 <p>これまでのChallengeが解けたとのこと、おめでとうございます！Dyanmic circuitをうまく使えることがわかりましたね。
 ここまで来たご褒美として、127量子ビットデバイスの1つを使うことができます。</p>
 <p>注意事項として、Challengeの完了でバッジを獲得するには、5つのLabのうち4つを終了している必要があります。このように決定した理由は、このLabが (a)技術的に困難であり、 (b)当社の最先端のハードウェアを使用することが分かっているためで、意図的にこのように決定しました。100量子ビットを超えるデバイスを一般に公開すると、ジョブの実行に大きな遅れが生じる可能性があるというのが実情です。Challengeの終了までにジョブを成功させることができない可能性もあります（そうでないことを祈りますが！）。そのようなことがないように、私たちは舞台裏でできる限りのことをしていますが、しかし、今年のChallengeは過去最高の参加者数を記録しています。親切に、何度も回路を提出し、キューを詰まらせないようにしてください。</p>
@@ -702,14 +707,14 @@ document.write(`
 </div>
 </div>
 <section id="step-1-ghz">
-<h2>Step 1: 大きなGHZ状態を作る<a class="headerlink" href="#step-1-ghz" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.1. </span>Step 1: 大きなGHZ状態を作る<a class="headerlink" href="#step-1-ghz" title="Permalink to this heading">#</a></h2>
 <p>多くの量子アルゴリズムでは、複数の量子ビットを互いにエンタングルする必要があります。
 アルゴリズムでよく使われる状態の1つに、一般化されたGHZ状態があり、 <span class="math notranslate nohighlight">\((\alpha |00...0\rangle + \beta |11...1\rangle)\)</span> このとき <span class="math notranslate nohighlight">\(\alpha = \beta\)</span> という状態です。</p>
 <p>GHZ状態は完全にエンタングルされており、任意の数の量子ビットに一般化することができます。ここでは、これを用いて127量子ビットのGHZ状態を作ることにします！
 <strong>何個の量子ビットによるGHZ状態であっても、GHZ状態は測定されると、すべての量子ビットが0か1かのどちらかになっています。</strong></p>
 <p>ここでのchallengeは、127個の量子ビットを理論的にエンタングルさせることではなく、 <em>実際のデバイス上で</em> エンタングルさせることです。つまり、デバイスのレイアウトを考慮する必要があります（例えば、互いに直接接続されていない量子ビットの間でCXゲートを使用しないなど）。また、ノイズを減らすために、回路の深さをできるだけ小さくするようにする必要があります。</p>
 <section id="exercise-1">
-<h3>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.1.1. </span>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this heading">#</a></h3>
 <p>アダマールゲートとCNOTゲートだけを使って、127量子ビットのデバイス <code class="docutils literal notranslate"><span class="pre">ibm_sherbrook</span></code> にGHZ状態を生成してください。できるだけ回路のDepthが小さくなるようにしてみてください。</p>
 <p><em>ヒント：すべての量子ビットが互いに接続されている理想的なデバイスに対して、（最小のDepthで）どのように行うかを最初に考えることが助けになることがあります。</em></p>
 <div class="cell docutils container">
@@ -742,12 +747,12 @@ document.write(`
 </section>
 </section>
 <section id="step-2">
-<h2>Step 2: サイズを半分にする<a class="headerlink" href="#step-2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.2. </span>Step 2: サイズを半分にする<a class="headerlink" href="#step-2" title="Permalink to this heading">#</a></h2>
 <p>ここで、作成したGHZ状態を利用して、偶数量子ビットを使った縮小GHZ状態を形成したいと思います。そのためには、GHZ状態を崩壊させることなく測定できるように、奇数量子ビットのエンタングルメントを解消させる必要があります。</p>
 <p>量子ビットをアンエンタングルしたいので、Lab４でやったのと同じように、 <strong>スタビライザー</strong> を生成する方法で行います。スタビライザーは、接続されている両方の量子ビットが同じ値であれば0になり、異なる値であれば1になるはずです。</p>
 <p>このようなことをすることに何の意味があるのでしょうか？鋭い観察者はすでに気づいているかもしれませんが、このスタビライザーを使って、縮小されたGHZ状態にエラー訂正を適用することができるのです。</p>
 <section id="exercise-2">
-<h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.2.1. </span>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this heading">#</a></h3>
 <p>スタビライザーを作るために、作られたGHZ状態の奇数量子ビットをアンエンタングルしてください。ここでも、回路のDepthをできるだけ小さくすることに挑戦できます。</p>
 <p><em>ヒント：上記のGHZ状態の作り方を考慮に入れてください。アンエンタングリングの方法は、その作成方法に特化したものです。</em></p>
 <div class="cell docutils container">
@@ -832,7 +837,7 @@ document.write(`
 </section>
 </section>
 <section id="step-3">
-<h2>Step 3: 準備し、実デバイスで実行する<a class="headerlink" href="#step-3" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.3. </span>Step 3: 準備し、実デバイスで実行する<a class="headerlink" href="#step-3" title="Permalink to this heading">#</a></h2>
 <p>GHZ状態を実際のデバイス上で実行する準備が整いましたので、<code class="docutils literal notranslate"><span class="pre">ibm_sherbrooke</span></code>の出番です。</p>
 <p>127個の量子ビットを扱ったことのある人は、世界でもそう多くはないでしょう。あなたはすぐに、自分がその一人であると言える数少ない勇者の一人になるでしょう。量子コンピューターにとっては小さな一歩、あなたの履歴書にとっては大きな一歩です。</p>
 <p>冗談です :-P</p>
@@ -912,12 +917,12 @@ document.write(`
 </div>
 </section>
 <section id="step-4-ghz">
-<h2>Step 4: GHZ状態のテスト<a class="headerlink" href="#step-4-ghz" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.4. </span>Step 4: GHZ状態のテスト<a class="headerlink" href="#step-4-ghz" title="Permalink to this heading">#</a></h2>
 <p>あなたはやり遂げました！127量子ビットマシンでGHZ状態の回路を走らせました。すごいですね!</p>
 <p>さて、GHZ状態の結果が出たので、次はそれを検証してみましょう。エラー緩和やエラー訂正は一切していませんので、まだまだ結果に改善が期待できます。</p>
 <p>結果がどの程度「良い」かを調べるには、さまざまな方法があります。生の結果を見ることもできますが、GHZ状態で使用される量子ビットは隣り合っていないので、少し煩わしいかもしれません。品質や、GHZ状態のエラーについて教えてくれる機能があれば便利です。</p>
 <section id="exercise-3">
-<h3>Exercise 3<a class="headerlink" href="#exercise-3" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.4.1. </span>Exercise 3<a class="headerlink" href="#exercise-3" title="Permalink to this heading">#</a></h3>
 <p>GHZ状態をテストするための関数を作成してください。</p>
 <p>Challengeの作成者として、私たちは、あなたが結果をどのようにテストしたいのか、ここでいくつかの自由を与えることにしました。 <strong>あなたにとって</strong> 理にかなった方法を見つけてください。関数の <em>出力が低いほど、</em>　GHZ状態が <em>良好である</em> ことを示すことが重要です。</p>
 <p><em>ヒント：この関数は作成したデータをテストするために作成する必要があるため、GHZ状態の一部である量子ビットのみをテストする必要があります。</em></p>
@@ -1040,10 +1045,10 @@ document.write(`
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>ボーナス: エラー訂正への道<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">7. </span>ボーナス: エラー訂正への道<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <p>エラー訂正は、今でも活発で重要な研究テーマです。そのため、実機でのエラー訂正は、今回のGHZ状態の例のような単純なケースであっても、それほど簡単ではありません。このページでは、どのような方法が考えられるかについて、いくつかのガイダンスやヒントを提供しながら、独自のアイデアを生み出す機会を提供したいと思います。</p>
 <section id="step-1">
-<h2>Step 1: 実際の状態はどの程度よかったのか？<a class="headerlink" href="#step-1" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">7.1. </span>Step 1: 実際の状態はどの程度よかったのか？<a class="headerlink" href="#step-1" title="Permalink to this heading">#</a></h2>
 <p>エラーを修正する前に、まず状態がどの程度良かったかを知る必要がありますが、これさえも思ったほど簡単ではありません。</p>
 <p>あなたのGHZ状態がどれだけ優れているかをテストする最も簡単な方法は、偶数量子ビットのうち、どれだけが多数派と異なる結果を得たかを調べることです。この方法は、上記で使用した方が多いのではないでしょうか？</p>
 <p>しかし、これは必ずしもエラーの発生回数と相関があることを意味するものではありません。そして、GHZの良し悪しを知るには、エラーの発生数の方が重要であるとも言えます。</p>
@@ -1108,7 +1113,7 @@ document.write(`
 </div>
 </section>
 <section id="id2">
-<h2>Step 2: なぜ単一のスタビライザーだけでは不十分なのか<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">7.2. </span>Step 2: なぜ単一のスタビライザーだけでは不十分なのか<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <p>エラー訂正のExerciseでは、スタビライザー量子ビットの測定から、1ビット、またはビット列全体を使用して、その演算を条件付けることができることを確認しました。</p>
 <p>スタビライザー測定は54ビットなので、ビット列全体を条件付けに使うのは現実的ではありません。なぜなら、2^54個の異なるビット列を考慮する必要があるからです。</p>
 <p>一方、1ビットだけを考慮する場合は、不可能であるか、または過度に複雑になる可能性があります。</p>
@@ -1150,7 +1155,7 @@ Open QASM3によるDynamic Circuitについてもっと知りたい場合は、�
 </div>
 </section>
 <section id="id3">
-<h2>Step 3: エラーを増やさないためにはどうするか？<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">7.3. </span>Step 3: エラーを増やさないためにはどうするか？<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
 <p>エラーが発生する原因はさまざまです。時間経過によるデコヒーレンスや、CX-Gateのようなエンタングルゲートで発生するエラーは、そのうちの2つです。この2つはスタビライザーにも当てはまるので、本末転倒にならないように、エラーを修正しようとすることでノイズを増やさないようにする必要があります。将来的には、一般的なエラーレートがさらに下がるので、それほど問題にはならないかもしれませんが、それでも考慮しなければならないことです。</p>
 <p>このことは、私たちにとってどのような意味を持つのでしょうか？</p>
 <p>スタビライザーを作成し、測定したい時について考えてみましょう。次の量子ビットのエンタングルに使われなくなった後、直接エンタングルを解くのでしょうか？ 回路全体がエンタングルされるまで待つのでしょうか？(これはもちろん、どのような種類のエラーを修正したいかによります。）また、スタビライザーをリセットして、後で新しいものを作る（同じ量子ビットを使う）、エラーを修正するために2つのフェーズを使う、ということも考えられます。</p>
@@ -1176,7 +1181,7 @@ Open QASM3によるDynamic Circuitについてもっと知りたい場合は、�
 </div>
 </section>
 <section id="step-4">
-<h2>Step 4: 何ができるでしょうか？<a class="headerlink" href="#step-4" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">7.4. </span>Step 4: 何ができるでしょうか？<a class="headerlink" href="#step-4" title="Permalink to this heading">#</a></h2>
 <p>あなたが試せる可能性はたくさんあります：</p>
 <ul class="simple">
 <li><p>複数のスタビライザーを使って何か良い論理的な機能を見つけ、QASM3を使ってみるのも良いでしょう。</p></li>
@@ -1267,7 +1272,7 @@ Open QASM3によるDynamic Circuitについてもっと知りたい場合は、�
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Lab 4: エラー訂正</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Lab 4: エラー訂正</p>
       </div>
     </a>
 </div></div>
@@ -1288,27 +1293,27 @@ Open QASM3によるDynamic Circuitについてもっと知りたい場合は、�
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Challenge 5: 127 量子ビットを使う</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-ghz">Step 1: 大きなGHZ状態を作る</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">6. Challenge 5: 127 量子ビットを使う</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-ghz">6.1. Step 1: 大きなGHZ状態を作る</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">6.1.1. Exercise 1</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2">Step 2: サイズを半分にする</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2">6.2. Step 2: サイズを半分にする</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">6.2.1. Exercise 2</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3">Step 3: 準備し、実デバイスで実行する</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-ghz">Step 4: GHZ状態のテスト</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">Exercise 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3">6.3. Step 3: 準備し、実デバイスで実行する</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-ghz">6.4. Step 4: GHZ状態のテスト</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">6.4.1. Exercise 3</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">ボーナス: エラー訂正への道</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1">Step 1: 実際の状態はどの程度よかったのか？</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Step 2: なぜ単一のスタビライザーだけでは不十分なのか</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Step 3: エラーを増やさないためにはどうするか？</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4">Step 4: 何ができるでしょうか？</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">7. ボーナス: エラー訂正への道</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1">7.1. Step 1: 実際の状態はどの程度よかったのか？</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">7.2. Step 2: なぜ単一のスタビライザーだけでは不十分なのか</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">7.3. Step 3: エラーを増やさないためにはどうするか？</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4">7.4. Step 4: 何ができるでしょうか？</a></li>
 </ul>
 </li>
 </ul>

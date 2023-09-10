@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Lab 2: 量子テレポーテーション &#8212; IBM Quantum Challengeで学ぶ量子コンピューティング</title>
+    <title>3. Lab 2: 量子テレポーテーション &#8212; IBM Quantum Challengeで学ぶ量子コンピューティング</title>
   
   
   
@@ -66,8 +66,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'lab2-ja';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Lab 3: 反復位相推定" href="lab3-ja.html" />
-    <link rel="prev" title="IBM Quantum Challenge: Spring 2023" href="lab1-ja.html" />
+    <link rel="next" title="4. Lab 3: 反復位相推定" href="lab3-ja.html" />
+    <link rel="prev" title="1. IBM Quantum Challenge: Spring 2023" href="lab1-ja.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -148,21 +148,26 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Welcome to your Jupyter Book
+                    Welcome to IQC Textbook
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">2023Spring Test</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">第２章 量子コンピューターの計算ルール</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2019-w1-adder.html">Week1 量子回路における加算器</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Test: 2023Spring</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="lab1-ja.html">IBM Quantum Challenge: Spring 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab1-ja.html">1. IBM Quantum Challenge: Spring 2023</a></li>
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 2: 量子テレポーテーション</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab3-ja.html">Lab 3: 反復位相推定</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab4-ja.html">Lab 4: エラー訂正</a></li>
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="lab5-ja.html">Challenge 5: 127 量子ビットを使う</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Lab 2: 量子テレポーテーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab3-ja.html">4. Lab 3: 反復位相推定</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab4-ja.html">5. Lab 4: エラー訂正</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab5-ja.html">6. Challenge 5: 127 量子ビットを使う</a></li>
 
 </ul>
 
@@ -357,13 +362,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">背景</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">実装</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">Exercise 3</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4">Exercise 4</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5">Exercise 5</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">3.1. 背景</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">3.2. 実装</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">3.2.1. Exercise 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">3.2.2. Exercise 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">3.2.3. Exercise 3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4">3.2.4. Exercise 4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5">3.2.5. Exercise 5</a></li>
 </ul>
 </li>
 </ul>
@@ -378,11 +383,11 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="lab-2">
-<h1>Lab 2: 量子テレポーテーション<a class="headerlink" href="#lab-2" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">3. </span>Lab 2: 量子テレポーテーション<a class="headerlink" href="#lab-2" title="Permalink to this heading">#</a></h1>
 <p>アリスとボブが抱えている問題を解決する量子テレポーテーションのLabへようこそ。ご安心ください、人間関係の問題ではありませんよ！アリスは未知の状態 <span class="math notranslate nohighlight">\(\lvert \psi \rangle\)</span> の量子ビットを所持しており、この量子状態をボブに転送したいと考えています。しかしながら彼らは非常に離れた場所におり、量子情報を直接転送する手段はなく、転送できるのは古典情報のみです。彼らの目標を達成することは可能でしょうか？</p>
 <p>アリスとボブがエンタングルした量子ビットのペアを共有している場合、彼女が２ビットの古典情報を送信することで、量子ビットの状態をボブに転送できることがわかっています。最終的に、ボブが <span class="math notranslate nohighlight">\(\lvert \psi \rangle\)</span> を所有し、アリスはそれを持たなくなるため、このプロセスはテレポーテーションとして知られています。</p>
 <section id="id1">
-<h2>背景<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.1. </span>背景<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <p>量子テレポーテーションは、エンタングルメントと古典通信を使用し、ある量子ビットから別の量子ビットへと量子情報の転送を可能にするプロトコルです。このプロトコルは、1993年に Charles Bennett、Gilles Brassard、Claude Crépeau、Richard Jozsa、Asher Peres および William Wootters によって提案されました。このプロセスは、量子ビット自体を送信するのではなく、ソース量子ビットからターゲット量子ビットに量子状態を転送します。</p>
 <p>プロトコルには３つの量子ビットが必要です。</p>
 <ol class="arabic simple">
@@ -399,7 +404,7 @@ document.write(`
 </ol>
 </section>
 <section id="id2">
-<h2>実装<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.2. </span>実装<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <p>量子ビットを転送するためには、アリスとボブにエンタングルした量子ビットのペアを提供してくれる第三者の助けが必要です。次に、アリスは量子ビットに対して特定の操作を実行し、その結果を古典通信チャネルを介してボブと共有します。最後に、ボブは自分の側で一連の操作を実行し、アリスの量子ビットを正常に取得します。それでは、これらの各ステップについて詳しく見ていきましょう。</p>
 <p>量子回路は、３つの量子ビットと３つの古典ビットで構成されます。量子ビットは次のように命名されます。</p>
 <ul class="simple">
@@ -414,7 +419,7 @@ document.write(`
 <li><p><span class="math notranslate nohighlight">\(c2\)</span>: ボブが <span class="math notranslate nohighlight">\(b\)</span> の測定に使用する古典ビット。</p></li>
 </ul>
 <section id="exercise-1">
-<h3>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">3.2.1. </span>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this heading">#</a></h3>
 <p>２つの量子ビットを利用して、エンタングルしたBellペアの状態 <span class="math notranslate nohighlight">\(\frac{\lvert 00 \rangle + \lvert 11 \rangle}{\sqrt{2}}\)</span> を生成してください。量子ビット <span class="math notranslate nohighlight">\(a\)</span> はアリスに割り当てられ、量子ビット <span class="math notranslate nohighlight">\(b\)</span> はボブのものです。</p>
 <p>ヒント:Bell状態はアダマールゲートとCNOTゲートを使うことで生成できます。</p>
 <div class="cell docutils container">
@@ -474,7 +479,7 @@ document.write(`
 <p>アリスが量子ビット <span class="math notranslate nohighlight">\(a\)</span> を持ち、ボブが量子ビット <span class="math notranslate nohighlight">\(b\)</span> を持っていると仮定しましょう。彼らは本当に関係性に問題を抱えているかもしれませんね😉。</p>
 </section>
 <section id="exercise-2">
-<h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">3.2.2. </span>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this heading">#</a></h3>
 <p>次のプロトコルを実装してください。</p>
 <ol class="arabic simple">
 <li><p>アリスが、 <span class="math notranslate nohighlight">\(s\)</span> (<span class="math notranslate nohighlight">\(\lvert \psi \rangle\)</span> を含む量子ビット)を制御、 <span class="math notranslate nohighlight">\(a\)</span> をターゲットとしてCNOTゲートを適用する。</p></li>
@@ -516,7 +521,7 @@ document.write(`
 </div>
 </section>
 <section id="exercise-3">
-<h3>Exercise 3<a class="headerlink" href="#exercise-3" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">3.2.3. </span>Exercise 3<a class="headerlink" href="#exercise-3" title="Permalink to this heading">#</a></h3>
 <p>このステップでは、アリスは所有している両方の量子ビットで測定を実行し、結果を２つの古典ビットに保存します。その後、彼女はこれら２つのビットをボブに送信します。</p>
 <p>彼女は量子ビット <span class="math notranslate nohighlight">\(a\)</span> を古典ビット <span class="math notranslate nohighlight">\(c0\)</span> に、量子ビット <span class="math notranslate nohighlight">\(s\)</span> を古典ビット <span class="math notranslate nohighlight">\(c1\)</span> に測定して入れるように以下のコードセルを完成させてください。</p>
 <div class="cell docutils container">
@@ -556,7 +561,7 @@ document.write(`
 </div>
 </section>
 <section id="exercise-4">
-<h3>Exercise 4<a class="headerlink" href="#exercise-4" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">3.2.4. </span>Exercise 4<a class="headerlink" href="#exercise-4" title="Permalink to this heading">#</a></h3>
 <p>このステップでは、すでに量子ビット <span class="math notranslate nohighlight">\(b\)</span> を所有しているボブが、アリスから受け取った古典ビットの状態に基づいて、回路に特定のゲートを動的に追加します。</p>
 <ul class="simple">
 <li><p>ビットが <code class="docutils literal notranslate"><span class="pre">00</span></code> の場合、アクションは必要ありません。</p></li>
@@ -614,7 +619,7 @@ document.write(`
 <p>テレポーテーション回路ができたので、~~カーク船長を見知らぬ惑星の地表に転送して~~ 量子状態の生成とテレポートを、シミュレーター上の回路で実行しましょう。</p>
 </section>
 <section id="exercise-5">
-<h3>Exercise 5<a class="headerlink" href="#exercise-5" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">3.2.5. </span>Exercise 5<a class="headerlink" href="#exercise-5" title="Permalink to this heading">#</a></h3>
 <p>次のコードセルでは、完全な量子テレポーテーション回路を <code class="docutils literal notranslate"><span class="pre">teleport_superposition_circuit</span></code> 変数に構築します。次のステップに従ってください。</p>
 <ul class="simple">
 <li><p>状態を準備する回路を構築します。角度 <span class="math notranslate nohighlight">\(\pi / 4\)</span> の <span class="math notranslate nohighlight">\(R_x\)</span> 回転ゲートを適用して量子ビット <span class="math notranslate nohighlight">\(s\)</span> を準備してください。</p></li>
@@ -788,7 +793,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">IBM Quantum Challenge: Spring 2023</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>IBM Quantum Challenge: Spring 2023</p>
       </div>
     </a>
     <a class="right-next"
@@ -796,7 +801,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Lab 3: 反復位相推定</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Lab 3: 反復位相推定</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -818,13 +823,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">背景</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">実装</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">Exercise 3</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4">Exercise 4</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5">Exercise 5</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">3.1. 背景</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">3.2. 実装</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">3.2.1. Exercise 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">3.2.2. Exercise 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">3.2.3. Exercise 3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4">3.2.4. Exercise 4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5">3.2.5. Exercise 5</a></li>
 </ul>
 </li>
 </ul>

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>IBM Quantum Challenge: Spring 2023 &#8212; IBM Quantum Challengeで学ぶ量子コンピューティング</title>
+    <title>1. IBM Quantum Challenge: Spring 2023 &#8212; IBM Quantum Challengeで学ぶ量子コンピューティング</title>
   
   
   
@@ -66,8 +66,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'lab1-ja';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Lab 2: 量子テレポーテーション" href="lab2-ja.html" />
-    <link rel="prev" title="Welcome to your Jupyter Book" href="intro.html" />
+    <link rel="next" title="3. Lab 2: 量子テレポーテーション" href="lab2-ja.html" />
+    <link rel="prev" title="Week1 量子回路における加算器" href="2019-w1-adder.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -148,21 +148,26 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Welcome to your Jupyter Book
+                    Welcome to IQC Textbook
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">2023Spring Test</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">第２章 量子コンピューターの計算ルール</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2019-w1-adder.html">Week1 量子回路における加算器</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Test: 2023Spring</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">IBM Quantum Challenge: Spring 2023</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. IBM Quantum Challenge: Spring 2023</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="lab2-ja.html">Lab 2: 量子テレポーテーション</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab3-ja.html">Lab 3: 反復位相推定</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab4-ja.html">Lab 4: エラー訂正</a></li>
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="lab5-ja.html">Challenge 5: 127 量子ビットを使う</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab2-ja.html">3. Lab 2: 量子テレポーテーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab3-ja.html">4. Lab 3: 反復位相推定</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab4-ja.html">5. Lab 4: エラー訂正</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab5-ja.html">6. Challenge 5: 127 量子ビットを使う</a></li>
 
 </ul>
 
@@ -357,27 +362,27 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">IBM Quantum Challenge: Spring 2023</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">始めの一歩</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">サンプル問題</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. IBM Quantum Challenge: Spring 2023</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.1. 始めの一歩</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.1.1. サンプル問題</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-circuits">Dynamic Circuits入門 と 成功するまでの繰り返し</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">はじめに</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hello-dynamic-circuit-world">Hello Dynamic Circuit World</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1"><strong>Exercise 1</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-circuits">2. Dynamic Circuits入門 と 成功するまでの繰り返し</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2.1. はじめに</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hello-dynamic-circuit-world">2.2. Hello Dynamic Circuit World</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">2.2.1. <strong>Exercise 1</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">成功するまで繰り返す</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">Exercise 3</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4">Exercise 4</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">2.3. 成功するまで繰り返す</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">2.3.1. Exercise 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">2.3.2. Exercise 3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4">2.3.3. Exercise 4</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">ハードウェア上での実行</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">おめでとうございます!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">2.4. ハードウェア上での実行</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">2.5. おめでとうございます!</a></li>
 </ul>
 </li>
 </ul>
@@ -393,15 +398,15 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="ibm-quantum-challenge-spring-2023">
-<h1>IBM Quantum Challenge: Spring 2023<a class="headerlink" href="#ibm-quantum-challenge-spring-2023" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">1. </span>IBM Quantum Challenge: Spring 2023<a class="headerlink" href="#ibm-quantum-challenge-spring-2023" title="Permalink to this heading">#</a></h1>
 <section id="id1">
-<h2>始めの一歩<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.1. </span>始めの一歩<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <p>IBM Quantum Challenge: Spring 2023へようこそ！</p>
 <p>今回のIBM Quantum ChallengeではDynamic circuitsに取り組んでいただきます。あなたは現在、このChallengeの最初のLabにいます。この最初のLabで作業する中でいくつかのExerciseを完了させます。この入門編では、Exerciseの解き方について簡単に説明します。以前のChallengeに参加したことがある方でもこの資料を見直す事をお勧めします。</p>
 <p>すべてのLabは、チュートリアルコンテンツ、事前に書かれたコードブロック、およびあなたにQiskitコードを埋めていただく必要があるExerciseのコードブロックが混ざっています。Exerciseを完了するためには、コメント行 <em>“### Your code goes here ###”</em> の下に必要なコードを入力する必要があります。</p>
 <p>初めてChallengeに参加する方に、覚えておいていただきたい重要なこととして、新たにコードを追加していない場合でも、すべてのコードセルを実行する必要があります。そうすることで、Graderを実行して回答を提出するときにすべてが最新であることが確認されます。</p>
 <section id="id2">
-<h3>サンプル問題<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">1.1.1. </span>サンプル問題<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
 <p>下のセルでは、1つの量子ビットと1つの古典ビットを持つ回路を構築しています。あなたの最初の仕事は、量子ビットにアダマールゲートを実行、測定し、結果を古典ビットに格納することです。既にコードは用意してあります。あなたに必要なことは、両方の行の先頭にある<code class="docutils literal notranslate"><span class="pre">#</span></code>を取り除くことだけです。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -463,9 +468,9 @@ document.write(`
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="dynamic-circuits">
-<h1>Dynamic Circuits入門 と 成功するまでの繰り返し<a class="headerlink" href="#dynamic-circuits" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">2. </span>Dynamic Circuits入門 と 成功するまでの繰り返し<a class="headerlink" href="#dynamic-circuits" title="Permalink to this heading">#</a></h1>
 <section id="id3">
-<h2>はじめに<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.1. </span>はじめに<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
 <p><a class="reference external" href="https://ja.learn.qiskit.org/course/ch-algorithms/quantum-circuits">Qiskitテキストブック</a>によると以下のように表現されています。</p>
 <blockquote>
 <div><p><em>「量子回路とは、量子データ(量子ビットなど)に対するコヒーレントな量子演算と、リアルタイム同時古典計算で構成される計算ルーチンのことです。量子回路は、量子ゲート 、測定 、リセットの順序立てられたシーケンスであり、これらはすべてリアルタイム古典計算のデータを使用した条件付ゲートが作用することがあります。」</em></p>
@@ -478,7 +483,7 @@ document.write(`
 </center><p>別の言い方をすればDynamic circuitsとは、if文やwhileループなどの制御フローを含む量子回路で、述語は過去の量子ビット測定結果から計算され、条件演算は量子ゲートを含みます。</p>
 </section>
 <section id="hello-dynamic-circuit-world">
-<h2>Hello Dynamic Circuit World<a class="headerlink" href="#hello-dynamic-circuit-world" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.2. </span>Hello Dynamic Circuit World<a class="headerlink" href="#hello-dynamic-circuit-world" title="Permalink to this heading">#</a></h2>
 <p>IBM Quantumハードウェアはすでに回路途中の測定とリセットをサポートしていました。しかし古典フィードフォワードのサポートを追加するには、制御システムと関連するソフトウェアスタックを大幅に再設計する必要がありました。Dynamic circuitsの完全なサポートは、昨年（2022年）になってから導入されました。</p>
 <p>QiskitではDynamic circuitをプログラミングするための構文が何度か取り入れられていますが、まだ完全なサポートは実装されていません。現在のところは、Dynamic circuitの全機能にアクセスするにはOpenQASM3で書かれたプログラムを提出するしかないのです。とはいえ、今回のチャレンジではQiskitで現在利用可能な機能を使って取り組んでいただきます。</p>
 <p>Qiskitの以前のバージョンでは<a class="reference external" href="https://qiskit.org/documentation/stubs/qiskit.circuit.Instruction.c_if.html"><code class="docutils literal notranslate"><span class="pre">c_if()</span></code></a>命令が使われていましたが、この構文は今後非推奨となる予定です。というのもQuantumCircuitクラスにはより柔軟な<a class="reference external" href="https://qiskit.org/documentation/stubs/qiskit.circuit.QuantumCircuit.if_test.html"><code class="docutils literal notranslate"><span class="pre">if_test()</span></code></a>メソッドがあり、今回のチャレンジではこちらを主に使用します。</p>
@@ -554,7 +559,7 @@ document.write(`
 </div>
 <p>これで、初めてのDynamic circuitを作る準備ができました！</p>
 <section id="exercise-1">
-<h3><strong>Exercise 1</strong><a class="headerlink" href="#exercise-1" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.2.1. </span><strong>Exercise 1</strong><a class="headerlink" href="#exercise-1" title="Permalink to this heading">#</a></h3>
 <p>レベルを上げましょう。最初の課題は2量子ビット回路を設計することです。この場合<span class="math notranslate nohighlight">\(q_{0}\)</span>の値によって<span class="math notranslate nohighlight">\(q_{1}\)</span>に異なる動作をさせることが目的となります。<span class="math notranslate nohighlight">\(q_{0}\)</span>の測定値が0なら<span class="math notranslate nohighlight">\(q_{1}\)</span>に<span class="math notranslate nohighlight">\(X\)</span>ゲートを適用します。1であれば代わりに<span class="math notranslate nohighlight">\(q_{1}\)</span>にアダマールゲートを適用します。</p>
 <p><span class="math notranslate nohighlight">\(q_{0}\)</span>の値をランダムにするために、まずアダマールゲートを適用します。次に、<span class="math notranslate nohighlight">\(q_{0}\)</span>を測定して<span class="math notranslate nohighlight">\(b_{0}\)</span>に書き込みます。そうすると、動的なマジックが起こるはずです。最後に<span class="math notranslate nohighlight">\(q_{1}\)</span>を測定します。</p>
 <p>このExerciseでは <a class="reference external" href="https://qiskit.org/documentation/stubs/qiskit.circuit.QuantumCircuit.if_test.html"><code class="docutils literal notranslate"><span class="pre">if_test()</span></code></a> のドキュメントを読むことをお勧めします。</p>
@@ -610,12 +615,12 @@ document.write(`
 </section>
 </section>
 <section id="id4">
-<h2>成功するまで繰り返す<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.3. </span>成功するまで繰り返す<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
 <p>プロセスの出力がランダムで得られる結果が望んだものでないことがあります。このような場合どうすればいいのでしょうか？もう一度やってみればいいのです！望む結果が得られる確率がゼロでない限り、プロセスを繰り返せば、最終的には期待した結果が得られることが保証されています。多くの場合ほんの数回の繰り返しで済みます。</p>
 <p>このセクションでは「成功するまで繰り返す」アイデアを用いて<span class="math notranslate nohighlight">\(R_X(\theta)\)</span>ゲート(ただし<span class="math notranslate nohighlight">\(\theta / \pi\)</span>は無理数)を有限のゲートセット<span class="math notranslate nohighlight">\(\{H,\,X,\,S,\,\text{Toffoli}\}\)</span>から構築します。特に<span class="math notranslate nohighlight">\(\cos\theta = \frac35\)</span>の場合を考えます。この構成はNielsen and Chuangの <em>量子コンピュータと量子通信</em>, 10<sup>th</sup> anniversary edition, Exercise 4.41 からの引用したもので、上で与えられた有限のゲートセットの普遍性を示しています。</p>
 <p>作り方は、3つの量子ビットに作用する回路を作ることになります。そのうちの1つはターゲット量子ビットで、このターゲット量子ビットに対して<span class="math notranslate nohighlight">\(R_X(\theta)\)</span>ゲートを実行することが目標です。残りの2つの量子ビットは「シンドローム」量子ビットで、測定し、測定結果で操作が成功したかどうかを知ることができます。もし両方のシンドローム量子ビットが0を読み取ったら、ゲートが成功したことがわかります。そうでない場合は、量子ビットをリセットして再挑戦します。測定結果をもとに回路の繰り返しを条件付けるために、Dynamic circuitが必要になります。</p>
 <section id="exercise-2">
-<h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.3.1. </span>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this heading">#</a></h3>
 <p>このセクションの最初の課題は、上記の回路を返す関数を作成することです。回路のアウトプットイメージはこちらです。</p>
 <center>
 <img src="resources/circuitRx.png">
@@ -674,7 +679,7 @@ document.write(`
 </div>
 </section>
 <section id="exercise-3">
-<h3>Exercise 3<a class="headerlink" href="#exercise-3" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.3.2. </span>Exercise 3<a class="headerlink" href="#exercise-3" title="Permalink to this heading">#</a></h3>
 <p>次の作業は測定値のチェックです。制御ビットの測定値が2つとも <span class="math notranslate nohighlight">\(|0\rangle\)</span> の場合、適用されるゲートは<span class="math notranslate nohighlight">\(R_X(\theta)\)</span>で、<span class="math notranslate nohighlight">\(\cos(\theta) = \frac{3}{5}\)</span>です。測定値のいずれかが <span class="math notranslate nohighlight">\(|1\rangle\)</span> であれば、適用されるゲートは単に<span class="math notranslate nohighlight">\(X\)</span>であり失敗を示します。したがって、対象となる量子ビットのコヒーレンスを乱すことなく、測定値から正しいゲートを適用したかどうかを知ることができるのです。</p>
 <p>失敗した場合は、量子ビットをリセットしてもう一度やり直す必要があります。 失敗した場合に何が適用するかがわかっているので、一般的なハードウェアのリセットを使わなくても、この知識を使って効率的にリセットを実行することができます。2つの補助量子ビットについては、それぞれの測定値が <span class="math notranslate nohighlight">\(1\)</span> であることを条件として、 <span class="math notranslate nohighlight">\(X\)</span> ゲートを適用すれば良いのです。</p>
 <p>次のセルに<code class="docutils literal notranslate"><span class="pre">reset_controls</span></code>関数の中身を埋めて、次のステップで回路を変更できるようにしてください。</p>
@@ -717,7 +722,7 @@ document.write(`
 <p>2つ目の問題は、現在、私たちのハードウェアがループをサポートしていないことです。そのため、真の意味で成功するまで繰り返すループを実行することができません。そこで、この問題を解決するために、試行回路を一定回数だけ繰り返すことにします。</p>
 </section>
 <section id="exercise-4">
-<h3>Exercise 4<a class="headerlink" href="#exercise-4" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.3.3. </span>Exercise 4<a class="headerlink" href="#exercise-4" title="Permalink to this heading">#</a></h3>
 <p>以下のコードセルに、シンドローム量子ビットの測定で試行を繰り返す必要があると判断された場合に実行されるロジックを <code class="docutils literal notranslate"><span class="pre">else</span></code> ブロックに記入してください。</p>
 <ol class="arabic simple">
 <li><p>ターゲット量子ビットをゼロ状態にリセットする。（すでに1の状態であることを知っていることを思い出してください）</p></li>
@@ -792,7 +797,7 @@ document.write(`
 </section>
 </section>
 <section id="id5">
-<h2>ハードウェア上での実行<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.4. </span>ハードウェア上での実行<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
 <p>作成した回路を実際のハードウェアで動かしてみましょう！今回は、Dynamic circuit用に特別に調整された27qubitのPeekskillデバイスを使用します。しかし、実際のハードウェアで動かすのには時間がかかり、時にはエラーが発生することもあることを忘れないでください。他のChallenge参加者と渋滞の原因になるので、<strong>このセルを何度も実行しないでください</strong>。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -836,7 +841,7 @@ document.write(`
 </div>
 </section>
 <section id="id6">
-<h2>おめでとうございます!<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.5. </span>おめでとうございます!<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
 <p>最初のLabが終了しました！Dynamic circuitについてより深く理解できたので、次のLabに進み、応用とより高度な特性について学び始めてください。頑張ってください！</p>
 </section>
 </section>
@@ -873,12 +878,12 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="intro.html"
+       href="2019-w1-adder.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Welcome to your Jupyter Book</p>
+        <p class="prev-next-title">Week1 量子回路における加算器</p>
       </div>
     </a>
     <a class="right-next"
@@ -886,7 +891,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Lab 2: 量子テレポーテーション</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Lab 2: 量子テレポーテーション</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -908,27 +913,27 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">IBM Quantum Challenge: Spring 2023</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">始めの一歩</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">サンプル問題</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. IBM Quantum Challenge: Spring 2023</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.1. 始めの一歩</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.1.1. サンプル問題</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-circuits">Dynamic Circuits入門 と 成功するまでの繰り返し</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">はじめに</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hello-dynamic-circuit-world">Hello Dynamic Circuit World</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1"><strong>Exercise 1</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-circuits">2. Dynamic Circuits入門 と 成功するまでの繰り返し</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2.1. はじめに</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hello-dynamic-circuit-world">2.2. Hello Dynamic Circuit World</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">2.2.1. <strong>Exercise 1</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">成功するまで繰り返す</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">Exercise 3</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4">Exercise 4</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">2.3. 成功するまで繰り返す</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">2.3.1. Exercise 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">2.3.2. Exercise 3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4">2.3.3. Exercise 4</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">ハードウェア上での実行</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">おめでとうございます!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">2.4. ハードウェア上での実行</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">2.5. おめでとうございます!</a></li>
 </ul>
 </li>
 </ul>
