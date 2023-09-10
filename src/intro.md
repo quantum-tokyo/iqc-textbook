@@ -1,11 +1,12 @@
-# Welcome to your Jupyter Book
+# Welcome to IQC Textbook
 
-This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
+このページは IBM 社員有志により作成した、IBM Quantum Challenge を題材とした量子コンピューティングの学習教材です。
 
-Check out the content pages bundled with this sample book to see more.
+IBM Quantum Challenge は IBM が主催する量子コンピューターのプログラミングコンテストのことで、2019 年から半年に一度（Spring/Autumn）開催されています。  
+オープンソースの量子開発キットの Qiskit を活用して、量子コンピューティングに関する基礎から応用までを学びながら腕を競っています。
+
+本教材では過去の Quantum Challenge の問題を扱いながら量子コンピューティングを学ぶことを目的としています。
 
 ```{tableofcontents}
+
 ```
