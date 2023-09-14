@@ -46,7 +46,3 @@ parts:
     maxdepth: 1
     chapters:
       - file: lab1-ja
-      - file: lab2-ja
-      - file: lab3-ja
-      - file: lab4-ja
-      - file: lab5-ja
