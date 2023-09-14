@@ -427,108 +427,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">MissingOptionalLibraryError</span><span class="g g-Whitespace">               </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/qiskit/circuit/quantumcircuit.py:1913,</span> in <span class="ni">QuantumCircuit.draw</span><span class="nt">(self, output, scale, filename, style, interactive, plot_barriers, reverse_bits, justify, vertical_compression, idle_wires, with_layout, fold, ax, initial_state, cregbundle, wire_order)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1910</span> <span class="c1"># pylint: disable=cyclic-import</span>
-<span class="g g-Whitespace">   </span><span class="mi">1911</span> <span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="kn">import</span> <span class="n">circuit_drawer</span>
-<span class="ne">-&gt; </span><span class="mi">1913</span> <span class="k">return</span> <span class="n">circuit_drawer</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1914</span>     <span class="bp">self</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1915</span>     <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1916</span>     <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1917</span>     <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1918</span>     <span class="n">output</span><span class="o">=</span><span class="n">output</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1919</span>     <span class="n">interactive</span><span class="o">=</span><span class="n">interactive</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1920</span>     <span class="n">plot_barriers</span><span class="o">=</span><span class="n">plot_barriers</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1921</span>     <span class="n">reverse_bits</span><span class="o">=</span><span class="n">reverse_bits</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1922</span>     <span class="n">justify</span><span class="o">=</span><span class="n">justify</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1923</span>     <span class="n">vertical_compression</span><span class="o">=</span><span class="n">vertical_compression</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1924</span>     <span class="n">idle_wires</span><span class="o">=</span><span class="n">idle_wires</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1925</span>     <span class="n">with_layout</span><span class="o">=</span><span class="n">with_layout</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1926</span>     <span class="n">fold</span><span class="o">=</span><span class="n">fold</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1927</span>     <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1928</span>     <span class="n">initial_state</span><span class="o">=</span><span class="n">initial_state</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1929</span>     <span class="n">cregbundle</span><span class="o">=</span><span class="n">cregbundle</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1930</span>     <span class="n">wire_order</span><span class="o">=</span><span class="n">wire_order</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1931</span> <span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/qiskit/visualization/circuit/circuit_visualization.py:292,</span> in <span class="ni">circuit_drawer</span><span class="nt">(circuit, scale, filename, style, output, interactive, plot_barriers, reverse_bits, justify, vertical_compression, idle_wires, with_layout, fold, ax, initial_state, cregbundle, wire_order)</span>
-<span class="g g-Whitespace">    </span><span class="mi">277</span>     <span class="k">return</span> <span class="n">_generate_latex_source</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">278</span>         <span class="n">circuit</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">279</span>         <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">289</span>         <span class="n">wire_order</span><span class="o">=</span><span class="n">complete_wire_order</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">290</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">291</span> <span class="k">elif</span> <span class="n">output</span> <span class="o">==</span> <span class="s2">&quot;mpl&quot;</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">292</span>     <span class="n">image</span> <span class="o">=</span> <span class="n">_matplotlib_circuit_drawer</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">293</span>         <span class="n">circuit</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">294</span>         <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">295</span>         <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">296</span>         <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">297</span>         <span class="n">plot_barriers</span><span class="o">=</span><span class="n">plot_barriers</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">298</span>         <span class="n">reverse_bits</span><span class="o">=</span><span class="n">reverse_bits</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">299</span>         <span class="n">justify</span><span class="o">=</span><span class="n">justify</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">300</span>         <span class="n">idle_wires</span><span class="o">=</span><span class="n">idle_wires</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">301</span>         <span class="n">with_layout</span><span class="o">=</span><span class="n">with_layout</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">302</span>         <span class="n">fold</span><span class="o">=</span><span class="n">fold</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">303</span>         <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">304</span>         <span class="n">initial_state</span><span class="o">=</span><span class="n">initial_state</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">305</span>         <span class="n">cregbundle</span><span class="o">=</span><span class="n">cregbundle</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">306</span>         <span class="n">wire_order</span><span class="o">=</span><span class="n">complete_wire_order</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">307</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">308</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">309</span>     <span class="k">raise</span> <span class="n">VisualizationError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">310</span>         <span class="s2">&quot;Invalid output type </span><span class="si">%s</span><span class="s2"> selected. The only valid choices &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">311</span>         <span class="s2">&quot;are text, latex, latex_source, and mpl&quot;</span> <span class="o">%</span> <span class="n">output</span>
-<span class="g g-Whitespace">    </span><span class="mi">312</span>     <span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/qiskit/visualization/circuit/circuit_visualization.py:662,</span> in <span class="ni">_matplotlib_circuit_drawer</span><span class="nt">(circuit, scale, filename, style, plot_barriers, reverse_bits, justify, idle_wires, with_layout, fold, ax, initial_state, cregbundle, wire_order)</span>
-<span class="g g-Whitespace">    </span><span class="mi">659</span> <span class="k">if</span> <span class="n">fold</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">660</span>     <span class="n">fold</span> <span class="o">=</span> <span class="mi">25</span>
-<span class="ne">--&gt; </span><span class="mi">662</span> <span class="n">qcd</span> <span class="o">=</span> <span class="n">_matplotlib</span><span class="o">.</span><span class="n">MatplotlibDrawer</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">663</span>     <span class="n">qubits</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">664</span>     <span class="n">clbits</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">665</span>     <span class="n">nodes</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">666</span>     <span class="n">circuit</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">667</span>     <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">668</span>     <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">669</span>     <span class="n">reverse_bits</span><span class="o">=</span><span class="n">reverse_bits</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">670</span>     <span class="n">plot_barriers</span><span class="o">=</span><span class="n">plot_barriers</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">671</span>     <span class="n">fold</span><span class="o">=</span><span class="n">fold</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">672</span>     <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">673</span>     <span class="n">initial_state</span><span class="o">=</span><span class="n">initial_state</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">674</span>     <span class="n">cregbundle</span><span class="o">=</span><span class="n">cregbundle</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">675</span>     <span class="n">with_layout</span><span class="o">=</span><span class="n">with_layout</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">676</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">677</span> <span class="k">return</span> <span class="n">qcd</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/qiskit/utils/classtools.py:111,</span> in <span class="ni">_WrappedMethod.__get__.&lt;locals&gt;.out</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">108</span> <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">method</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">109</span> <span class="k">def</span> <span class="nf">out</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">110</span>     <span class="k">for</span> <span class="n">callback</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_before</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">111</span>         <span class="n">callback</span><span class="o">.</span><span class="fm">__get__</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">objtype</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">112</span>     <span class="n">retval</span> <span class="o">=</span> <span class="n">method</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">113</span>     <span class="k">for</span> <span class="n">callback</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_after</span><span class="p">:</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/qiskit/utils/lazy_tester.py:39,</span> in <span class="ni">_RequireNow.__call__</span><span class="nt">(self, *_args, **_kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">38</span> <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">_args</span><span class="p">,</span> <span class="o">**</span><span class="n">_kwargs</span><span class="p">):</span>
-<span class="ne">---&gt; </span><span class="mi">39</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_tester</span><span class="o">.</span><span class="n">require_now</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_feature</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/qiskit/utils/lazy_tester.py:223,</span> in <span class="ni">LazyDependencyManager.require_now</span><span class="nt">(self, feature)</span>
-<span class="g g-Whitespace">    </span><span class="mi">221</span> <span class="k">if</span> <span class="bp">self</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">222</span>     <span class="k">return</span>
-<span class="ne">--&gt; </span><span class="mi">223</span> <span class="k">raise</span> <span class="n">MissingOptionalLibraryError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">224</span>     <span class="n">libname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">feature</span><span class="p">,</span> <span class="n">pip_install</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_install</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_msg</span>
-<span class="g g-Whitespace">    </span><span class="mi">225</span> <span class="p">)</span>
-
-<span class="ne">MissingOptionalLibraryError</span>: &quot;The &#39;pylatexenc&#39; library is required to use &#39;MatplotlibDrawer&#39;. You can install it with &#39;pip install pylatexenc&#39;.&quot;
-</pre></div>
-</div>
+<img alt="_images/78313c36436bbcb5155f7efbc121ed0a69c81baa75f3c9b11e568e7684d0f5e4.png" src="_images/78313c36436bbcb5155f7efbc121ed0a69c81baa75f3c9b11e568e7684d0f5e4.png" />
 </div>
 </div>
 </section>
@@ -549,7 +448,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/bc1908a932dcab58d66f4b9b45abce56545e4b7e808898d9656ddb359f0c9a8e.png" src="_images/bc1908a932dcab58d66f4b9b45abce56545e4b7e808898d9656ddb359f0c9a8e.png" />
+<img alt="_images/1fcb1b39cc48fb55186c3bf3aff80ec990f2b264507d12d09b7d0b0ceb864236.png" src="_images/1fcb1b39cc48fb55186c3bf3aff80ec990f2b264507d12d09b7d0b0ceb864236.png" />
 </div>
 </div>
 </section>
@@ -571,7 +470,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4c65f44eefe06b87de4c5861fbcb8fa89eb17e4d45b5086078dc12e6d56c69b7.png" src="_images/4c65f44eefe06b87de4c5861fbcb8fa89eb17e4d45b5086078dc12e6d56c69b7.png" />
+<img alt="_images/f37056415b0fc6b71d879fc3b994522086fa3442081bd9e34d30095f6b83b69e.png" src="_images/f37056415b0fc6b71d879fc3b994522086fa3442081bd9e34d30095f6b83b69e.png" />
 </div>
 </div>
 </section>
@@ -594,7 +493,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/8ed1b860cac79b3db1e622a4a5c4ba32d678815b99e4d956bfe24292a99d8839.png" src="_images/8ed1b860cac79b3db1e622a4a5c4ba32d678815b99e4d956bfe24292a99d8839.png" />
+<img alt="_images/21a98455527b4b4c5057bb523007f406a5261ec06ec8eb47a63bfb9285281b36.png" src="_images/21a98455527b4b4c5057bb523007f406a5261ec06ec8eb47a63bfb9285281b36.png" />
 </div>
 </div>
 </section>
@@ -617,7 +516,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/20a7e37eafa3dbad3cdf934c0adf55d9040439d349574dcf8793d31db1fae3ec.png" src="_images/20a7e37eafa3dbad3cdf934c0adf55d9040439d349574dcf8793d31db1fae3ec.png" />
+<img alt="_images/bda6486ba382acc07d3ebd83d7b732cfa2c79cac37f7f945a74abf6b24689fb1.png" src="_images/bda6486ba382acc07d3ebd83d7b732cfa2c79cac37f7f945a74abf6b24689fb1.png" />
 </div>
 </div>
 <p>なお、CZゲートはCXゲートとHゲートから作ることができます。</p>
@@ -634,7 +533,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/38c443c360cf599f13eb1b072f7c8f70b6eea067deb5fe6e1db3a2c52e5231f2.png" src="_images/38c443c360cf599f13eb1b072f7c8f70b6eea067deb5fe6e1db3a2c52e5231f2.png" />
+<img alt="_images/1ebd3c804b40bde9125e9ed42f4ee6a9f70dd321ad359091339bf07b85e16a04.png" src="_images/1ebd3c804b40bde9125e9ed42f4ee6a9f70dd321ad359091339bf07b85e16a04.png" />
 </div>
 </div>
 </section>
@@ -662,7 +561,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/22d89ccd6bd2d29bfb5bb0ac424923d255a76e5b53d02682fb5b7cd9d2e83bfe.png" src="_images/22d89ccd6bd2d29bfb5bb0ac424923d255a76e5b53d02682fb5b7cd9d2e83bfe.png" />
+<img alt="_images/4c005a77556a08fc7ad361625bcf80229ecd1e4b0502324c12af2dbf943f0f21.png" src="_images/4c005a77556a08fc7ad361625bcf80229ecd1e4b0502324c12af2dbf943f0f21.png" />
 </div>
 </div>
 <p>その他の量子ゲートの詳細に関しては<a class="reference external" href="https://github.com/Qiskit/qiskit-iqx-tutorials/blob/master/qiskit/fundamentals/7_summary_of_quantum_operations.ipynb">Summary of Quantum Operations</a> をご覧ください。</p>
@@ -701,7 +600,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/24373e14367f59029550e50db36d7fb881a79afe11931ee6fbc4e5535989cf25.png" src="_images/24373e14367f59029550e50db36d7fb881a79afe11931ee6fbc4e5535989cf25.png" />
+<img alt="_images/2cf223cf4f3a20effa3ec12ce63192a902b464b937e83745ce75e34817c5d93e.png" src="_images/2cf223cf4f3a20effa3ec12ce63192a902b464b937e83745ce75e34817c5d93e.png" />
 </div>
 </div>
 </section>
@@ -747,7 +646,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4b06e374b1c08163f9d049803548f1e877f15fec45f267d418d1e03f71551220.png" src="_images/4b06e374b1c08163f9d049803548f1e877f15fec45f267d418d1e03f71551220.png" />
+<img alt="_images/831123a76e2162262bf47f16db6ba9f611bbf277e710c067103048821c3ae10e.png" src="_images/831123a76e2162262bf47f16db6ba9f611bbf277e710c067103048821c3ae10e.png" />
 </div>
 </div>
 </section>
@@ -793,7 +692,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a7a046b09977d26c914f7a918215cb84770c622b04fd2489cc5661c9394d8772.png" src="_images/a7a046b09977d26c914f7a918215cb84770c622b04fd2489cc5661c9394d8772.png" />
+<img alt="_images/18d05976c2527da3e0fe61a875d84e111e71740bc7712635623cf792d4b5fa71.png" src="_images/18d05976c2527da3e0fe61a875d84e111e71740bc7712635623cf792d4b5fa71.png" />
 </div>
 </div>
 </section>
@@ -840,7 +739,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a003a5344889ed0eb58f2eb452b215114c004413c773a0c54ccbc3f4765953d2.png" src="_images/a003a5344889ed0eb58f2eb452b215114c004413c773a0c54ccbc3f4765953d2.png" />
+<img alt="_images/2020f75fceef23c62e911c7bb4612e219c1c7d4daec89cc05c1cf05ed0e5454a.png" src="_images/2020f75fceef23c62e911c7bb4612e219c1c7d4daec89cc05c1cf05ed0e5454a.png" />
 </div>
 </div>
 </section>
@@ -885,7 +784,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4e997467dc208270237853ef9b5421453d233d9522f345ac3d9c85f9b628ac24.png" src="_images/4e997467dc208270237853ef9b5421453d233d9522f345ac3d9c85f9b628ac24.png" />
+<img alt="_images/3da071a19b17cbe08ab06570a97d2e14852d574b3e027abf2d09ba83a04f32d6.png" src="_images/3da071a19b17cbe08ab06570a97d2e14852d574b3e027abf2d09ba83a04f32d6.png" />
 </div>
 </div>
 </section>
@@ -933,7 +832,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/0a6767640f74f4f2483142d17654a9d064b91498a65a41c98ede6e79d79544e1.png" src="_images/0a6767640f74f4f2483142d17654a9d064b91498a65a41c98ede6e79d79544e1.png" />
+<img alt="_images/df2ccd99f6c2635b2f938fc9ad6e6213b05d531e42f04c4fa4666349647908d5.png" src="_images/df2ccd99f6c2635b2f938fc9ad6e6213b05d531e42f04c4fa4666349647908d5.png" />
 </div>
 </div>
 </section>
@@ -1017,10 +916,41 @@ ANDとXORに関してはすでに作成済みなので、以下のように組�
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;00&#39;: 1000}
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/qiskit/__init__.py:123,</span> in <span class="ni">AerWrapper.__getattr__</span><span class="nt">(self, attr)</span>
+<span class="g g-Whitespace">    </span><span class="mi">122</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">123</span>     <span class="kn">from</span> <span class="nn">qiskit.providers</span> <span class="kn">import</span> <span class="n">aer</span>
+<span class="g g-Whitespace">    </span><span class="mi">125</span>     <span class="bp">self</span><span class="o">.</span><span class="n">aer</span> <span class="o">=</span> <span class="n">aer</span><span class="o">.</span><span class="n">Aer</span>
+
+<span class="ne">ImportError</span>: cannot import name &#39;aer&#39; from &#39;qiskit.providers&#39; (/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/qiskit/providers/__init__.py)
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="ne">MissingOptionalLibraryError</span><span class="g g-Whitespace">               </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span> <span class="n">line</span> <span class="mi">22</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="c1">#Sum</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="ne">---&gt; </span><span class="mi">22</span> <span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="n">result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/qiskit/__init__.py:134,</span> in <span class="ni">AerWrapper.__getattr__</span><span class="nt">(self, attr)</span>
+<span class="g g-Whitespace">    </span><span class="mi">126</span>         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">127</span>             <span class="s2">&quot;The qiskit.Aer entry point will be deprecated in a future release and &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">128</span>             <span class="s2">&quot;subsequently removed. Instead you should use this &quot;</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">131</span>             <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">132</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">133</span>     <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">134</span>         <span class="k">raise</span> <span class="n">MissingOptionalLibraryError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">135</span>             <span class="s2">&quot;qiskit-aer&quot;</span><span class="p">,</span> <span class="s2">&quot;Aer provider&quot;</span><span class="p">,</span> <span class="s2">&quot;pip install qiskit-aer&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">136</span>         <span class="p">)</span> <span class="kn">from</span> <span class="nn">ex</span>
+<span class="g g-Whitespace">    </span><span class="mi">137</span> <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">aer</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
+
+<span class="ne">MissingOptionalLibraryError</span>: &quot;The &#39;qiskit-aer&#39; library is required to use &#39;Aer provider&#39;. You can install it with &#39;pip install qiskit-aer&#39;.&quot;
 </pre></div>
 </div>
-<img alt="_images/954b9b56d084fb4f667746fd50087b98cd51d9af91d5625d7ccc4ab39d92ba23.png" src="_images/954b9b56d084fb4f667746fd50087b98cd51d9af91d5625d7ccc4ab39d92ba23.png" />
 </div>
 </div>
 </section>
