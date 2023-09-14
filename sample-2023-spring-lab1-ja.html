@@ -63,10 +63,9 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'lab1-ja';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sample-2023-spring-lab1-ja';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="3. Lab 2: 量子テレポーテーション" href="lab2-ja.html" />
     <link rel="prev" title="Week1 量子回路における加算器" href="2019-w1-adder.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -164,11 +163,6 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">1. IBM Quantum Challenge: Spring 2023</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="lab2-ja.html">3. Lab 2: 量子テレポーテーション</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab3-ja.html">4. Lab 3: 反復位相推定</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab4-ja.html">5. Lab 4: エラー訂正</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab5-ja.html">6. Challenge 5: 127 量子ビットを使う</a></li>
-
 </ul>
 
     </div>
@@ -240,7 +234,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/quantum-tokyo/iqc-textbook/issues/new?title=Issue%20on%20page%20%2Flab1-ja.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/quantum-tokyo/iqc-textbook/issues/new?title=Issue%20on%20page%20%2Fsample-2023-spring-lab1-ja.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -270,7 +264,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="_sources/lab1-ja.ipynb" target="_blank"
+      <li><a href="_sources/sample-2023-spring-lab1-ja.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -399,6 +393,10 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="ibm-quantum-challenge-spring-2023">
 <h1><span class="section-number">1. </span>IBM Quantum Challenge: Spring 2023<a class="headerlink" href="#ibm-quantum-challenge-spring-2023" title="Permalink to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>このNotebookはQiskit v0.44の仕様に合わせてコードを改変しています。</p>
+</div>
 <section id="id1">
 <h2><span class="section-number">1.1. </span>始めの一歩<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <p>IBM Quantum Challenge: Spring 2023へようこそ！</p>
@@ -438,6 +436,38 @@ document.write(`
 </pre></div>
 </div>
 </div>
+</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+解答<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">cr</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">q0</span><span class="p">,</span> <span class="n">q1</span> <span class="o">=</span> <span class="n">qr</span>
+<span class="n">b0</span><span class="p">,</span> <span class="n">b1</span> <span class="o">=</span> <span class="n">cr</span>
+
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q0</span><span class="p">,</span> <span class="n">b0</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">qc</span><span class="o">.</span><span class="n">if_test</span><span class="p">((</span><span class="n">b0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="k">as</span> <span class="n">else_</span><span class="p">:</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">else_</span><span class="p">:</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span>
+
+
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q1</span><span class="p">,</span> <span class="n">b1</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s2">&quot;mpl&quot;</span><span class="p">,</span> <span class="n">idle_wires</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details><div class="tip admonition">
+<p class="admonition-title">解説</p>
+<p>ここに解説を書きます</p>
 </div>
 <p>よくできました！各Exerciseの後、あなたが書いたものが正しいかどうかを判断する必要があります。それは、Graderのセルを実行するとわかります。</p>
 <p>試してみましょう。次のセルで、変数 <code class="docutils literal notranslate"><span class="pre">answer_0</span></code> に整数値を設定してください。この整数が1〜5の間であれば、Grader は正しい答えを見つけたことを祝福するメッセージを返します。それ以外の数値を入力した場合は、逆のメッセージが表示されます。</p>
@@ -885,15 +915,6 @@ document.write(`
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Week1 量子回路における加算器</p>
       </div>
-    </a>
-    <a class="right-next"
-       href="lab2-ja.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">3. </span>Lab 2: 量子テレポーテーション</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div></div>
   
