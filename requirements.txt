@@ -67,6 +67,7 @@ pybtex-docutils==1.0.3
 pycparser==2.21
 pydata-sphinx-theme==0.13.3
 Pygments==2.16.1
+pylatexenc==2.10
 pyparsing==3.0.9
 python-dateutil==2.8.2
 PyYAML==6.0.1
