@@ -45,4 +45,4 @@ parts:
     numbered: True
     maxdepth: 1
     chapters:
-      - file: lab1-ja
+      - file: sample-2023-spring-lab1-ja
