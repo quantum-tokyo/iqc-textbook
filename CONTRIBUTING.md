@@ -9,7 +9,7 @@
 以下コマンドを実行して必要なライブラリをインストールする。
 
 ```
-pip install -r requirement.txt
+pip install -r requirements.txt
 ```
 
 ### Jupyter notebook の編集
