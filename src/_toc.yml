@@ -11,9 +11,9 @@ parts:
       - file: 2019-w1-adder
   #   - file: 2020-w1-a-adder
   #   - file: 2021-lab1-toffoli
-  # - caption: "第３章 量子アルゴリズム"
-  #   chapters:
-  #   - file: 2019-w2-grover
+   - caption: "第３章 量子アルゴリズム"
+     chapters:
+     - file: 2019-w2-grover
   #   - file: 2020-w1-b-grover
   #   - file: 2020-w2-a-lights-out-puzzle
   #   - file: 2020-w2-b-lights-out-puzzle
