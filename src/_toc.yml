@@ -6,13 +6,13 @@ root: intro
 defaults: # The defaults key will be applied to all chapters and sub-sections
   titlesonly: True
 parts:
-  - caption: "第２章 量子コンピューターの計算ルール"
-    chapters:
-      - file: 2019-w1-adder
+  # - caption: "第２章 量子コンピューターの計算ルール"
+  #   chapters:
+  #   - file: 2019-w1-adder
   #   - file: 2020-w1-a-adder
   #   - file: 2021-lab1-toffoli
-  # - caption: "第３章 量子アルゴリズム"
-  #   chapters:
+  #   - caption: "第３章 量子アルゴリズム"
+  #     chapters:
   #   - file: 2019-w2-grover
   #   - file: 2020-w1-b-grover
   #   - file: 2020-w2-a-lights-out-puzzle
@@ -20,8 +20,8 @@ parts:
   #   - file: 2020-w3-false-asteroids
   #   - file: 2021-spring-lab2-shor
   #   - file: 2023-spring-lab3-iqpe
-  # - caption: "第4章 量子コンピューターの応用"
-  #   chapters:
+    - caption: "第4章 量子コンピューターの応用"
+      chapters:
   #   - file: 2021-autumn-lab1-portfolio
   #   - file: 2021-spring-lab5-vqe
   #   - file: 2021-autumn-lab2-oled
@@ -34,15 +34,15 @@ parts:
   #   - file: 2021-autumn-lab4-battery
   #   - file: 2022-autumn-lab3-optimization
   #   - file: 2021-autumn-lab3-img-classification
-  #   - file: 2022-autumn-lab2-quantum-kernel
+      - file: 2022-autumn-lab2-quantum-kernel
   # - caption: "第5章 量子コンピューターのエラー訂正・緩和"
   #   chapters:
   #   - file: 2022-autumn-lab1-runtime
   #   - file: 2021-spring-lab3-error-correction
   #   - file: 2023-spring-lab4-error-correction
   #   - file: 2023-spring-lab5-127qubits
-  - caption: "Test: 2023Spring"
-    numbered: True
-    maxdepth: 1
-    chapters:
+    - caption: "Test: 2023Spring"
+      numbered: True
+      maxdepth: 1
+      chapters:
       - file: sample-2023-spring-lab1-ja
