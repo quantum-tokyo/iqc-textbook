@@ -20,13 +20,13 @@ parts:
   #   - file: 2020-w3-false-asteroids
   #   - file: 2021-spring-lab2-shor
   #   - file: 2023-spring-lab3-iqpe
-  # - caption: "第4章 量子コンピューターの応用"
-  #   chapters:
+  - caption: "第4章 量子コンピューターの応用"
+    chapters:
   #   - file: 2021-autumn-lab1-portfolio
   #   - file: 2021-spring-lab5-vqe
   #   - file: 2021-autumn-lab2-oled
   #   - file: 2022-spring-lab1-tb-model
-  #   - file: 2022-spring-lab2-tb-model
+    - file: 2022-spring-lab2-tb-model
   #   - file: 2022-spring-lab3-many-body-systems
   #   - file: 2022-spring-lab4-electric-structure
   #   - file: 2022-autumn-lab4-chemistry
