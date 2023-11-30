@@ -35,7 +35,7 @@ pi=math.pi
 ------------------
 
 ----- stderr -----
-/tmp/ipykernel_1970/1182467571.py:3: MatplotlibDeprecationWarning: MatplotlibDeprecationWarning was deprecated in Matplotlib 3.6 and will be removed two minor releases later. Use matplotlib.MatplotlibDeprecationWarning instead.
+/tmp/ipykernel_2007/1182467571.py:3: MatplotlibDeprecationWarning: MatplotlibDeprecationWarning was deprecated in Matplotlib 3.6 and will be removed two minor releases later. Use matplotlib.MatplotlibDeprecationWarning instead.
   from matplotlib.cbook import MatplotlibDeprecationWarning
 ------------------
 

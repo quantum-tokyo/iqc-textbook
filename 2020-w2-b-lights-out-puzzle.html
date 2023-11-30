@@ -1,0 +1,1190 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>4-ライツアウトパズル（2020年 Week2b） &#8212; IBM Quantum Challengeで学ぶ量子コンピューティング</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '2020-w2-b-lights-out-puzzle';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="1. IBM Quantum Challenge: Spring 2023" href="sample-2023-spring-lab1-ja.html" />
+    <link rel="prev" title="トフォリゲート(2021年春 Lab1)" href="2021-spring-lab1-toffoli.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">IBM Quantum Challengeで学ぶ量子コンピューティング</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to IQC Textbook
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">第２章 量子コンピューターの計算ルール</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2019-w1-adder.html">量子回路における加算器（2019年 Week1）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2021-spring-lab1-toffoli.html">トフォリゲート(2021年春 Lab1)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">第３章 量子アルゴリズム</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4-ライツアウトパズル（2020年 Week2b）</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Test: 2023Spring</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="sample-2023-spring-lab1-ja.html">1. IBM Quantum Challenge: Spring 2023</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/quantum-tokyo/iqc-textbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/quantum-tokyo/iqc-textbook/issues/new?title=Issue%20on%20page%20%2F2020-w2-b-lights-out-puzzle.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/2020-w2-b-lights-out-puzzle.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>4-ライツアウトパズル（2020年 Week2b）</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1度のスイッチでボードをクリア</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#week2-b-4">Week2-B: 4-ライツアウト</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">解答戦略</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qram-quantum-random-access-memory">qRAM: Quantum Random Access Memory</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qram">例題: データをqRAMから見つけよう</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">qRAM演算</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">qRAM 内のデータ探索</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">qRAMの実装についての考察</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ii-b">ラーニング演習 II-B</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">ヒント</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">解答例</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="week2b">
+<h1>4-ライツアウトパズル（2020年 Week2b）<a class="headerlink" href="#week2b" title="Permalink to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>このNotebookはQiskit v0.44の仕様に合わせてコードを改変しています。</p>
+</div>
+<section id="id1">
+<h2>1度のスイッチでボードをクリア<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p><em>Dr. リョウコのいる部屋の床は３ｘ３のタイルでできている。ひとつのタイルはひとつの量子ビットに対応している。<br/>
+エネルギーの低い基底状態のタイルは平らだが、エネルギーレベルの高い励起状態の量子ビットは柱のようにそびえ立ち行く手を阻む。<br/>
+しかも2つの状態間を行き来する量子ビットがいくつか存在している。更に観察をつづけると、各量子ビットが取り得る状態の組み合わせが、<br/>
+全部で４パターンしかないことに気づく。だが、スイッチは1度しか押せない。これは4枚のライツアウト問題を1度のスイッチ操作で解くのと同じだ。<br/>
+１度のスイッチ操作でクリアできるボードをみつけて、Dr.リョウコが無事に部屋を通過できるのを助けよう。</em></p>
+</section>
+<section id="week2-b-4">
+<h2>Week2-B: 4-ライツアウト<a class="headerlink" href="#week2-b-4" title="Permalink to this heading">#</a></h2>
+<p>この問題では、複数のバイナリデータを同時に取り扱います。
+与えられた4枚のライツアウトボードのそれぞれが制約条件下で解けるかどうか、一つの量子回路で同時に判断できるよう工夫してみましょう。</p>
+<p>例として、以下の4ボードの中から”１度のスイッチ操作でクリアできるボード”を発見する方法を考えてみましょう。
+4ボードの初期状態は以下の２次元配列で与えられ、０と1がそれぞれ消灯と点灯を示しています。
+lightsout4_ex=[[Board 0],[Board 1],[Board 2],[Board 3]]</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
+<span class="n">Image</span><span class="p">(</span><span class="s1">&#39;resources/2020-w2-b-4lightsout_ex.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b18d385076061db7c0fd0c11f9c112d45abe03b7efbcbf2f009d32613b171b22.png" src="_images/b18d385076061db7c0fd0c11f9c112d45abe03b7efbcbf2f009d32613b171b22.png" />
+</div>
+</div>
+<section id="id2">
+<h3>解答戦略<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<p>ボードが一つなら、この例題は決定問題となります。</p>
+<ul class="simple">
+<li><p>2-a問題のアルゴリズムを使って、出力に含まれる”１”を数え上げることで解決できるでしょう。</p></li>
+</ul>
+<p>ボードが複数の場合、いくつかのアプローチが考えられます。</p>
+<ol class="arabic simple">
+<li><p>各ボードに対して、１ボード用のアルゴリズムを繰り返し適用する。</p></li>
+<li><p>複数のボード情報を同時に保持し、一度のアルゴリズム実行で解決する。</p></li>
+</ol>
+<ul class="simple">
+<li><p>以下のコンテンツでは、後者のアプローチに挑戦します。</p></li>
+</ul>
+<p>ここで、全てのボード情報をQubit上に保持するにはどうすれば良いでしょうか？</p>
+<ol class="arabic simple">
+<li><p>ナイーブなデータ構造:　　9 Qubits/board * 4 boards &gt; 32 qubits (ibm_qasm_simulatorの上限)。</p></li>
+<li><p>重ね合わせ状態を準備する:   <span class="math notranslate nohighlight">\(\vert Board 0\rangle + \vert Board 1\rangle + \vert Board 2\rangle + \vert Board 3\rangle\)</span>.</p>
+<ul class="simple">
+<li><p>状態生成に用いる回路構成は非自明。</p></li>
+</ul>
+</li>
+<li><p>一つの解法として<em>qRAM</em>が知られている。</p>
+<ul class="simple">
+<li><p><strong>長所</strong>: 直感的な実装が可能。</p></li>
+<li><p><strong>短所</strong>: 計算量が大きい。</p></li>
+</ul>
+</li>
+</ol>
+<p>もちろん他のより優れた方法を採用しても構いません。</p>
+<p>ここでは<em>qRAM</em>に焦点を当て、その構成と実装について説明します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">Aer</span><span class="p">,</span> <span class="n">execute</span>
+<span class="kn">from</span> <span class="nn">qiskit_ibm_provider</span> <span class="kn">import</span> <span class="n">IBMProvider</span>
+<span class="n">provider</span> <span class="o">=</span> <span class="n">IBMProvider</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AccountNotFoundError</span><span class="g g-Whitespace">                      </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">Aer</span><span class="p">,</span> <span class="n">execute</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">qiskit_ibm_provider</span> <span class="kn">import</span> <span class="n">IBMProvider</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">provider</span> <span class="o">=</span> <span class="n">IBMProvider</span><span class="p">()</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.6/x64/lib/python3.11/site-packages/qiskit_ibm_provider/ibm_provider.py:162,</span> in <span class="ni">IBMProvider.__init__</span><span class="nt">(self, token, url, name, instance, proxies, verify)</span>
+<span class="g g-Whitespace">    </span><span class="mi">139</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;IBMProvider constructor</span>
+<span class="g g-Whitespace">    </span><span class="mi">140</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">141</span><span class="sd"> Args:</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">    </span><span class="mi">159</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">160</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">161</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">162</span> <span class="bp">self</span><span class="o">.</span><span class="n">_account</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_discover_account</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">163</span>     <span class="n">token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">164</span>     <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">165</span>     <span class="n">instance</span><span class="o">=</span><span class="n">instance</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">166</span>     <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">167</span>     <span class="n">proxies</span><span class="o">=</span><span class="n">ProxyConfiguration</span><span class="p">(</span><span class="o">**</span><span class="n">proxies</span><span class="p">)</span> <span class="k">if</span> <span class="n">proxies</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">168</span>     <span class="n">verify</span><span class="o">=</span><span class="n">verify</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">169</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">171</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client_params</span> <span class="o">=</span> <span class="n">ClientParameters</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">172</span>     <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_account</span><span class="o">.</span><span class="n">token</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">173</span>     <span class="n">url</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_account</span><span class="o">.</span><span class="n">url</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">176</span>     <span class="n">verify</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_account</span><span class="o">.</span><span class="n">verify</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">177</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">178</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auth_client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_authenticate_ibm_quantum_account</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client_params</span><span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.6/x64/lib/python3.11/site-packages/qiskit_ibm_provider/ibm_provider.py:221,</span> in <span class="ni">IBMProvider._discover_account</span><span class="nt">(token, url, instance, name, proxies, verify)</span>
+<span class="g g-Whitespace">    </span><span class="mi">217</span>         <span class="k">if</span> <span class="n">url</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">218</span>             <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">219</span>                 <span class="s2">&quot;Loading default ibm_quantum account. Input &#39;url&#39; is ignored.&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">220</span>             <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">221</span>         <span class="n">account</span> <span class="o">=</span> <span class="n">AccountManager</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">channel</span><span class="o">=</span><span class="s2">&quot;ibm_quantum&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">223</span> <span class="k">if</span> <span class="n">account</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">224</span>     <span class="n">account</span> <span class="o">=</span> <span class="n">AccountManager</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.6/x64/lib/python3.11/site-packages/qiskit_ibm_provider/accounts/management.py:151,</span> in <span class="ni">AccountManager.get</span><span class="nt">(cls, name, channel)</span>
+<span class="g g-Whitespace">    </span><span class="mi">146</span>     <span class="n">saved_account</span> <span class="o">=</span> <span class="n">read_config</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">147</span>         <span class="n">filename</span><span class="o">=</span><span class="bp">cls</span><span class="o">.</span><span class="n">_default_account_config_json_file</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">148</span>         <span class="n">name</span><span class="o">=</span><span class="bp">cls</span><span class="o">.</span><span class="n">_default_account_name_ibm_quantum</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">149</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">150</span>     <span class="k">if</span> <span class="n">saved_account</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">151</span>         <span class="k">raise</span> <span class="n">AccountNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No default </span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s2"> account saved.&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">152</span>     <span class="k">return</span> <span class="n">Account</span><span class="o">.</span><span class="n">from_saved_format</span><span class="p">(</span><span class="n">saved_account</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">154</span> <span class="n">all_config</span> <span class="o">=</span> <span class="n">read_config</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="bp">cls</span><span class="o">.</span><span class="n">_default_account_config_json_file</span><span class="p">)</span>
+
+<span class="ne">AccountNotFoundError</span>: &#39;No default ibm_quantum account saved.&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="qram-quantum-random-access-memory">
+<h3>qRAM: Quantum Random Access Memory<a class="headerlink" href="#qram-quantum-random-access-memory" title="Permalink to this heading">#</a></h3>
+<p>古典的なコンピュータでは、RAM(Random Access Memory)は揮発性メモリの一種で、メモリアドレス <span class="math notranslate nohighlight">\(j\)</span> を持ち、各アドレス <span class="math notranslate nohighlight">\(D_j\)</span> に対応するバイナリデータを格納しています。</p>
+<p>量子コンピュータの<a class="reference external" href="https://arxiv.org/abs/0708.1879">qRAM</a>の場合、アドレスQubits <span class="math notranslate nohighlight">\(a\)</span> は、<span class="math notranslate nohighlight">\(N\)</span> 個のアドレスを重ね合わせ状態で持ち、対応するバイナリデータを状態ベクトルとしてデータQubit <span class="math notranslate nohighlight">\(d\)</span> に格納しています。</p>
+<p><span class="math notranslate nohighlight">\(
+\sum_{j}\frac{1}{\sqrt{N}}\vert j \rangle_{a}\vert 0 \rangle_{d}\xrightarrow{qRAM}\sum_{j}\frac{1}{\sqrt{N}}\vert j \rangle_{a}\vert D_{j} \rangle_{d}
+\)</span></p>
+<p>右辺の状態を”qRAM”、対応するゲート操作を”qRAM演算”と呼ぶことにします。</p>
+<p>qRAM演算には <span class="math notranslate nohighlight">\(\mathcal{O}(N\log N)\)</span> 個のゲートが必要ですが、直感的にバイナリデータの重ね合わせ状態を作ることができます。
+qRAMは、HHLアルゴリズムをはじめとする量子機械学習の様々なアルゴリズムに応用されています。
+今回は、GroverのアルゴリズムにqRAMを適用してみましょう。</p>
+</section>
+<section id="qram">
+<h3>例題: データをqRAMから見つけよう<a class="headerlink" href="#qram" title="Permalink to this heading">#</a></h3>
+<p><span class="math notranslate nohighlight">\(k_0, k_1, ... , k_{n-1}\)</span> がこの順に格納された <span class="math notranslate nohighlight">\(n\)</span> アドレスの qRAM を用意します。
+Groverのアルゴリズムを使って，<span class="math notranslate nohighlight">\(m\)</span>という数字が格納されているアドレスを求めます。</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(n = 4\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(k = [1,2,5,7]\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(m = 7\)</span></p></li>
+</ul>
+<section id="id3">
+<h4>qRAM演算<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h4>
+<p>以下にqRAM演算の実装例を示します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">address</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">address</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+
+<span class="c1"># address preparation</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">([</span><span class="n">address</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">address</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+<span class="c1"># address 0 -&gt; data = 1</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">([</span><span class="n">address</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">address</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">address</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">address</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">([</span><span class="n">address</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">address</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+<span class="c1"># address 1 -&gt; data = 2</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">address</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">address</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">address</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">address</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+<span class="c1"># address 2 -&gt; data = 5</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">address</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">address</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">address</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">address</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">address</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">address</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+<span class="c1"># address 3 -&gt; data = 7</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">address</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">address</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">address</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">address</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">address</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">address</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+
+
+<span class="c1">#Check the qRAM　status</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">address</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>
+ 
+<span class="c1"># Reverse the output string.</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">qc</span><span class="o">.</span><span class="n">reverse_bits</span><span class="p">()</span>
+
+<span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span> <span class="n">seed_simulator</span><span class="o">=</span><span class="mi">12345</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">count</span> <span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">address</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">data</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;QuantumRegister&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id4">
+<h4>qRAM 内のデータ探索<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h4>
+<p>Groverのアルゴリズムを実行するには、<span class="math notranslate nohighlight">\(m\)</span>を含む<strong>アドレスQubit</strong>の符号を反転させます。
+また、拡散変換の前に別のqRAM演算でデータ Qubitを初期化する必要があります。</p>
+<p><span class="math notranslate nohighlight">\(
+\begin{align*}
+\vert j \rangle_{a}\vert D_{j} \rangle_{d} \vert - \rangle_{f}
+\xrightarrow{oracle}  
+\left \{
+ \begin{array}{l}
+-\vert j \rangle_{a}\vert D_{j} \rangle_{d} \vert - \rangle_{f},  D_{j} = m\\
+\vert j \rangle_{a}\vert D_{j} \rangle_{d} \vert - \rangle_{f},  D_{j}  \neq m
+ \end{array}
+ \right.
+ \xrightarrow{qRAM}
+\left \{
+ \begin{array}{l}
+-\vert j \rangle_{a}\vert 0 \rangle_{d}\vert - \rangle_{f},  D_{j} = m \\
+\vert j \rangle_{a}\vert 0 \rangle_{d}\vert - \rangle_{f},　D_{j}\neq m
+ \end{array}
+ \right.
+ \end{align*}
+\)</span></p>
+<p>ここで、<span class="math notranslate nohighlight">\(f\)</span> はフラグQubitを表します。
+この例題の場合，<a class="reference external" href="https://qiskit.org/documentation/stubs/qiskit.circuit.library.C3XGate.html#qiskit.circuit.library.C3XGate">C3X gate</a>でオラクル操作を実行することができます。</p>
+<p>以下にqRAMの例題の回路全体を示しています。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;resources/2020-w2-b-circuit_ex.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">Image</span><span class="p">(</span><span class="s1">&#39;resources/2020-w2-b-circuit_ex.png&#39;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;Image&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id5">
+<h4>qRAMの実装についての考察<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h4>
+<p>上記の説明では、ナイーブな<em>qRAM演算</em>回路を紹介しました。<br />
+データ構造にもよりますが、ゲートの<strong>合成</strong>(等価変換)の技術を用いることで回路を簡略化することができます。
+また、<a class="reference external" href="https://qiskit.org/documentation/stubs/qiskit.circuit.library.RCCXGate.html#qiskit.circuit.library.RCCXGate">RCCX</a>などの簡略化されたゲートは、あなたの実装における<em>CNOT</em>の節約に役立つかもしれません。
+以下にゲート合成の例を示します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;resources/2020-w2-b-gatesynthesis_ex.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0a8f6ff0d49a277ef02917fba13ce274f8c8eb6e9a6b86ffe82b72630a918fa6.png" src="_images/0a8f6ff0d49a277ef02917fba13ce274f8c8eb6e9a6b86ffe82b72630a918fa6.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="ii-b">
+<h3>ラーニング演習 II-B<a class="headerlink" href="#ii-b" title="Permalink to this heading">#</a></h3>
+<p>4-ライツアウトをqRAMを用いて解決してみましょう。</p>
+<p>ボード状態が以下の lightsout4 = [[Board 0], [Board 1], [Board 2], [Board 3]] で与えられるとき、3回のスイッチ操作で解決できるボード番号を２進数形式で答える量子回路を作成してください。 (ex. Board 0 -&gt; 00, 1-&gt;01, 2 -&gt; 10, 3 -&gt; 11)</p>
+<p>量子回路では、パズルの答えとなるsolution(2bit)のみを観測してください。</p>
+<p>提出形式は、lightsout4 を引数とし、<code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code>を返す関数です（関数名は任意のものを付けて問題ありません）。lightsout4に別のデータセットをインプットしても機能するようにしてください。</p>
+<p><strong>尚、量子回路は 28 qubits 以内で実装してください。</strong></p>
+<p>説明で用いられているものと同じエンディアンで解答が得られるようになっているか注意してください。以下の関数を使っても構いません。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">qc</span> <span class="o">=</span> <span class="n">qc</span><span class="o">.</span><span class="n">reverse_bits</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;resources/2020-w2-b-4lightsout_pr.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/758e4d14065499f11666a8bb91d3dd82cf5c836de00bc3ea169ab6c16433a544.png" src="_images/758e4d14065499f11666a8bb91d3dd82cf5c836de00bc3ea169ab6c16433a544.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lightsout4</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id6">
+<h4>ヒント<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>qRAM Data search のオラクルを適切なものに変更しましょう。</p></li>
+<li><p><em>qRAM演算</em>におけるデータ書き込みは任意の順序で行うことができます。アドレスの <em>ハミング距離</em> や入力されるデータを考慮することでゲート数を削減できるかもしれません。</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">week2b_ans_func</span><span class="p">(</span><span class="n">lightout4</span><span class="p">):</span>
+    <span class="c1">##### ここに量子回路を作成してください。</span>
+    <span class="c1">####  尚、異なる入力(lightout4)でも問題が解ける関数にしてください。異なる入力で検証を行います。</span>
+    
+    <span class="k">return</span> <span class="n">qc</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="id7">
+<h2>解答例<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd"> Week2-Aのライツアウトの関数</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1"># 初期化処理</span>
+<span class="k">def</span> <span class="nf">initialize_lights_out</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">oracle</span><span class="p">):</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">flip</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">oracle</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">oracle</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># flipの1行目の操作する</span>
+<span class="k">def</span> <span class="nf">flip_1</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">):</span>
+    <span class="c1"># push 0</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+    <span class="c1"># push 1</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+    <span class="c1"># push 2</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span> 
+    
+<span class="c1"># tileの1行目でflipの2行目を反転する</span>
+<span class="k">def</span> <span class="nf">inv_1</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">):</span>
+    <span class="c1"># copy 0,1,2</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">tile</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">flip</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">tile</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">flip</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">tile</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">flip</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+    
+<span class="c1"># flipの2行目を操作する</span>
+<span class="k">def</span> <span class="nf">flip_2</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">):</span>
+    <span class="c1"># apply flip[3,4,5]</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span>
+    
+<span class="c1"># tileの2行目でflipの３行目を反転する</span>
+<span class="k">def</span> <span class="nf">inv_2</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">):</span>
+    <span class="c1"># copy 3,4,5</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">tile</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">flip</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">tile</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">flip</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">tile</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">flip</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span>
+    
+<span class="c1"># flipの3行目を操作する</span>
+<span class="k">def</span> <span class="nf">flip_3</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">):</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">tile</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span>
+
+<span class="c1"># lightoutのオラクルを定義する</span>
+<span class="k">def</span> <span class="nf">lights_out_oracle</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">tile</span><span class="p">,</span><span class="n">oracle</span><span class="p">,</span><span class="n">auxiliary</span><span class="p">):</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">tile</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">9</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">mct</span><span class="p">(</span><span class="n">tile</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">9</span><span class="p">],</span> <span class="n">oracle</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">auxiliary</span><span class="p">)</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">tile</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">9</span><span class="p">])</span>
+    
+<span class="c1"># flip操作のdiffusionゲートを操作する</span>
+<span class="k">def</span> <span class="nf">flipdiffusion</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">):</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">flip</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">flip</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">flip</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">flip</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">flip</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">flip</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">解説（Week2-Aのライツアウトの関数）</p>
+<p>Week2-Aのライツアウトの関数はWeek2-Aの解である<code class="docutils literal notranslate"><span class="pre">week2a_ans_func(light)</span></code>で使用される部品を関数として定義したものです。
+ライツアウトを解くための各関数の解説はWeek2-Aの範囲なので省略します。
+ここに記載した解とは別の解き方でも問題ありません。</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd"> 関数定義</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1"># qRAMにlightoutを記録する</span>
+<span class="k">def</span> <span class="nf">qram_exercise</span><span class="p">(</span><span class="n">prob_array</span><span class="p">,</span> <span class="n">qc</span><span class="p">,</span> <span class="n">qr</span><span class="p">,</span> <span class="n">qa</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">board</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">prob_array</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">k</span><span class="o">//</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">qa</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">k</span><span class="o">%</span><span class="k">2</span>==0:
+            <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">qa</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>            
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">qa</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">qa</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">qr</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+            <span class="n">j</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="n">k</span><span class="o">//</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">qa</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">k</span><span class="o">%</span><span class="k">2</span>==0:
+            <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">qa</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># flipの数をカウントする</span>
+<span class="k">def</span> <span class="nf">counter</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">auxiliary</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">flip</span><span class="p">)):</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">mct</span><span class="p">([</span><span class="n">flip</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">2</span><span class="p">]],</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">6</span><span class="p">])</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">mct</span><span class="p">([</span><span class="n">flip</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        
+<span class="c1"># flipの数をカウントする操作の逆操作を実行する</span>
+<span class="k">def</span> <span class="nf">revcounter</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">auxiliary</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">flip</span><span class="p">)):</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">flip</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">mct</span><span class="p">([</span><span class="n">flip</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">mct</span><span class="p">([</span><span class="n">flip</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">2</span><span class="p">]],</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">6</span><span class="p">])</span>
+
+<span class="c1"># qRAM操作のdiffusionゲートを操作する</span>
+<span class="k">def</span> <span class="nf">addressdiffusion</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">address</span><span class="p">):</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">address</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">address</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cz</span><span class="p">(</span><span class="n">address</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">address</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">address</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">address</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">解説</p>
+<p>ここでは以下の解答で使用する関数を定義します。</p>
+<p class="rubric"><code class="docutils literal notranslate"><span class="pre">qram_exercise(prob_array,</span> <span class="pre">qc,</span> <span class="pre">qr,</span> <span class="pre">qa)</span></code></p>
+<p>量子回路<code class="docutils literal notranslate"><span class="pre">qc</span></code>の量子ビット<code class="docutils literal notranslate"><span class="pre">qa</span></code>で与えれるqRAMのアドレスに対して、対応する<code class="docutils literal notranslate"><span class="pre">prob_array</span></code>として与えられた<code class="docutils literal notranslate"><span class="pre">lightsout4</span></code>配列を量子ビット<code class="docutils literal notranslate"><span class="pre">qr</span></code>に記録します。<br />
+<span class="math notranslate nohighlight">\(k=0\)</span>は<span class="math notranslate nohighlight">\(\ket{00}\)</span>に<br />
+<span class="math notranslate nohighlight">\(k=1\)</span>は<span class="math notranslate nohighlight">\(\ket{10}\)</span>に<br />
+<span class="math notranslate nohighlight">\(k=2\)</span>は<span class="math notranslate nohighlight">\(\ket{01}\)</span>に<br />
+<span class="math notranslate nohighlight">\(k=3\)</span>は<span class="math notranslate nohighlight">\(\ket{11}\)</span>に対応します。</p>
+<p class="rubric"><code class="docutils literal notranslate"><span class="pre">counter(qc,flip,auxiliary)</span></code></p>
+<p>量子回路qcのflipの1の数をカウントします。<br />
+カウントした結果はauxiliaryに2進数の形で記録されます。</p>
+<p class="rubric"><code class="docutils literal notranslate"><span class="pre">revcounter(qc,flip,auxiliary)</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">counter</span></code>の逆操作を実行します。<br />
+<code class="docutils literal notranslate"><span class="pre">counter</span></code>で実施した<code class="docutils literal notranslate"><span class="pre">auxiliary</span></code>への操作を初期化するために実施します。</p>
+<p class="rubric"><code class="docutils literal notranslate"><span class="pre">addressdiffusion(qc,address)</span></code></p>
+<p>量子回路<code class="docutils literal notranslate"><span class="pre">qc</span></code>の<code class="docutils literal notranslate"><span class="pre">address</span></code>に対する<code class="docutils literal notranslate"><span class="pre">diffusion</span></code>操作です。
+この操作により求める解に対応する振幅を増幅します。</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">week2b_ans_func</span><span class="p">(</span><span class="n">lightout4</span><span class="p">):</span>
+<span class="c1"># 量子ビット &amp; 回路定義</span>
+<span class="n">address</span><span class="o">=</span><span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">tile</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">flip</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">oracle</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">auxiliary</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">tile</span><span class="p">,</span> <span class="n">flip</span><span class="p">,</span> <span class="n">oracle</span><span class="p">,</span> <span class="n">auxiliary</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+
+<span class="c1"># addressを初期化</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">address</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="c1"># ライツアウト処理の初期化</span>
+<span class="n">initialize_lights_out</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">oracle</span><span class="p">)</span>
+
+<span class="c1"># 各アドレスに対してlightsoutに対応するtileを作成</span>
+<span class="n">qram_exercise</span><span class="p">(</span><span class="n">lightsout4</span><span class="p">,</span> <span class="n">qc</span><span class="p">,</span> <span class="n">tile</span><span class="p">,</span> <span class="n">address</span><span class="p">)</span>
+
+<span class="c1"># ライツアウトの解の振幅を増幅処理を2回繰り返す</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">flip_1</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+    <span class="n">inv_1</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+    <span class="n">flip_2</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+    <span class="n">inv_2</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+    <span class="n">flip_3</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+
+    <span class="n">lights_out_oracle</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">tile</span><span class="p">,</span><span class="n">oracle</span><span class="p">,</span><span class="n">auxiliary</span><span class="p">)</span>
+
+    <span class="n">flip_3</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+    <span class="n">inv_2</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+    <span class="n">flip_2</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+    <span class="n">inv_1</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+    <span class="n">flip_1</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+
+    <span class="n">flipdiffusion</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">)</span>
+
+<span class="c1"># 3量子ビットのflip情報を9量子ビットに変換</span>
+<span class="n">flip_1</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+<span class="n">inv_1</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+<span class="n">flip_2</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+<span class="n">inv_2</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+
+<span class="c1"># flipの１をカウント</span>
+<span class="n">counter</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">auxiliary</span><span class="p">)</span>
+
+<span class="c1"># ３Push以内に解ける解の位相を反転</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">oracle</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">auxiliary</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="c1"># flipのカウント処理をリセット</span>
+<span class="n">revcounter</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">auxiliary</span><span class="p">)</span>
+
+<span class="c1"># flip情報の9量子ビット化をリセット</span>
+<span class="n">inv_2</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+<span class="n">flip_2</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+<span class="n">inv_1</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+<span class="n">flip_1</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+
+<span class="c1"># ライツアウトの振幅を増幅処理をリセット</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">flipdiffusion</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">)</span>
+    <span class="n">flip_1</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+    <span class="n">inv_1</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+    <span class="n">flip_2</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+    <span class="n">inv_2</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+    <span class="n">flip_3</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+
+    <span class="n">lights_out_oracle</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">tile</span><span class="p">,</span><span class="n">oracle</span><span class="p">,</span><span class="n">auxiliary</span><span class="p">)</span>
+
+    <span class="n">flip_3</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+    <span class="n">inv_2</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+    <span class="n">flip_2</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+    <span class="n">inv_1</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+    <span class="n">flip_1</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">flip</span><span class="p">,</span><span class="n">tile</span><span class="p">)</span>
+
+<span class="c1"># 各アドレスに対してlightsoutに対応するtileを作成する処理をリセット</span>
+<span class="n">qram_exercise</span><span class="p">(</span><span class="n">lightsout4</span><span class="p">,</span> <span class="n">qc</span><span class="p">,</span> <span class="n">tile</span><span class="p">,</span> <span class="n">address</span><span class="p">)</span>
+
+<span class="c1"># 求める解を持つアドレスの振幅を増幅</span>
+<span class="n">addressdiffusion</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">address</span><span class="p">)</span>
+
+<span class="c1"># アドレスを測定</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">address</span><span class="p">,</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="c1"># アドレスの順序を反転</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">qc</span><span class="o">.</span><span class="n">reverse_bits</span><span class="p">()</span>
+
+<span class="k">return</span> <span class="n">qc</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+    <span class="n">address</span><span class="o">=</span><span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="o">^</span>
+<span class="ne">IndentationError</span>: expected an indented block after function definition on line 1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">解説</p>
+<p>Groverのアルゴリズムを用いて求める解を持つqRAMのアドレスを求めます。</p>
+<p>使用量子ビット</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">address</span></code>（2量子ビット）:qRAMのアドレス</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tile</span></code>（9量子ビット）:ライツアウトのタイルの状態</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">flip</span></code>（9量子ビット）:タイルの操作の実施可否</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">oracle</span></code>（1量子ビット）:Groverのアルゴリズムを解くための補助量子ビット</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">auxiliary</span></code>（6量子ビット）:<code class="docutils literal notranslate"><span class="pre">multi</span> <span class="pre">cx</span></code>ゲートや<code class="docutils literal notranslate"><span class="pre">flip</span></code>に含まれる1のカウントなどに使用する補助量子ビット</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">c</span></code>（2古典ビット）アドレスを観測するための古典ビット</p></li>
+</ul>
+<p>求める解を持つqRAMのアドレスを求める手順は以下のとおりです。
+ここで2〜11までの処理の繰り返し回数は1としています。（<span class="math notranslate nohighlight">\(\frac{\pi}{4}\sqrt{2^{2}}-\frac{1}{2} \fallingdotseq 1\)</span>）</p>
+<ol class="arabic simple">
+<li><p>address, flip, oracleを初期化（address, flipは均一な重ね合わせ状態に、oracleは補助量子としてx, hゲートを作用させる）</p></li>
+<li><p>qRAMの各アドレスに対してlightsout4リストの解をtileにマップ</p></li>
+<li><p>Week2-Aでの解に基づきGroverのアルゴリズムでライツアウトの解を求める（ここでは繰り返し回数は2回）</p></li>
+<li><p>3で求めたライツアウトの解（3量子ビット）を9量子ビットに変換</p></li>
+<li><p>flipに含まれる1をカウント</p></li>
+<li><p>3Push以内に解ける解を探索</p></li>
+<li><p>flipのカウント処理を逆操作でリセット</p></li>
+<li><p>ライツアウトの解の9量子ビットへの変換を逆操作でリセット</p></li>
+<li><p>ライツアウトの解を求める操作を逆操作でリセット</p></li>
+<li><p>qRAMの各アドレスに対してlightsout4リストの解をtileにマップする操作を逆操作でリセット</p></li>
+<li><p>求める解を持つアドレスを振幅増幅</p></li>
+<li><p>求める解を持つアドレスを測定</p></li>
+<li><p>測定したアドレスの順序を反転</p></li>
+</ol>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">qc</span> <span class="o">=</span> <span class="n">week2b_ans_func</span><span class="p">(</span><span class="n">lightsout4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">IBMQ</span><span class="p">,</span> <span class="n">Aer</span><span class="p">,</span> <span class="n">execute</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">provider</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;ibmq_qasm_simulator&#39;</span><span class="p">)</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span> <span class="n">seed_simulator</span><span class="o">=</span><span class="mi">123456</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">count</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">score_sorted</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">count</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">final_score</span> <span class="o">=</span> <span class="n">score_sorted</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">40</span><span class="p">]</span>
+<span class="n">final_score</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;01&#39;, 7758), (&#39;10&#39;, 99), (&#39;11&#39;, 73), (&#39;00&#39;, 70)]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2021-spring-lab1-toffoli.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">トフォリゲート(2021年春 Lab1)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="sample-2023-spring-lab1-ja.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>IBM Quantum Challenge: Spring 2023</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1度のスイッチでボードをクリア</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#week2-b-4">Week2-B: 4-ライツアウト</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">解答戦略</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qram-quantum-random-access-memory">qRAM: Quantum Random Access Memory</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qram">例題: データをqRAMから見つけよう</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">qRAM演算</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">qRAM 内のデータ探索</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">qRAMの実装についての考察</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ii-b">ラーニング演習 II-B</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">ヒント</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">解答例</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Quantum Tokyo
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
