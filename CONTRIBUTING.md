@@ -6,18 +6,19 @@
 
 ### 必要なライブラリのインストール
 
-以下コマンドを実行して必要なライブラリをインストールする。
+以下コマンドを実行して必要なライブラリをインストールする。  
+**作業する問題にて下記に含まれないライブラリを必要とする場合は、必要なライブラリを追加した本ファイルをプルリクエストに含めること。**
 
 ```
 pip install -r requirements.txt
 ```
 
+
 ### Jupyter notebook の編集
 
 コンテンツファイルは過去の Quantum Challenge の GitHub リポジトリから取得する。
 
-以下TODO
-- Qiskit ver0.44 で動作確認を行う
+- **Qiskit ver0.44** で動作確認を行う
   - 廃止済み機能を利用しているものは新機能で作り直す
   - コードの改変がある場合はnotebookのタイトル下に以下のような注意書きブロックを加える
 
@@ -27,18 +28,15 @@ pip install -r requirements.txt
   ```
 ````
 
-- 各Excersiseに対して解答・解説をつける
-  - Excersiseのブロックはそのままで、以下のような解答ブロックと解説ブロックを追加する([サンプルファイル参照](https://github.com/quantum-tokyo/iqc-textbook/blob/main/src/sample-2023-spring-lab1-ja.ipynb))
-  - （オプション）トピックに対して飛躍のある部分に解説をつける
+- 本文の修正
+  - htmlで表現されているオブジェクトは削除または代替する[コンポーネント](https://jupyterbook.org/en/stable/content/content-blocks.html)で置換
+  - 本文の説明文は基本的に変更不要（変更の必要があれば改変いただいて問題ありません）
 
-解答ブロック
-`````
-  ````{dropdown} 解答
-    ```python
-    <ここに解答Qiskitコードを書きます>
-    ```
-  ````
-`````
+- 各Excersiseに対して解答・解説をつける
+  - Excersiseのブロックは基本的にそのまま（変更の必要があれば改変いただいて問題ありません）
+  - 解答例は解答例とわかるように`## 解答例`のH2見出しを付ける
+  - 解説は以下のようなブロックを追加する([サンプルファイル参照](https://github.com/quantum-tokyo/iqc-textbook/blob/main/src/sample-2023-spring-lab1-ja.ipynb))
+  - （オプション）トピックに対して飛躍のある部分に解説をつける
 
 解説ブロック
 ````
@@ -57,7 +55,9 @@ pip install -r requirements.txt
   - 見出し調整をしないと[サンプル](https://quantum-tokyo.github.io/iqc-textbook/intro.html)の様に1つのノートブックに複数のリンクが表れてしまう
 
 ### 画像ファイルの編集
-- 画像ファイルがある場合は`src/resources`配下に`{年度}-{spring/autumn}-{識別ファイル名}`のファイル名で配置する（notebook 側の参照パスが変更されるので注意）
+- 画像ファイルがある場合は`src/resources`配下に`{年度}-{spring/autumn}-{識別ファイル名}`のファイル名で配置する
+- notebook 側の参照パスを変更（htmlではなくMarkdown記法で）
+
 
 ### 目次ファイル編集
 
