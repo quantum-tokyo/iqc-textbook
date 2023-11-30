@@ -8,15 +8,15 @@ defaults: # The defaults key will be applied to all chapters and sub-sections
 parts:
   - caption: "第２章 量子コンピューターの計算ルール"
     chapters:
-      - file: 2019-w1-adder
+    - file: 2019-w1-adder
   #   - file: 2020-w1-a-adder
-      - file: 2021-spring-lab1-toffoli
-  # - caption: "第３章 量子アルゴリズム"
-  #   chapters:
+    - file: 2021-spring-lab1-toffoli
+  - caption: "第３章 量子アルゴリズム"
+    chapters:
   #   - file: 2019-w2-grover
   #   - file: 2020-w1-b-grover
   #   - file: 2020-w2-a-lights-out-puzzle
-  #   - file: 2020-w2-b-lights-out-puzzle
+    - file: 2020-w2-b-lights-out-puzzle
   #   - file: 2020-w3-false-asteroids
   #   - file: 2021-spring-lab2-shor
   #   - file: 2023-spring-lab3-iqpe
