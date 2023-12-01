@@ -74,7 +74,7 @@ PyYAML==6.0.1
 pyzmq==25.1.1
 qiskit==0.44.1
 qiskit-aer==0.12.2
-qiskit-ibm-provider==0.7.2
+qiskit-ibm-provider==0.7.1
 qiskit-ibmq-provider==0.20.2
 qiskit-terra==0.25.1
 referencing==0.30.2
