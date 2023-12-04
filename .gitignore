@@ -1,8 +1,9 @@
-### Custom ### 
+### Custom ###
 _build/
 Untitled*
 untitled*
 *~
+*env
 
 ### JupyterNotebooks ###
 # gitignore template for Jupyter Notebooks
@@ -26,7 +27,6 @@ ipython_config.py
 
 # Icon must end with two \r
 Icon
-
 
 # Thumbnails
 ._*
