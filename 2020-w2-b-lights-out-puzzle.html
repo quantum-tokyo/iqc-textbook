@@ -61,13 +61,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '2020-w2-b-lights-out-puzzle';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="1. サンプル問題（2023年春）" href="sample-2023-spring-lab1-ja.html" />
-    <link rel="prev" title="トフォリゲート(2021年春 Lab1)" href="2021-spring-lab1-toffoli.html" />
+    <link rel="prev" title="量子テレポーテーション（2023年 Lab2）" href="2023-spring-lab2-teleportation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -156,6 +155,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="2019-w1-adder.html">量子回路における加算器（2019年 Week1）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2021-spring-lab1-toffoli.html">トフォリゲート(2021年春 Lab1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-spring-lab2-teleportation.html">量子テレポーテーション（2023年 Lab2）</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">第３章 量子アルゴリズム</span></p>
 <ul class="current nav bd-sidenav">
@@ -385,7 +385,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="week2b">
+  <section id="week2b">
 <h1>4-ライツアウトパズル（2020年 Week2b）<a class="headerlink" href="#week2b" title="Permalink to this heading">#</a></h1>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
@@ -434,7 +434,7 @@ lightsout4_ex=[[Board 0],[Board 1],[Board 2],[Board 3]]</p>
 <p>ここで、全てのボード情報をQubit上に保持するにはどうすれば良いでしょうか？</p>
 <ol class="arabic simple">
 <li><p>ナイーブなデータ構造:　　9 Qubits/board * 4 boards &gt; 32 qubits (ibm_qasm_simulatorの上限)。</p></li>
-<li><p>重ね合わせ状態を準備する:   <span class="math notranslate nohighlight">\(\vert Board 0\rangle + \vert Board 1\rangle + \vert Board 2\rangle + \vert Board 3\rangle\)</span>.</p>
+<li><p>重ね合わせ状態を準備する:   $\vert Board 0\rangle + \vert Board 1\rangle + \vert Board 2\rangle + \vert Board 3\rangle$.</p>
 <ul class="simple">
 <li><p>状態生成に用いる回路構成は非自明。</p></li>
 </ul>
@@ -517,24 +517,24 @@ lightsout4_ex=[[Board 0],[Board 1],[Board 2],[Board 3]]</p>
 </section>
 <section id="qram-quantum-random-access-memory">
 <h3>qRAM: Quantum Random Access Memory<a class="headerlink" href="#qram-quantum-random-access-memory" title="Permalink to this heading">#</a></h3>
-<p>古典的なコンピュータでは、RAM(Random Access Memory)は揮発性メモリの一種で、メモリアドレス <span class="math notranslate nohighlight">\(j\)</span> を持ち、各アドレス <span class="math notranslate nohighlight">\(D_j\)</span> に対応するバイナリデータを格納しています。</p>
-<p>量子コンピュータの<a class="reference external" href="https://arxiv.org/abs/0708.1879">qRAM</a>の場合、アドレスQubits <span class="math notranslate nohighlight">\(a\)</span> は、<span class="math notranslate nohighlight">\(N\)</span> 個のアドレスを重ね合わせ状態で持ち、対応するバイナリデータを状態ベクトルとしてデータQubit <span class="math notranslate nohighlight">\(d\)</span> に格納しています。</p>
-<p><span class="math notranslate nohighlight">\(
+<p>古典的なコンピュータでは、RAM(Random Access Memory)は揮発性メモリの一種で、メモリアドレス $j$ を持ち、各アドレス $D_j$ に対応するバイナリデータを格納しています。</p>
+<p>量子コンピュータの<a class="reference external" href="https://arxiv.org/abs/0708.1879">qRAM</a>の場合、アドレスQubits $a$ は、$N$ 個のアドレスを重ね合わせ状態で持ち、対応するバイナリデータを状態ベクトルとしてデータQubit $d$ に格納しています。</p>
+<p>$
 \sum_{j}\frac{1}{\sqrt{N}}\vert j \rangle_{a}\vert 0 \rangle_{d}\xrightarrow{qRAM}\sum_{j}\frac{1}{\sqrt{N}}\vert j \rangle_{a}\vert D_{j} \rangle_{d}
-\)</span></p>
+$</p>
 <p>右辺の状態を”qRAM”、対応するゲート操作を”qRAM演算”と呼ぶことにします。</p>
-<p>qRAM演算には <span class="math notranslate nohighlight">\(\mathcal{O}(N\log N)\)</span> 個のゲートが必要ですが、直感的にバイナリデータの重ね合わせ状態を作ることができます。
+<p>qRAM演算には $\mathcal{O}(N\log N)$ 個のゲートが必要ですが、直感的にバイナリデータの重ね合わせ状態を作ることができます。
 qRAMは、HHLアルゴリズムをはじめとする量子機械学習の様々なアルゴリズムに応用されています。
 今回は、GroverのアルゴリズムにqRAMを適用してみましょう。</p>
 </section>
 <section id="qram">
 <h3>例題: データをqRAMから見つけよう<a class="headerlink" href="#qram" title="Permalink to this heading">#</a></h3>
-<p><span class="math notranslate nohighlight">\(k_0, k_1, ... , k_{n-1}\)</span> がこの順に格納された <span class="math notranslate nohighlight">\(n\)</span> アドレスの qRAM を用意します。
-Groverのアルゴリズムを使って，<span class="math notranslate nohighlight">\(m\)</span>という数字が格納されているアドレスを求めます。</p>
+<p>$k_0, k_1, … , k_{n-1}$ がこの順に格納された $n$ アドレスの qRAM を用意します。
+Groverのアルゴリズムを使って，$m$という数字が格納されているアドレスを求めます。</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(n = 4\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(k = [1,2,5,7]\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(m = 7\)</span></p></li>
+<li><p>$n = 4$</p></li>
+<li><p>$k = [1,2,5,7]$</p></li>
+<li><p>$m = 7$</p></li>
 </ul>
 <section id="id3">
 <h4>qRAM演算<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h4>
@@ -605,10 +605,11 @@ Groverのアルゴリズムを使って，<span class="math notranslate nohighli
 </section>
 <section id="id4">
 <h4>qRAM 内のデータ探索<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h4>
-<p>Groverのアルゴリズムを実行するには、<span class="math notranslate nohighlight">\(m\)</span>を含む<strong>アドレスQubit</strong>の符号を反転させます。
+<p>Groverのアルゴリズムを実行するには、$m$を含む<strong>アドレスQubit</strong>の符号を反転させます。
 また、拡散変換の前に別のqRAM演算でデータ Qubitを初期化する必要があります。</p>
-<p><span class="math notranslate nohighlight">\(
-\begin{align*}
+<p>$</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
 \vert j \rangle_{a}\vert D_{j} \rangle_{d} \vert - \rangle_{f}
 \xrightarrow{oracle}  
 \left \{
@@ -624,9 +625,9 @@ Groverのアルゴリズムを使って，<span class="math notranslate nohighli
 \vert j \rangle_{a}\vert 0 \rangle_{d}\vert - \rangle_{f},　D_{j}\neq m
  \end{array}
  \right.
- \end{align*}
-\)</span></p>
-<p>ここで、<span class="math notranslate nohighlight">\(f\)</span> はフラグQubitを表します。
+ \end{align*}\]</div>
+<p>$</p>
+<p>ここで、$f$ はフラグQubitを表します。
 この例題の場合，<a class="reference external" href="https://qiskit.org/documentation/stubs/qiskit.circuit.library.C3XGate.html#qiskit.circuit.library.C3XGate">C3X gate</a>でオラクル操作を実行することができます。</p>
 <p>以下にqRAMの例題の回路全体を示しています。</p>
 <div class="cell docutils container">
@@ -864,10 +865,10 @@ Groverのアルゴリズムを使って，<span class="math notranslate nohighli
 <p>ここでは以下の解答で使用する関数を定義します。</p>
 <p class="rubric"><code class="docutils literal notranslate"><span class="pre">qram_exercise(prob_array,</span> <span class="pre">qc,</span> <span class="pre">qr,</span> <span class="pre">qa)</span></code></p>
 <p>量子回路<code class="docutils literal notranslate"><span class="pre">qc</span></code>の量子ビット<code class="docutils literal notranslate"><span class="pre">qa</span></code>で与えれるqRAMのアドレスに対して、対応する<code class="docutils literal notranslate"><span class="pre">prob_array</span></code>として与えられた<code class="docutils literal notranslate"><span class="pre">lightsout4</span></code>配列を量子ビット<code class="docutils literal notranslate"><span class="pre">qr</span></code>に記録します。<br />
-<span class="math notranslate nohighlight">\(k=0\)</span>は<span class="math notranslate nohighlight">\(\ket{00}\)</span>に<br />
-<span class="math notranslate nohighlight">\(k=1\)</span>は<span class="math notranslate nohighlight">\(\ket{10}\)</span>に<br />
-<span class="math notranslate nohighlight">\(k=2\)</span>は<span class="math notranslate nohighlight">\(\ket{01}\)</span>に<br />
-<span class="math notranslate nohighlight">\(k=3\)</span>は<span class="math notranslate nohighlight">\(\ket{11}\)</span>に対応します。</p>
+$k=0$は$\ket{00}$に<br />
+$k=1$は$\ket{10}$に<br />
+$k=2$は$\ket{01}$に<br />
+$k=3$は$\ket{11}$に対応します。</p>
 <p class="rubric"><code class="docutils literal notranslate"><span class="pre">counter(qc,flip,auxiliary)</span></code></p>
 <p>量子回路qcのflipの1の数をカウントします。<br />
 カウントした結果はauxiliaryに2進数の形で記録されます。</p>
@@ -997,7 +998,7 @@ Groverのアルゴリズムを使って，<span class="math notranslate nohighli
 <li><p><code class="docutils literal notranslate"><span class="pre">c</span></code>（2古典ビット）アドレスを観測するための古典ビット</p></li>
 </ul>
 <p>求める解を持つqRAMのアドレスを求める手順は以下のとおりです。
-ここで2〜11までの処理の繰り返し回数は1としています。（<span class="math notranslate nohighlight">\(\frac{\pi}{4}\sqrt{2^{2}}-\frac{1}{2} \fallingdotseq 1\)</span>）</p>
+ここで2〜11までの処理の繰り返し回数は1としています。（$\frac{\pi}{4}\sqrt{2^{2}}-\frac{1}{2} \fallingdotseq 1$）</p>
 <ol class="arabic simple">
 <li><p>address, flip, oracleを初期化（address, flipは均一な重ね合わせ状態に、oracleは補助量子としてx, hゲートを作用させる）</p></li>
 <li><p>qRAMの各アドレスに対してlightsout4リストの解をtileにマップ</p></li>
@@ -1081,12 +1082,12 @@ Groverのアルゴリズムを使って，<span class="math notranslate nohighli
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="2021-spring-lab1-toffoli.html"
+       href="2023-spring-lab2-teleportation.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">トフォリゲート(2021年春 Lab1)</p>
+        <p class="prev-next-title">量子テレポーテーション（2023年 Lab2）</p>
       </div>
     </a>
     <a class="right-next"

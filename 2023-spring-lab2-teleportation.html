@@ -1,0 +1,1042 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>量子テレポーテーション（2023年 Lab2） &#8212; IBM Quantum Challengeで学ぶ量子コンピューティング</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '2023-spring-lab2-teleportation';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4-ライツアウトパズル（2020年 Week2b）" href="2020-w2-b-lights-out-puzzle.html" />
+    <link rel="prev" title="トフォリゲート(2021年春 Lab1)" href="2021-spring-lab1-toffoli.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">IBM Quantum Challengeで学ぶ量子コンピューティング</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to IQC Textbook
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">第２章 量子コンピューターの計算ルール</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2019-w1-adder.html">量子回路における加算器（2019年 Week1）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2021-spring-lab1-toffoli.html">トフォリゲート(2021年春 Lab1)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">量子テレポーテーション（2023年 Lab2）</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">第３章 量子アルゴリズム</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2020-w2-b-lights-out-puzzle.html">4-ライツアウトパズル（2020年 Week2b）</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Test: 2023Spring</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="sample-2023-spring-lab1-ja.html">1. サンプル問題（2023年春）</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/quantum-tokyo/iqc-textbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/quantum-tokyo/iqc-textbook/issues/new?title=Issue%20on%20page%20%2F2023-spring-lab2-teleportation.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/2023-spring-lab2-teleportation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>量子テレポーテーション（2023年 Lab2）</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">背景</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">実装</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Exercise 1 解答例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Exercise 2 解答例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">Exercise 3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Exercise 3 解答例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4">Exercise 4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Exercise 4 解答例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5">Exercise 5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Exercise 5 解答例</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="lab2">
+<h1>量子テレポーテーション（2023年 Lab2）<a class="headerlink" href="#lab2" title="Permalink to this heading">#</a></h1>
+<p>アリスとボブが抱えている問題を解決する量子テレポーテーションのLabへようこそ。ご安心ください、人間関係の問題ではありませんよ！アリスは未知の状態 $\lvert \psi \rangle$ の量子ビットを所持しており、この量子状態をボブに転送したいと考えています。しかしながら彼らは非常に離れた場所におり、量子情報を直接転送する手段はなく、転送できるのは古典情報のみです。彼らの目標を達成することは可能でしょうか？</p>
+<p>アリスとボブがエンタングルした量子ビットのペアを共有している場合、彼女が２ビットの古典情報を送信することで、量子ビットの状態をボブに転送できることがわかっています。最終的に、ボブが $\lvert \psi \rangle$ を所有し、アリスはそれを持たなくなるため、このプロセスはテレポーテーションとして知られています。</p>
+<section id="id1">
+<h2>背景<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>量子テレポーテーションは、エンタングルメントと古典通信を使用し、ある量子ビットから別の量子ビットへと量子情報の転送を可能にするプロトコルです。このプロトコルは、1993年に Charles Bennett、Gilles Brassard、Claude Crépeau、Richard Jozsa、Asher Peres および William Wootters によって提案されました。このプロセスは、量子ビット自体を送信するのではなく、ソース量子ビットからターゲット量子ビットに量子状態を転送します。</p>
+<p>プロトコルには３つの量子ビットが必要です。</p>
+<ol class="arabic simple">
+<li><p>テレポートする量子ビット（アリスの量子ビット）</p></li>
+<li><p>エンタングルした量子ビットのペアの片方（アリスの２番目の量子ビット）</p></li>
+<li><p>エンタングルしたペアのもう片方（ボブの量子ビット）</p></li>
+</ol>
+<p>プロトコルは、次の手順に要約できます。</p>
+<ol class="arabic simple">
+<li><p>アリスとボブの間で共有される、エンタングルした量子ビットのペア（Bellペア）を生成します。</p></li>
+<li><p>アリスは、自身が持つ２つの量子ビットに対しBell基底測定を実行します。</p></li>
+<li><p>アリスは、古典測定の結果をボブに送信します。</p></li>
+<li><p>ボブは、アリスの測定結果に基づいて適切な量子ゲートを適用し、テレポート状態を取得します。</p></li>
+</ol>
+</section>
+<section id="id2">
+<h2>実装<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>量子ビットを転送するためには、アリスとボブにエンタングルした量子ビットのペアを提供してくれる第三者の助けが必要です。次に、アリスは量子ビットに対して特定の操作を実行し、その結果を古典通信チャネルを介してボブと共有します。最後に、ボブは自分の側で一連の操作を実行し、アリスの量子ビットを正常に取得します。それでは、これらの各ステップについて詳しく見ていきましょう。</p>
+<p>量子回路は、３つの量子ビットと３つの古典ビットで構成されます。量子ビットは次のように命名されます。</p>
+<ul class="simple">
+<li><p>$s$: アリスがボブに送信したい、状態 $\lvert \psi \rangle$ を含む「ソース」量子ビット。</p></li>
+<li><p>$a$: エンタングルしたBellペアのうち、アリスが持つ片方を最初に格納する量子ビット。</p></li>
+<li><p>$b$: エンタングルしたBellペアのうち、ボブが持つもう片方を最初に格納する量子ビット。</p></li>
+</ul>
+<p>テレポーテーションプロトコル自体には２つの古典ビットが必要であり、ボブの最終状態を測定するために使用する３つ目の古典ビットも含まれます。古典ビットは次のように命名されます。</p>
+<ul class="simple">
+<li><p>$c0$: アリスが $a$ の測定に使用する古典ビット。</p></li>
+<li><p>$c1$: アリスが $s$ の測定に使用する古典ビット。</p></li>
+<li><p>$c2$: ボブが $b$ の測定に使用する古典ビット。</p></li>
+</ul>
+<section id="exercise-1">
+<h3>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this heading">#</a></h3>
+<div class="admonition-bell admonition">
+<p class="admonition-title">Bell状態の生成</p>
+<p>２つの量子ビットを利用して、エンタングルしたBellペアの状態 $\frac{\lvert 00 \rangle + \lvert 11 \rangle}{\sqrt{2}}$ を生成してください。量子ビット $a$ はアリスに割り当てられ、量子ビット $b$ はボブのものです。</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Bell状態はアダマールゲートとCNOTゲートを使うことで生成できます。</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">ClassicalRegister</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="kn">import</span> <span class="n">Qubit</span><span class="p">,</span> <span class="n">Clbit</span>
+
+<span class="k">def</span> <span class="nf">create_bell_pair</span><span class="p">(</span><span class="n">qr</span><span class="p">:</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">cr</span><span class="p">:</span> <span class="n">ClassicalRegister</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QuantumCircuit</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates a bell pair between qubits a and b.&quot;&quot;&quot;</span>
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+    <span class="c1"># unpack qubits</span>
+    <span class="c1"># the first qubit is s but we won&#39;t be using it in this exercise</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">qr</span>
+
+    <span class="c1">####### your code goes here #######</span>
+
+    <span class="k">return</span> <span class="n">qc</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id3">
+<h3>Exercise 1 解答例<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">ClassicalRegister</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="kn">import</span> <span class="n">Qubit</span><span class="p">,</span> <span class="n">Clbit</span>
+
+<span class="k">def</span> <span class="nf">create_bell_pair</span><span class="p">(</span><span class="n">qr</span><span class="p">:</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">cr</span><span class="p">:</span> <span class="n">ClassicalRegister</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QuantumCircuit</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates a bell pair between qubits a and b.&quot;&quot;&quot;</span>
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+    <span class="c1"># unpack qubits</span>
+    <span class="c1"># the first qubit is s but we won&#39;t be using it in this exercise</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">qr</span>
+
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">qc</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;q&quot;</span><span class="p">)</span>
+<span class="n">cr</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;c&quot;</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">create_bell_pair</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1830355a7e93fb34d5293f409a9398918669f802b59f2fc367461eb7310ae5cb.png" src="_images/1830355a7e93fb34d5293f409a9398918669f802b59f2fc367461eb7310ae5cb.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Submit your circuit</span>
+<span class="c1"># from qc_grader.challenges.spring_2023 import grade_ex2a</span>
+<span class="c1"># grade_ex2a(qc)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">解説</p>
+<p>ヒントにあるように、Bell状態はアダマールゲートとCNOTゲートを使うことで生成できます。<br />
+CNOTゲートは2量子ビットゲートで、入力に制御量子ビットとターゲット量子ビットを指定する必要があります。<br />
+ここではアリスのもつ量子ビットを制御量子ビットに、ボブのもつ量子ビットをターゲット量子ビットに設定します。</p>
+<p>ここで、メッセージ量子ビット$s$の状態を$\ket{\psi}$とおくと、3量子ビットの量子状態は以下のように表すことが出来ます。</p>
+<div class="amsmath math notranslate nohighlight" id="equation-6c365e04-8f03-4905-8b56-2f0207405c86">
+<span class="eqno">(1)<a class="headerlink" href="#equation-6c365e04-8f03-4905-8b56-2f0207405c86" title="Permalink to this equation">#</a></span>\[\begin{align}
+    \ket{\psi}\ket{B_{00}} &amp;= (\alpha\ket{0}+\beta\ket{1})(\frac{1}{\sqrt{2}}(\ket{00}+\ket{11})) \\
+     &amp;= \frac{1}{\sqrt{2}}(\alpha\ket{000}+\alpha\ket{011}+\beta\ket{100}+\beta\ket{111})
+\end{align}\]</div>
+</div>
+<p>アリスが量子ビット $a$ を持ち、ボブが量子ビット $b$ を持っていると仮定しましょう。彼らは本当に関係性に問題を抱えているかもしれませんね😉。</p>
+</section>
+<section id="exercise-2">
+<h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this heading">#</a></h3>
+<div class="admonition- admonition">
+<p class="admonition-title">メッセージ送信回路の構築</p>
+<p>次のプロトコルを実装してください。</p>
+<ol class="arabic simple">
+<li><p>アリスが、 $s$ ($\lvert \psi \rangle$ を含む量子ビット)を制御、 $a$ をターゲットとしてCNOTゲートを適用する。</p></li>
+<li><p>アリスが $s$ にアダマールゲートを適用する。</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">alice_gates</span><span class="p">(</span><span class="n">qr</span><span class="p">:</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">cr</span><span class="p">:</span> <span class="n">ClassicalRegister</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates Alices&#39;s gates&quot;&quot;&quot;</span>
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">create_bell_pair</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>  <span class="c1"># Use barrier to separate steps</span>
+    <span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">qr</span>
+
+    <span class="c1">####### your code goes here #######</span>
+    
+    <span class="k">return</span> <span class="n">qc</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id4">
+<h3>Exercise 2 解答例<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">alice_gates</span><span class="p">(</span><span class="n">qr</span><span class="p">:</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">cr</span><span class="p">:</span> <span class="n">ClassicalRegister</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates Alices&#39;s gates&quot;&quot;&quot;</span>
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">create_bell_pair</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>  <span class="c1"># Use barrier to separate steps</span>
+    <span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">qr</span>
+
+    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">qc</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">qc</span> <span class="o">=</span> <span class="n">alice_gates</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/38e34520dd2fba6fc0aac9989f3be5cd31d64946767f86f06120972e9eafd989.png" src="_images/38e34520dd2fba6fc0aac9989f3be5cd31d64946767f86f06120972e9eafd989.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Submit your circuit</span>
+<span class="c1"># from qc_grader.challenges.spring_2023 import grade_ex2b</span>
+<span class="c1"># grade_ex2b(qc)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition- admonition">
+<p class="admonition-title">解説</p>
+<p>問題文の手順通りに量子ゲートを配置します。</p>
+<p>構築した回路を通した量子状態は以下のように表されます。
+　$$
+\frac{1}{\sqrt{2}}(\alpha\ket{000}+\alpha\ket{100}+\alpha\ket{011}+\alpha\ket{111}+\beta\ket{010}-\beta\ket{110}+\beta\ket{001}-\beta\ket{101})
+$$</p>
+</div>
+</section>
+<section id="exercise-3">
+<h3>Exercise 3<a class="headerlink" href="#exercise-3" title="Permalink to this heading">#</a></h3>
+<div class="admonition- admonition">
+<p class="admonition-title">量子状態の測定</p>
+<p>このステップでは、アリスは所有している両方の量子ビットで測定を実行し、結果を２つの古典ビットに保存します。その後、彼女はこれら２つのビットをボブに送信します。</p>
+<p>彼女は量子ビット $a$ を古典ビット $c0$ に、量子ビット $s$ を古典ビット $c1$ に測定して入れるように以下のコードセルを完成させてください。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">measure_and_send</span><span class="p">(</span><span class="n">qr</span><span class="p">:</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">cr</span><span class="p">:</span> <span class="n">ClassicalRegister</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Measures qubits a &amp; b and &#39;sends&#39; the results to Bob&quot;&quot;&quot;</span>
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">alice_gates</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>  <span class="c1"># Use barrier to separate steps</span>
+    <span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">qr</span>
+    <span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span> <span class="o">=</span> <span class="n">cr</span>
+
+    <span class="c1">####### your code goes here #######</span>
+    
+    <span class="k">return</span> <span class="n">qc</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id5">
+<h3>Exercise 3 解答例<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">measure_and_send</span><span class="p">(</span><span class="n">qr</span><span class="p">:</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">cr</span><span class="p">:</span> <span class="n">ClassicalRegister</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Measures qubits a &amp; b and &#39;sends&#39; the results to Bob&quot;&quot;&quot;</span>
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">alice_gates</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>  <span class="c1"># Use barrier to separate steps</span>
+    <span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">qr</span>
+    <span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span> <span class="o">=</span> <span class="n">cr</span>
+
+    <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">c0</span><span class="p">)</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">c1</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">qc</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">qc</span> <span class="o">=</span> <span class="n">measure_and_send</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">,</span> <span class="n">cregbundle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a5fb2f633ad3b860f6f587675202cc6fd07a49aa4a901d995e0edfebab8437a8.png" src="_images/a5fb2f633ad3b860f6f587675202cc6fd07a49aa4a901d995e0edfebab8437a8.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Submit your circuit</span>
+<span class="c1"># from qc_grader.challenges.spring_2023 import grade_ex2c</span>
+<span class="c1"># grade_ex2c(qc)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">解説</p>
+<p>測定を実行するためには<code class="docutils literal notranslate"><span class="pre">.measure()</span></code>メソッドを用います。<br />
+入力には測定対象である量子ビットと、測定結果を格納する古典ビットが必要となります。</p>
+<p>量子ビット$a$と$b$はエンタングルしているので量子ビット$a$の測定結果は$b$の状態に影響を与えます。</p>
+<ul class="simple">
+<li><p>測定結果が<code class="docutils literal notranslate"><span class="pre">00</span></code>：量子ビット$b$の状態は$\alpha\ket{0}+\beta\ket{1}$ ・・・送信したかった正しい状態</p></li>
+<li><p>測定結果が<code class="docutils literal notranslate"><span class="pre">01</span></code>：量子ビット$b$の状態は$\alpha\ket{1}+\beta\ket{0}$ ・・・Xゲートを適用すると正しい状態に戻すことが出来る</p></li>
+<li><p>測定結果が<code class="docutils literal notranslate"><span class="pre">10</span></code>：量子ビット$b$の状態は$\alpha\ket{0}-\beta\ket{1}$ ・・・Zゲートを適用すると正しい状態に戻すことが出来る</p></li>
+<li><p>測定結果が<code class="docutils literal notranslate"><span class="pre">11</span></code>：量子ビット$b$の状態は$\alpha\ket{1}-\beta\ket{0}$ ・・・ZXゲートを適用すると正しい状態に戻すことが出来る</p></li>
+</ul>
+</div>
+</section>
+<section id="exercise-4">
+<h3>Exercise 4<a class="headerlink" href="#exercise-4" title="Permalink to this heading">#</a></h3>
+<div class="admonition- admonition">
+<p class="admonition-title">動的回路の生成</p>
+<p>このステップでは、すでに量子ビット $b$ を所有しているボブが、アリスから受け取った古典ビットの状態に基づいて、回路に特定のゲートを動的に追加します。</p>
+<ul class="simple">
+<li><p>ビットが <code class="docutils literal notranslate"><span class="pre">00</span></code> の場合、アクションは必要ありません。</p></li>
+<li><p>ビットが <code class="docutils literal notranslate"><span class="pre">01</span></code> の場合、 $X$ ゲート（Pauli-X または ビット・フリップ・ゲートとも呼ばれます）を適用する必要があります。</p></li>
+<li><p>ビット <code class="docutils literal notranslate"><span class="pre">10</span></code> には、 $Z$ ゲート（Pauli-Z または フェーズ・フリップ・ゲートとも呼ばれます）を適用する必要があります。</p></li>
+<li><p>最後に、古典ビットが <code class="docutils literal notranslate"><span class="pre">11</span></code> の場合は、 $ZX$ ゲートを適用する必要があります。これには、 $Z$ゲートと $X$ ゲートの両方を順番に適用する必要があります。</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bob_gates</span><span class="p">(</span><span class="n">qr</span><span class="p">:</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">cr</span><span class="p">:</span> <span class="n">ClassicalRegister</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Uses qc.if_test to control which gates are dynamically added&quot;&quot;&quot;</span>
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">measure_and_send</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>  <span class="c1"># Use barrier to separate steps</span>
+    <span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">qr</span>
+    <span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span> <span class="o">=</span> <span class="n">cr</span>
+
+    <span class="c1">####### your code goes here #######</span>
+    
+    <span class="k">return</span> <span class="n">qc</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id6">
+<h3>Exercise 4 解答例<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bob_gates</span><span class="p">(</span><span class="n">qr</span><span class="p">:</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">cr</span><span class="p">:</span> <span class="n">ClassicalRegister</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Uses qc.if_test to control which gates are dynamically added&quot;&quot;&quot;</span>
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">measure_and_send</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>  <span class="c1"># Use barrier to separate steps</span>
+    <span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">qr</span>
+    <span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span> <span class="o">=</span> <span class="n">cr</span>
+
+    <span class="k">with</span> <span class="n">qc</span><span class="o">.</span><span class="n">if_test</span><span class="p">((</span><span class="n">c0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)):</span>
+      <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">qc</span><span class="o">.</span><span class="n">if_test</span><span class="p">((</span><span class="n">c1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)):</span>
+      <span class="n">qc</span><span class="o">.</span><span class="n">z</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">qc</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">qc</span> <span class="o">=</span> <span class="n">bob_gates</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">,</span> <span class="n">cregbundle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/27b19e7abeac3846fd5499419417c66586492ba46fcfb74c244c3446cc113d34.png" src="_images/27b19e7abeac3846fd5499419417c66586492ba46fcfb74c244c3446cc113d34.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Submit your circuit</span>
+<span class="c1"># from qc_grader.challenges.spring_2023 import grade_ex2d</span>
+<span class="c1"># grade_ex2d(qc)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">解説</p>
+<p>古典ビットの状態に対して必要な操作をまとめると、「$c_0$が状態1であるときはXゲートを適用し、$c_1$が状態1であるときはZゲートを適用する」となります。<br />
+場合分けが発生するような動的回路は”.if_test”メソッドを用いて実装することが可能です。</p>
+</div>
+<p>ここで、ボブは自分の量子ビットを測定して、古典ビット $c2$ に入れます。実験全体を複数回繰り返した後、測定結果に関する統計を収集して、テレポーテーションが正しく機能したことを確認できます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">teleportation_circuit</span> <span class="o">=</span> <span class="n">bob_gates</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">qr</span>
+<span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span> <span class="o">=</span> <span class="n">cr</span>
+<span class="n">teleportation_circuit</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">c2</span><span class="p">)</span>
+<span class="n">teleportation_circuit</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/9572cc2a64c56c6705804b0a7d96a3968f0b6c59b4be44ed7c39078c29fa1e6a.png" src="_images/9572cc2a64c56c6705804b0a7d96a3968f0b6c59b4be44ed7c39078c29fa1e6a.png" />
+</div>
+</div>
+<p>テレポーテーション回路ができたので、~~カーク船長を見知らぬ惑星の地表に転送して~~ 量子状態の生成とテレポートを、シミュレーター上の回路で実行しましょう。</p>
+</section>
+<section id="exercise-5">
+<h3>Exercise 5<a class="headerlink" href="#exercise-5" title="Permalink to this heading">#</a></h3>
+<div class="admonition- admonition">
+<p class="admonition-title">回路の結合</p>
+<p>次のコードセルでは、完全な量子テレポーテーション回路を <code class="docutils literal notranslate"><span class="pre">teleport_superposition_circuit</span></code> 変数に構築します。次のステップに従ってください。</p>
+<ul class="simple">
+<li><p>状態を準備する回路を構築します。角度 $\pi / 4$ の $R_x$ 回転ゲートを適用して量子ビット $s$ を準備してください。</p></li>
+<li><p>状態準備回路と先ほど構築したテレポーテーション回路を結合してください。</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="n">teleport_superposition_circuit</span><span class="p">:</span> <span class="n">QuantumCircuit</span>
+
+<span class="c1">####### your code goes here #######</span>
+
+<span class="c1"># Uncomment this line to draw your circuit</span>
+<span class="n">teleport_superposition_circuit</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">,</span> <span class="n">cregbundle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id7">
+<h3>Exercise 5 解答例<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="n">teleport_superposition_circuit</span><span class="p">:</span> <span class="n">QuantumCircuit</span>
+
+<span class="n">state_prep</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">state_prep</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+<span class="n">state_prep</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+<span class="n">teleport_superposition_circuit</span> <span class="o">=</span> <span class="n">state_prep</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="n">teleportation_circuit</span><span class="p">)</span>
+<span class="n">teleport_superposition_circuit</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">,</span> <span class="n">cregbundle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Uncomment this line to draw your circuit</span>
+<span class="n">teleport_superposition_circuit</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">,</span> <span class="n">cregbundle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/47831a032e292c78ad7d834c70ab2590b324a56050ee1c3866f28d8187a3899f.png" src="_images/47831a032e292c78ad7d834c70ab2590b324a56050ee1c3866f28d8187a3899f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">transpile</span>
+<span class="kn">from</span> <span class="nn">qiskit_aer</span> <span class="kn">import</span> <span class="n">AerSimulator</span>
+<span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="kn">import</span> <span class="n">plot_histogram</span>
+
+<span class="n">sim</span> <span class="o">=</span> <span class="n">AerSimulator</span><span class="p">()</span>
+<span class="n">transpiled_circuit</span> <span class="o">=</span> <span class="n">transpile</span><span class="p">(</span><span class="n">teleport_superposition_circuit</span><span class="p">,</span> <span class="n">sim</span><span class="p">)</span>
+
+<span class="c1"># run job</span>
+<span class="n">shots</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transpiled_circuit</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">,</span> <span class="n">dynamic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Get the results and display them</span>
+<span class="n">exp_result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">exp_counts</span> <span class="o">=</span> <span class="n">exp_result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="n">plot_histogram</span><span class="p">(</span><span class="n">exp_counts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1a231564534cfc07834b5d4b3e441a051e916efe36b0655bee40d74e5c2ac7ab.png" src="_images/1a231564534cfc07834b5d4b3e441a051e916efe36b0655bee40d74e5c2ac7ab.png" />
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">解説</p>
+<p>問題のステップ通りに回路を組み立てます。<code class="docutils literal notranslate"><span class="pre">.compose</span></code>メソッドを用いることで、定義済みの回路の結合が可能となります。</p>
+</div>
+<p>他の測定ビットを無視して、ボブの測定値だけの分布を計算してみましょう。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># trace out Bob&#39;s results on qubit 2</span>
+<span class="kn">from</span> <span class="nn">qiskit.result</span> <span class="kn">import</span> <span class="n">marginal_counts</span>
+
+<span class="n">bobs_counts</span> <span class="o">=</span> <span class="n">marginal_counts</span><span class="p">(</span><span class="n">exp_counts</span><span class="p">,</span> <span class="p">[</span><span class="n">qr</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">b</span><span class="p">)])</span>
+<span class="n">plot_histogram</span><span class="p">(</span><span class="n">bobs_counts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6c582109985a46c761c2a9fff9b8c3a8657c571e13efa284189eda4829dfb058.png" src="_images/6c582109985a46c761c2a9fff9b8c3a8657c571e13efa284189eda4829dfb058.png" />
+</div>
+</div>
+<p>周辺分布は、理想的な確率にある程度は近いはずです。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># from qc_grader.challenges.spring_2023 import grade_ex2e</span>
+<span class="c1"># grade_ex2e(bobs_counts)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>~~カーク船長~~ アリスの量子ビットが安全にテレポートすることがほぼ確実になったので、実際のハードウェアで量子テレポーテーション回路を実行してみましょう。</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>以下のコードは実機を扱うためコメントアウトしています</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># from qiskit_ibm_provider import IBMProvider</span>
+
+<span class="c1"># provider = IBMProvider()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># hub = &quot;YOUR_HUB&quot;</span>
+<span class="c1"># group = &quot;YOUR_GROUP&quot;</span>
+<span class="c1"># project = &quot;YOUR_PROJECT&quot;</span>
+
+<span class="c1"># backend_name = &quot;ibm_peekskill&quot;</span>
+<span class="c1"># backend = provider.get_backend(backend_name, instance=f&quot;{hub}/{group}/{project}&quot;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # backend.target.add_instruction(IfElseOp, name=&quot;if_else&quot;) # Uncomment if necessary</span>
+<span class="c1"># qc_transpiled = transpile(teleport_superposition_circuit, backend)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># job = backend.run(qc_transpiled, shots=1000, dynamic=True)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>実際のバックエンドで実行するには時間がかかるため、通常はjob_idを使って時間をおいてからジョブを呼び出すことになります。以下のコードは、job_idを通してジョブを呼び出し、実行状況を確認するものです。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># retrieve_job = provider.retrieve_job(job.job_id())</span>
+<span class="c1"># retrieve_job.status()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>無事に終了したら、結果をインポートしましょう。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Get the results and display them</span>
+<span class="c1"># exp_result = retrieve_job.result()</span>
+<span class="c1"># exp_counts = exp_result.get_counts()</span>
+<span class="c1"># plot_histogram(exp_counts)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # trace out Bob&#39;s results on qubit 2</span>
+<span class="c1"># from qiskit.result import marginal_counts</span>
+
+<span class="c1"># bobs_qubit = 2</span>
+<span class="c1"># bobs_counts = marginal_counts(exp_counts, [bobs_qubit])</span>
+<span class="c1"># plot_histogram(bobs_counts)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2021-spring-lab1-toffoli.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">トフォリゲート(2021年春 Lab1)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="2020-w2-b-lights-out-puzzle.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">4-ライツアウトパズル（2020年 Week2b）</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">背景</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">実装</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Exercise 1 解答例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Exercise 2 解答例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">Exercise 3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Exercise 3 解答例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4">Exercise 4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Exercise 4 解答例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5">Exercise 5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Exercise 5 解答例</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Quantum Tokyo
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
