@@ -20,22 +20,39 @@ pip install -r requirements.txt
   - コードの改変がある場合はnotebookのタイトル下に以下のような注意書きブロックを加える
 
 ````
-  ```{note}
-  このNotebookはQiskit v0.44の仕様に合わせてコードを改変しています。
-  ```
+    ```{attention}
+    このNotebookはQiskit v0.44の仕様に合わせてコードを改変しています。
+    ```
 ````
 
 ### 本文修正
   - htmlで表現されているオブジェクトは削除または代替する[コンポーネント](https://jupyterbook.org/en/stable/content/content-blocks.html)で置換
-  - 本文の説明文は基本的に変更不要
-    - 変更の必要があれば改変いただいて問題ありません
-    - graderやモック・ダミーデバイスなどChallenge期間限定で動作するコードは断りを入れたうえでコメントアウト
+  - 本文の説明文は基本的に変更不要、必要な場合は改変可
+  - Challenge期間限定で動作するコード（graderやモック・ダミーデバイスなど）は断りを入れたうえでコメントアウト
+
+### 問題
+  - 問題文は適切なレベル（原則L2見出し`##`）で問題/Excersiseなどの見出しを付ける
+  - 問題文は以下のようなブロック中に記載する
+  - 回答用に与えられているQiskitコードの雛形は問題文にMarkdownとして含める（[サンプルファイル参照](https://github.com/quantum-tokyo/iqc-textbook/blob/main/src/sample-2023-spring-lab1-ja.ipynb)）
+
+問題文ブロック
+````
+    ````{admonition} 問題文タイトル
+    <問題文>
+    
+    ```python
+    """
+    回答用に与えられているコード
+    "your code goes here"が含まれている
+    """
+    ```
+    ````
+````
 
 ### 解答・解説作成
   - Excersiseのブロックは基本的にそのまま（変更の必要があれば改変いただいて問題ありません）
-  - 解答例は解答例とわかるように`## 解答例`のH2見出しを付ける
+  - 解答例はL2見出し`## 解答例`を付けてpythonコードで記載する
   - 解説は以下のようなブロックを追加する([サンプルファイル参照](https://github.com/quantum-tokyo/iqc-textbook/blob/main/src/sample-2023-spring-lab1-ja.ipynb))
-  - （オプション）トピックに対して飛躍のある部分に解説をつける
 
 解説ブロック
 ````
