@@ -379,6 +379,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">半加算器</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unroller">重要: Unrollerを用いた量子コストの導出</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">問題</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">解答例1 回路の構築</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">解答例2 出力結果とUnrollerによる分解</a></li>
 </ul>
             </nav>
         </div>
@@ -1040,6 +1042,8 @@ ANDとXORに関してはすでに作成済みなので、以下のように組�
 </section>
 <section id="id5">
 <h2>問題<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">全加算器の構築</p>
 <p>全加算器は、下の位からの桁上げを含む加算器である。
 全加算器を量子回路で表現せよ。なお、真理値表は以下のようになる。</p>
 <table class="table">
@@ -1107,15 +1111,13 @@ ANDとXORに関してはすでに作成済みなので、以下のように組�
 例<br />
 00,01,01,10,01,…改行<br />
 u3: 27, cx: 24</p>
-<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
-<summary class="sd-summary-title sd-card-header">
-解答 ~全加算器の量子回路~<div class="sd-summary-down docutils">
-<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="sd-summary-up docutils">
-<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="sd-summary-content sd-card-body docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-<span class="c1">#----事前準備----</span>
+</div>
+</section>
+<section id="id6">
+<h2>解答例1 回路の構築<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#----事前準備----</span>
 <span class="c1">#各レジスタ、量子回路を宣言</span>
 <span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumCircuit</span>
 <span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">IBMQ</span><span class="p">,</span> <span class="n">Aer</span><span class="p">,</span> <span class="n">execute</span>
@@ -1184,7 +1186,14 @@ u3: 27, cx: 24</p>
 </pre></div>
 </div>
 </div>
-</details><div class="tip admonition">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;00&#39;: 1000}
+</pre></div>
+</div>
+<img alt="_images/49cb77935abe75f82e805201dd8eaef669558021bf1797270d0f4aaaf7dbb859.png" src="_images/49cb77935abe75f82e805201dd8eaef669558021bf1797270d0f4aaaf7dbb859.png" />
+</div>
+</div>
+<div class="tip admonition">
 <p class="admonition-title">解説</p>
 <p><img alt="" src="_images/2019-fall-adder.png" /></p>
 <p>半加算器２つとORを使うことで全加算器を実装することができます。</p>
@@ -1213,14 +1222,12 @@ A, B, Xの入力値を決める(inputdata = [x,x,x]を任意の値にしてif-el
 左側が出力された値、右側が観測された回数を指します。<br />
 例えば{‘00’:1000}と表示された場合は、00という結果が1000回計算されたことを表します</p>
 </div>
-<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
-<summary class="sd-summary-title sd-card-header">
-解答2 ~出力結果とUnrollerによる分解~<div class="sd-summary-down docutils">
-<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="sd-summary-up docutils">
-<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="sd-summary-content sd-card-body docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Unrollerを使って回路をu3とcxゲートに分解してみましょう。</span>
+</section>
+<section id="id7">
+<h2>解答例2 出力結果とUnrollerによる分解<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Unrollerを使って回路をu3とcxゲートに分解してみましょう。</span>
 <span class="n">pass_</span> <span class="o">=</span> <span class="n">Unroller</span><span class="p">([</span><span class="s1">&#39;u3&#39;</span><span class="p">,</span> <span class="s1">&#39;cx&#39;</span><span class="p">])</span>
 <span class="n">pm</span> <span class="o">=</span> <span class="n">PassManager</span><span class="p">(</span><span class="n">pass_</span><span class="p">)</span>
 <span class="n">new_circuit</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span> 
@@ -1228,12 +1235,17 @@ A, B, Xの入力値を決める(inputdata = [x,x,x]を任意の値にしてif-el
 
 <span class="c1">#最後に、量子コストを算出しましょう</span>
 <span class="n">new_circuit</span><span class="o">.</span><span class="n">count_ops</span><span class="p">()</span>
-
-<span class="c1">#今回の解答例の量子回路のコストは：$27+24\times10=267$ となります</span>
 </pre></div>
 </div>
 </div>
-</details></section>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OrderedDict([(&#39;u3&#39;, 27), (&#39;cx&#39;, 24), (&#39;barrier&#39;, 3), (&#39;measure&#39;, 2)])
+</pre></div>
+</div>
+</div>
+</div>
+<p>今回の解答例の量子回路のコストは：<span class="math notranslate nohighlight">\(27+24\times10=267\)</span> となります</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1325,6 +1337,8 @@ A, B, Xの入力値を決める(inputdata = [x,x,x]を任意の値にしてif-el
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">半加算器</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unroller">重要: Unrollerを用いた量子コストの導出</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">問題</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">解答例1 回路の構築</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">解答例2 出力結果とUnrollerによる分解</a></li>
 </ul>
   </nav></div>
 

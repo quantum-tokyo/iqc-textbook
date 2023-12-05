@@ -403,6 +403,10 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="lab1">
 <h1>トフォリゲート(2021年春 Lab1)<a class="headerlink" href="#lab1" title="Permalink to this heading">#</a></h1>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>このNotebookはQiskit v0.44の仕様に合わせてコードを改変しています。</p>
+</div>
 <section id="id1">
 <h2>歴史的背景<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <p>40年前、50人の思想家からなるグループがMITのエンディコット・ハウスの芝生で写真を撮るために並びました。1981年に開催された、MITとIBMが共同で開催した計算物理に関する会議(Physics of Computation Conference)において、歴史を作っていると思った人はその時、ほとんどいませんでした。そこは、コンピューティングの物理、特に今、急成長中の分野で、教科書や大学のコースにふさわしい重要な科目である、量子コンピューティングが間違いなく誕生した場所であったのです。</p>
@@ -458,7 +462,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2024/1182467571.py:3: MatplotlibDeprecationWarning: MatplotlibDeprecationWarning was deprecated in Matplotlib 3.6 and will be removed two minor releases later. Use matplotlib.MatplotlibDeprecationWarning instead.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2137/1182467571.py:3: MatplotlibDeprecationWarning: MatplotlibDeprecationWarning was deprecated in Matplotlib 3.6 and will be removed two minor releases later. Use matplotlib.MatplotlibDeprecationWarning instead.
   from matplotlib.cbook import MatplotlibDeprecationWarning
 </pre></div>
 </div>
@@ -972,7 +976,8 @@ q_2: ─■─────────────■─────────
 </section>
 <section id="id10">
 <h2>演習 1<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
-<div id='problem'></div>
+<div id='problem'></div><div class="admonition- admonition">
+<p class="admonition-title">トフォリゲートの構築</p>
 <p>先ほど、我々の基本ゲートセットでアダマールゲートをどのように構築するか見ましたが、今度は、トフォリゲートを同じように構築したいと思います。なぜトフォリゲートなのでしょうか？上記で述べたように、トフォリゲートは、古典コンピューターにおいてNANDゲートと同じように、ユニバーサル・ゲートでありますが、可逆的です。さらに、アダマールゲートとともに量子コンピューターではユニバーサル・ゲートを構築します。</p>
 <p>基本ゲートを使ってより複雑なゲートを表現するいくつかの例を見てきました。今回は、得られた知識を使って、我々の基本ゲートのみを使ってトフォリゲートを構築します。このために、先ほどの例である、制御回転を構築し使う方法が重宝するでしょう。大きなチャレンジは、制御回転を構築するところです。</p>
 <div class="admonition warning">
@@ -983,6 +988,25 @@ q_2: ─■─────────────■─────────
 \[
 Cost = 10 N_{CNOT} + N_{other}
 \]</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">IBMQ</span><span class="p">,</span> <span class="n">Aer</span><span class="p">,</span> <span class="n">execute</span>
+
+
+<span class="n">circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># この下にコードを書いてくだ</span>
+
+
+
+
+
+<span class="c1"># この上にコードを書いてください</span>
+
+<span class="n">circuit</span><span class="o">.</span><span class="n">measure_all</span><span class="p">()</span> <span class="c1"># すべて量子ビットを測定します</span>
+
+</pre></div>
+</div>
 </div>
 </section>
 <section id="id11">
