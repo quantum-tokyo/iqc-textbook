@@ -43,7 +43,5 @@ parts:
   #   - file: 2023-spring-lab4-error-correction
   #   - file: 2023-spring-lab5-127qubits
   - caption: "Test: 2023Spring"
-    numbered: True
-    maxdepth: 1
     chapters:
       - file: sample-2023-spring-lab1-ja
