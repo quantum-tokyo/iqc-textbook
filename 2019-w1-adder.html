@@ -61,6 +61,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '2019-w1-adder';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -158,6 +160,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">第３章 量子アルゴリズム</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2019-w2-grover.html">Groverのアルゴリズム（2019年 Week2）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2020-w2-b-lights-out-puzzle.html">4-ライツアウトパズル（2020年 Week2b）</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Test: 2023Spring</span></p>
@@ -391,7 +394,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="week1">
+  <section class="tex2jax_ignore mathjax_ignore" id="week1">
 <h1>量子回路における加算器（2019年 Week1）<a class="headerlink" href="#week1" title="Permalink to this heading">#</a></h1>
 <p>この週では、量子回路を用いて単純な古典計算(加算)を行います。</p>
 <div class="cell docutils container">
@@ -407,12 +410,12 @@ document.write(`
 <p>量子回路は、量子計算の過程を記述する手法の１つで、基本的な操作を行う量子ゲートを組み合わせて構成されます。まず、いくつかの主要な量子ゲートをご紹介します。</p>
 <section id="x">
 <h3>Xゲート<a class="headerlink" href="#x" title="Permalink to this heading">#</a></h3>
-<p>Xゲートはブロッホ球の$x$軸周りの$\pi$回転です。
+<p>Xゲートはブロッホ球の<span class="math notranslate nohighlight">\(x\)</span>軸周りの<span class="math notranslate nohighlight">\(\pi\)</span>回転です。
 |0&gt;にXゲートを適用すると|1&gt;、|1&gt;にXゲートを適用すると|0&gt;になるので、古典のNOTゲートのような操作が実現でき、ビット反転とも呼ばれます。</p>
-<p>$X = \begin{pmatrix}
-0 &amp; 1 \
-1 &amp; 0 \
-\end{pmatrix}$</p>
+<p><span class="math notranslate nohighlight">\(X = \begin{pmatrix}
+0 &amp; 1 \\
+1 &amp; 0 \\
+\end{pmatrix}\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -429,11 +432,11 @@ document.write(`
 </section>
 <section id="z">
 <h3>Zゲート<a class="headerlink" href="#z" title="Permalink to this heading">#</a></h3>
-<p>Zゲートはブロッホ球の$z$軸周りの$\pi$回転です。位相反転とも呼ばれます。</p>
-<p>$Z = \begin{pmatrix}
-1 &amp; 0 \
-0 &amp; -1 \
-\end{pmatrix}$</p>
+<p>Zゲートはブロッホ球の<span class="math notranslate nohighlight">\(z\)</span>軸周りの<span class="math notranslate nohighlight">\(\pi\)</span>回転です。位相反転とも呼ばれます。</p>
+<p><span class="math notranslate nohighlight">\(Z = \begin{pmatrix}
+1 &amp; 0 \\
+0 &amp; -1 \\
+\end{pmatrix}\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -450,12 +453,12 @@ document.write(`
 </section>
 <section id="h">
 <h3>Hゲート<a class="headerlink" href="#h" title="Permalink to this heading">#</a></h3>
-<p>Hadamardゲート(アダマールゲート)はブロッホ球の$x$軸と$z$軸の中間の軸周りの$\pi$回転です。
-例えば|0&gt;にHゲートを適用すると、$\frac{|0&gt; + |1&gt;}{\sqrt{2}}$のような重ね合わせ状態を作ることができます。</p>
-<p>$H = \frac{1}{\sqrt{2}}\begin{pmatrix}
-1 &amp; 1 \
-1 &amp; -1 \
-\end{pmatrix}$</p>
+<p>Hadamardゲート(アダマールゲート)はブロッホ球の<span class="math notranslate nohighlight">\(x\)</span>軸と<span class="math notranslate nohighlight">\(z\)</span>軸の中間の軸周りの<span class="math notranslate nohighlight">\(\pi\)</span>回転です。
+例えば|0&gt;にHゲートを適用すると、<span class="math notranslate nohighlight">\(\frac{|0&gt; + |1&gt;}{\sqrt{2}}\)</span>のような重ね合わせ状態を作ることができます。</p>
+<p><span class="math notranslate nohighlight">\(H = \frac{1}{\sqrt{2}}\begin{pmatrix}
+1 &amp; 1 \\
+1 &amp; -1 \\
+\end{pmatrix}\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -473,12 +476,12 @@ document.write(`
 <section id="cx-cnot">
 <h3>CXゲート(CNOTゲート)<a class="headerlink" href="#cx-cnot" title="Permalink to this heading">#</a></h3>
 <p>CXゲートは制御NOTゲート、CNOTとも呼ばれます。CXゲートは、２つの量子ビット(制御量子ビットとターゲット量子ビットと呼びます)を入出力に持ち、制御量子ビットが|1&gt;のときに、ターゲット量子ビットに対してビット反転(Xゲート)を行います。</p>
-<p>$CX = \begin{pmatrix}
-1 &amp; 0 &amp; 0 &amp; 0\
-0 &amp; 1 &amp; 0 &amp; 0\
-0 &amp; 0 &amp; 0 &amp; 1\
-0 &amp; 0 &amp; 1 &amp; 0\
-\end{pmatrix}$</p>
+<p><span class="math notranslate nohighlight">\(CX = \begin{pmatrix}
+1 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 1\\
+0 &amp; 0 &amp; 1 &amp; 0\\
+\end{pmatrix}\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
@@ -496,12 +499,12 @@ document.write(`
 <section id="cz">
 <h3>CZゲート<a class="headerlink" href="#cz" title="Permalink to this heading">#</a></h3>
 <p>CZゲートも、２つの量子ビット(制御量子ビットとターゲット量子ビットと呼びます)を入出力に持ち、制御量子ビットが|1&gt;のときに、ターゲット量子ビットに対して位相反転(Zゲート)を行います。</p>
-<p>$CZ = \begin{pmatrix}
-1 &amp; 0 &amp; 0 &amp; 0\
-0 &amp; 1 &amp; 0 &amp; 0\
-0 &amp; 0 &amp; 1 &amp; 0\
-0 &amp; 0 &amp; 0 &amp; -1\
-\end{pmatrix}$</p>
+<p><span class="math notranslate nohighlight">\(CZ = \begin{pmatrix}
+1 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 1 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; -1\\
+\end{pmatrix}\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
@@ -537,16 +540,16 @@ document.write(`
 <h3>CCXゲート<a class="headerlink" href="#ccx" title="Permalink to this heading">#</a></h3>
 <p>CCXゲートはToffoliゲートとも呼ばれます。</p>
 <p>CCXゲートは、3つの量子ビット(2つの制御量子ビットと1つのターゲット量子ビット)を入出力に持ち、制御量子ビットが2つとも|1&gt;のときに、ターゲット量子ビットに対してビット反転(Xゲート)を行います。</p>
-<p>$CCX = \begin{pmatrix}
-1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\
-0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\
-0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1\
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0\
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0\
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0\
-0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0\
-\end{pmatrix}$</p>
+<p><span class="math notranslate nohighlight">\(CCX = \begin{pmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1\\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\
+\end{pmatrix}\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -930,7 +933,7 @@ ANDとXORに関してはすでに作成済みなので、以下のように組�
 <li><p>命令数</p></li>
 </ol>
 <p>これらはどれも量子計算の結果やスループットなどに影響する重要な尺度ですが、今回のQuantum Challengeでは特に4の命令数を指標として、以下のようにプログラムを評価しています。今回の手法で用いる値をコストと呼称します。</p>
-<p>コスト $=$ 単一量子ビットゲートの数 $+$ CXゲートの数 $\times 10$</p>
+<p>コスト <span class="math notranslate nohighlight">\(=\)</span> 単一量子ビットゲートの数 <span class="math notranslate nohighlight">\(+\)</span> CXゲートの数 <span class="math notranslate nohighlight">\(\times 10\)</span></p>
 <p>任意の量子回路は単一量子ビットゲート(1量子ビットに対する命令)と2量子ビットゲートに対する命令に分解して同等な回路を構築することができます。また、現代のデバイスではCXゲートの方がノイズが乗りやすいので10倍の重み付けをしています。</p>
 <p>unrollerと呼ばれるプログラムを用いることで、皆さんのお手元でもこのコストを導出することができます。
 例えば、以下のような量子回路があったとします。</p>
@@ -996,7 +999,7 @@ ANDとXORに関してはすでに作成済みなので、以下のように組�
 </div>
 </div>
 </div>
-<p>よって、この回路のコストは$19+13\times10=149$ということになります。</p>
+<p>よって、この回路のコストは<span class="math notranslate nohighlight">\(19+13\times10=149\)</span>ということになります。</p>
 <p>単一量子ビットゲートやCXゲート以外のゲートが、Unrollerによってどのように分解されるかは簡単に確認できるので、興味がある人は自分で調べてみましょう。以下ではサンプルとして、CCXゲートを単一量子ビットゲートとCXゲートに分解しています。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1037,7 +1040,7 @@ ANDとXORに関してはすでに作成済みなので、以下のように組�
 </div>
 </div>
 </div>
-<p>上記の回路のコストは$9+6\times10=69$ということになります。</p>
+<p>上記の回路のコストは<span class="math notranslate nohighlight">\(9+6\times10=69\)</span>ということになります。</p>
 </section>
 <section id="id5">
 <h2>問題<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
@@ -1243,7 +1246,7 @@ A, B, Xの入力値を決める(inputdata = [x,x,x]を任意の値にしてif-el
 </div>
 </div>
 </div>
-<p>今回の解答例の量子回路のコストは：$27+24\times10=267$ となります</p>
+<p>今回の解答例の量子回路のコストは：<span class="math notranslate nohighlight">\(27+24\times10=267\)</span> となります</p>
 </section>
 </section>
 

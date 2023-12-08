@@ -61,11 +61,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '2023-spring-lab2-teleportation';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="4-ライツアウトパズル（2020年 Week2b）" href="2020-w2-b-lights-out-puzzle.html" />
+    <link rel="next" title="Groverのアルゴリズム（2019年 Week2）" href="2019-w2-grover.html" />
     <link rel="prev" title="トフォリゲート(2021年春 Lab1)" href="2021-spring-lab1-toffoli.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -159,6 +160,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">第３章 量子アルゴリズム</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2019-w2-grover.html">Groverのアルゴリズム（2019年 Week2）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2020-w2-b-lights-out-puzzle.html">4-ライツアウトパズル（2020年 Week2b）</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Test: 2023Spring</span></p>
@@ -382,10 +384,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="lab2">
+  <section class="tex2jax_ignore mathjax_ignore" id="lab2">
 <h1>量子テレポーテーション（2023年 Lab2）<a class="headerlink" href="#lab2" title="Permalink to this heading">#</a></h1>
-<p>アリスとボブが抱えている問題を解決する量子テレポーテーションのLabへようこそ。ご安心ください、人間関係の問題ではありませんよ！アリスは未知の状態 $\lvert \psi \rangle$ の量子ビットを所持しており、この量子状態をボブに転送したいと考えています。しかしながら彼らは非常に離れた場所におり、量子情報を直接転送する手段はなく、転送できるのは古典情報のみです。彼らの目標を達成することは可能でしょうか？</p>
-<p>アリスとボブがエンタングルした量子ビットのペアを共有している場合、彼女が２ビットの古典情報を送信することで、量子ビットの状態をボブに転送できることがわかっています。最終的に、ボブが $\lvert \psi \rangle$ を所有し、アリスはそれを持たなくなるため、このプロセスはテレポーテーションとして知られています。</p>
+<p>アリスとボブが抱えている問題を解決する量子テレポーテーションのLabへようこそ。ご安心ください、人間関係の問題ではありませんよ！アリスは未知の状態 <span class="math notranslate nohighlight">\(\lvert \psi \rangle\)</span> の量子ビットを所持しており、この量子状態をボブに転送したいと考えています。しかしながら彼らは非常に離れた場所におり、量子情報を直接転送する手段はなく、転送できるのは古典情報のみです。彼らの目標を達成することは可能でしょうか？</p>
+<p>アリスとボブがエンタングルした量子ビットのペアを共有している場合、彼女が２ビットの古典情報を送信することで、量子ビットの状態をボブに転送できることがわかっています。最終的に、ボブが <span class="math notranslate nohighlight">\(\lvert \psi \rangle\)</span> を所有し、アリスはそれを持たなくなるため、このプロセスはテレポーテーションとして知られています。</p>
 <section id="id1">
 <h2>背景<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <p>量子テレポーテーションは、エンタングルメントと古典通信を使用し、ある量子ビットから別の量子ビットへと量子情報の転送を可能にするプロトコルです。このプロトコルは、1993年に Charles Bennett、Gilles Brassard、Claude Crépeau、Richard Jozsa、Asher Peres および William Wootters によって提案されました。このプロセスは、量子ビット自体を送信するのではなく、ソース量子ビットからターゲット量子ビットに量子状態を転送します。</p>
@@ -408,21 +410,21 @@ document.write(`
 <p>量子ビットを転送するためには、アリスとボブにエンタングルした量子ビットのペアを提供してくれる第三者の助けが必要です。次に、アリスは量子ビットに対して特定の操作を実行し、その結果を古典通信チャネルを介してボブと共有します。最後に、ボブは自分の側で一連の操作を実行し、アリスの量子ビットを正常に取得します。それでは、これらの各ステップについて詳しく見ていきましょう。</p>
 <p>量子回路は、３つの量子ビットと３つの古典ビットで構成されます。量子ビットは次のように命名されます。</p>
 <ul class="simple">
-<li><p>$s$: アリスがボブに送信したい、状態 $\lvert \psi \rangle$ を含む「ソース」量子ビット。</p></li>
-<li><p>$a$: エンタングルしたBellペアのうち、アリスが持つ片方を最初に格納する量子ビット。</p></li>
-<li><p>$b$: エンタングルしたBellペアのうち、ボブが持つもう片方を最初に格納する量子ビット。</p></li>
+<li><p><span class="math notranslate nohighlight">\(s\)</span>: アリスがボブに送信したい、状態 <span class="math notranslate nohighlight">\(\lvert \psi \rangle\)</span> を含む「ソース」量子ビット。</p></li>
+<li><p><span class="math notranslate nohighlight">\(a\)</span>: エンタングルしたBellペアのうち、アリスが持つ片方を最初に格納する量子ビット。</p></li>
+<li><p><span class="math notranslate nohighlight">\(b\)</span>: エンタングルしたBellペアのうち、ボブが持つもう片方を最初に格納する量子ビット。</p></li>
 </ul>
 <p>テレポーテーションプロトコル自体には２つの古典ビットが必要であり、ボブの最終状態を測定するために使用する３つ目の古典ビットも含まれます。古典ビットは次のように命名されます。</p>
 <ul class="simple">
-<li><p>$c0$: アリスが $a$ の測定に使用する古典ビット。</p></li>
-<li><p>$c1$: アリスが $s$ の測定に使用する古典ビット。</p></li>
-<li><p>$c2$: ボブが $b$ の測定に使用する古典ビット。</p></li>
+<li><p><span class="math notranslate nohighlight">\(c0\)</span>: アリスが <span class="math notranslate nohighlight">\(a\)</span> の測定に使用する古典ビット。</p></li>
+<li><p><span class="math notranslate nohighlight">\(c1\)</span>: アリスが <span class="math notranslate nohighlight">\(s\)</span> の測定に使用する古典ビット。</p></li>
+<li><p><span class="math notranslate nohighlight">\(c2\)</span>: ボブが <span class="math notranslate nohighlight">\(b\)</span> の測定に使用する古典ビット。</p></li>
 </ul>
 <section id="exercise-1">
 <h3>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this heading">#</a></h3>
 <div class="admonition-bell admonition">
 <p class="admonition-title">Bell状態の生成</p>
-<p>２つの量子ビットを利用して、エンタングルしたBellペアの状態 $\frac{\lvert 00 \rangle + \lvert 11 \rangle}{\sqrt{2}}$ を生成してください。量子ビット $a$ はアリスに割り当てられ、量子ビット $b$ はボブのものです。</p>
+<p>２つの量子ビットを利用して、エンタングルしたBellペアの状態 <span class="math notranslate nohighlight">\(\frac{\lvert 00 \rangle + \lvert 11 \rangle}{\sqrt{2}}\)</span> を生成してください。量子ビット <span class="math notranslate nohighlight">\(a\)</span> はアリスに割り当てられ、量子ビット <span class="math notranslate nohighlight">\(b\)</span> はボブのものです。</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>Bell状態はアダマールゲートとCNOTゲートを使うことで生成できます。</p>
@@ -494,14 +496,14 @@ document.write(`
 <p>ヒントにあるように、Bell状態はアダマールゲートとCNOTゲートを使うことで生成できます。<br />
 CNOTゲートは2量子ビットゲートで、入力に制御量子ビットとターゲット量子ビットを指定する必要があります。<br />
 ここではアリスのもつ量子ビットを制御量子ビットに、ボブのもつ量子ビットをターゲット量子ビットに設定します。</p>
-<p>ここで、メッセージ量子ビット$s$の状態を$\ket{\psi}$とおくと、3量子ビットの量子状態は以下のように表すことが出来ます。</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6c365e04-8f03-4905-8b56-2f0207405c86">
-<span class="eqno">(1)<a class="headerlink" href="#equation-6c365e04-8f03-4905-8b56-2f0207405c86" title="Permalink to this equation">#</a></span>\[\begin{align}
+<p>ここで、メッセージ量子ビット<span class="math notranslate nohighlight">\(s\)</span>の状態を<span class="math notranslate nohighlight">\(\ket{\psi}\)</span>とおくと、3量子ビットの量子状態は以下のように表すことが出来ます。</p>
+<div class="amsmath math notranslate nohighlight" id="equation-90c1c942-f082-4e71-a6c2-0991fb94cb99">
+<span class="eqno">(1)<a class="headerlink" href="#equation-90c1c942-f082-4e71-a6c2-0991fb94cb99" title="Permalink to this equation">#</a></span>\[\begin{align}
     \ket{\psi}\ket{B_{00}} &amp;= (\alpha\ket{0}+\beta\ket{1})(\frac{1}{\sqrt{2}}(\ket{00}+\ket{11})) \\
      &amp;= \frac{1}{\sqrt{2}}(\alpha\ket{000}+\alpha\ket{011}+\beta\ket{100}+\beta\ket{111})
 \end{align}\]</div>
 </div>
-<p>アリスが量子ビット $a$ を持ち、ボブが量子ビット $b$ を持っていると仮定しましょう。彼らは本当に関係性に問題を抱えているかもしれませんね😉。</p>
+<p>アリスが量子ビット <span class="math notranslate nohighlight">\(a\)</span> を持ち、ボブが量子ビット <span class="math notranslate nohighlight">\(b\)</span> を持っていると仮定しましょう。彼らは本当に関係性に問題を抱えているかもしれませんね😉。</p>
 </section>
 <section id="exercise-2">
 <h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this heading">#</a></h3>
@@ -509,8 +511,8 @@ CNOTゲートは2量子ビットゲートで、入力に制御量子ビットと
 <p class="admonition-title">メッセージ送信回路の構築</p>
 <p>次のプロトコルを実装してください。</p>
 <ol class="arabic simple">
-<li><p>アリスが、 $s$ ($\lvert \psi \rangle$ を含む量子ビット)を制御、 $a$ をターゲットとしてCNOTゲートを適用する。</p></li>
-<li><p>アリスが $s$ にアダマールゲートを適用する。</p></li>
+<li><p>アリスが、 <span class="math notranslate nohighlight">\(s\)</span> (<span class="math notranslate nohighlight">\(\lvert \psi \rangle\)</span> を含む量子ビット)を制御、 <span class="math notranslate nohighlight">\(a\)</span> をターゲットとしてCNOTゲートを適用する。</p></li>
+<li><p>アリスが <span class="math notranslate nohighlight">\(s\)</span> にアダマールゲートを適用する。</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">alice_gates</span><span class="p">(</span><span class="n">qr</span><span class="p">:</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">cr</span><span class="p">:</span> <span class="n">ClassicalRegister</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates Alices&#39;s gates&quot;&quot;&quot;</span>
@@ -567,9 +569,9 @@ CNOTゲートは2量子ビットゲートで、入力に制御量子ビットと
 <p class="admonition-title">解説</p>
 <p>問題文の手順通りに量子ゲートを配置します。</p>
 <p>構築した回路を通した量子状態は以下のように表されます。
-　$$
-\frac{1}{\sqrt{2}}(\alpha\ket{000}+\alpha\ket{100}+\alpha\ket{011}+\alpha\ket{111}+\beta\ket{010}-\beta\ket{110}+\beta\ket{001}-\beta\ket{101})
-$$</p>
+　$<span class="math notranslate nohighlight">\(
+    \frac{1}{\sqrt{2}}(\alpha\ket{000}+\alpha\ket{100}+\alpha\ket{011}+\alpha\ket{111}+\beta\ket{010}-\beta\ket{110}+\beta\ket{001}-\beta\ket{101})
+\)</span>$</p>
 </div>
 </section>
 <section id="exercise-3">
@@ -577,7 +579,7 @@ $$</p>
 <div class="admonition- admonition">
 <p class="admonition-title">量子状態の測定</p>
 <p>このステップでは、アリスは所有している両方の量子ビットで測定を実行し、結果を２つの古典ビットに保存します。その後、彼女はこれら２つのビットをボブに送信します。</p>
-<p>彼女は量子ビット $a$ を古典ビット $c0$ に、量子ビット $s$ を古典ビット $c1$ に測定して入れるように以下のコードセルを完成させてください。</p>
+<p>彼女は量子ビット <span class="math notranslate nohighlight">\(a\)</span> を古典ビット <span class="math notranslate nohighlight">\(c0\)</span> に、量子ビット <span class="math notranslate nohighlight">\(s\)</span> を古典ビット <span class="math notranslate nohighlight">\(c1\)</span> に測定して入れるように以下のコードセルを完成させてください。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">measure_and_send</span><span class="p">(</span><span class="n">qr</span><span class="p">:</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">cr</span><span class="p">:</span> <span class="n">ClassicalRegister</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Measures qubits a &amp; b and &#39;sends&#39; the results to Bob&quot;&quot;&quot;</span>
     <span class="n">qc</span> <span class="o">=</span> <span class="n">alice_gates</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
@@ -635,12 +637,12 @@ $$</p>
 <p class="admonition-title">解説</p>
 <p>測定を実行するためには<code class="docutils literal notranslate"><span class="pre">.measure()</span></code>メソッドを用います。<br />
 入力には測定対象である量子ビットと、測定結果を格納する古典ビットが必要となります。</p>
-<p>量子ビット$a$と$b$はエンタングルしているので量子ビット$a$の測定結果は$b$の状態に影響を与えます。</p>
+<p>量子ビット<span class="math notranslate nohighlight">\(a\)</span>と<span class="math notranslate nohighlight">\(b\)</span>はエンタングルしているので量子ビット<span class="math notranslate nohighlight">\(a\)</span>の測定結果は<span class="math notranslate nohighlight">\(b\)</span>の状態に影響を与えます。</p>
 <ul class="simple">
-<li><p>測定結果が<code class="docutils literal notranslate"><span class="pre">00</span></code>：量子ビット$b$の状態は$\alpha\ket{0}+\beta\ket{1}$ ・・・送信したかった正しい状態</p></li>
-<li><p>測定結果が<code class="docutils literal notranslate"><span class="pre">01</span></code>：量子ビット$b$の状態は$\alpha\ket{1}+\beta\ket{0}$ ・・・Xゲートを適用すると正しい状態に戻すことが出来る</p></li>
-<li><p>測定結果が<code class="docutils literal notranslate"><span class="pre">10</span></code>：量子ビット$b$の状態は$\alpha\ket{0}-\beta\ket{1}$ ・・・Zゲートを適用すると正しい状態に戻すことが出来る</p></li>
-<li><p>測定結果が<code class="docutils literal notranslate"><span class="pre">11</span></code>：量子ビット$b$の状態は$\alpha\ket{1}-\beta\ket{0}$ ・・・ZXゲートを適用すると正しい状態に戻すことが出来る</p></li>
+<li><p>測定結果が<code class="docutils literal notranslate"><span class="pre">00</span></code>：量子ビット<span class="math notranslate nohighlight">\(b\)</span>の状態は<span class="math notranslate nohighlight">\(\alpha\ket{0}+\beta\ket{1}\)</span> ・・・送信したかった正しい状態</p></li>
+<li><p>測定結果が<code class="docutils literal notranslate"><span class="pre">01</span></code>：量子ビット<span class="math notranslate nohighlight">\(b\)</span>の状態は<span class="math notranslate nohighlight">\(\alpha\ket{1}+\beta\ket{0}\)</span> ・・・Xゲートを適用すると正しい状態に戻すことが出来る</p></li>
+<li><p>測定結果が<code class="docutils literal notranslate"><span class="pre">10</span></code>：量子ビット<span class="math notranslate nohighlight">\(b\)</span>の状態は<span class="math notranslate nohighlight">\(\alpha\ket{0}-\beta\ket{1}\)</span> ・・・Zゲートを適用すると正しい状態に戻すことが出来る</p></li>
+<li><p>測定結果が<code class="docutils literal notranslate"><span class="pre">11</span></code>：量子ビット<span class="math notranslate nohighlight">\(b\)</span>の状態は<span class="math notranslate nohighlight">\(\alpha\ket{1}-\beta\ket{0}\)</span> ・・・ZXゲートを適用すると正しい状態に戻すことが出来る</p></li>
 </ul>
 </div>
 </section>
@@ -648,12 +650,12 @@ $$</p>
 <h3>Exercise 4<a class="headerlink" href="#exercise-4" title="Permalink to this heading">#</a></h3>
 <div class="admonition- admonition">
 <p class="admonition-title">動的回路の生成</p>
-<p>このステップでは、すでに量子ビット $b$ を所有しているボブが、アリスから受け取った古典ビットの状態に基づいて、回路に特定のゲートを動的に追加します。</p>
+<p>このステップでは、すでに量子ビット <span class="math notranslate nohighlight">\(b\)</span> を所有しているボブが、アリスから受け取った古典ビットの状態に基づいて、回路に特定のゲートを動的に追加します。</p>
 <ul class="simple">
 <li><p>ビットが <code class="docutils literal notranslate"><span class="pre">00</span></code> の場合、アクションは必要ありません。</p></li>
-<li><p>ビットが <code class="docutils literal notranslate"><span class="pre">01</span></code> の場合、 $X$ ゲート（Pauli-X または ビット・フリップ・ゲートとも呼ばれます）を適用する必要があります。</p></li>
-<li><p>ビット <code class="docutils literal notranslate"><span class="pre">10</span></code> には、 $Z$ ゲート（Pauli-Z または フェーズ・フリップ・ゲートとも呼ばれます）を適用する必要があります。</p></li>
-<li><p>最後に、古典ビットが <code class="docutils literal notranslate"><span class="pre">11</span></code> の場合は、 $ZX$ ゲートを適用する必要があります。これには、 $Z$ゲートと $X$ ゲートの両方を順番に適用する必要があります。</p></li>
+<li><p>ビットが <code class="docutils literal notranslate"><span class="pre">01</span></code> の場合、 <span class="math notranslate nohighlight">\(X\)</span> ゲート（Pauli-X または ビット・フリップ・ゲートとも呼ばれます）を適用する必要があります。</p></li>
+<li><p>ビット <code class="docutils literal notranslate"><span class="pre">10</span></code> には、 <span class="math notranslate nohighlight">\(Z\)</span> ゲート（Pauli-Z または フェーズ・フリップ・ゲートとも呼ばれます）を適用する必要があります。</p></li>
+<li><p>最後に、古典ビットが <code class="docutils literal notranslate"><span class="pre">11</span></code> の場合は、 <span class="math notranslate nohighlight">\(ZX\)</span> ゲートを適用する必要があります。これには、 <span class="math notranslate nohighlight">\(Z\)</span>ゲートと <span class="math notranslate nohighlight">\(X\)</span> ゲートの両方を順番に適用する必要があります。</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bob_gates</span><span class="p">(</span><span class="n">qr</span><span class="p">:</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">cr</span><span class="p">:</span> <span class="n">ClassicalRegister</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Uses qc.if_test to control which gates are dynamically added&quot;&quot;&quot;</span>
@@ -712,10 +714,10 @@ $$</p>
 </div>
 <div class="tip admonition">
 <p class="admonition-title">解説</p>
-<p>古典ビットの状態に対して必要な操作をまとめると、「$c_0$が状態1であるときはXゲートを適用し、$c_1$が状態1であるときはZゲートを適用する」となります。<br />
+<p>古典ビットの状態に対して必要な操作をまとめると、「<span class="math notranslate nohighlight">\(c_0\)</span>が状態1であるときはXゲートを適用し、<span class="math notranslate nohighlight">\(c_1\)</span>が状態1であるときはZゲートを適用する」となります。<br />
 場合分けが発生するような動的回路は”.if_test”メソッドを用いて実装することが可能です。</p>
 </div>
-<p>ここで、ボブは自分の量子ビットを測定して、古典ビット $c2$ に入れます。実験全体を複数回繰り返した後、測定結果に関する統計を収集して、テレポーテーションが正しく機能したことを確認できます。</p>
+<p>ここで、ボブは自分の量子ビットを測定して、古典ビット <span class="math notranslate nohighlight">\(c2\)</span> に入れます。実験全体を複数回繰り返した後、測定結果に関する統計を収集して、テレポーテーションが正しく機能したことを確認できます。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">teleportation_circuit</span> <span class="o">=</span> <span class="n">bob_gates</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
@@ -738,7 +740,7 @@ $$</p>
 <p class="admonition-title">回路の結合</p>
 <p>次のコードセルでは、完全な量子テレポーテーション回路を <code class="docutils literal notranslate"><span class="pre">teleport_superposition_circuit</span></code> 変数に構築します。次のステップに従ってください。</p>
 <ul class="simple">
-<li><p>状態を準備する回路を構築します。角度 $\pi / 4$ の $R_x$ 回転ゲートを適用して量子ビット $s$ を準備してください。</p></li>
+<li><p>状態を準備する回路を構築します。角度 <span class="math notranslate nohighlight">\(\pi / 4\)</span> の <span class="math notranslate nohighlight">\(R_x\)</span> 回転ゲートを適用して量子ビット <span class="math notranslate nohighlight">\(s\)</span> を準備してください。</p></li>
 <li><p>状態準備回路と先ほど構築したテレポーテーション回路を結合してください。</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
@@ -797,7 +799,7 @@ $$</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1a231564534cfc07834b5d4b3e441a051e916efe36b0655bee40d74e5c2ac7ab.png" src="_images/1a231564534cfc07834b5d4b3e441a051e916efe36b0655bee40d74e5c2ac7ab.png" />
+<img alt="_images/1926ba3efb0a2fb80fd9ffe72886bf0895c2088546681ad540c81802fa3c6946.png" src="_images/1926ba3efb0a2fb80fd9ffe72886bf0895c2088546681ad540c81802fa3c6946.png" />
 </div>
 </div>
 <div class="tip admonition">
@@ -946,11 +948,11 @@ $$</p>
       </div>
     </a>
     <a class="right-next"
-       href="2020-w2-b-lights-out-puzzle.html"
+       href="2019-w2-grover.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">4-ライツアウトパズル（2020年 Week2b）</p>
+        <p class="prev-next-title">Groverのアルゴリズム（2019年 Week2）</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

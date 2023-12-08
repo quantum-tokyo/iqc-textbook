@@ -61,12 +61,13 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '2020-w2-b-lights-out-puzzle';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="1. サンプル問題（2023年春）" href="sample-2023-spring-lab1-ja.html" />
-    <link rel="prev" title="量子テレポーテーション（2023年 Lab2）" href="2023-spring-lab2-teleportation.html" />
+    <link rel="prev" title="Groverのアルゴリズム（2019年 Week2）" href="2019-w2-grover.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -159,6 +160,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">第３章 量子アルゴリズム</span></p>
 <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2019-w2-grover.html">Groverのアルゴリズム（2019年 Week2）</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">4-ライツアウトパズル（2020年 Week2b）</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Test: 2023Spring</span></p>
@@ -385,7 +387,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="week2b">
+  <section class="tex2jax_ignore mathjax_ignore" id="week2b">
 <h1>4-ライツアウトパズル（2020年 Week2b）<a class="headerlink" href="#week2b" title="Permalink to this heading">#</a></h1>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
@@ -434,7 +436,7 @@ lightsout4_ex=[[Board 0],[Board 1],[Board 2],[Board 3]]</p>
 <p>ここで、全てのボード情報をQubit上に保持するにはどうすれば良いでしょうか？</p>
 <ol class="arabic simple">
 <li><p>ナイーブなデータ構造:　　9 Qubits/board * 4 boards &gt; 32 qubits (ibm_qasm_simulatorの上限)。</p></li>
-<li><p>重ね合わせ状態を準備する:   $\vert Board 0\rangle + \vert Board 1\rangle + \vert Board 2\rangle + \vert Board 3\rangle$.</p>
+<li><p>重ね合わせ状態を準備する:   <span class="math notranslate nohighlight">\(\vert Board 0\rangle + \vert Board 1\rangle + \vert Board 2\rangle + \vert Board 3\rangle\)</span>.</p>
 <ul class="simple">
 <li><p>状態生成に用いる回路構成は非自明。</p></li>
 </ul>
@@ -466,7 +468,7 @@ lightsout4_ex=[[Board 0],[Board 1],[Board 2],[Board 3]]</p>
 <span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">qiskit_ibm_provider</span> <span class="kn">import</span> <span class="n">IBMProvider</span>
 <span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">provider</span> <span class="o">=</span> <span class="n">IBMProvider</span><span class="p">()</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.6/x64/lib/python3.11/site-packages/qiskit_ibm_provider/ibm_provider.py:162,</span> in <span class="ni">IBMProvider.__init__</span><span class="nt">(self, token, url, name, instance, proxies, verify)</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.7/x64/lib/python3.11/site-packages/qiskit_ibm_provider/ibm_provider.py:162,</span> in <span class="ni">IBMProvider.__init__</span><span class="nt">(self, token, url, name, instance, proxies, verify)</span>
 <span class="g g-Whitespace">    </span><span class="mi">139</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;IBMProvider constructor</span>
 <span class="g g-Whitespace">    </span><span class="mi">140</span><span class="sd"> </span>
 <span class="g g-Whitespace">    </span><span class="mi">141</span><span class="sd"> Args:</span>
@@ -490,7 +492,7 @@ lightsout4_ex=[[Board 0],[Board 1],[Board 2],[Board 3]]</p>
 <span class="g g-Whitespace">    </span><span class="mi">177</span> <span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">178</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auth_client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_authenticate_ibm_quantum_account</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client_params</span><span class="p">)</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.6/x64/lib/python3.11/site-packages/qiskit_ibm_provider/ibm_provider.py:221,</span> in <span class="ni">IBMProvider._discover_account</span><span class="nt">(token, url, instance, name, proxies, verify)</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.7/x64/lib/python3.11/site-packages/qiskit_ibm_provider/ibm_provider.py:221,</span> in <span class="ni">IBMProvider._discover_account</span><span class="nt">(token, url, instance, name, proxies, verify)</span>
 <span class="g g-Whitespace">    </span><span class="mi">217</span>         <span class="k">if</span> <span class="n">url</span><span class="p">:</span>
 <span class="g g-Whitespace">    </span><span class="mi">218</span>             <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
 <span class="g g-Whitespace">    </span><span class="mi">219</span>                 <span class="s2">&quot;Loading default ibm_quantum account. Input &#39;url&#39; is ignored.&quot;</span>
@@ -499,7 +501,7 @@ lightsout4_ex=[[Board 0],[Board 1],[Board 2],[Board 3]]</p>
 <span class="g g-Whitespace">    </span><span class="mi">223</span> <span class="k">if</span> <span class="n">account</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 <span class="g g-Whitespace">    </span><span class="mi">224</span>     <span class="n">account</span> <span class="o">=</span> <span class="n">AccountManager</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.6/x64/lib/python3.11/site-packages/qiskit_ibm_provider/accounts/management.py:151,</span> in <span class="ni">AccountManager.get</span><span class="nt">(cls, name, channel)</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.7/x64/lib/python3.11/site-packages/qiskit_ibm_provider/accounts/management.py:151,</span> in <span class="ni">AccountManager.get</span><span class="nt">(cls, name, channel)</span>
 <span class="g g-Whitespace">    </span><span class="mi">146</span>     <span class="n">saved_account</span> <span class="o">=</span> <span class="n">read_config</span><span class="p">(</span>
 <span class="g g-Whitespace">    </span><span class="mi">147</span>         <span class="n">filename</span><span class="o">=</span><span class="bp">cls</span><span class="o">.</span><span class="n">_default_account_config_json_file</span><span class="p">,</span>
 <span class="g g-Whitespace">    </span><span class="mi">148</span>         <span class="n">name</span><span class="o">=</span><span class="bp">cls</span><span class="o">.</span><span class="n">_default_account_name_ibm_quantum</span><span class="p">,</span>
@@ -517,24 +519,24 @@ lightsout4_ex=[[Board 0],[Board 1],[Board 2],[Board 3]]</p>
 </section>
 <section id="qram-quantum-random-access-memory">
 <h3>qRAM: Quantum Random Access Memory<a class="headerlink" href="#qram-quantum-random-access-memory" title="Permalink to this heading">#</a></h3>
-<p>古典的なコンピュータでは、RAM(Random Access Memory)は揮発性メモリの一種で、メモリアドレス $j$ を持ち、各アドレス $D_j$ に対応するバイナリデータを格納しています。</p>
-<p>量子コンピュータの<a class="reference external" href="https://arxiv.org/abs/0708.1879">qRAM</a>の場合、アドレスQubits $a$ は、$N$ 個のアドレスを重ね合わせ状態で持ち、対応するバイナリデータを状態ベクトルとしてデータQubit $d$ に格納しています。</p>
-<p>$
+<p>古典的なコンピュータでは、RAM(Random Access Memory)は揮発性メモリの一種で、メモリアドレス <span class="math notranslate nohighlight">\(j\)</span> を持ち、各アドレス <span class="math notranslate nohighlight">\(D_j\)</span> に対応するバイナリデータを格納しています。</p>
+<p>量子コンピュータの<a class="reference external" href="https://arxiv.org/abs/0708.1879">qRAM</a>の場合、アドレスQubits <span class="math notranslate nohighlight">\(a\)</span> は、<span class="math notranslate nohighlight">\(N\)</span> 個のアドレスを重ね合わせ状態で持ち、対応するバイナリデータを状態ベクトルとしてデータQubit <span class="math notranslate nohighlight">\(d\)</span> に格納しています。</p>
+<p><span class="math notranslate nohighlight">\(
 \sum_{j}\frac{1}{\sqrt{N}}\vert j \rangle_{a}\vert 0 \rangle_{d}\xrightarrow{qRAM}\sum_{j}\frac{1}{\sqrt{N}}\vert j \rangle_{a}\vert D_{j} \rangle_{d}
-$</p>
+\)</span></p>
 <p>右辺の状態を”qRAM”、対応するゲート操作を”qRAM演算”と呼ぶことにします。</p>
-<p>qRAM演算には $\mathcal{O}(N\log N)$ 個のゲートが必要ですが、直感的にバイナリデータの重ね合わせ状態を作ることができます。
+<p>qRAM演算には <span class="math notranslate nohighlight">\(\mathcal{O}(N\log N)\)</span> 個のゲートが必要ですが、直感的にバイナリデータの重ね合わせ状態を作ることができます。
 qRAMは、HHLアルゴリズムをはじめとする量子機械学習の様々なアルゴリズムに応用されています。
 今回は、GroverのアルゴリズムにqRAMを適用してみましょう。</p>
 </section>
 <section id="qram">
 <h3>例題: データをqRAMから見つけよう<a class="headerlink" href="#qram" title="Permalink to this heading">#</a></h3>
-<p>$k_0, k_1, … , k_{n-1}$ がこの順に格納された $n$ アドレスの qRAM を用意します。
-Groverのアルゴリズムを使って，$m$という数字が格納されているアドレスを求めます。</p>
+<p><span class="math notranslate nohighlight">\(k_0, k_1, ... , k_{n-1}\)</span> がこの順に格納された <span class="math notranslate nohighlight">\(n\)</span> アドレスの qRAM を用意します。
+Groverのアルゴリズムを使って，<span class="math notranslate nohighlight">\(m\)</span>という数字が格納されているアドレスを求めます。</p>
 <ul class="simple">
-<li><p>$n = 4$</p></li>
-<li><p>$k = [1,2,5,7]$</p></li>
-<li><p>$m = 7$</p></li>
+<li><p><span class="math notranslate nohighlight">\(n = 4\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(k = [1,2,5,7]\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(m = 7\)</span></p></li>
 </ul>
 <section id="id3">
 <h4>qRAM演算<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h4>
@@ -605,7 +607,7 @@ Groverのアルゴリズムを使って，$m$という数字が格納されて�
 </section>
 <section id="id4">
 <h4>qRAM 内のデータ探索<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h4>
-<p>Groverのアルゴリズムを実行するには、$m$を含む<strong>アドレスQubit</strong>の符号を反転させます。
+<p>Groverのアルゴリズムを実行するには、<span class="math notranslate nohighlight">\(m\)</span>を含む<strong>アドレスQubit</strong>の符号を反転させます。
 また、拡散変換の前に別のqRAM演算でデータ Qubitを初期化する必要があります。</p>
 <p>$</p>
 <div class="amsmath math notranslate nohighlight">
@@ -627,7 +629,7 @@ Groverのアルゴリズムを使って，$m$という数字が格納されて�
  \right.
  \end{align*}\]</div>
 <p>$</p>
-<p>ここで、$f$ はフラグQubitを表します。
+<p>ここで、<span class="math notranslate nohighlight">\(f\)</span> はフラグQubitを表します。
 この例題の場合，<a class="reference external" href="https://qiskit.org/documentation/stubs/qiskit.circuit.library.C3XGate.html#qiskit.circuit.library.C3XGate">C3X gate</a>でオラクル操作を実行することができます。</p>
 <p>以下にqRAMの例題の回路全体を示しています。</p>
 <div class="cell docutils container">
@@ -865,10 +867,10 @@ Groverのアルゴリズムを使って，$m$という数字が格納されて�
 <p>ここでは以下の解答で使用する関数を定義します。</p>
 <p class="rubric"><code class="docutils literal notranslate"><span class="pre">qram_exercise(prob_array,</span> <span class="pre">qc,</span> <span class="pre">qr,</span> <span class="pre">qa)</span></code></p>
 <p>量子回路<code class="docutils literal notranslate"><span class="pre">qc</span></code>の量子ビット<code class="docutils literal notranslate"><span class="pre">qa</span></code>で与えれるqRAMのアドレスに対して、対応する<code class="docutils literal notranslate"><span class="pre">prob_array</span></code>として与えられた<code class="docutils literal notranslate"><span class="pre">lightsout4</span></code>配列を量子ビット<code class="docutils literal notranslate"><span class="pre">qr</span></code>に記録します。<br />
-$k=0$は$\ket{00}$に<br />
-$k=1$は$\ket{10}$に<br />
-$k=2$は$\ket{01}$に<br />
-$k=3$は$\ket{11}$に対応します。</p>
+<span class="math notranslate nohighlight">\(k=0\)</span>は<span class="math notranslate nohighlight">\(\ket{00}\)</span>に<br />
+<span class="math notranslate nohighlight">\(k=1\)</span>は<span class="math notranslate nohighlight">\(\ket{10}\)</span>に<br />
+<span class="math notranslate nohighlight">\(k=2\)</span>は<span class="math notranslate nohighlight">\(\ket{01}\)</span>に<br />
+<span class="math notranslate nohighlight">\(k=3\)</span>は<span class="math notranslate nohighlight">\(\ket{11}\)</span>に対応します。</p>
 <p class="rubric"><code class="docutils literal notranslate"><span class="pre">counter(qc,flip,auxiliary)</span></code></p>
 <p>量子回路qcのflipの1の数をカウントします。<br />
 カウントした結果はauxiliaryに2進数の形で記録されます。</p>
@@ -998,7 +1000,7 @@ $k=3$は$\ket{11}$に対応します。</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">c</span></code>（2古典ビット）アドレスを観測するための古典ビット</p></li>
 </ul>
 <p>求める解を持つqRAMのアドレスを求める手順は以下のとおりです。
-ここで2〜11までの処理の繰り返し回数は1としています。（$\frac{\pi}{4}\sqrt{2^{2}}-\frac{1}{2} \fallingdotseq 1$）</p>
+ここで2〜11までの処理の繰り返し回数は1としています。（<span class="math notranslate nohighlight">\(\frac{\pi}{4}\sqrt{2^{2}}-\frac{1}{2} \fallingdotseq 1\)</span>）</p>
 <ol class="arabic simple">
 <li><p>address, flip, oracleを初期化（address, flipは均一な重ね合わせ状態に、oracleは補助量子としてx, hゲートを作用させる）</p></li>
 <li><p>qRAMの各アドレスに対してlightsout4リストの解をtileにマップ</p></li>
@@ -1082,12 +1084,12 @@ $k=3$は$\ket{11}$に対応します。</p>
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="2023-spring-lab2-teleportation.html"
+       href="2019-w2-grover.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">量子テレポーテーション（2023年 Lab2）</p>
+        <p class="prev-next-title">Groverのアルゴリズム（2019年 Week2）</p>
       </div>
     </a>
     <a class="right-next"
