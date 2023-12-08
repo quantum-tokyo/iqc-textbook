@@ -1,0 +1,1763 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>量子回路における加算器（2020年 Week1a） &#8212; IBM Quantum Challengeで学ぶ量子コンピューティング</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '2020-w1-a-adder';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="トフォリゲート(2021年春 Lab1)" href="2021-spring-lab1-toffoli.html" />
+    <link rel="prev" title="量子回路における加算器（2019年 Week1）" href="2019-w1-adder.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">IBM Quantum Challengeで学ぶ量子コンピューティング</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to IQC Textbook
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">第２章 量子コンピューターの計算ルール</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2019-w1-adder.html">量子回路における加算器（2019年 Week1）</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">量子回路における加算器（2020年 Week1a）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2021-spring-lab1-toffoli.html">トフォリゲート(2021年春 Lab1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-spring-lab2-teleportation.html">量子テレポーテーション（2023年 Lab2）</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">第３章 量子アルゴリズム</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2019-w2-grover.html">Groverのアルゴリズム（2019年 Week2）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2020-w2-b-lights-out-puzzle.html">4-ライツアウトパズル（2020年 Week2b）</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Test: 2023Spring</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="sample-2023-spring-lab1-ja.html">サンプル問題（2023年春）</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/quantum-tokyo/iqc-textbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/quantum-tokyo/iqc-textbook/issues/new?title=Issue%20on%20page%20%2F2020-w1-a-adder.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/2020-w1-a-adder.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>量子回路における加算器（2020年 Week1a）</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">はじめに</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">目的</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">前提知識</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">演習で身につく知識</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">準備：演習で使用するモジュールのインポート</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">量子回路の基礎</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#x">Xゲート</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#h">Hゲート</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#z">Zゲート</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cx-cnot">CXゲート(CNOTゲート)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cz">CZゲート</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ccx">CCXゲート</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">古典の論理ゲートを量子ゲートで作成する</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#not">NOTゲート</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#and">ANDゲート</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nand">NANDゲート</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#or">ORゲート</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#xor">XORゲート</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nor">NORゲート</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">加算器</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">半加算器</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unroller">重要: Unrollerを用いた量子コストの導出</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#i-a">ラーニング演習 I-A</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">解答例</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="week1a">
+<h1>量子回路における加算器（2020年 Week1a）<a class="headerlink" href="#week1a" title="Permalink to this heading">#</a></h1>
+<section id="id1">
+<h2>はじめに<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<section id="id2">
+<h3>目的<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<p>本演習では、量子回路を用いて、古典論理回路による加算器と論理的に等価な回路を作成することを目的とします。<br />
+本演習を行うにあたり、必要となる前提知識は以下の通りです。可能な限り下記項目の概要を調べ、理解しておくことを推奨します。</p>
+<p>演習ではまず最初に量子回路を使った様々な論理ゲート（AND, OR, XORなど）と、ブロッホ球表示について扱います。
+その後、古典の加算器と等価な計算を量子回路で実現する方法を演習を通して学ぶことができます。下記の通り、演習を通して量子計算手法の基礎を身に着けることができます。</p>
+</section>
+<section id="id3">
+<h3>前提知識<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>古典論理回路と真理値表</p></li>
+<li><p>半加算器・全加算器</p></li>
+</ol>
+</section>
+<section id="id4">
+<h3>演習で身につく知識<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>量子回路の基礎</p></li>
+<li><p>ブロッホ球表示</p></li>
+<li><p>Unrollerによる量子回路の分解・量子コスト計算</p></li>
+<li><p>量子回路を用いた半加算器・全加算器の実装</p></li>
+</ol>
+</section>
+<section id="id5">
+<h3>準備：演習で使用するモジュールのインポート<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 標準のQiskitライブラリーをインポートしてアカウントを構成する</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">Aer</span><span class="p">,</span> <span class="n">execute</span>
+<span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="kn">import</span> <span class="n">plot_bloch_multivector</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="id6">
+<h2>量子回路の基礎<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<p>ブロッホ球とは？</p>
+<blockquote>
+<div><p>ブロッホ球とは、量子ビットの状態を単位球面上に表す表記法です。量子ビットの任意の純粋状態 <span class="math notranslate nohighlight">\(\ket \psi\)</span> は <span class="math notranslate nohighlight">\(\ket 0\)</span> と <span class="math notranslate nohighlight">\(\ket 0\)</span> の重ね合わせで表現できるため、ブロッホ球上の極座標として表現することができます。<br />
+（簡単に数式で説明すると、、、）<br />
+<span class="math notranslate nohighlight">\(\ket 0\)</span>と <span class="math notranslate nohighlight">\(\ket 0\)</span> の重ね合わせ状態を式で表すと、このようになります。$<span class="math notranslate nohighlight">\( \ket \psi = \alpha \ket 0 + \beta \ket 1\)</span><span class="math notranslate nohighlight">\(
+重ね合わせ状態のうち、\)</span>\alpha<span class="math notranslate nohighlight">\( は \)</span>\ket 0<span class="math notranslate nohighlight">\( の占める割合、\)</span>\beta<span class="math notranslate nohighlight">\( は \)</span>\ket 0<span class="math notranslate nohighlight">\( の占める割合であり（確率振幅）、以下の式が成り立ちます。\)</span><span class="math notranslate nohighlight">\( |\alpha|^2 + |\beta|^2 = 1 \)</span><span class="math notranslate nohighlight">\(
+例えば、単純な量子ビット \)</span> \ket 0 <span class="math notranslate nohighlight">\(と、重ね合わせ状態 \)</span> (1 / \sqrt 2)(\ket 0 + \ket 1)$ をブロッホ球で表現すると以下のように表されます。</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 単純な量子ビット|0&gt;のブロッホ球表示</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+
+<span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_statevector</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plot_bloch_multivector</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.7/x64/lib/python3.11/site-packages/qiskit/__init__.py:123,</span> in <span class="ni">AerWrapper.__getattr__</span><span class="nt">(self, attr)</span>
+<span class="g g-Whitespace">    </span><span class="mi">122</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">123</span>     <span class="kn">from</span> <span class="nn">qiskit.providers</span> <span class="kn">import</span> <span class="n">aer</span>
+<span class="g g-Whitespace">    </span><span class="mi">125</span>     <span class="bp">self</span><span class="o">.</span><span class="n">aer</span> <span class="o">=</span> <span class="n">aer</span><span class="o">.</span><span class="n">Aer</span>
+
+<span class="ne">ImportError</span>: cannot import name &#39;aer&#39; from &#39;qiskit.providers&#39; (/opt/hostedtoolcache/Python/3.11.7/x64/lib/python3.11/site-packages/qiskit/providers/__init__.py)
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="ne">MissingOptionalLibraryError</span><span class="g g-Whitespace">               </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">result</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_statevector</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">plot_bloch_multivector</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.7/x64/lib/python3.11/site-packages/qiskit/__init__.py:134,</span> in <span class="ni">AerWrapper.__getattr__</span><span class="nt">(self, attr)</span>
+<span class="g g-Whitespace">    </span><span class="mi">126</span>         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">127</span>             <span class="s2">&quot;The qiskit.Aer entry point will be deprecated in a future release and &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">128</span>             <span class="s2">&quot;subsequently removed. Instead you should use this &quot;</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">131</span>             <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">132</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">133</span>     <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">134</span>         <span class="k">raise</span> <span class="n">MissingOptionalLibraryError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">135</span>             <span class="s2">&quot;qiskit-aer&quot;</span><span class="p">,</span> <span class="s2">&quot;Aer provider&quot;</span><span class="p">,</span> <span class="s2">&quot;pip install qiskit-aer&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">136</span>         <span class="p">)</span> <span class="kn">from</span> <span class="nn">ex</span>
+<span class="g g-Whitespace">    </span><span class="mi">137</span> <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">aer</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
+
+<span class="ne">MissingOptionalLibraryError</span>: &quot;The &#39;qiskit-aer&#39; library is required to use &#39;Aer provider&#39;. You can install it with &#39;pip install qiskit-aer&#39;.&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 重ね合わせ状態 1/√2 (|0&gt; + |1&gt;)</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_statevector</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plot_bloch_multivector</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/97e7dabe22cf14b7312391455df0cd4d4c318918a07383dd9b61d0677e345f11.png" src="_images/97e7dabe22cf14b7312391455df0cd4d4c318918a07383dd9b61d0677e345f11.png" />
+</div>
+</div>
+<p>量子回路とは？</p>
+<blockquote>
+<div><p>量子回路は、量子計算の過程を記述する手法の１つで、基本的な操作を行う量子ゲートを組み合わせて構成されます。本章ではまず、いくつかの主要な量子ゲートをご紹介します。<br />
+以下より、さっそく基本的な単一量子ゲートを動かしてみましょう</p>
+</div></blockquote>
+<section id="x">
+<h3>Xゲート<a class="headerlink" href="#x" title="Permalink to this heading">#</a></h3>
+<p>Xゲートはブロッホ球の<span class="math notranslate nohighlight">\(x\)</span>軸周りの<span class="math notranslate nohighlight">\(\pi\)</span>回転です。
+すなわち、 <span class="math notranslate nohighlight">\(\ket 0\)</span> にXゲートを適用すると <span class="math notranslate nohighlight">\(\ket 1\)</span> 、 <span class="math notranslate nohighlight">\(\ket 1\)</span> にXゲートを適用すると <span class="math notranslate nohighlight">\(\ket 0\)</span> になるので、古典のNOTゲートのような操作が実現でき、ビット反転とも呼ばれます。<br/>線形代数について学習したい方はQiskit Textbookのこちらの章をご覧ください：<a class="reference external" href="https://github.com/qiskit-community/qiskit-textbook/blob/master-ja/content/ch-appendix/linear_algebra.ipynb">Linear Algebra</a></p>
+<p>xゲートを代数的に表現すると下記のように表されます。</p>
+<p><span class="math notranslate nohighlight">\(X = \begin{pmatrix}
+0 &amp; 1 \\
+1 &amp; 0 \\
+\end{pmatrix}\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># |0&gt; qubitにXゲートをかけてみましょう</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/da6c0b52de1b85df345b47e4e4c5727e40bbc6520ca5d957ef8fdcd1ce7c4bf0.png" src="_images/da6c0b52de1b85df345b47e4e4c5727e40bbc6520ca5d957ef8fdcd1ce7c4bf0.png" />
+</div>
+</div>
+<p>注：新表記では<code class="docutils literal notranslate"><span class="pre">QuantumRegister</span></code>を省略するコーディング方法もありますが、今回のChallengeでは、こちらのコーディング法を使います。複雑な量子回路のアルゴリズムを理解しやすくするためです。（新表記についてはこちらをご覧ください：https://qiskit.org/documentation/stubs/qiskit.circuit.QuantumCircuit.html?highlight=quantumcircuit#qiskit.circuit.QuantumCircuit）</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ブロッホ球表示で結果を見てみましょう</span>
+<span class="c1">## 初期状態|0&gt;がビット反転して、|1&gt;となっていれば成功です！</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_statevector</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plot_bloch_multivector</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/c2b83fc65202d73b0dd4331db44d1307b3db1d52da168d90a6b53b9aae601e70.png" src="_images/c2b83fc65202d73b0dd4331db44d1307b3db1d52da168d90a6b53b9aae601e70.png" />
+</div>
+</div>
+</section>
+<section id="h">
+<h3>Hゲート<a class="headerlink" href="#h" title="Permalink to this heading">#</a></h3>
+<p>Hadamardゲート(アダマールゲート)はブロッホ球の<span class="math notranslate nohighlight">\(x\)</span>軸と<span class="math notranslate nohighlight">\(z\)</span>軸の中間の軸周りの<span class="math notranslate nohighlight">\(\pi\)</span>回転です。
+例えば<span class="math notranslate nohighlight">\(|0\rangle\)</span>にHゲートを適用すると、<span class="math notranslate nohighlight">\(\frac{|0\rangle + |1\rangle}{\sqrt{2}}\)</span>のような重ね合わせ状態（測定すると0または1になる確率が等しい状態）を作ることができます。この状態は<span class="math notranslate nohighlight">\(|+\rangle\)</span>とも表記されます。</p>
+<p>Hゲートを代数的に表現すると以下のように表されます。</p>
+<p><span class="math notranslate nohighlight">\(H = \frac{1}{\sqrt{2}}\begin{pmatrix}
+1 &amp; 1 \\
+1 &amp; -1 \\
+\end{pmatrix}\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># |0&gt; qubitにHゲートをかけてみましょう</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/34ddda62d3264ed14132571a12d85bdd6b236ec9615caa5af4dc1eb96965dfcb.png" src="_images/34ddda62d3264ed14132571a12d85bdd6b236ec9615caa5af4dc1eb96965dfcb.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ブロッホ球表示で結果を見てみましょう</span>
+<span class="c1">## |0&gt;と|1&gt;の存在確率が等しくなっているでしょうか？</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_statevector</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plot_bloch_multivector</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/97e7dabe22cf14b7312391455df0cd4d4c318918a07383dd9b61d0677e345f11.png" src="_images/97e7dabe22cf14b7312391455df0cd4d4c318918a07383dd9b61d0677e345f11.png" />
+</div>
+</div>
+</section>
+<section id="z">
+<h3>Zゲート<a class="headerlink" href="#z" title="Permalink to this heading">#</a></h3>
+<p>Zゲートはブロッホ球の<span class="math notranslate nohighlight">\(z\)</span>軸周りの<span class="math notranslate nohighlight">\(\pi\)</span>回転です。位相反転とも呼ばれます。<br />
+（重ね合わせ状態は確率振幅の他に、位相を持ちます。ここではブロッホ球の緯線の方向が反転するという理解で十分です）</p>
+<p>Zゲートを代数的に表現すると下記のように表されます。</p>
+<p><span class="math notranslate nohighlight">\(Z = \begin{pmatrix}
+1 &amp; 0 \\
+0 &amp; -1 \\
+\end{pmatrix}\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># |+&gt;にZゲートをかけてみましょう</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">z</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/87a95899be07dc2912f7929adad0c27b40a6387cc3ab67c773fe557180ec523e.png" src="_images/87a95899be07dc2912f7929adad0c27b40a6387cc3ab67c773fe557180ec523e.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 結果を見てみましょう</span>
+<span class="c1">## 先ほどのHゲートの結果と位相反転していれば成功です！</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_statevector</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plot_bloch_multivector</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/aca751c982afe6eb221dc74408381bb1c1ffb39b0136d7513f2278707ace48cf.png" src="_images/aca751c982afe6eb221dc74408381bb1c1ffb39b0136d7513f2278707ace48cf.png" />
+</div>
+</div>
+<blockquote>
+<div><p>ここまでは単純な単一量子ゲートのXゲート、Hゲート、Zゲートを扱いました。<br />
+ここからは、複数の量子ビットを入出力に持つ、CXゲート、CZゲート、CCXゲートについて扱います</p>
+</div></blockquote>
+</section>
+<section id="cx-cnot">
+<h3>CXゲート(CNOTゲート)<a class="headerlink" href="#cx-cnot" title="Permalink to this heading">#</a></h3>
+<p>CXゲート（Control-Xゲート）は制御NOTゲート、CNOTとも呼ばれます。CXゲートは、２つの量子ビット(制御量子ビットとターゲット量子ビットと呼びます)を入出力に持ち、制御量子ビットが<span class="math notranslate nohighlight">\(|1\rangle\)</span>のときに、ターゲット量子ビットに対してビット反転(Xゲート)を行います。(Qiskitでは、番号の大きい量子ビットほど高い位のビット数に対応しています。つまり、右から順に番号付けされます。)</p>
+<p>CXゲートを代数的に表現すると下記のように表されます。</p>
+<p><span class="math notranslate nohighlight">\(CX = \begin{pmatrix}
+1 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 1\\
+0 &amp; 0 &amp; 1 &amp; 0\\
+\end{pmatrix}\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># |00&gt;にCXゲートをかけてみましょう</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/24406fc6b59a510358457692e1aa76b1119700679384d29fcf66740149ad3b8f.png" src="_images/24406fc6b59a510358457692e1aa76b1119700679384d29fcf66740149ad3b8f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 結果を見てみましょう</span>
+<span class="c1">## 今回はq0がコントロールビット、q1がターゲットビットです。コントロールビットが|0&gt;なので何も起きていませんね</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_statevector</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plot_bloch_multivector</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f0359cd0ec19100047da48eca78df7cfaba5d4374c7da5ff24ba3863ec3b4822.png" src="_images/f0359cd0ec19100047da48eca78df7cfaba5d4374c7da5ff24ba3863ec3b4822.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># コントロールビットを|1&gt;にして|10&gt;にCXゲートをかけてみましょう</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a22fc8a692eb30bebdc994d7e7b869174f6a4ade944cdaf459ac699c182ae267.png" src="_images/a22fc8a692eb30bebdc994d7e7b869174f6a4ade944cdaf459ac699c182ae267.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 結果を見てみましょう</span>
+<span class="c1">## |11&gt;となっていれば成功です！</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_statevector</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plot_bloch_multivector</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/96e625ab977878ee50fc0237894ea31557edd32bd05ee129ce2ae2e8b91fb9d8.png" src="_images/96e625ab977878ee50fc0237894ea31557edd32bd05ee129ce2ae2e8b91fb9d8.png" />
+</div>
+</div>
+</section>
+<section id="cz">
+<h3>CZゲート<a class="headerlink" href="#cz" title="Permalink to this heading">#</a></h3>
+<p>CZゲートも、２つの量子ビット(制御量子ビットとターゲット量子ビットと呼びます)を入出力に持ち、制御量子ビットが<span class="math notranslate nohighlight">\(|1\rangle\)</span>のときに、ターゲット量子ビットに対して位相反転(Zゲート)を行います。</p>
+<p>CZゲートを代数的に表現すると下記のように表されます。</p>
+<p><span class="math notranslate nohighlight">\(CZ = \begin{pmatrix}
+1 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 1 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; -1\\
+\end{pmatrix}\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># |0+&gt;状態を作ってから、CZゲートをかけてみましょう</span>
+<span class="c1">## コントロールビットq0の状態が|0&gt;なので、ターゲットビットq1は変わらず|+&gt;となるはずです</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cz</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/dfdff3915f8b4a09ffa6a1c04e51169ae752bd257956f0245501030583ee6bac.png" src="_images/dfdff3915f8b4a09ffa6a1c04e51169ae752bd257956f0245501030583ee6bac.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 結果を見てみましょう</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_statevector</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plot_bloch_multivector</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a5fd408b8db42f755ead324e82d7edd7746c16561b095af2ac3d8231df26eb15.png" src="_images/a5fd408b8db42f755ead324e82d7edd7746c16561b095af2ac3d8231df26eb15.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># |1+&gt;状態を作ってから、CZゲートをかけてみましょう</span>
+<span class="c1">## コントロールビットq0の状態が|1&gt;なので、q1は|+&gt;から|-&gt;になるはずです</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cz</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/269ae23ca82a84a3815183874249a3ca58328c0ac373c49aa48953c7c44ebe79.png" src="_images/269ae23ca82a84a3815183874249a3ca58328c0ac373c49aa48953c7c44ebe79.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 結果を見てみましょう</span>
+<span class="c1">## ターゲットビットq1が位相反転して|-&gt;になっていれば成功です！</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_statevector</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plot_bloch_multivector</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7fe574a15a60cc85a6b0871df07e87c5e6720b597ff4b460c1499367f1d8e932.png" src="_images/7fe574a15a60cc85a6b0871df07e87c5e6720b597ff4b460c1499367f1d8e932.png" />
+</div>
+</div>
+<p>※なお、CZゲートはCXゲートとHゲートから作ることができます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># CZゲートをCXゲートとHゲートから作ります</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+
+<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ee804069224bc5857c9807d0f1e761f57abf488607b62110d067acbe9f9ae23c.png" src="_images/ee804069224bc5857c9807d0f1e761f57abf488607b62110d067acbe9f9ae23c.png" />
+</div>
+</div>
+</section>
+<section id="ccx">
+<h3>CCXゲート<a class="headerlink" href="#ccx" title="Permalink to this heading">#</a></h3>
+<p>CCXゲートはToffoliゲートとも呼ばれます。</p>
+<p>CCXゲートは、3つの量子ビット(2つの制御量子ビットと1つのターゲット量子ビット)を入出力に持ち、制御量子ビットが2つとも<span class="math notranslate nohighlight">\(|1\rangle\)</span> のときに、ターゲット量子ビットに対してビット反転(Xゲート)を行います。(Qiskitでは、右から順に番号付けされることに注意してください。)</p>
+<p>Toffoliゲートを代数的に表現すると下記のように表されます。</p>
+<p><span class="math notranslate nohighlight">\(CCX = \begin{pmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1\\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0\\
+\end{pmatrix}\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># |00&gt;にCCXゲートをかけてみましょう</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3757a8f56ca130dbf501993609db098417ff509da8dd568e9f9b1804344b01c8.png" src="_images/3757a8f56ca130dbf501993609db098417ff509da8dd568e9f9b1804344b01c8.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 結果を見てみましょう</span>
+<span class="c1">## 例によって何も作用しないため、|000&gt;となっているはずです</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_statevector</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plot_bloch_multivector</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/265e338dbc9e6f96495b21ecd7b31a1563da2c05f4e5ce87747af6ee03da5d42.png" src="_images/265e338dbc9e6f96495b21ecd7b31a1563da2c05f4e5ce87747af6ee03da5d42.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># |10&gt;にCCXゲートをかけてみましょう</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/99d68f89ce89ef0895907ea615ab1c36c598b9356b3e73785cabc204f7b9d102.png" src="_images/99d68f89ce89ef0895907ea615ab1c36c598b9356b3e73785cabc204f7b9d102.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 結果を見てみましょう</span>
+<span class="c1">## Toffoliゲートでは、q0とq1の両方が|1&gt;になっていないとq2ビットに作用しません。よって結果は|100&gt;です</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_statevector</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plot_bloch_multivector</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a5694b7bc216fbaaa1c9cfec3b70ad7220c474230e792f3e03429b973f41eb6b.png" src="_images/a5694b7bc216fbaaa1c9cfec3b70ad7220c474230e792f3e03429b973f41eb6b.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 最後に|11&gt;にCCXゲートをかけてみましょう</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e998264b782efa513c32096e91e0ae3233f0c490007cb616c4de7b2024f42948.png" src="_images/e998264b782efa513c32096e91e0ae3233f0c490007cb616c4de7b2024f42948.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 結果を見てみましょう</span>
+<span class="c1">## q0とq1の両方が|1&gt;であるため、ターゲットビットであるq2がビット反転して、|111&gt;となっていれば成功です！</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_statevector</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plot_bloch_multivector</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3f954f4a70de1d3bcba01f1f316f71edb70e2701065b10e39d8c3f1455418e7a.png" src="_images/3f954f4a70de1d3bcba01f1f316f71edb70e2701065b10e39d8c3f1455418e7a.png" />
+</div>
+</div>
+<p>※その他の量子ゲートの詳細に関しては<a class="reference external" href="https://qiskit.org/textbook/ch-states/single-qubit-gates.html">Single Qubit Gates</a> をご覧ください。</p>
+</section>
+</section>
+<section id="id7">
+<h2>古典の論理ゲートを量子ゲートで作成する<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<p>ここまで、基本的な量子ゲートを学びました。
+次は、古典の論理ゲート</p>
+<ol class="arabic simple">
+<li><p>NOTゲート</p></li>
+<li><p>ANDゲート</p></li>
+<li><p>NANDゲート</p></li>
+<li><p>ORゲート</p></li>
+<li><p>XORゲート</p></li>
+<li><p>NORゲート</p></li>
+</ol>
+<p>を量子ゲートで作成してみましょう。</p>
+<p>この章では、真理値表と量子回路による表現を示します。なお、量子レジスタをq、古典レジスタをcとし、測定結果を作成する論理ゲートの出力とします。</p>
+<section id="not">
+<h3>NOTゲート<a class="headerlink" href="#not" title="Permalink to this heading">#</a></h3>
+<p>先述の通り、XゲートをNOTゲートとみなすことができます。 真理値表は以下のようになります。</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>入力</p></th>
+<th class="head"><p>出力</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 量子レジスター1個と古典レジスター1個の量子回路を作成する</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>    <span class="c1"># 測定した結果を古典ビットにマップする</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2c70d682308622dd8ce85fcfe67390803f1f4ebd6670b5f9ca635fe716be15ce.png" src="_images/2c70d682308622dd8ce85fcfe67390803f1f4ebd6670b5f9ca635fe716be15ce.png" />
+</div>
+</div>
+</section>
+<section id="and">
+<h3>ANDゲート<a class="headerlink" href="#and" title="Permalink to this heading">#</a></h3>
+<p>ANDゲートの真理値表は以下のようなものです。</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>入力A</p></th>
+<th class="head"><p>入力B</p></th>
+<th class="head"><p>出力</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+<p>CCXゲートを用いると、制御量子ビット2つに対するANDゲートの結果をターゲット量子ビットに得られます。</p>
+<p>ex.</p>
+<blockquote>
+<div><p>q0, q1を制御量子ビットとした場合、q0とq1に対するAND演算の結果がq2に格納されます。</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ab46dba685b6ad19466c95975d28f2ce3e184391fe3df04499e937e8e94cb374.png" src="_images/ab46dba685b6ad19466c95975d28f2ce3e184391fe3df04499e937e8e94cb374.png" />
+</div>
+</div>
+</section>
+<section id="nand">
+<h3>NANDゲート<a class="headerlink" href="#nand" title="Permalink to this heading">#</a></h3>
+<p>NANDゲートはANDゲートにNOTゲートを適用したものと捉えることができます。
+よって、先ほどのANDゲートのq2ビットにNOTゲートを作用させます。</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>入力A</p></th>
+<th class="head"><p>入力B</p></th>
+<th class="head"><p>出力</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/27629b157c423530207bdf2f74f9fbc52c788d053d22b58d9ec8ae2b90085be2.png" src="_images/27629b157c423530207bdf2f74f9fbc52c788d053d22b58d9ec8ae2b90085be2.png" />
+</div>
+</div>
+</section>
+<section id="or">
+<h3>ORゲート<a class="headerlink" href="#or" title="Permalink to this heading">#</a></h3>
+<p>ORゲートは2入力の一方が1であれば1出力が1となる、下記の論理表のような入出力を持つ論理ゲートです。<br />
+量子回路を用いる場合、ANDゲートと同じようにq0ビット、q1ビットを2入力、q2ビットを1出力とし、CXゲートとCCXゲートを用いることでORゲートを再現することができます。</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>入力A</p></th>
+<th class="head"><p>入力B</p></th>
+<th class="head"><p>出力</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ff51418c29d3a21d5741b7c00a3f3ae3fdb4cbce458e0606ae12dda108500e5c.png" src="_images/ff51418c29d3a21d5741b7c00a3f3ae3fdb4cbce458e0606ae12dda108500e5c.png" />
+</div>
+</div>
+</section>
+<section id="xor">
+<h3>XORゲート<a class="headerlink" href="#xor" title="Permalink to this heading">#</a></h3>
+<p>XORゲートは2入力が一致しない場合に1を出力する論理ゲートです。<br />
+量子回路を用いる場合、CXゲートを用いることでXORゲートを再現できます。</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>入力A</p></th>
+<th class="head"><p>入力B</p></th>
+<th class="head"><p>出力</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f3aa50824d1e60ce15dd8f9a2dbe27c95bf1c962c7f9cebeb7b04f421bdded26.png" src="_images/f3aa50824d1e60ce15dd8f9a2dbe27c95bf1c962c7f9cebeb7b04f421bdded26.png" />
+</div>
+</div>
+</section>
+<section id="nor">
+<h3>NORゲート<a class="headerlink" href="#nor" title="Permalink to this heading">#</a></h3>
+<p>NORゲートはORゲートの出力にNOTゲートを作用させることで実現できます。</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>入力A</p></th>
+<th class="head"><p>入力B</p></th>
+<th class="head"><p>出力</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5ef1f6ad7acc22a490550d395ebe97595fdba556ca5d4720414f0a617b179160.png" src="_images/5ef1f6ad7acc22a490550d395ebe97595fdba556ca5d4720414f0a617b179160.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="id8">
+<h2>加算器<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<p>ここまでの章で、</p>
+<ol class="arabic simple">
+<li><p>量子回路の基礎</p></li>
+<li><p>量子回路を用いた古典論理ゲートの再現</p></li>
+</ol>
+<p>を学んできました。これで量子回路を用いた加算器を作ることができます。</p>
+<p>加算器は足し算を行う論理回路です。<br />
+今回は最もシンプルな加算器である半加算器と全加算器を用いた加算器に関して考えます。</p>
+<section id="id9">
+<h3>半加算器<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
+<p>半加算器は2つのビット列の同じ桁の値同士を加算し、その桁の加算後の値と上位桁への繰り上がりの有無を表す「桁上げ出力、キャリー(Carry out)」の2つを出力するような論理回路です。桁上げ出力は、繰り上がりがあれば1、なければ0となります。<br />
+この半加算器を用いて、後述の全加算器を作成します。</p>
+<p>半加算器は以下の様な2入力2出力の真理値表の論理回路で表すことができます。
+2入力A, Bはそれぞれ2つのビット列の同じ桁同士、出力Sはその桁の出力、桁上げ出力Cは繰り上がりの値です。</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>入力A</p></th>
+<th class="head"><p>入力B</p></th>
+<th class="head"><p>出力S</p></th>
+<th class="head"><p>桁上げ出力C</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+<p>この真理値表を見ると、桁上げ出力Cは入力Aと入力Bに対してANDを適用したものであること、出力Sは入力Aと入力Bに対してXORを適用したものであることがわかります。
+ANDとXORに関してはすでに作成済みなので、以下のように組み合わせて半加算器の量子回路が作成してみましょう。</p>
+<p>なお、量子レジスタをq, 古典レジスタcとし、入力A, Bをq[0],q[1]に、出力S,桁上げ出力C,をq[2], q[3]に割り振ります。
+また、出力結果はc[1], c[0]の順になっていることに注意して下さい。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#各レジスター、量子回路を宣言</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+
+<span class="c1">#XOR</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+
+<span class="c1">#AND</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+
+<span class="c1">#Sum</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="c1">#Carry out</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">count</span> <span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;00&#39;: 1000}
+</pre></div>
+</div>
+<img alt="_images/6d2ffd0d9f08e3b0bc24b9fb13f7ccf9fed3b42ea9097bfcb02ba6688cb6af60.png" src="_images/6d2ffd0d9f08e3b0bc24b9fb13f7ccf9fed3b42ea9097bfcb02ba6688cb6af60.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="unroller">
+<h2>重要: Unrollerを用いた量子コストの導出<a class="headerlink" href="#unroller" title="Permalink to this heading">#</a></h2>
+<p>全加算器を作成する前に、量子回路の性能についてここで学んでおきましょう。
+プログラム(量子回路)を評価する手法はいくつか存在します。
+代表的なものとしては、</p>
+<ol class="arabic simple">
+<li><p>量子ビット数</p></li>
+<li><p>深さ</p></li>
+<li><p>実行速度</p></li>
+<li><p>命令数</p></li>
+</ol>
+<p>があります。<br />
+これらはどれも量子計算の結果やスループットなどに影響する重要な尺度ですが、今回のQuantum Challengeでは特に4の命令数を指標として、以下のようにプログラムを評価します。また、この指標を今回のQuantum Challengeではコストと呼称します。</p>
+<blockquote>
+<div><p>コスト <span class="math notranslate nohighlight">\(=\)</span> 単一量子ビットゲートの数 <span class="math notranslate nohighlight">\(+\)</span> CXゲートの数 <span class="math notranslate nohighlight">\(\times 10\)</span></p>
+</div></blockquote>
+<p>なぜこのように単一量子ビットゲートとCXゲートによってコストを計算するのかというと、任意の量子回路は単一量子ビットゲート(1量子ビットに対する命令)と2量子ビットゲートに対する命令に分解できるためです。<br />
+（※現在のノイズの多い中規模量子デバイス（NISQ）では、CXゲートのエラー率は一般に単一量子ビットゲートの10倍です。よって、コストでは、CXゲートの重みづけを単一量子ビットゲートの10倍としています。）</p>
+<p>また、unrollerと呼ばれるプログラムを用いることで、皆さんのお手元でもこのコストを導出することができます。<br />
+例えば、以下のような量子回路があったとします。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumRegister</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">BasicAer</span><span class="p">,</span> <span class="n">execute</span>
+<span class="kn">from</span> <span class="nn">qiskit.quantum_info</span> <span class="kn">import</span> <span class="n">Pauli</span><span class="p">,</span> <span class="n">state_fidelity</span><span class="p">,</span> <span class="n">process_fidelity</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;q0&#39;</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;c0&#39;</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4f0d8fc837c692b2b9ac2597504dbf9f1379664961880af0c2e20cae5988ac0a.png" src="_images/4f0d8fc837c692b2b9ac2597504dbf9f1379664961880af0c2e20cae5988ac0a.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># qiskitのメソッドcount_ops()でゲートの数をカウントすることができます</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">count_ops</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OrderedDict([(&#39;ccx&#39;, 2), (&#39;cx&#39;, 1), (&#39;h&#39;, 1), (&#39;measure&#39;, 1)])
+</pre></div>
+</div>
+</div>
+</div>
+<p>この量子回路にはHゲート、CXゲート、CCXゲートが入っています。qiskit.transpilerを使ってPassManagerをインポートすることで、以下のようにUnrollerによって指定されたゲートに分解できます。この場合では、u3ゲートとcxゲートに分解します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.transpiler</span> <span class="kn">import</span> <span class="n">PassManager</span>
+<span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="kn">import</span> <span class="n">Unroller</span>
+<span class="n">pass_</span> <span class="o">=</span> <span class="n">Unroller</span><span class="p">([</span><span class="s1">&#39;u3&#39;</span><span class="p">,</span> <span class="s1">&#39;cx&#39;</span><span class="p">])</span>
+<span class="n">pm</span> <span class="o">=</span> <span class="n">PassManager</span><span class="p">(</span><span class="n">pass_</span><span class="p">)</span>
+<span class="n">new_circuit</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span> 
+<span class="n">new_circuit</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5dc4b0afd3777ee74c992f023d4169b9185c55a79ce3afbacf4c2f02bd8d73ed.png" src="_images/5dc4b0afd3777ee74c992f023d4169b9185c55a79ce3afbacf4c2f02bd8d73ed.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_circuit</span><span class="o">.</span><span class="n">count_ops</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OrderedDict([(&#39;u3&#39;, 19), (&#39;cx&#39;, 13), (&#39;measure&#39;, 1)])
+</pre></div>
+</div>
+</div>
+</div>
+<p>よって、この回路のコストは<span class="math notranslate nohighlight">\(19+13\times10=149\)</span>ということになります。
+このように、以下の手順によって量子回路の性能を評価してみましょう。</p>
+<ol class="arabic simple">
+<li><p>任意の量子回路をUnrollerで単一量子ビットゲートとCXゲートに分割する</p></li>
+<li><p>上述のコスト計算方法によってコストを計算する</p></li>
+</ol>
+<p>※単一量子ビットゲートやCXゲート以外のゲートが、Unrollerによってどのように分解されるかは簡単に確認できるので、興味がある人は自分で調べてみましょう。以下ではサンプルとして、CCXゲートをu3ゲートとCXゲートに分解しています。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;q0&#39;</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;c0&#39;</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3b92e9e2b3c155c56bc1b172ef9b56c23ab1828780ffa24229773a89dd3185c1.png" src="_images/3b92e9e2b3c155c56bc1b172ef9b56c23ab1828780ffa24229773a89dd3185c1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pass_</span> <span class="o">=</span> <span class="n">Unroller</span><span class="p">([</span><span class="s1">&#39;u3&#39;</span><span class="p">,</span> <span class="s1">&#39;cx&#39;</span><span class="p">])</span>
+<span class="n">pm</span> <span class="o">=</span> <span class="n">PassManager</span><span class="p">(</span><span class="n">pass_</span><span class="p">)</span>
+<span class="n">new_circuit</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span> 
+<span class="n">new_circuit</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f6223ecba30d583e2a521ae673273ad16b18aacad37443130529a5c4613dc4ab.png" src="_images/f6223ecba30d583e2a521ae673273ad16b18aacad37443130529a5c4613dc4ab.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_circuit</span><span class="o">.</span><span class="n">count_ops</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OrderedDict([(&#39;u3&#39;, 9), (&#39;cx&#39;, 6)])
+</pre></div>
+</div>
+</div>
+</div>
+<p>上記の回路のコストは<span class="math notranslate nohighlight">\(9+6\times10=69\)</span>ということになります。</p>
+</section>
+<section id="i-a">
+<h2>ラーニング演習 I-A<a class="headerlink" href="#i-a" title="Permalink to this heading">#</a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">全加算器の量子回路の構築</p>
+<p>さて、いよいよ最終演習です。<br />
+ここでは全加算器を量子回路で作成します。<br />
+全加算器は、下の位からの桁上げを含む加算器です。前章の半加算器を用いて作成します。<br />
+最終的に全加算器を量子回路で表現して、</p>
+<p><span class="math notranslate nohighlight">\(A=1\)</span>, <span class="math notranslate nohighlight">\(B=0\)</span>, <span class="math notranslate nohighlight">\(X=1\)</span></p>
+<p>の時の結果<br />
+すなわち <span class="math notranslate nohighlight">\(\ket{11} + \ket{01}\)</span> の2桁目を計算したときの結果を出力してみましょう。<br />
+結果が、出力0、桁上げ出力1となれば正解です。</p>
+<p>真理値表は以下のようになります。</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>入力A</p></th>
+<th class="head"><p>入力B</p></th>
+<th class="head"><p>桁上げ入力X</p></th>
+<th class="head"><p>出力S</p></th>
+<th class="head"><p>桁上げ出力C</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+<p>なお、以下の条件とするように全加算器を作成してください</p>
+<ul class="simple">
+<li><p>量子レジスタを<span class="math notranslate nohighlight">\(q\)</span>, 古典レジスタ<span class="math notranslate nohighlight">\(c\)</span>とする</p></li>
+<li><p>入力A, B, 桁上げ入力Xをそれぞれ<span class="math notranslate nohighlight">\(q[0]\)</span>, <span class="math notranslate nohighlight">\(q[1]\)</span>, <span class="math notranslate nohighlight">\(q[2]\)</span>に与えられるようにする</p></li>
+<li><p>測定結果の<span class="math notranslate nohighlight">\(c[0]\)</span>に出力S、<span class="math notranslate nohighlight">\(c[1]\)</span>に桁上げ出力Cが出力されるようにする</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">IBMQ</span><span class="p">,</span> <span class="n">Aer</span><span class="p">,</span> <span class="n">execute</span>
+
+<span class="c1">##### ここに量子回路を作成してください。</span>
+
+<span class="c1"># qasm_simulatorを使って回路を実行させてください。</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">count</span> <span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id10">
+<h2>解答例<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">IBMQ</span><span class="p">,</span> <span class="n">Aer</span><span class="p">,</span> <span class="n">execute</span>
+
+<span class="c1"># 各レジスター、量子回路を宣言</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+
+<span class="c1"># 入力データを入れます</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># 量子回路を作成</span>
+<span class="k">def</span> <span class="nf">OR</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">):</span>
+  <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">b</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">c</span><span class="p">])</span>
+  <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">a</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">c</span><span class="p">])</span>
+  <span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">a</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">b</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">c</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">hadder</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">s</span><span class="p">,</span><span class="n">c</span><span class="p">):</span>
+  <span class="c1">#XOR</span>
+  <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">b</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="p">])</span>
+  <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">a</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="p">])</span>
+  <span class="c1">#AND</span>
+  <span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">a</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">b</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">c</span><span class="p">])</span>
+
+<span class="n">hadder</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">barrier</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="n">hadder</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">barrier</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="n">OR</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">barrier</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+
+<span class="c1">#観測</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+
+<span class="c1"># qasm_simulatorを使って回路を実行させてください。</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span> <span class="c1"># 1000回のサンプルを取ったときのc[0], c[1]の測定結果</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">count</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;10&#39;: 1000}
+</pre></div>
+</div>
+<img alt="_images/f21a44f7409f909e215b8d1e613eefb0db065a5f5447c066dabada4018373403.png" src="_images/f21a44f7409f909e215b8d1e613eefb0db065a5f5447c066dabada4018373403.png" />
+</div>
+</div>
+<p>入力と出力の量子ビットのブロッホ球表示も確認してみましょう</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_statevector</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plot_bloch_multivector</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/45d3f1546f8700a449a3c756b5882635c660a19ed68ccad32852e52706b711fc.png" src="_images/45d3f1546f8700a449a3c756b5882635c660a19ed68ccad32852e52706b711fc.png" />
+</div>
+</div>
+<p>Unrollerでコストも計算してください</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pass_</span> <span class="o">=</span> <span class="n">Unroller</span><span class="p">([</span><span class="s1">&#39;u3&#39;</span><span class="p">,</span> <span class="s1">&#39;cx&#39;</span><span class="p">])</span>
+<span class="n">pm</span> <span class="o">=</span> <span class="n">PassManager</span><span class="p">(</span><span class="n">pass_</span><span class="p">)</span>
+<span class="n">new_circuit</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span> 
+<span class="n">new_circuit</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+<span class="n">new_circuit</span><span class="o">.</span><span class="n">count_ops</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OrderedDict([(&#39;u3&#39;, 29), (&#39;cx&#39;, 24), (&#39;barrier&#39;, 3), (&#39;measure&#39;, 2)])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Unrollerを用いて計算したこの回路のコストは、29 + 24 × 10 = 279 となります。</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2019-w1-adder.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">量子回路における加算器（2019年 Week1）</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="2021-spring-lab1-toffoli.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">トフォリゲート(2021年春 Lab1)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">はじめに</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">目的</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">前提知識</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">演習で身につく知識</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">準備：演習で使用するモジュールのインポート</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">量子回路の基礎</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#x">Xゲート</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#h">Hゲート</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#z">Zゲート</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cx-cnot">CXゲート(CNOTゲート)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cz">CZゲート</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ccx">CCXゲート</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">古典の論理ゲートを量子ゲートで作成する</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#not">NOTゲート</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#and">ANDゲート</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nand">NANDゲート</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#or">ORゲート</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#xor">XORゲート</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nor">NORゲート</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">加算器</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">半加算器</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unroller">重要: Unrollerを用いた量子コストの導出</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#i-a">ラーニング演習 I-A</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">解答例</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Quantum Tokyo
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

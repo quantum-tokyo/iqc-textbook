@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '2019-w1-adder';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="トフォリゲート(2021年春 Lab1)" href="2021-spring-lab1-toffoli.html" />
+    <link rel="next" title="量子回路における加算器（2020年 Week1a）" href="2020-w1-a-adder.html" />
     <link rel="prev" title="Welcome to IQC Textbook" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -155,6 +155,7 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">第２章 量子コンピューターの計算ルール</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">量子回路における加算器（2019年 Week1）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2020-w1-a-adder.html">量子回路における加算器（2020年 Week1a）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2021-spring-lab1-toffoli.html">トフォリゲート(2021年春 Lab1)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-spring-lab2-teleportation.html">量子テレポーテーション（2023年 Lab2）</a></li>
 </ul>
@@ -165,7 +166,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Test: 2023Spring</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="sample-2023-spring-lab1-ja.html">1. サンプル問題（2023年春）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sample-2023-spring-lab1-ja.html">サンプル問題（2023年春）</a></li>
 </ul>
 
     </div>
@@ -916,10 +917,41 @@ ANDとXORに関してはすでに作成済みなので、以下のように組�
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;00&#39;: 1000}
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.7/x64/lib/python3.11/site-packages/qiskit/__init__.py:123,</span> in <span class="ni">AerWrapper.__getattr__</span><span class="nt">(self, attr)</span>
+<span class="g g-Whitespace">    </span><span class="mi">122</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">123</span>     <span class="kn">from</span> <span class="nn">qiskit.providers</span> <span class="kn">import</span> <span class="n">aer</span>
+<span class="g g-Whitespace">    </span><span class="mi">125</span>     <span class="bp">self</span><span class="o">.</span><span class="n">aer</span> <span class="o">=</span> <span class="n">aer</span><span class="o">.</span><span class="n">Aer</span>
+
+<span class="ne">ImportError</span>: cannot import name &#39;aer&#39; from &#39;qiskit.providers&#39; (/opt/hostedtoolcache/Python/3.11.7/x64/lib/python3.11/site-packages/qiskit/providers/__init__.py)
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="ne">MissingOptionalLibraryError</span><span class="g g-Whitespace">               </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span> <span class="n">line</span> <span class="mi">22</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="c1">#Sum</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="ne">---&gt; </span><span class="mi">22</span> <span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="n">result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.7/x64/lib/python3.11/site-packages/qiskit/__init__.py:134,</span> in <span class="ni">AerWrapper.__getattr__</span><span class="nt">(self, attr)</span>
+<span class="g g-Whitespace">    </span><span class="mi">126</span>         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">127</span>             <span class="s2">&quot;The qiskit.Aer entry point will be deprecated in a future release and &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">128</span>             <span class="s2">&quot;subsequently removed. Instead you should use this &quot;</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">131</span>             <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">132</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">133</span>     <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">134</span>         <span class="k">raise</span> <span class="n">MissingOptionalLibraryError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">135</span>             <span class="s2">&quot;qiskit-aer&quot;</span><span class="p">,</span> <span class="s2">&quot;Aer provider&quot;</span><span class="p">,</span> <span class="s2">&quot;pip install qiskit-aer&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">136</span>         <span class="p">)</span> <span class="kn">from</span> <span class="nn">ex</span>
+<span class="g g-Whitespace">    </span><span class="mi">137</span> <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">aer</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
+
+<span class="ne">MissingOptionalLibraryError</span>: &quot;The &#39;qiskit-aer&#39; library is required to use &#39;Aer provider&#39;. You can install it with &#39;pip install qiskit-aer&#39;.&quot;
 </pre></div>
 </div>
-<img alt="_images/a6c25535c86b46dc2d5764418a1b715791c0a9540de22a1456266c7f70f09889.png" src="_images/a6c25535c86b46dc2d5764418a1b715791c0a9540de22a1456266c7f70f09889.png" />
 </div>
 </div>
 </section>
@@ -1291,11 +1323,11 @@ A, B, Xの入力値を決める(inputdata = [x,x,x]を任意の値にしてif-el
       </div>
     </a>
     <a class="right-next"
-       href="2021-spring-lab1-toffoli.html"
+       href="2020-w1-a-adder.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">トフォリゲート(2021年春 Lab1)</p>
+        <p class="prev-next-title">量子回路における加算器（2020年 Week1a）</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -155,6 +155,7 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">第２章 量子コンピューターの計算ルール</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="2019-w1-adder.html">量子回路における加算器（2019年 Week1）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2020-w1-a-adder.html">量子回路における加算器（2020年 Week1a）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2021-spring-lab1-toffoli.html">トフォリゲート(2021年春 Lab1)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-spring-lab2-teleportation.html">量子テレポーテーション（2023年 Lab2）</a></li>
 </ul>
@@ -165,7 +166,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Test: 2023Spring</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="sample-2023-spring-lab1-ja.html">1. サンプル問題（2023年春）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sample-2023-spring-lab1-ja.html">サンプル問題（2023年春）</a></li>
 </ul>
 
     </div>
@@ -471,6 +472,20 @@ $<span class="math notranslate nohighlight">\( |s&gt; = \frac{1}{\sqrt N}\sum_{x
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">8</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># importing Qiskit</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">IBMQ</span><span class="p">,</span> <span class="n">BasicAer</span>
+<span class="ne">----&gt; </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">qiskit_ibm_provider</span> <span class="kn">import</span> <span class="n">least_busy</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">execute</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1"># import basic plot tools</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;qiskit_ibm_provider&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <p>上のStep1で実施したように求めたい解（今回の場合、<span class="math notranslate nohighlight">\(|11&gt;\)</span>）の符号を反転するオラクルを作成します。</p>
 <div class="cell docutils container">
@@ -486,7 +501,7 @@ $<span class="math notranslate nohighlight">\( |s&gt; = \frac{1}{\sqrt N}\sum_{x
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a29431e00c0828314167f1f91c65903f97fdc7ea4daa6c8bdf4b69d600252db7.png" src="_images/a29431e00c0828314167f1f91c65903f97fdc7ea4daa6c8bdf4b69d600252db7.png" />
+<img alt="_images/6f99c5a50fae5f3a3703519a86e3675d4c7741ef069a0b19ef0d801f65831c7e.png" src="_images/6f99c5a50fae5f3a3703519a86e3675d4c7741ef069a0b19ef0d801f65831c7e.png" />
 </div>
 </div>
 <p>次にStep 2で実施した平均についての反転(inversion about averate)をする回路を作成します。この回路はDiffusion回路と呼ばれることもあります。</p>
@@ -514,7 +529,7 @@ $<span class="math notranslate nohighlight">\( |s&gt; = \frac{1}{\sqrt N}\sum_{x
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/48c8b5cdce4836efdb14568bcfad253f1ae0e35fce7965377ab64f62db51124a.png" src="_images/48c8b5cdce4836efdb14568bcfad253f1ae0e35fce7965377ab64f62db51124a.png" />
+<img alt="_images/ca14295abd80a0d42100f2d38f20a680e2fe4b9e61d0b05818cea5db8fcc7aca.png" src="_images/ca14295abd80a0d42100f2d38f20a680e2fe4b9e61d0b05818cea5db8fcc7aca.png" />
 </div>
 </div>
 <p>回路の初めで均一な重ね合わせ状態を準備し、今まで作成した部品を合わせ、最後に測定を行います。四つの可能性のうち解は一つなので、繰り返し回数は一回であることに注意してください。</p>
@@ -535,7 +550,7 @@ $<span class="math notranslate nohighlight">\( |s&gt; = \frac{1}{\sqrt N}\sum_{x
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c79778d6a6a71c6a3ac667b8e057a42506e4793b644a794b5a09d013569c31e3.png" src="_images/c79778d6a6a71c6a3ac667b8e057a42506e4793b644a794b5a09d013569c31e3.png" />
+<img alt="_images/b072baf7bf0d097d1ab38945b82adcdb47d9fe8dadff65226039bfdc77530180.png" src="_images/b072baf7bf0d097d1ab38945b82adcdb47d9fe8dadff65226039bfdc77530180.png" />
 </div>
 </div>
 <section id="id3">
@@ -552,7 +567,7 @@ $<span class="math notranslate nohighlight">\( |s&gt; = \frac{1}{\sqrt N}\sum_{x
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c212f547752e1f4e7cbb030c54400c386cd4afbd1c1ea9e6837aa38b66dc4be9.png" src="_images/c212f547752e1f4e7cbb030c54400c386cd4afbd1c1ea9e6837aa38b66dc4be9.png" />
+<img alt="_images/da0845f41ab49f181226e9f796176429c9c9fa2d21b828dff8e377a95fc1ef39.png" src="_images/da0845f41ab49f181226e9f796176429c9c9fa2d21b828dff8e377a95fc1ef39.png" />
 </div>
 </div>
 <p>実行結果から分かるようにGroverのアルゴリズムは解を発見しています。</p>
@@ -575,6 +590,11 @@ $<span class="math notranslate nohighlight">\( |s&gt; = \frac{1}{\sqrt N}\sum_{x
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Least busy backend:  ibmq_ourense
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -589,6 +609,11 @@ $<span class="math notranslate nohighlight">\( |s&gt; = \frac{1}{\sqrt N}\sum_{x
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Job Status: job has successfully run
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -598,6 +623,9 @@ $<span class="math notranslate nohighlight">\( |s&gt; = \frac{1}{\sqrt N}\sum_{x
 <span class="c1"># plot_histogram(answer)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e71a44a80f4c8fd0e658c1c946d19c9f88a07950997280a183dce5ac8146a422.png" src="_images/e71a44a80f4c8fd0e658c1c946d19c9f88a07950997280a183dce5ac8146a422.png" />
 </div>
 </div>
 </section>
@@ -641,7 +669,7 @@ $<span class="math notranslate nohighlight">\( |s&gt; = \frac{1}{\sqrt N}\sum_{x
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b1939407867fe0d80309e3f703c06a525de9fce01bfc278fdd5e5eabcd553d11.png" src="_images/b1939407867fe0d80309e3f703c06a525de9fce01bfc278fdd5e5eabcd553d11.png" />
+<img alt="_images/5698d8096d0706736a44f48bbdcceb0a2e9b48b8c08c9311b00b7eb5567df7da.png" src="_images/5698d8096d0706736a44f48bbdcceb0a2e9b48b8c08c9311b00b7eb5567df7da.png" />
 </div>
 </div>
 <p>次に、Diffusion回路を準備します。Diffusion回路は補助ビットには作用しないようにしてください。</p>
@@ -669,7 +697,7 @@ $<span class="math notranslate nohighlight">\( |s&gt; = \frac{1}{\sqrt N}\sum_{x
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1cffb0909c3a7305f561f800e7a8b2341221215ae0204daefe151126e59e0899.png" src="_images/1cffb0909c3a7305f561f800e7a8b2341221215ae0204daefe151126e59e0899.png" />
+<img alt="_images/29b365775e729aa1448cf7e9c1f842bfc17acf5ca1ab2b7d4fbaa0f344e6a5da.png" src="_images/29b365775e729aa1448cf7e9c1f842bfc17acf5ca1ab2b7d4fbaa0f344e6a5da.png" />
 </div>
 </div>
 <p>補助ビットなしで作成した回路と同じように、回路の最初で均一な重ね合わせ状態を作成し（この際、補助ビットにHゲートをかけないように注意してください）、変換を適用し、最後に測定をします。</p>
@@ -691,7 +719,7 @@ $<span class="math notranslate nohighlight">\( |s&gt; = \frac{1}{\sqrt N}\sum_{x
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/baf6459c2f33b8dfa8094bd67d8e3ccf3fe6418d9108e78b3bea0c0ac19da9f4.png" src="_images/baf6459c2f33b8dfa8094bd67d8e3ccf3fe6418d9108e78b3bea0c0ac19da9f4.png" />
+<img alt="_images/6332762931931901cd98ff2ee37d8418c92b1fb140e4699aa7cf5832fccf83c4.png" src="_images/6332762931931901cd98ff2ee37d8418c92b1fb140e4699aa7cf5832fccf83c4.png" />
 </div>
 </div>
 <section id="id6">
@@ -708,7 +736,7 @@ $<span class="math notranslate nohighlight">\( |s&gt; = \frac{1}{\sqrt N}\sum_{x
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/601a2b22bb30e2bc4d3f3b99b105329b26cf6f8aa13e203bdced1a74d8671d2d.png" src="_images/601a2b22bb30e2bc4d3f3b99b105329b26cf6f8aa13e203bdced1a74d8671d2d.png" />
+<img alt="_images/396ab42f22848fb005ef075210372802ac32ac31a29598fc1c00fa9328d4abcd.png" src="_images/396ab42f22848fb005ef075210372802ac32ac31a29598fc1c00fa9328d4abcd.png" />
 </div>
 </div>
 <p>補助ビットなしで作成した回路と同じように<span class="math notranslate nohighlight">\(|11&gt;\)</span>の状態の確率が増幅されていることが確認できます。最上位ビットの1は補助量子ビットのものなので無視して問題ありません。</p>
@@ -762,7 +790,7 @@ $<span class="math notranslate nohighlight">\( |s&gt; = \frac{1}{\sqrt N}\sum_{x
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a4f718e4a5bc990398e8fb709f88ead7e9a517d7aacfabffc50fc4f5633ed834.png" src="_images/a4f718e4a5bc990398e8fb709f88ead7e9a517d7aacfabffc50fc4f5633ed834.png" />
+<img alt="_images/9144b303255d9a6c2c5cc71d913dfcd2cac9d7686bc7c534dee881ea12921a01.png" src="_images/9144b303255d9a6c2c5cc71d913dfcd2cac9d7686bc7c534dee881ea12921a01.png" />
 </div>
 </div>
 <div class="tip admonition">
@@ -807,7 +835,7 @@ $<span class="math notranslate nohighlight">\( |s&gt; = \frac{1}{\sqrt N}\sum_{x
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/9b965954758c87c555277942702e8f9013b3936208db10926b1d5973092e600a.png" src="_images/9b965954758c87c555277942702e8f9013b3936208db10926b1d5973092e600a.png" />
+<img alt="_images/c83342a7829ecbb9b3c0bbd2a262ff17ff8f113047cd952adbb3b54c73912a88.png" src="_images/c83342a7829ecbb9b3c0bbd2a262ff17ff8f113047cd952adbb3b54c73912a88.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -877,7 +905,7 @@ $<span class="math notranslate nohighlight">\( |s&gt; = \frac{1}{\sqrt N}\sum_{x
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/bf352e55c46fcfc0b997dcfb3ba64d4b6070ca54230350035d1a30a6d76e48c9.png" src="_images/bf352e55c46fcfc0b997dcfb3ba64d4b6070ca54230350035d1a30a6d76e48c9.png" />
+<img alt="_images/46ec197f85857d5bc656f73442d6b260996698db37e6ad35b1a940af8da8adfa.png" src="_images/46ec197f85857d5bc656f73442d6b260996698db37e6ad35b1a940af8da8adfa.png" />
 </div>
 </div>
 <div class="tip admonition">
@@ -924,7 +952,7 @@ $<span class="math notranslate nohighlight">\( |s&gt; = \frac{1}{\sqrt N}\sum_{x
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d59cad93c99618a1f9de007e983b101774a4957b0d4d7a4795c5787085ec61e5.png" src="_images/d59cad93c99618a1f9de007e983b101774a4957b0d4d7a4795c5787085ec61e5.png" />
+<img alt="_images/91230dc729b694a984be5ba13c094e42770b9f2a23ec86cf5b4b88d4d41f25bd.png" src="_images/91230dc729b694a984be5ba13c094e42770b9f2a23ec86cf5b4b88d4d41f25bd.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -938,7 +966,7 @@ $<span class="math notranslate nohighlight">\( |s&gt; = \frac{1}{\sqrt N}\sum_{x
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c0971fddda79fe736546257e07996b5647dfb287b6e41eddd279c05f4e8d1cac.png" src="_images/c0971fddda79fe736546257e07996b5647dfb287b6e41eddd279c05f4e8d1cac.png" />
+<img alt="_images/c2c1b6a59f68e1d45a601aa47040cc27e012db5cac0dde1f85e506792a0a29db.png" src="_images/c2c1b6a59f68e1d45a601aa47040cc27e012db5cac0dde1f85e506792a0a29db.png" />
 </div>
 </div>
 <p>正しく<span class="math notranslate nohighlight">\(|10&gt;\)</span>の状態の確率が増幅されています（最上位の量子ビットは補助量子ビットのため、無視して問題ありません）。</p>
@@ -958,7 +986,7 @@ $<span class="math notranslate nohighlight">\( |s&gt; = \frac{1}{\sqrt N}\sum_{x
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c396573ceb284ba6c4d41507ec70dea59ea7ca41a840d66c3bfed94d1cc91ce1.png" src="_images/c396573ceb284ba6c4d41507ec70dea59ea7ca41a840d66c3bfed94d1cc91ce1.png" />
+<img alt="_images/57ed7651c14d38a9730a197fad8740e50f54c941b66fbcd6914a5b9d3eb80266.png" src="_images/57ed7651c14d38a9730a197fad8740e50f54c941b66fbcd6914a5b9d3eb80266.png" />
 </div>
 </div>
 <p>解答例の量子回路のコストは、<br />

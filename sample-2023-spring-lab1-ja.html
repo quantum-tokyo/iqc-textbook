@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>1. サンプル問題（2023年春） &#8212; IBM Quantum Challengeで学ぶ量子コンピューティング</title>
+    <title>サンプル問題（2023年春） &#8212; IBM Quantum Challengeで学ぶ量子コンピューティング</title>
   
   
   
@@ -152,6 +152,7 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">第２章 量子コンピューターの計算ルール</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="2019-w1-adder.html">量子回路における加算器（2019年 Week1）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2020-w1-a-adder.html">量子回路における加算器（2020年 Week1a）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2021-spring-lab1-toffoli.html">トフォリゲート(2021年春 Lab1)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-spring-lab2-teleportation.html">量子テレポーテーション（2023年 Lab2）</a></li>
 </ul>
@@ -162,7 +163,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Test: 2023Spring</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. サンプル問題（2023年春）</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">サンプル問題（2023年春）</a></li>
 </ul>
 
     </div>
@@ -356,9 +357,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.1. 始めの一歩</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.2. サンプル問題</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.3. 解答例</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">始めの一歩</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">サンプル問題</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">解答例</a></li>
 </ul>
             </nav>
         </div>
@@ -371,20 +372,20 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">1. </span>サンプル問題（2023年春）<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1>サンプル問題（2023年春）<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
 <p>このNotebookはQiskit v0.44の仕様に合わせてコードを改変しています。</p>
 </div>
 <section id="id2">
-<h2><span class="section-number">1.1. </span>始めの一歩<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2>始めの一歩<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <p>IBM Quantum Challenge: Spring 2023へようこそ！</p>
 <p>今回のIBM Quantum ChallengeではDynamic circuitsに取り組んでいただきます。あなたは現在、このChallengeの最初のLabにいます。この最初のLabで作業する中でいくつかのExerciseを完了させます。この入門編では、Exerciseの解き方について簡単に説明します。以前のChallengeに参加したことがある方でもこの資料を見直す事をお勧めします。</p>
 <p>すべてのLabは、チュートリアルコンテンツ、事前に書かれたコードブロック、およびあなたにQiskitコードを埋めていただく必要があるExerciseのコードブロックが混ざっています。Exerciseを完了するためには、コメント行 <em>“### Your code goes here ###”</em> の下に必要なコードを入力する必要があります。</p>
 <p>初めてChallengeに参加する方に、覚えておいていただきたい重要なこととして、新たにコードを追加していない場合でも、すべてのコードセルを実行する必要があります。そうすることで、Graderを実行して回答を提出するときにすべてが最新であることが確認されます。</p>
 </section>
 <section id="id3">
-<h2><span class="section-number">1.2. </span>サンプル問題<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<h2>サンプル問題<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
 <div class="admonition-qiskit admonition">
 <p class="admonition-title">はじめてのQiskit</p>
 <p>下のセルでは、1つの量子ビットと1つの古典ビットを持つ回路を構築しています。<br />
@@ -408,7 +409,7 @@ document.write(`
 </div>
 </section>
 <section id="id4">
-<h2><span class="section-number">1.3. </span>解答例<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<h2>解答例<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">ClassicalRegister</span>
@@ -495,9 +496,9 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.1. 始めの一歩</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.2. サンプル問題</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.3. 解答例</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">始めの一歩</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">サンプル問題</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">解答例</a></li>
 </ul>
   </nav></div>
 

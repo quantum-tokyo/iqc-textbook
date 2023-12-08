@@ -18,21 +18,29 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-from qiskit import *
-from qiskit import QuantumRegister, ClassicalRegister, QuantumCircuit
-from qiskit import Aer, execute
-from qiskit_ibm_provider import IBMProvider
-provider = IBMProvider()
+#initialization
+import matplotlib.pyplot as plt
+%matplotlib inline
+import numpy as np
+
+# importing Qiskit
+from qiskit import IBMQ, BasicAer
+from qiskit_ibm_provider import least_busy
+from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, execute
+
+# import basic plot tools
+from qiskit.tools.visualization import plot_histogram
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [0;32mIn[2], line 4[0m
-[1;32m      2[0m [38;5;28;01mfrom[39;00m [38;5;21;01mqiskit[39;00m [38;5;28;01mimport[39;00m QuantumRegister, ClassicalRegister, QuantumCircuit
-[1;32m      3[0m [38;5;28;01mfrom[39;00m [38;5;21;01mqiskit[39;00m [38;5;28;01mimport[39;00m Aer, execute
-[0;32m----> 4[0m [38;5;28;01mfrom[39;00m [38;5;21;01mqiskit_ibm_provider[39;00m [38;5;28;01mimport[39;00m IBMProvider
-[1;32m      5[0m provider [38;5;241m=[39m IBMProvider()
+Cell [0;32mIn[1], line 8[0m
+[1;32m      6[0m [38;5;66;03m# importing Qiskit[39;00m
+[1;32m      7[0m [38;5;28;01mfrom[39;00m [38;5;21;01mqiskit[39;00m [38;5;28;01mimport[39;00m IBMQ, BasicAer
+[0;32m----> 8[0m [38;5;28;01mfrom[39;00m [38;5;21;01mqiskit_ibm_provider[39;00m [38;5;28;01mimport[39;00m least_busy
+[1;32m      9[0m [38;5;28;01mfrom[39;00m [38;5;21;01mqiskit[39;00m [38;5;28;01mimport[39;00m QuantumCircuit, ClassicalRegister, QuantumRegister, execute
+[1;32m     11[0m [38;5;66;03m# import basic plot tools[39;00m
 
 [0;31mModuleNotFoundError[0m: No module named 'qiskit_ibm_provider'
 

@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '2020-w2-b-lights-out-puzzle';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1. サンプル問題（2023年春）" href="sample-2023-spring-lab1-ja.html" />
+    <link rel="next" title="サンプル問題（2023年春）" href="sample-2023-spring-lab1-ja.html" />
     <link rel="prev" title="Groverのアルゴリズム（2019年 Week2）" href="2019-w2-grover.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -155,6 +155,7 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">第２章 量子コンピューターの計算ルール</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="2019-w1-adder.html">量子回路における加算器（2019年 Week1）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2020-w1-a-adder.html">量子回路における加算器（2020年 Week1a）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2021-spring-lab1-toffoli.html">トフォリゲート(2021年春 Lab1)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-spring-lab2-teleportation.html">量子テレポーテーション（2023年 Lab2）</a></li>
 </ul>
@@ -165,7 +166,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Test: 2023Spring</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="sample-2023-spring-lab1-ja.html">1. サンプル問題（2023年春）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sample-2023-spring-lab1-ja.html">サンプル問題（2023年春）</a></li>
 </ul>
 
     </div>
@@ -462,56 +463,14 @@ lightsout4_ex=[[Board 0],[Board 1],[Board 2],[Board 3]]</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AccountNotFoundError</span><span class="g g-Whitespace">                      </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumCircuit</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">Aer</span><span class="p">,</span> <span class="n">execute</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">qiskit_ibm_provider</span> <span class="kn">import</span> <span class="n">IBMProvider</span>
-<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">provider</span> <span class="o">=</span> <span class="n">IBMProvider</span><span class="p">()</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">qiskit_ibm_provider</span> <span class="kn">import</span> <span class="n">IBMProvider</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">provider</span> <span class="o">=</span> <span class="n">IBMProvider</span><span class="p">()</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.7/x64/lib/python3.11/site-packages/qiskit_ibm_provider/ibm_provider.py:162,</span> in <span class="ni">IBMProvider.__init__</span><span class="nt">(self, token, url, name, instance, proxies, verify)</span>
-<span class="g g-Whitespace">    </span><span class="mi">139</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;IBMProvider constructor</span>
-<span class="g g-Whitespace">    </span><span class="mi">140</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">141</span><span class="sd"> Args:</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">159</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">160</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">161</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-<span class="ne">--&gt; </span><span class="mi">162</span> <span class="bp">self</span><span class="o">.</span><span class="n">_account</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_discover_account</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">163</span>     <span class="n">token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">164</span>     <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">165</span>     <span class="n">instance</span><span class="o">=</span><span class="n">instance</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">166</span>     <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">167</span>     <span class="n">proxies</span><span class="o">=</span><span class="n">ProxyConfiguration</span><span class="p">(</span><span class="o">**</span><span class="n">proxies</span><span class="p">)</span> <span class="k">if</span> <span class="n">proxies</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">168</span>     <span class="n">verify</span><span class="o">=</span><span class="n">verify</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">169</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">171</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client_params</span> <span class="o">=</span> <span class="n">ClientParameters</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">172</span>     <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_account</span><span class="o">.</span><span class="n">token</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">173</span>     <span class="n">url</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_account</span><span class="o">.</span><span class="n">url</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">176</span>     <span class="n">verify</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_account</span><span class="o">.</span><span class="n">verify</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">177</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">178</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auth_client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_authenticate_ibm_quantum_account</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client_params</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.7/x64/lib/python3.11/site-packages/qiskit_ibm_provider/ibm_provider.py:221,</span> in <span class="ni">IBMProvider._discover_account</span><span class="nt">(token, url, instance, name, proxies, verify)</span>
-<span class="g g-Whitespace">    </span><span class="mi">217</span>         <span class="k">if</span> <span class="n">url</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">218</span>             <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">219</span>                 <span class="s2">&quot;Loading default ibm_quantum account. Input &#39;url&#39; is ignored.&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">220</span>             <span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">221</span>         <span class="n">account</span> <span class="o">=</span> <span class="n">AccountManager</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">channel</span><span class="o">=</span><span class="s2">&quot;ibm_quantum&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">223</span> <span class="k">if</span> <span class="n">account</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">224</span>     <span class="n">account</span> <span class="o">=</span> <span class="n">AccountManager</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.7/x64/lib/python3.11/site-packages/qiskit_ibm_provider/accounts/management.py:151,</span> in <span class="ni">AccountManager.get</span><span class="nt">(cls, name, channel)</span>
-<span class="g g-Whitespace">    </span><span class="mi">146</span>     <span class="n">saved_account</span> <span class="o">=</span> <span class="n">read_config</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">147</span>         <span class="n">filename</span><span class="o">=</span><span class="bp">cls</span><span class="o">.</span><span class="n">_default_account_config_json_file</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">148</span>         <span class="n">name</span><span class="o">=</span><span class="bp">cls</span><span class="o">.</span><span class="n">_default_account_name_ibm_quantum</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">149</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">150</span>     <span class="k">if</span> <span class="n">saved_account</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">151</span>         <span class="k">raise</span> <span class="n">AccountNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No default </span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s2"> account saved.&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">152</span>     <span class="k">return</span> <span class="n">Account</span><span class="o">.</span><span class="n">from_saved_format</span><span class="p">(</span><span class="n">saved_account</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">154</span> <span class="n">all_config</span> <span class="o">=</span> <span class="n">read_config</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="bp">cls</span><span class="o">.</span><span class="n">_default_account_config_json_file</span><span class="p">)</span>
-
-<span class="ne">AccountNotFoundError</span>: &#39;No default ibm_quantum account saved.&#39;
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;qiskit_ibm_provider&#39;
 </pre></div>
 </div>
 </div>
@@ -1097,7 +1056,7 @@ Groverのアルゴリズムを使って，<span class="math notranslate nohighli
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>サンプル問題（2023年春）</p>
+        <p class="prev-next-title">サンプル問題（2023年春）</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
