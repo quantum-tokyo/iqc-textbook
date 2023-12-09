@@ -3,7 +3,7 @@
 
 title: IBM Quantum Challengeで学ぶ量子コンピューティング
 author: Quantum Tokyo
-# logo: logo.png
+logo: ./resources/quantum-tokyo-icon.jpg
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
