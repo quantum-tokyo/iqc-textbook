@@ -1,0 +1,682 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>自治体のコンビニ出店プラン（2019年 Week4） &#8212; IBM Quantum Challengeで学ぶ量子コンピューティング</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '2019-w3-maxcut_bk';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="5点の強結合格子（2022年春 Lab2）" href="2022-spring-lab2-tb-model.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/quantum-tokyo-icon.jpg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/quantum-tokyo-icon.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    IBM Quantum Challengeで学ぶ量子コンピューティング
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">第１章 はじめてのQiskit</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2023-spring-lab1-sample.html">サンプル問題（2023年春）</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">第２章 量子コンピューターの計算ルール</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2019-w1-adder.html">量子回路における加算器（2019年 Week1）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2020-w1-a-adder.html">量子回路における加算器（2020年 Week1a）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2021-spring-lab1-toffoli.html">トフォリゲート(2021年春 Lab1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-spring-lab2-teleportation.html">量子テレポーテーション（2023年 Lab2）</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">第３章 量子アルゴリズム</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2019-w2-grover.html">Groverのアルゴリズム（2019年 Week2）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2020-w2-a-lights-out-puzzle_bk.html">ライツアウトパズル（2020年 Week2a）</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="2020-w2-b-lights-out-puzzle_bk.html">4-ライツアウトパズル（2020年 Week2b）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2020-w3-false-asteroids_bk.html">作り損ねた惑星問題（2020年 Week3）</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">第４章 量子コンピューターの応用</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2021-autumn-lab1-portfolio_bk.html">ポートフォリオ最適化（2021年秋 Lab1）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-spring-lab1-tb-model.html">強結合モデル（2022年春 Lab1）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-spring-lab2-tb-model.html">5点の強結合格子（2022年春 Lab2）</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">自治体のコンビニ出店プラン（2019年 Week4）</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/quantum-tokyo/iqc-textbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/quantum-tokyo/iqc-textbook/issues/new?title=Issue%20on%20page%20%2F2019-w3-maxcut_bk.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/2019-w3-maxcut_bk.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>自治体のコンビニ出店プラン（2019年 Week4）</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">実行時の注意</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">回答ファイル作成</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">回答ファイル検証</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="week4">
+<h1>自治体のコンビニ出店プラン（2019年 Week4）<a class="headerlink" href="#week4" title="Permalink to this heading">#</a></h1>
+<div class="admonition- admonition">
+<p class="admonition-title">問題</p>
+<p>東京のZ市は11の区域からなる自治体で、すでに4社のコンビニ(A社,B社,C社,D社)が本社の1店舗を別々の区域に展開しています。<br />
+現在の出店状況は地図の通りです。地図上の各ノードはそれぞれの区域を表しており、地図上のエッジは、エッジの両端の区域が隣り合っていることを表しています。<br />
+市長のあなたは、残りの7区域にもコンビニを誘致しようとしましたが、４社から以下の条件が提示されました。</p>
+<ul class="simple">
+<li><p>1つの区域に出店出来るのは1社のコンビニのみ</p></li>
+<li><p>自社のコンビニは、隣接する区域に自社のコンビニが既に出店している場合は出店しない。</p></li>
+</ul>
+<p>あなたはこれらの条件を満たす出店案を提示できるでしょうか？<br />
+<strong>week2,3で使ったグローバーのアルゴリズムをiteration回数=5で用いて、条件を満たす全ての出店案を列挙してみてください。</strong></p>
+<p><img alt="" src="_images/2019-w3_tokyo_map_pic.png" /></p>
+</div>
+<section id="id1">
+<h2>実行時の注意<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>バックエンドは <strong>32-qubitシミュレーター</strong>を指定してください. (e.g. backend = provider.get_backend(‘ibmq_qasm_simulator’))</p></li>
+<li><p>回路の規模が大き過ぎる場合、実行時間が長くなる可能性があります（具体的には30分から60分等。ジャッジが作成した回答例はもっと短い時間で処理が完了します）。自分のジョブが正しく実行されているか確認したい場合は、下記のページで確認してください。<br />
+https://quantum-computing.ibm.com/results<br />
+<strong>実行出来ているか心配だからといって何度も同じjobを投げないでください</strong></p></li>
+<li><p>シミュレーター実行時は下記のコードを用いて実行してください。下記のコード内ではサンプル数を増やすために<code class="docutils literal notranslate"><span class="pre">shots</span></code>を8000に、シードを固定するために<code class="docutils literal notranslate"><span class="pre">seed_simulator</span></code>を12345に、シミュレーターの実行速度を向上させるために<code class="docutils literal notranslate"><span class="pre">backend_options={&quot;fusion_enable&quot;:True}</span></code>を設定しています。</p></li>
+<li><p>回路のなかでリセットのオペレーション (i.e. qc.reset()) は使用しないでください。</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">provider</span> <span class="o">=</span> <span class="n">IBMQ</span><span class="o">.</span><span class="n">load_account</span><span class="p">()</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">provider</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;ibmq_qasm_simulator&#39;</span><span class="p">)</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span> <span class="n">seed_simulator</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span> <span class="n">backend_options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;fusion_enable&quot;</span><span class="p">:</span><span class="kc">True</span><span class="p">})</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">count</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<ul class="simple">
+<li><p>それぞれの会社については、A社を<span class="math notranslate nohighlight">\(00\)</span>、B社を<span class="math notranslate nohighlight">\(01\)</span>、C社を<span class="math notranslate nohighlight">\(10\)</span>、D社を<span class="math notranslate nohighlight">\(11\)</span>とマッピングするものとします。</p></li>
+<li><p>古典レジスタc[2n], c[2n+1]にn番目の区域に出店するコンビニをマッピングしてください。</p></li>
+<li><p>答えを知らない状態でも作成できるオラクルを用いてください（言い換えると、古典の最適化ソルバ等で答えを計算して、それを基にオラクルを作成しないでください！）</p></li>
+<li><p>Unroller以外のtranspilerのpassを用いないでください（言い換えると、既存の最適化用等のpassを使わず、自分の力で戦ってください）</p></li>
+</ul>
+<p>例:0番目の区域に出店するコンビニがB社の場合、古典レジスタc[0], c[1]にそれぞれ<span class="math notranslate nohighlight">\(0\)</span>と<span class="math notranslate nohighlight">\(1\)</span>をマッピングします。</p>
+<p>上記提出時の注意を踏まえて、シミュレーターでの実行結果から、<strong>確率が高いビット列上位9個</strong>を基に作成したコンビニの配置案とUnrollerを用いて回路をu3とCXに分解してください。</p>
+<p class="rubric">回答ファイルは下記のプログラムを用いて作成してください。</p>
+<p>下記の<code class="docutils literal notranslate"><span class="pre">circuit</span></code>と<code class="docutils literal notranslate"><span class="pre">results</span></code>と<code class="docutils literal notranslate"><span class="pre">name</span></code>と<code class="docutils literal notranslate"><span class="pre">times</span></code>に作成した回路と実行結果と名前と提出回数を代入すれば自動で回答ファイルが作成されます。<br />
+回答ファイル内ではA社、B社、C社、D社は0、１、２、３にマッピングされています。</p>
+<p class="rubric">回答ファイルのサンプル</p>
+<p>下記のプログラムで作成される回答ファイルはこのようなファイルになります（実際の値は下記とは異なります）。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;ans&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;01230123012&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;01230123012&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;01230123012&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;01230123012&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;01230123012&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;01230123012&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;01230123012&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;01230123012&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;01230123012&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="s2">&quot;costs&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;u3&quot;</span><span class="p">:</span> <span class="mi">20000</span><span class="p">,</span> <span class="s2">&quot;cx&quot;</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span> <span class="s2">&quot;barrier&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="s2">&quot;measure&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">}}</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h2>回答ファイル作成<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p><strong>回路が大きい場合、Unrollerの処理に時間がかかる可能性があります。</strong><br />
+もし、処理が終わらない場合、使用していないウィンドウを閉じたりJupyter NotebookのKernelを再起動する等し、Unrollerの処理を再実行してください。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Input your quantum circuit</span>
+<span class="n">circuit</span><span class="o">=</span><span class="s1">&#39;Input your circuit&#39;</span>
+<span class="c1"># Input your result of the execute(groverCircuit, backend=backend, shots=shots).result()</span>
+<span class="n">results</span> <span class="o">=</span> <span class="s1">&#39;Input your result&#39;</span>
+<span class="n">count</span><span class="o">=</span><span class="n">results</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="c1"># Input your name or your team name (&#39;Team details form&#39;に記入した通りにチーム名を入力してください)</span>
+<span class="n">name</span><span class="o">=</span><span class="s1">&#39;Input your team name as exactly as you inputted it in the team details form&#39;</span>
+<span class="c1"># Please indicate the number of times you have submitted your answer so far.</span>
+<span class="c1"># For example, If it&#39;s your 1st time to submit your answer, write times=&#39;1&#39;. If it&#39;s your 5th time to submit your answer, write times=&#39;5&#39;.</span>
+<span class="c1"># Do not forget to put single quotations to make the variable &#39;Str&#39;&#39; type</span>
+<span class="n">times</span><span class="o">=</span><span class="s1">&#39;Input the number of times you have submitted your answer so far&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">qiskit.transpiler</span> <span class="kn">import</span> <span class="n">PassManager</span>
+<span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="kn">import</span> <span class="n">Unroller</span>
+
+<span class="c1"># Unroll the circuit</span>
+<span class="n">pass_</span> <span class="o">=</span> <span class="n">Unroller</span><span class="p">([</span><span class="s1">&#39;u3&#39;</span><span class="p">,</span> <span class="s1">&#39;cx&#39;</span><span class="p">])</span>
+<span class="n">pm</span> <span class="o">=</span> <span class="n">PassManager</span><span class="p">(</span><span class="n">pass_</span><span class="p">)</span>
+<span class="n">new_circuit</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span> 
+
+<span class="c1"># obtain gates</span>
+<span class="n">gates</span><span class="o">=</span><span class="n">new_circuit</span><span class="o">.</span><span class="n">count_ops</span><span class="p">()</span>
+
+<span class="c1">#sort count</span>
+<span class="n">count_sorted</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">count</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># collect answers with Top 9 probability</span>
+<span class="n">ans_list</span> <span class="o">=</span> <span class="n">count_sorted</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">9</span><span class="p">]</span>
+
+<span class="c1"># reverse ans_list</span>
+<span class="n">ans_reversed</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ans_list</span><span class="p">:</span>
+    <span class="n">ans_temp</span><span class="o">=</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="n">ans_reversed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ans_temp</span><span class="p">)</span>
+
+<span class="c1"># convert each 2 bits into corresponding color. Add node0(0),node3(1),node8(2) and node11(3)</span>
+<span class="n">ans_shaped</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">ans_reversed</span><span class="p">:</span>
+    <span class="n">ans_temp</span><span class="o">=</span><span class="n">j</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">nodeA</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">node0</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ans_temp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">ans_temp</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">node1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ans_temp</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">ans_temp</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">nodeB</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">node2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ans_temp</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">+</span> <span class="n">ans_temp</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">node3</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ans_temp</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">+</span> <span class="n">ans_temp</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">node4</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ans_temp</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">+</span> <span class="n">ans_temp</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">nodeC</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">node5</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ans_temp</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">+</span> <span class="n">ans_temp</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">node6</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ans_temp</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="o">+</span> <span class="n">ans_temp</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">nodeD</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">nodes_color</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">nodeA</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">node0</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">node1</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">nodeB</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">node2</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">node3</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">node4</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">nodeC</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">node5</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">node6</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">nodeD</span><span class="p">)</span> 
+    <span class="n">ans_shaped</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">nodes_color</span><span class="p">,</span><span class="n">j</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+
+<span class="c1"># write the result into &#39;[your name]_final_output.txt&#39;</span>
+<span class="n">filename</span><span class="o">=</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="n">times</span><span class="o">+</span><span class="s1">&#39;_final_output.txt&#39;</span>
+<span class="n">dct</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;ans&#39;</span><span class="p">:</span><span class="n">ans_shaped</span><span class="p">,</span><span class="s1">&#39;costs&#39;</span><span class="p">:</span><span class="n">gates</span><span class="p">}</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">dct</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id3">
+<h2>回答ファイル検証<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Input a path of your submitted file</span>
+<span class="n">your_path</span><span class="o">=</span><span class="s1">&#39;Input a path of your submitted file&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">p</span><span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">your_path</span><span class="p">)</span>
+
+<span class="c1"># Verify your information</span>
+<span class="n">f_name</span><span class="o">=</span><span class="n">p</span><span class="o">.</span><span class="n">name</span>
+<span class="n">your_info</span><span class="o">=</span><span class="n">f_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Your name: &#39;</span><span class="p">,</span> <span class="n">your_info</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The number of times you have submitted your answer: &#39;</span><span class="p">,</span> <span class="n">your_info</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">your_ans</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Does your submission file have 9 answers?&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">your_ans</span><span class="p">[</span><span class="s1">&#39;ans&#39;</span><span class="p">])</span><span class="o">!=</span><span class="mi">9</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;- No, make sure you have 9 answers with top 9 probabilities&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;- Yes&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;- Your plan: &#39;</span><span class="p">,</span> <span class="n">your_ans</span><span class="p">[</span><span class="s1">&#39;ans&#39;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;What is your cost?&#39;</span><span class="p">)</span>
+<span class="n">your_cost</span><span class="o">=</span><span class="n">your_ans</span><span class="p">[</span><span class="s1">&#39;costs&#39;</span><span class="p">][</span><span class="s1">&#39;u3&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">10</span><span class="o">*</span><span class="n">your_ans</span><span class="p">[</span><span class="s1">&#39;costs&#39;</span><span class="p">][</span><span class="s1">&#39;cx&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;- &#39;</span><span class="p">,</span> <span class="n">your_cost</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2022-spring-lab2-tb-model.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">5点の強結合格子（2022年春 Lab2）</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">実行時の注意</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">回答ファイル作成</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">回答ファイル検証</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Quantum Tokyo
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

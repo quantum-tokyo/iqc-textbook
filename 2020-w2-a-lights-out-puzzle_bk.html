@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>サンプル問題（2023年春） &#8212; IBM Quantum Challengeで学ぶ量子コンピューティング</title>
+    <title>ライツアウトパズル（2020年 Week2a） &#8212; IBM Quantum Challengeで学ぶ量子コンピューティング</title>
   
   
   
@@ -61,11 +61,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '2023-spring-lab1-sample';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '2020-w2-a-lights-out-puzzle_bk';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="量子回路における加算器（2019年 Week1）" href="2019-w1-adder.html" />
-    <link rel="prev" title="IBM Quantum Challengeで学ぶ量子コンピューティング" href="intro.html" />
+    <link rel="next" title="4-ライツアウトパズル（2020年 Week2b）" href="2020-w2-b-lights-out-puzzle_bk.html" />
+    <link rel="prev" title="Groverのアルゴリズム（2019年 Week2）" href="2019-w2-grover.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -157,8 +157,8 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">第１章 はじめてのQiskit</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">サンプル問題（2023年春）</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2023-spring-lab1-sample.html">サンプル問題（2023年春）</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">第２章 量子コンピューターの計算ルール</span></p>
 <ul class="nav bd-sidenav">
@@ -168,9 +168,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="2023-spring-lab2-teleportation.html">量子テレポーテーション（2023年 Lab2）</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">第３章 量子アルゴリズム</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="2019-w2-grover.html">Groverのアルゴリズム（2019年 Week2）</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2020-w2-a-lights-out-puzzle_bk.html">ライツアウトパズル（2020年 Week2a）</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">ライツアウトパズル（2020年 Week2a）</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="2020-w2-b-lights-out-puzzle_bk.html">4-ライツアウトパズル（2020年 Week2b）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2020-w3-false-asteroids_bk.html">作り損ねた惑星問題（2020年 Week3）</a></li>
@@ -252,7 +252,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/quantum-tokyo/iqc-textbook/issues/new?title=Issue%20on%20page%20%2F2023-spring-lab1-sample.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/quantum-tokyo/iqc-textbook/issues/new?title=Issue%20on%20page%20%2F2020-w2-a-lights-out-puzzle_bk.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -282,7 +282,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="_sources/2023-spring-lab1-sample.ipynb" target="_blank"
+      <li><a href="_sources/2020-w2-a-lights-out-puzzle_bk.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -364,7 +364,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>サンプル問題（2023年春）</h1>
+    <h1>ライツアウトパズル（2020年 Week2a）</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -374,10 +374,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">始めの一歩</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">サンプル問題</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">解答例</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">ライツアウトパズル（2020年 Week2a）</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">例題</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ii-a">ラーニング演習 II-A</a></li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -388,71 +391,80 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>サンプル問題（2023年春）<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
-<div class="admonition attention">
-<p class="admonition-title">Attention</p>
-<p>このNotebookはQiskit v0.44の仕様に合わせてコードを改変しています。</p>
-</div>
-<section id="id2">
-<h2>始めの一歩<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<p>IBM Quantum Challenge: Spring 2023へようこそ！</p>
-<p>今回のIBM Quantum ChallengeではDynamic circuitsに取り組んでいただきます。あなたは現在、このChallengeの最初のLabにいます。この最初のLabで作業する中でいくつかのExerciseを完了させます。この入門編では、Exerciseの解き方について簡単に説明します。以前のChallengeに参加したことがある方でもこの資料を見直す事をお勧めします。</p>
-<p>すべてのLabは、チュートリアルコンテンツ、事前に書かれたコードブロック、およびあなたにQiskitコードを埋めていただく必要があるExerciseのコードブロックが混ざっています。Exerciseを完了するためには、コメント行 <em>“### Your code goes here ###”</em> の下に必要なコードを入力する必要があります。</p>
-<p>初めてChallengeに参加する方に、覚えておいていただきたい重要なこととして、新たにコードを追加していない場合でも、すべてのコードセルを実行する必要があります。そうすることで、Graderを実行して回答を提出するときにすべてが最新であることが確認されます。</p>
-</section>
-<section id="id3">
-<h2>サンプル問題<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
-<div class="admonition-qiskit admonition">
-<p class="admonition-title">はじめてのQiskit</p>
-<p>下のセルでは、1つの量子ビットと1つの古典ビットを持つ回路を構築しています。<br />
-あなたの最初の仕事は、量子ビットにアダマールゲートを実行、測定し、結果を古典ビットに格納することです。<br />
-既にコードは用意してあります。あなたに必要なことは、両方の行の先頭にある<code class="docutils literal notranslate"><span class="pre">#</span></code>を取り除くことだけです。</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">ClassicalRegister</span>
-
-<span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">cr</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
-
-<span class="c1">####### your code goes here #######</span>
-
-<span class="c1"># qc.h(qr[0])</span>
-<span class="c1"># qc.measure(qr[0], cr[0])</span>
-
-
-<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+  <section class="tex2jax_ignore mathjax_ignore" id="week2a">
+<h1>ライツアウトパズル（2020年 Week2a）<a class="headerlink" href="#week2a" title="Permalink to this heading">#</a></h1>
+<p>ライツアウトは有名なパズルゲームです。プレーヤーに格子状に並べられたライトが与えられます。このうちいくつかは点灯しており、いくつかは消灯しています。この問題の目的は、ライトを全て消灯させることです。各ライトにはスイッチがついており、それを押すことで点灯/消灯させることができます。しかしながらこのライトは少し特殊で、あるライトのスイッチを押すと、連動して上下左右の隣接したライトの状態も切り替わってしまいます。</p>
+<section id="id1">
+<h2>例題<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>以下の図は、3x3のライツアウトパズルの例です。各ライトには0から8までのラベルが付いています。バイナリのリストを使用して与えられた盤面を表すことができます。<code class="docutils literal notranslate"><span class="pre">1</span></code>はオンになっているライトを表し、<code class="docutils literal notranslate"><span class="pre">0</span></code>はオフになっているライトを表します。以下のリスト(<code class="docutils literal notranslate"><span class="pre">lights</span></code>)は、この例の初期盤面を表しています（ライト 3、5、6、7がオンで、残りはオフです）。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
+<p>例題は、図で示されているように、0、3、4のスイッチを操作することで解決できます。少し遊んでみると、すぐにこのパズルゲームの<strong>2つの重要な特性</strong>に気付くでしょう。</p>
+<ol class="arabic simple">
+<li><p>同じスイッチを複数回押す必要はありません。</p></li>
+<li><p>スイッチを押す順序は特に意味を持ちません。</p></li>
+</ol>
+<p>従って、初期の盤面同様にバイナリのリストでパズルの解を表現できます。 ただし、ここでは<code class="docutils literal notranslate"><span class="pre">0</span></code>と<code class="docutils literal notranslate"><span class="pre">1</span></code>の意味が盤面のそれと異なります。<code class="docutils literal notranslate"><span class="pre">1</span></code>はスイッチを切り替えることを表し、<code class="docutils literal notranslate"><span class="pre">0</span></code>はスイッチを切り替えないことを表します。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">solution</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
 </div>
+<p><img alt="" src="_images/2020-w2-a_lights_out_rule.png" /></p>
 </section>
-<section id="id4">
-<h2>解答例<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="ii-a">
+<h1>ラーニング演習 II-A<a class="headerlink" href="#ii-a" title="Permalink to this heading">#</a></h1>
+<p>第1週で学んだことをいかして、ライツアウトを<strong>Groverのアルゴリズム</strong>を使って解いてみましょう！</p>
+<div class="admonition-grover admonition">
+<p class="admonition-title">Groverのアルゴリズムを使ったライツアウトパズル</p>
+<p>以下の盤面を解くための量子回路を作成してください。提出する量子回路では、パズルの答えとなる**<code class="docutils literal notranslate"><span class="pre">solution</span></code>(9bit)のみを観測してください。**
+提出形式は、lightsを引数とし、<code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code>を返す関数です（関数名は任意のものを付けて問題ありません）。異なる入力(lights)でも問題が解ける関数にしてください。異なる入力で検証を行います。</p>
+<p><strong>なお、量子回路は 28 qubits 以内で実装してください。</strong></p>
+<p>説明で用いられているものと同じエンディアンで解答が得られるようになっているか注意してください。以下の関数を使っても構いません。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">qc</span> <span class="o">=</span> <span class="n">qc</span><span class="o">.</span><span class="n">reverse_bits</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>この問題を解くにはWeek1-Bのものよりも複雑なオラクルが必要になるでしょう。補助量子ビットを追加することでオラクル部分の設計が容易になりますが、その取り扱いには注意が必要です。オラクル部分の終了時点では全ての補助量子ビットが初期状態に戻っているいる必要があります（この操作はUncomputationと呼ばれることもあります）。<br />
+2019年の<a class="reference external" href="https://github.com/quantum-challenge/2019">IBM Quantum Challenge のWeek3</a>はこの概念の理解に役立つかもしれません。</p>
+</div>
+</div>
+<p><img alt="" src="_images/2020-w2-a_lights_out_prob.png" /></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">ClassicalRegister</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 初期状態は以下のリストで与えられます。 </span>
+<span class="c1"># 回路の入力としてお使いください。</span>
+<span class="n">lights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 
-<span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">cr</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
-
-<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-
-
-<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">week2a_ans_func</span><span class="p">(</span><span class="n">lights</span><span class="p">):</span>
+    <span class="c1">##### ここに量子回路を作成してください。</span>
+    <span class="c1">####  尚、異なる入力(lights)でも問題が解ける関数にしてください。異なる入力で検証を行います。</span>
+    
+    <span class="k">return</span> <span class="n">qc</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/fed395a200c738fce192d5eeaee25d32a08655e33aefdc0dc5228397ee2b6eba.png" src="_images/fed395a200c738fce192d5eeaee25d32a08655e33aefdc0dc5228397ee2b6eba.png" />
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 提出用コード</span>
+<span class="kn">from</span> <span class="nn">qc_grader</span> <span class="kn">import</span> <span class="n">prepare_ex2a</span><span class="p">,</span> <span class="n">grade_ex2a</span><span class="p">,</span> <span class="n">submit_ex2a</span>
+
+<span class="c1"># 以下のprepare_ex2a()関数で回路を実行してください。</span>
+<span class="c1"># prepare_ex2a()関数はQuantumCircuitのみを引数として、execute()関数のように働きます。</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">prepare_ex2a</span><span class="p">(</span><span class="n">week2a_ans_func</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">count</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="n">original_problem_set_counts</span> <span class="o">=</span> <span class="n">count</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">original_problem_set_counts</span>
+<span class="c1"># 最も観測回数が多いビット列が解として扱われます。</span>
+</pre></div>
 </div>
 </div>
-<div class="tip admonition">
-<p class="admonition-title">解説</p>
-<p>ここに解説を書きます</p>
 </div>
-<p>これで、このChallengeを始める準備は万端です。がんばって、そして楽しんでください！</p>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -487,20 +499,20 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="intro.html"
+       href="2019-w2-grover.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">IBM Quantum Challengeで学ぶ量子コンピューティング</p>
+        <p class="prev-next-title">Groverのアルゴリズム（2019年 Week2）</p>
       </div>
     </a>
     <a class="right-next"
-       href="2019-w1-adder.html"
+       href="2020-w2-b-lights-out-puzzle_bk.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">量子回路における加算器（2019年 Week1）</p>
+        <p class="prev-next-title">4-ライツアウトパズル（2020年 Week2b）</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -522,10 +534,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">始めの一歩</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">サンプル問題</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">解答例</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">ライツアウトパズル（2020年 Week2a）</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">例題</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ii-a">ラーニング演習 II-A</a></li>
+</ul>
+
   </nav></div>
 
 </div></div>

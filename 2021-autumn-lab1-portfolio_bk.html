@@ -1,0 +1,1138 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>ポートフォリオ最適化（2021年秋 Lab1） &#8212; IBM Quantum Challengeで学ぶ量子コンピューティング</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '2021-autumn-lab1-portfolio_bk';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="強結合モデル（2022年春 Lab1）" href="2022-spring-lab1-tb-model.html" />
+    <link rel="prev" title="作り損ねた惑星問題（2020年 Week3）" href="2020-w3-false-asteroids_bk.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/quantum-tokyo-icon.jpg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/quantum-tokyo-icon.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    IBM Quantum Challengeで学ぶ量子コンピューティング
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">第１章 はじめてのQiskit</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2023-spring-lab1-sample.html">サンプル問題（2023年春）</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">第２章 量子コンピューターの計算ルール</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2019-w1-adder.html">量子回路における加算器（2019年 Week1）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2020-w1-a-adder.html">量子回路における加算器（2020年 Week1a）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2021-spring-lab1-toffoli.html">トフォリゲート(2021年春 Lab1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-spring-lab2-teleportation.html">量子テレポーテーション（2023年 Lab2）</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">第３章 量子アルゴリズム</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2019-w2-grover.html">Groverのアルゴリズム（2019年 Week2）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2020-w2-a-lights-out-puzzle_bk.html">ライツアウトパズル（2020年 Week2a）</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="2020-w2-b-lights-out-puzzle_bk.html">4-ライツアウトパズル（2020年 Week2b）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2020-w3-false-asteroids_bk.html">作り損ねた惑星問題（2020年 Week3）</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">第４章 量子コンピューターの応用</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">ポートフォリオ最適化（2021年秋 Lab1）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-spring-lab1-tb-model.html">強結合モデル（2022年春 Lab1）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-spring-lab2-tb-model.html">5点の強結合格子（2022年春 Lab2）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2019-w3-maxcut_bk.html">自治体のコンビニ出店プラン（2019年 Week4）</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/quantum-tokyo/iqc-textbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/quantum-tokyo/iqc-textbook/issues/new?title=Issue%20on%20page%20%2F2021-autumn-lab1-portfolio_bk.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/2021-autumn-lab1-portfolio_bk.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>ポートフォリオ最適化（2021年秋 Lab1）</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">はじめに：ポートフォリオ最適化とは？</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge">Challenge</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1. 効率的フロンティアを求めて</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2. 演習の目的</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">3. 四銘柄のポートフォリオ最適化問題</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">4. 問題の定式化</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">ゴール:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">仮定:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1">Step 1. 必要なライブラリをインポートします。</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2">Step 2. 時系列データ（金融データ）の生成</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3">Step 3. 期待リターンと共分散行列の取得</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">期待リターン μ</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">共分散行列 Σ</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qiskit-finance">Qiskit Finance のポートフォリオ最適化クラス</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-1a">Challenge 1a</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minimum-eigen-optimizer">Minimum Eigen Optimizer（最小固有値オプティマイザー）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5">Step 5. 古典的なオプティマイザーで参考値を取得</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-1b">Challenge 1b</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-1c">Challenge 1c</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Step 1: 必要なライブラリをインポートします。</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">Step 2: 時系列データ（金融データ）の生成</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">Step 3: 期待リターンと共分散行列の取得</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-1c">Step 4: チャレンジ1cの問題設定に基づく変数設定を行ってください。</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">Step 5: ポートフォリオ・インスタンスを生成するコードを完成させてください。</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-qaoa">Step 6: QAOAをつかったソリューション</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">更に学びたい方へ:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-information">Additional information</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lab1">
+<h1>ポートフォリオ最適化（2021年秋 Lab1）<a class="headerlink" href="#lab1" title="Permalink to this heading">#</a></h1>
+<section id="id1">
+<h2>はじめに：ポートフォリオ最適化とは？<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>ポートフォリオの最適化は、投資から得られるリターンを最大化したいと考える人にとって大変重要なプロセスです。
+投資は通常、いわゆる資産（株式、債権、債券、デリバティブ、コール、プットなど）の集まりであり、この資産の集まりを<strong>ポートフォリオ</strong>と呼びます。</p>
+<p><img alt="" src="_images/2021-autumn-lab1_ex1-01.png" /></p>
+<p>ポートフォリオの最適化のゴールは、リスク（金銭的損失）を最小化し、リターン（金銭的利益）を最大化することです。しかし、このプロセスはそう単純ではありません。リスクとリターンは通常トレードオフの関係にあり、これがポートフォリオの最適化を少し複雑にしています。ハリー・マーコウィッツ博士が1952年に発表した『現代ポートフォリオ理論』では、「リスクは、より高い報酬を得るための本質的な要素である」と述べています。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>現代ポートフォリオ理論</strong>
+<br>
+投資家は同じリターンが期待できる2つのポートフォリオを与えられたとき、リスクの少ない方を好むというリスク回避の考え方に基づく投資理論。投資家は、与えられた市場リスクに基づいて、期待リターンを最大化するようにポートフォリオを構築することができ、リスクはより高い報酬の本質的な部分であることを強調している。現代ポートフォリオ理論は、金融・投資に関する最も重要かつ影響力のある経済理論の一つとして、1952年にハリー・マーコウィッツ博士が提唱し、この功績によりマーコウィッツ博士は1990年にノーベル経済学賞を受賞した。<br><br>
+参照: <a class="reference external" href="https://en.wikipedia.org/wiki/Modern_portfolio_theory"><strong>現代ポートフォリオ理論</strong></a></p>
+</div>
+</section>
+<section id="challenge">
+<h2>Challenge<a class="headerlink" href="#challenge" title="Permalink to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Goal</p>
+<p>ポートフォリオの最適化は、投資から得られるリターンを最大化したいと考える人にとって大変重要なプロセスです。この最初のチャレンジでは、ポートフォリオ最適化の基本的な理論と、量子コンピューターで解けるように問題を定式化する方法を学びます。その過程で、QiskitのFinanceアプリケーションクラスをつかって、問題を効率的に解決する方法を学びます。</p>
+<ol class="arabic simple">
+<li><p><strong>Challenge 1a</strong>: QiskitのFinanceモジュールのPortfolioOptimization()メソッドを使って、ポートフォリオ最適化を二次プログラムに変換する方法を学びます。</p></li>
+<li><p><strong>Challenge 1b</strong>: Challenge 1aで作成したインスタンスに基づいて、4銘柄のポートフォリオ最適化問題をVQE (Variational Quantum Eigensolver:変分量子固有値ソルバー) をつかって解きます。</p></li>
+<li><p><strong>Challenge 1c</strong>: QAOA(Quantum Approximate Optimazation Algorithm:量子近似最適化アルゴリズム)を使って、ポートフォリオがとりうる４つのアセットから、予算=3かつ、ひとつの銘柄につきダブルウェイトまでを選択できる場合の問題を解きます。</p></li>
+</ol>
+<p>事前学習として<a class="reference external" href="https://youtu.be/UtMVoGXlz04?t=2022"><strong>Qiskit Finance Demo Session with Julien Gacon</strong></a>の視聴と対応する<a class="reference external" href="https://github.com/qiskit-community/qiskit-application-modules-demo-sessions/tree/main/qiskit-finance"><strong>demo notebook</strong></a>をチェックして、QiskitのFinanceモジュールとポートフォリオ最適化への応用について学ぶことをお勧めします。</p>
+</div>
+</section>
+<section id="id2">
+<h2>1. 効率的フロンティアを求めて<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>現代ポートフォリオ理論（MPT）は、投資家にとって理想的なポートフォリオを決定するための理論的な枠組みを提供します。同理論は平均分散ポートフォリオ理論とも呼ばれ、投資家が以下のようなポートフォリオの集合から最適なポートフォリオを選択することを想定しています。</p>
+<ul class="simple">
+<li><p>与えられたリスクに対して期待リターンを最大化する。</p></li>
+<li><p>与えられたレベルの期待リターンに対して、リスクを最小化する。</p></li>
+</ul>
+<p>下図は、横軸がリスク、縦軸が期待リターンを示す、現代ポートフォリオ理論の最小分散フロンティアです。</p>
+<p><img alt="" src="_images/2021-autumn-lab1_ex1-02.png" /></p>
+<p>AとBの2つの銘柄があり、この2つの銘柄のどちらかに投資するという状況を考えてみましょう。あるいは、Aに10％、Bに90％、Aに20％、Bに80％、Aに70％、Bに30％などと投資することもできます。こうした2つの銘柄を考える場合の単純なケース下でもたくさんの投資パターンの組み合わせが考えられます。さらに何千もの銘柄を検討する場合には、膨大な数の組み合わせになります。</p>
+<p>最小分散フロンティアは、ある想定される期待リターンに対して達成可能な最小分散を示します。あるポートフォリオの最小分散フロンティアを構築するには</p>
+<ul class="simple">
+<li><p>過去のデータを用いて、ポートフォリオの各個別銘柄の平均、分散、および各組の銘柄の相関を推定する。</p></li>
+<li><p>コンピュータプログラムを使って、事前に設定した期待リターンごとに、ポートフォリオの分散を最小化する全銘柄の重みを求める。</p></li>
+<li><p>上記で決定した最小分散ポートフォリオすべてについて、期待リターンと分散を計算し、2つの変数をグラフ化する。</p></li>
+</ul>
+<p>このとき、投資家は最小分散点以下のポートフォリオを保有したいとは思わないでしょう。投資家は最小分散フロンティアの正の方向に傾斜した部分に沿って、常に高いリターンを得ることができるため、最小分散フロンティアの正の傾斜部分は、<strong>効率的なフロンティア</strong>と呼ばれています。</p>
+<p>最適なポートフォリオがどこにあるかを示す<strong>効率的フロンティア</strong>を求めることによって、投資家はよりリターンを期待できそうな様々なポートフォリオはどれかを絞り込むことができます。</p>
+</section>
+<section id="id3">
+<h2>2. 演習の目的<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>この演習の目的は、量子的アプローチを用いて、ある特定のリスクに対する効率的フロンティアを見つけることです。QiskitのFinanceアプリケーションモジュールを使用して、ポートフォリオ最適化問題を二次計画問題に変換することで、VQEやQAOAなどの変分量子アルゴリズムを使用して最適化問題を解決していきます。それでは早速、今回のチャレンジ問題を見ていきましょう。</p>
+</section>
+<section id="id4">
+<h2>3. 四銘柄のポートフォリオ最適化問題<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<p>ここで、4銘柄(e.g. STOCK0, STOCK1, STOCK2, STOCK3) のポートフォリオ最適化問題を考えてみましょう。目標は、リスクとリターン間のトレードオフを最小化する2つの資産の組み合わせを見つけることです。</p>
+</section>
+<section id="id5">
+<h2>4. 問題の定式化<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<p>最適化問題については、検討している問題の定式化から行います。<br>
+効率的フロンティアを記述する関数は、以下のように線形制約を持つ二次計画問題に定式化することができます。<br>
+赤色で示されている用語はリスクに関連する項、青色で示されている項はリターンに関連するものです。
+一般に、最適化したい関数は目的関数と呼ばれ、今回の目的は、このリスクとリターンのトレードオフを最小化することです。<br> <br></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\min_{x \in \{0, 1\}^n}: q x^n\Sigma x \mu^n x \\
+subject to: 1^n x = B
+\end{split}\]</div>
+<ul class="simple">
+<li><p><font size=4em ><span class="math notranslate nohighlight">\(x\)</span></font> は資産配分を示す。</p></li>
+<li><p><font size=4em ><span class="math notranslate nohighlight">\(Σ\)</span></font> (sigma) は、共分散行列です。
+共分散行列は、2つの資産価格の値動きが互いにどのように相関しているかを統計的に示す指標で、金融工学で広く応用されています。共分散が高いということは、株価の値動きが激しく、ボラティリティーが高いことを意味します。そのため、この指数は、全体のリスクを減らすためにどのような資産をポートフォリオに含めるべきかを判断するのに役立ちます。</p></li>
+<li><p><font size=4em ><span class="math notranslate nohighlight">\(q\)</span></font> iはリスクファクター（リスク許容度）と呼ばれ、個人のリスクを取る意思や能力を評価したものです。
+例えば、自動化されたファイナンシャル・アドバイジング・サービス、いわゆるロボ・アドバイジングを利用する際には、通常、異なるリスク許容度が表示されます。このq値はそのようなものと同じで、0から1の間の値をとります。</p></li>
+<li><p><font size=4em ><span class="math notranslate nohighlight">\(𝝁\)</span></font> (mu) は期待リターンで、当然ながら最大化を目指します。</p></li>
+<li><p><font size=4em ><span class="math notranslate nohighlight">\(n\)</span></font> は選択可能なアセットの数です。</p></li>
+<li><p><font size=4em ><span class="math notranslate nohighlight">\(B\)</span></font> はBudget（予算）の略ですが、ここでいう「予算」とは、ポートフォリオに割り当てることのできる資産の数を意味します。</p></li>
+</ul>
+<section id="id6">
+<h3>ゴール:<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<p>ゴールは<strong>x</strong>値を見つけることです。ここでいうx値とは、どの資産を選ぶか（𝑥[𝑖]=1）、どの資産を選ばないか（𝑥[𝑖]=0）を示すものです。</p>
+</section>
+<section id="id7">
+<h3>仮定:<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<p>この演習では、簡単のために以下を仮定しています。</p>
+<ul class="simple">
+<li><p>すべての資産の価格は同じである（1に正規化）。</p></li>
+<li><p>予算<span class="math notranslate nohighlight">\(B\)</span>をすべて使わなければならない、つまり、正確に<span class="math notranslate nohighlight">\(B\)</span>個の資産を選択しなければならない。</p></li>
+<li><p>等式制約 <span class="math notranslate nohighlight">\(1^n x = B\)</span> はペナルティ項 <span class="math notranslate nohighlight">\((1^n x - B)^2\)</span> にマッピングされ、このペナルティ項はパラメータでスケーリングされ、目的関数から減算される。</p></li>
+</ul>
+</section>
+</section>
+<section id="step-1">
+<h2>Step 1. 必要なライブラリをインポートします。<a class="headerlink" href="#step-1" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Let us begin by importing necessary libraries.</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">Aer</span>
+<span class="kn">from</span> <span class="nn">qiskit.algorithms</span> <span class="kn">import</span> <span class="n">VQE</span><span class="p">,</span> <span class="n">QAOA</span><span class="p">,</span> <span class="n">NumPyMinimumEigensolver</span>
+<span class="kn">from</span> <span class="nn">qiskit.algorithms.optimizers</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit.library</span> <span class="kn">import</span> <span class="n">TwoLocal</span>
+<span class="kn">from</span> <span class="nn">qiskit.utils</span> <span class="kn">import</span> <span class="n">QuantumInstance</span>
+<span class="kn">from</span> <span class="nn">qiskit.utils</span> <span class="kn">import</span> <span class="n">algorithm_globals</span>
+<span class="kn">from</span> <span class="nn">qiskit_finance</span> <span class="kn">import</span> <span class="n">QiskitFinanceError</span>
+<span class="kn">from</span> <span class="nn">qiskit_finance.applications.optimization</span> <span class="kn">import</span> <span class="n">PortfolioOptimization</span>
+<span class="kn">from</span> <span class="nn">qiskit_finance.data_providers</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">qiskit_optimization.algorithms</span> <span class="kn">import</span> <span class="n">MinimumEigenOptimizer</span> 
+<span class="kn">from</span> <span class="nn">qiskit_optimization.applications</span> <span class="kn">import</span> <span class="n">OptimizationApplication</span>
+<span class="kn">from</span> <span class="nn">qiskit_optimization.converters</span> <span class="kn">import</span> <span class="n">QuadraticProgramToQubo</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">sympy.utilities.exceptions</span> <span class="kn">import</span> <span class="n">SymPyDeprecationWarning</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">SymPyDeprecationWarning</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2">
+<h2>Step 2. 時系列データ（金融データ）の生成<a class="headerlink" href="#step-2" title="Permalink to this heading">#</a></h2>
+<p>まず、全銘柄数n=4のランダムな時系列金融データを生成してみましょう。これにはRandomDataProviderを使います。ここではある4銘柄について、過去にさかのぼって、1955年11月5日から1985年10月26日までの金融データを取得しています。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set parameters for assets and risk factor</span>
+<span class="n">num_assets</span> <span class="o">=</span> <span class="mi">4</span>     <span class="c1"># set number of assets to 4</span>
+<span class="n">q</span> <span class="o">=</span> <span class="mf">0.5</span>                   <span class="c1"># set risk factor to 0.5</span>
+<span class="n">budget</span> <span class="o">=</span> <span class="mi">2</span>           <span class="c1"># set budget as defined in the problem</span>
+<span class="n">seed</span> <span class="o">=</span> <span class="mi">132</span>     <span class="c1">#set random seed</span>
+
+<span class="c1"># Generate time series data</span>
+<span class="n">stocks</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;STOCK</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_assets</span><span class="p">)]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">RandomDataProvider</span><span class="p">(</span><span class="n">tickers</span><span class="o">=</span><span class="n">stocks</span><span class="p">,</span>
+                 <span class="n">start</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">1955</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span>   
+                 <span class="n">end</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">1985</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">26</span><span class="p">),</span>  
+                 <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s plot our finanical data</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">cnt</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">_tickers</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">cnt</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;days&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;stock value&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3">
+<h2>Step 3. 期待リターンと共分散行列の取得<a class="headerlink" href="#step-3" title="Permalink to this heading">#</a></h2>
+<p>まず、期待リターンと共分散行列を計算しましょう。</p>
+</section>
+<section id="id8">
+<h2>期待リターン μ<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<p>ポートフォリオの期待リターンとは、ポートフォリオが生み出す可能性のあるリターンの予想値であり、ポートフォリオの可能なリターン分布の平均（平均値）となります。
+例えば、銘柄A、B、Cがそれぞれ50％、20％、30％の割合でポートフォリオに組み込まれていたとします。 各銘柄の期待リターンがそれぞれ15％、6％、9％だった場合、ポートフォリオの期待リターンの計算式は以下のようになります。<br></p>
+<div align="center"> μ = (50% x 15%) + (20% x 6%) + (30% x 9%) = 11.4% </div>
+<p>QiskitのRandomDataProviderが提供する以下の<code class="docutils literal notranslate"><span class="pre">get_period_return_mean_vector()</span></code>メソッドを使用することで、先ほど生成した時系列データについて、期待リターンを計算することができます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Let&#39;s calculate the expected return for our problem data</span>
+
+<span class="n">mu</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get_period_return_mean_vector</span><span class="p">()</span>   <span class="c1"># Returns a vector containing the mean value of each asset&#39;s expected return.</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id9">
+<h3>共分散行列 Σ<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
+<p>共分散Σは、2つの資産の平均リターンが互いにどのように変化するかを示す統計的な尺度で、投資ポートフォリオの観点からリスクの大きさを理解し、株式の売買を決定するのに役立ちます。</p>
+<p>自分のポートフォリオにn個の銘柄がある場合、共分散行列の大きさはn×nとなります。
+今回の4銘柄のポートフォリオの共分散行列をプロットすると、4×4の行列になります。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s plot our covariance matrix Σ（sigma）</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get_period_return_covariance_matrix</span><span class="p">()</span> <span class="c1">#Returns the covariance matrix of the four assets</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">x_label_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;stock3&#39;</span><span class="p">,</span> <span class="s1">&#39;stock2&#39;</span><span class="p">,</span> <span class="s1">&#39;stock1&#39;</span><span class="p">,</span> <span class="s1">&#39;stock0&#39;</span><span class="p">]</span>
+<span class="n">y_label_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;stock3&#39;</span><span class="p">,</span> <span class="s1">&#39;stock2&#39;</span><span class="p">,</span> <span class="s1">&#39;stock1&#39;</span><span class="p">,</span> <span class="s1">&#39;stock0&#39;</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="o">-</span><span class="mf">0.75</span><span class="p">,</span><span class="o">-</span><span class="mf">0.25</span><span class="p">,</span><span class="mf">0.25</span><span class="p">,</span><span class="mf">0.75</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mf">0.75</span><span class="p">,</span><span class="mf">0.25</span><span class="p">,</span><span class="o">-</span><span class="mf">0.25</span><span class="p">,</span><span class="o">-</span><span class="mf">0.75</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">x_label_list</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">y_label_list</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.000002</span><span class="p">,</span> <span class="mf">0.00001</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>左から右への対角成分（下図の黄色で示された値）は、ある銘柄の「自身」との関係を示しています。また、非対角線上の値は、各銘柄の平均期待収益率の互いの偏差を示しています。 共分散行列の簡単な見方は次の通りです。</p>
+<ul class="simple">
+<li><p>2つの銘柄が同時に増加・減少すれば、共分散の値は正の値になります。</p></li>
+<li><p>一方が上昇し、他方が下降した場合、共分散の値は負になります。</p></li>
+</ul>
+<p><img alt="" src="_images/2021-autumn-lab1_ex1-05.png" /></p>
+<p>“Don’t Put All Your Eggs in One Basket （卵は一つのカゴに盛るな）”という言葉を聞いたことがあるかもしれません。常に同じ方向に動くものに投資していると、同時にすべての資金を失うリスクがあります。共分散行列は、そのようなリスクを減らすために、投資家が資産を分散させるのに役立つ指標です。</p>
+<p>これで、最適化のためのポートフォリオを構築するために必要なすべての値が揃ったので、ポートフォリオを二次計画問題に定式化し、最適化問題に落とし込んでくれるのを手助けしてくれるQiskit Financeのアプリケーションクラスをみていきましょう。</p>
+</section>
+<section id="qiskit-finance">
+<h3>Qiskit Finance のポートフォリオ最適化クラス<a class="headerlink" href="#qiskit-finance" title="Permalink to this heading">#</a></h3>
+<p>ステップ2からステップ4までのなかで計算したポートフォリオを特徴づける値を入力としえ、<a class="reference external" href="https://qiskit.org/documentation/finance/stubs/qiskit_finance.applications.PortfolioOptimization.html#qiskit_finance.applications.PortfolioOptimization"><code class="docutils literal notranslate"><span class="pre">PortfolioOptimization(ポートフォリオ最適化クラス)</span></code></a> をつかってポートフォリオ・インスタンスをつくります。</p>
+<p>PortfolioOptimization クラスは以下 <strong>５つの引数</strong> をとり、そのインスタンスを二次計画問題に変換する準備を行います。</p>
+<ul class="simple">
+<li><p>expected_returns</p></li>
+<li><p>covariances</p></li>
+<li><p>risk_factor</p></li>
+<li><p>budget</p></li>
+<li><p>bounds</p></li>
+</ul>
+<p>ポートフォリオのインスタンスが二次計画問題に変換されれば、変分量子固有値ソルバー（VQE）や量子近似最適化アルゴリズム（QAOA）などの量子変分法を用いて、問題の最適解を求めることができます。<br></p>
+<p>ポートフォリオの資産選択の変数がバイナリ変数の場合、「bounds = None」と設定してください。</p>
+<p>すでにステップ3で期待リターンと共分散を得ており、リスクファクターとバジェットも事前に定義されています。それでは、 <a class="reference external" href="https://qiskit.org/documentation/finance/stubs/qiskit_finance.applications.PortfolioOptimization.html#qiskit_finance.applications.PortfolioOptimization"><code class="docutils literal notranslate"><span class="pre">PortfolioOptimization</span></code></a> クラスを使って、ポートフォリオを構築してみましょう。</p>
+</section>
+</section>
+<section id="challenge-1a">
+<h2>Challenge 1a<a class="headerlink" href="#challenge-1a" title="Permalink to this heading">#</a></h2>
+<div class="admonition-portfoliooptimization admonition">
+<p class="admonition-title">PortfolioOptimizationクラスを使用したポートフォリオインスタンスの作成</p>
+<p><a class="reference external" href="https://qiskit.org/documentation/finance/stubs/qiskit_finance.applications.PortfolioOptimization.html#qiskit_finance.applications.PortfolioOptimization">PortfolioOptimization</a> クラスを使って、ポートフォリオのインスタンスを生成するコードを完成させてください。<strong>5つの引数</strong>に前ステップで取得した値を代入し、インスタンスを二次計画問題 <strong>qp</strong> に変換してください。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">##############################</span>
+<span class="c1"># 以下にコードを入力</span>
+
+<span class="n">portfolio</span> <span class="o">=</span>
+<span class="n">qp</span> <span class="o">=</span> 
+
+<span class="c1">##############################</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">qp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">##############################</span>
+<span class="c1"># 以下にコードを入力</span>
+
+<span class="n">portfolio</span> <span class="o">=</span>
+<span class="n">qp</span> <span class="o">=</span> 
+
+<span class="c1">##############################</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">qp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you were able to successfully generate the code, you should see a standard representation of the formulation of our qudratic program.</p>
+</section>
+<section id="minimum-eigen-optimizer">
+<h2>Minimum Eigen Optimizer（最小固有値オプティマイザー）<a class="headerlink" href="#minimum-eigen-optimizer" title="Permalink to this heading">#</a></h2>
+<p>興味深いことに、このポートフォリオ最適化問題は、ハミルトニアンの基底状態を求める問題として解くことができます。ハミルトニアンとは、シミュレーションしたい物理系の全エネルギーを表すエネルギー関数と考えることができます。この物理系は、さらに <a class="reference external" href="https://en.wikipedia.org/wiki/Ising_model"><strong>イジングモデル</strong></a> と呼ばれる数学モデルで表現することができます。この数学モデルは、バイナリ変数をスピンアップ(+1)またはスピンダウン(-1)と呼ばれる状態に変換するためのフレームワークを提供します。</p>
+<p>最適化アルゴリズムを適用する際には、通常、適性なフォーマットに変換して適用可能な状態にする必要があります。今回適用するVQEやQAOAのような変分量子アルゴリズムは<a class="reference external" href="https://en.wikipedia.org/wiki/Quadratic_unconstrained_binary_optimization"><strong>二次非制約二次最適化(QUBO)</strong></a>問題に適用するため, Qiskitは自動的に適切なフォーマットにマッピングするコンバータを提供します。</p>
+<p><img alt="" src="_images/2021-autumn-lab1_ex1-04.png" /></p>
+<p>QUBOを解くことは、ハミルトニアンの基底状態を求めることに相当します。Minimum Eigen Optimizer（最小固有値オプティマイザー）は、二次プログラムをハミルトニアンに変換し、VQEやQAOAなどの所定の最小固有値ソルバーを呼び出して基底状態を計算し、最適化の結果を返します。</p>
+<p>このアプローチにより、最適化問題を解く際に基底状態の計算を利用することができます。次のステップの課題でこの手続きを実装してみましょう。</p>
+</section>
+<section id="step-5">
+<h2>Step 5. 古典的なオプティマイザーで参考値を取得<a class="headerlink" href="#step-5" title="Permalink to this heading">#</a></h2>
+<p>参考値として、今回の最適化問題解の理論値をさNumPyMinimumEigensolverを使ってまずは取得します。問題は「ising」に設定しています。量子計算ではなく古典的に計算されるので、バックエンドは必要ありません。結果はdictionary型として返されます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exact_mes</span> <span class="o">=</span> <span class="n">NumPyMinimumEigensolver</span><span class="p">()</span>
+<span class="n">exact_eigensolver</span> <span class="o">=</span> <span class="n">MinimumEigenOptimizer</span><span class="p">(</span><span class="n">exact_mes</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">exact_eigensolver</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">qp</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>ここで表示されるOptimal Valueとは、どの銘柄が選択されたかを示しています。例えばOptimal Value [1. 1. 0. 0.] は STOCK2とSTOCK3が選択されたポートフォリオを意味します。</p>
+</div>
+</section>
+<section id="challenge-1b">
+<h2>Challenge 1b<a class="headerlink" href="#challenge-1b" title="Permalink to this heading">#</a></h2>
+<p>**Variational Quantum Eigensolver (VQE)**は、古典と量子のハイブリッドアルゴリズムであり、 <a class="reference external" href="https://en.wikipedia.org/wiki/Hamiltonian_(quantum_mechanics)"><strong>Hamiltonian</strong></a>の基底エネルギー(最も低いエネルギー状態)を効率的に計算するために、処理負荷の一部を古典計算機に託します。 先ほど説明したように、二次プログラムを<a class="reference external" href="https://qiskit.org/documentation/stubs/qiskit.algorithms.VQE.html"><strong>VQE</strong></a> で解く基底状態エネルギーの探索問題として再構築することができます。この課題では、VQEを用いて最適解を求めます。</p>
+<div class="admonition-vqe admonition">
+<p class="admonition-title">VQEをつかったソリューション</p>
+<p>Variational Quantum Eigensolver(VQE)を使って同じ最適解を求めます。以下に使用するオプティマイザー(optimizer)と変分形式を指定します。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">SLSQP</span><span class="p">(</span><span class="n">maxiter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>  
+<span class="n">algorithm_globals</span><span class="o">.</span><span class="n">random_seed</span> <span class="o">=</span> <span class="mi">1234</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+
+
+<span class="c1">##############################</span>
+<span class="c1"># Provide your code here</span>
+
+<span class="n">vqe</span> <span class="o">=</span> 
+
+
+<span class="c1">##############################</span>
+
+<span class="n">vqe_meo</span> <span class="o">=</span> <span class="n">MinimumEigenOptimizer</span><span class="p">(</span><span class="n">vqe</span><span class="p">)</span>  <span class="c1">#please do not change this code</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">vqe_meo</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">qp</span><span class="p">)</span>  <span class="c1">#please do not change this code</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>    <span class="c1">#please do not change this code</span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>行き詰まったら、このqiskitチュートリアルを参考に問題設定に応じて適宜調整してください。<br />
+https://qiskit.org/documentation/finance/tutorials/01_portfolio_optimization.html</p>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">SLSQP</span><span class="p">(</span><span class="n">maxiter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>  
+<span class="n">algorithm_globals</span><span class="o">.</span><span class="n">random_seed</span> <span class="o">=</span> <span class="mi">1234</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+
+
+<span class="c1">##############################</span>
+<span class="c1"># Provide your code here</span>
+
+<span class="n">vqe</span> <span class="o">=</span> 
+
+
+<span class="c1">##############################</span>
+
+<span class="n">vqe_meo</span> <span class="o">=</span> <span class="n">MinimumEigenOptimizer</span><span class="p">(</span><span class="n">vqe</span><span class="p">)</span>  <span class="c1">#please do not change this code</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">vqe_meo</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">qp</span><span class="p">)</span>  <span class="c1">#please do not change this code</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>    <span class="c1">#please do not change this code</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>古典のオプティマイザーから得られた基準解と同じ最適解がVQEでも求まるはずです。</p>
+</section>
+<section id="challenge-1c">
+<h2>Challenge 1c<a class="headerlink" href="#challenge-1c" title="Permalink to this heading">#</a></h2>
+<p>このチャレンジ演習では、同じ問題を、今度はB=3で、1つの銘柄を２つ保有できる場合を考えていきます。(例えば、STOCK3を2つ保有、STOCK2を1つ保有した場合のポートフォリオは[2, 1, 0, 0]となります。また、STOCK0、STOCK1、STOCK02をそれぞれ、１株ずつ保有した場合、ポートフォリオは[0, 1, 1, 1]となります。) <br>
+この新しい制約条件を用いて、リスクとリターンのトレードオフを最小化する最適なポートフォリオを求めてください。</p>
+<div class="admonition-b-3-n-4 admonition">
+<p class="admonition-title">B=3, n=4 銘柄のポートフォリオ最適化問題</p>
+<p>PortfolioOptimization クラスを使用して、ポートフォリオのインスタンスを生成するコードを完成させます。<br />
+予算=3の場合、1つの資産に2倍のウェイトを割り当てることができる最適なポートフォリオを見つけてください。<br />
+最後にQAOAを使って最適解を見つけ、答えを提出してください。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 4. Set parameters and constraints based on this challenge 1c</span>
+
+<span class="c1">##############################</span>
+<span class="c1"># Provide your code here</span>
+
+<span class="n">q2</span> <span class="o">=</span>      <span class="c1">#Set risk factor to 0.5</span>
+<span class="n">budget2</span> <span class="o">=</span>      <span class="c1">#Set budget to 3</span>
+
+<span class="c1">##############################</span>
+
+<span class="c1"># Step 5. Complete code to generate the portfolio instance</span>
+
+
+<span class="c1">##############################</span>
+<span class="c1"># Provide your code here</span>
+
+<span class="n">portfolio2</span> <span class="o">=</span>
+<span class="n">qp2</span> <span class="o">=</span> 
+
+
+<span class="c1">##############################</span>
+
+<span class="c1"># Step 6. Now let&#39;s use QAOA to solve this problem. </span>
+
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">SLSQP</span><span class="p">(</span><span class="n">maxiter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>  
+<span class="n">algorithm_globals</span><span class="o">.</span><span class="n">random_seed</span> <span class="o">=</span> <span class="mi">1234</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+
+<span class="c1">##############################</span>
+<span class="c1"># Provide your code here </span>
+
+<span class="n">qaoa</span> <span class="o">=</span> 
+
+
+<span class="c1">##############################</span>
+
+<span class="n">qaoa_meo</span> <span class="o">=</span> <span class="n">MinimumEigenOptimizer</span><span class="p">(</span><span class="n">qaoa</span><span class="p">)</span> <span class="c1">#please do not change this code</span>
+
+<span class="n">result2</span> <span class="o">=</span> <span class="n">qaoa_meo</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">qp2</span><span class="p">)</span>  <span class="c1">#please do not change this code</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result2</span><span class="p">)</span> <span class="c1">#please do not change this code</span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>STOCK0, STOCK1, STOCK2, STOCK3のどれでも、ポートフォリオの中で2倍のウェイトを持つことができるケースです。整数変数に対応するためには、どのようにコードを変更すればよいでしょうか。</p>
+</div>
+</div>
+</section>
+<section id="id10">
+<h2>Step 1: 必要なライブラリをインポートします。<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Step 1: Let us begin by importing necessary libraries</span>
+<span class="kn">import</span> <span class="nn">qiskit</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">Aer</span>
+<span class="kn">from</span> <span class="nn">qiskit.algorithms</span> <span class="kn">import</span> <span class="n">VQE</span><span class="p">,</span> <span class="n">QAOA</span><span class="p">,</span> <span class="n">NumPyMinimumEigensolver</span>
+<span class="kn">from</span> <span class="nn">qiskit.algorithms.optimizers</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit.library</span> <span class="kn">import</span> <span class="n">TwoLocal</span>
+<span class="kn">from</span> <span class="nn">qiskit.utils</span> <span class="kn">import</span> <span class="n">QuantumInstance</span>
+<span class="kn">from</span> <span class="nn">qiskit.utils</span> <span class="kn">import</span> <span class="n">algorithm_globals</span>
+<span class="kn">from</span> <span class="nn">qiskit_finance</span> <span class="kn">import</span> <span class="n">QiskitFinanceError</span>
+<span class="kn">from</span> <span class="nn">qiskit_finance.applications.optimization</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">qiskit_finance.data_providers</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">qiskit_optimization.algorithms</span> <span class="kn">import</span> <span class="n">MinimumEigenOptimizer</span>
+<span class="kn">from</span> <span class="nn">qiskit_optimization.applications</span> <span class="kn">import</span> <span class="n">OptimizationApplication</span>
+<span class="kn">from</span> <span class="nn">qiskit_optimization.converters</span> <span class="kn">import</span> <span class="n">QuadraticProgramToQubo</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">sympy.utilities.exceptions</span> <span class="kn">import</span> <span class="n">SymPyDeprecationWarning</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span><span class="n">SymPyDeprecationWarning</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>以下にとりかかりのためのコードを提供します。######で区切られた箇所にご自身のコードを入力ください。</p>
+</section>
+<section id="id11">
+<h2>Step 2: 時系列データ（金融データ）の生成<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 2. Generate time series data for four assets. </span>
+<span class="c1"># Do not change start/end dates specified to generate problem data.</span>
+<span class="n">seed</span> <span class="o">=</span> <span class="mi">132</span> 
+<span class="n">num_assets</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">stocks</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;STOCK</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_assets</span><span class="p">)]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">RandomDataProvider</span><span class="p">(</span><span class="n">tickers</span><span class="o">=</span><span class="n">stocks</span><span class="p">,</span>
+                 <span class="n">start</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">1955</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span>   
+                 <span class="n">end</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">1985</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">26</span><span class="p">),</span>  
+                 <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s plot our finanical data (We are generating the same time series data as in the previous example.)</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">cnt</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">_tickers</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">cnt</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;days&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;stock value&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id12">
+<h2>Step 3: 期待リターンと共分散行列の取得<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 3. Calculate mu and sigma for this problem</span>
+
+<span class="n">mu2</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get_period_return_mean_vector</span><span class="p">()</span>   <span class="c1">#Returns a vector containing the mean value of each asset.</span>
+<span class="n">sigma2</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get_period_return_covariance_matrix</span><span class="p">()</span> <span class="c1">#Returns the covariance matrix associated with the assets.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mu2</span><span class="p">,</span> <span class="n">sigma2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-4-1c">
+<h2>Step 4: チャレンジ1cの問題設定に基づく変数設定を行ってください。<a class="headerlink" href="#step-4-1c" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 4. Set parameters and constraints based on this challenge 1c</span>
+
+<span class="c1">##############################</span>
+<span class="c1"># Provide your code here</span>
+
+<span class="n">q2</span> <span class="o">=</span>      <span class="c1">#Set risk factor to 0.5</span>
+<span class="n">budget2</span> <span class="o">=</span>      <span class="c1">#Set budget to 3</span>
+
+<span class="c1">##############################</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id13">
+<h2>Step 5: ポートフォリオ・インスタンスを生成するコードを完成させてください。<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 5. Complete code to generate the portfolio instance</span>
+
+
+<span class="c1">##############################</span>
+<span class="c1"># Provide your code here</span>
+
+<span class="n">portfolio2</span> <span class="o">=</span>
+<span class="n">qp2</span> <span class="o">=</span> 
+
+
+<span class="c1">##############################</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-6-qaoa">
+<h2>Step 6: QAOAをつかったソリューション<a class="headerlink" href="#step-6-qaoa" title="Permalink to this heading">#</a></h2>
+<p><strong>Quantum Approximate Optimization Algorithm(QAOA)</strong> は、もう一つの変分量子アルゴリズムで、小中規模のノイズ有の量子デバイス上での組合せ最適化問題を解くのに応用されています。このアルゴリズムはハミルトニアンの基底状態を求めるのにも使われており、Qiskitの<a class="reference external" href="https://qiskit.org/documentation/stubs/qiskit.algorithms.QAOA.html"><strong>QAOA</strong></a> アプリケーションをつかって簡単に実装することができます。（QAOAについては第4回の課題でより詳しい解説が予定されています。この演習ではまず、Qiskitを使ったQAOAの基本的な実装に焦点を当てています)。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 6. Now let&#39;s use QAOA to solve this problem. </span>
+
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">SLSQP</span><span class="p">(</span><span class="n">maxiter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>  
+<span class="n">algorithm_globals</span><span class="o">.</span><span class="n">random_seed</span> <span class="o">=</span> <span class="mi">1234</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+
+<span class="c1">##############################</span>
+<span class="c1"># Provide your code here </span>
+
+<span class="n">qaoa</span> <span class="o">=</span> 
+
+
+<span class="c1">##############################</span>
+
+<span class="n">qaoa_meo</span> <span class="o">=</span> <span class="n">MinimumEigenOptimizer</span><span class="p">(</span><span class="n">qaoa</span><span class="p">)</span> <span class="c1">#please do not change this code</span>
+
+<span class="n">result2</span> <span class="o">=</span> <span class="n">qaoa_meo</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">qp2</span><span class="p">)</span>  <span class="c1">#please do not change this code</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result2</span><span class="p">)</span> <span class="c1">#please do not change this code</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>注：QAOAの実行には最大で数分かかることがあります。</p>
+</section>
+<section id="id14">
+<h2>更に学びたい方へ:<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h2>
+<p>入門レベルの最初のチャレンジを無事に解いた皆さん、<strong>おめでとうございます！</strong> <br>
+ポートフォリオ最適化について、またQiskitのFinanceモジュールを使った演習を解く方法について学ぶことができたのではないでしょうか。<br>今回登場した変分量子アルゴリズムをつかった最適化問題について更に深く学びたい方は以下の文献をご覧ください。
+<br></p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://arxiv.org/abs/1710.01022"><strong>Quantum optimization using variational algorithms on near-term quantum devices. Moll et al. 2017</strong></a><br></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/1907.04769"><strong>Improving Variational Quantum Optimization using CVaR. Barkoutsos et al. 2019.</strong></a><br></p></li>
+</ol>
+</section>
+<section id="additional-information">
+<h2>Additional information<a class="headerlink" href="#additional-information" title="Permalink to this heading">#</a></h2>
+<p><strong>Created by:</strong> Yuri Kobayashi</p>
+<p><strong>Version:</strong> 1.0.0</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2020-w3-false-asteroids_bk.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">作り損ねた惑星問題（2020年 Week3）</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="2022-spring-lab1-tb-model.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">強結合モデル（2022年春 Lab1）</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">はじめに：ポートフォリオ最適化とは？</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge">Challenge</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1. 効率的フロンティアを求めて</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2. 演習の目的</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">3. 四銘柄のポートフォリオ最適化問題</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">4. 問題の定式化</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">ゴール:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">仮定:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1">Step 1. 必要なライブラリをインポートします。</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2">Step 2. 時系列データ（金融データ）の生成</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3">Step 3. 期待リターンと共分散行列の取得</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">期待リターン μ</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">共分散行列 Σ</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qiskit-finance">Qiskit Finance のポートフォリオ最適化クラス</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-1a">Challenge 1a</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minimum-eigen-optimizer">Minimum Eigen Optimizer（最小固有値オプティマイザー）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5">Step 5. 古典的なオプティマイザーで参考値を取得</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-1b">Challenge 1b</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-1c">Challenge 1c</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Step 1: 必要なライブラリをインポートします。</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">Step 2: 時系列データ（金融データ）の生成</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">Step 3: 期待リターンと共分散行列の取得</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-1c">Step 4: チャレンジ1cの問題設定に基づく変数設定を行ってください。</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">Step 5: ポートフォリオ・インスタンスを生成するコードを完成させてください。</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-qaoa">Step 6: QAOAをつかったソリューション</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">更に学びたい方へ:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-information">Additional information</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Quantum Tokyo
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
