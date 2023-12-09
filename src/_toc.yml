@@ -26,7 +26,7 @@ parts:
   #   - file: 2023-spring-lab3-iqpe
   - caption: "第４章 量子コンピューターの応用"
     chapters:
-  #   - file: 2021-autumn-lab1-portfolio
+      - file: 2021-autumn-lab1-portfolio_bk
   #   - file: 2021-spring-lab5-vqe
   #   - file: 2021-autumn-lab2-oled
       - file: 2022-spring-lab1-tb-model
