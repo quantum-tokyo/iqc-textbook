@@ -6,6 +6,9 @@ root: intro
 defaults: # The defaults key will be applied to all chapters and sub-sections
   titlesonly: True
 parts:
+  - caption: "第１章 はじめてのQiskit"
+    chapters:
+      - file: 2023-spring-lab1-sample
   - caption: "第２章 量子コンピューターの計算ルール"
     chapters:
       - file: 2019-w1-adder
@@ -21,7 +24,7 @@ parts:
   #   - file: 2020-w3-false-asteroids
   #   - file: 2021-spring-lab2-shor
   #   - file: 2023-spring-lab3-iqpe
-  - caption: "第4章 量子コンピューターの応用"
+  - caption: "第４章 量子コンピューターの応用"
     chapters:
   #   - file: 2021-autumn-lab1-portfolio
   #   - file: 2021-spring-lab5-vqe
@@ -36,12 +39,9 @@ parts:
   #   - file: 2022-autumn-lab3-optimization
   #   - file: 2021-autumn-lab3-img-classification
   #   - file: 2022-autumn-lab2-quantum-kernel
-  # - caption: "第5章 量子コンピューターのエラー訂正・緩和"
+  # - caption: "第５章 量子コンピューターのエラー訂正・緩和"
   #   chapters:
   #   - file: 2022-autumn-lab1-runtime
   #   - file: 2021-spring-lab3-error-correction
   #   - file: 2023-spring-lab4-error-correction
   #   - file: 2023-spring-lab5-127qubits
-  - caption: "Test: 2023Spring"
-    chapters:
-      - file: sample-2023-spring-lab1-ja
