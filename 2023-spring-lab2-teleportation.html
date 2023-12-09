@@ -177,6 +177,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">第４章 量子コンピューターの応用</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="2022-spring-lab1-tb-model.html">強結合モデル（2022年春 Lab1）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-spring-lab2-tb-model.html">5点の強結合格子（2022年春 Lab2）</a></li>
 </ul>
 
     </div>
@@ -508,8 +509,8 @@ document.write(`
 CNOTゲートは2量子ビットゲートで、入力に制御量子ビットとターゲット量子ビットを指定する必要があります。<br />
 ここではアリスのもつ量子ビットを制御量子ビットに、ボブのもつ量子ビットをターゲット量子ビットに設定します。</p>
 <p>ここで、メッセージ量子ビット<span class="math notranslate nohighlight">\(s\)</span>の状態を<span class="math notranslate nohighlight">\(\ket{\psi}\)</span>とおくと、3量子ビットの量子状態は以下のように表すことが出来ます。</p>
-<div class="amsmath math notranslate nohighlight" id="equation-efaee940-d88a-4c28-84db-288f55132462">
-<span class="eqno">(1)<a class="headerlink" href="#equation-efaee940-d88a-4c28-84db-288f55132462" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-79905512-4084-4e41-b8ac-c6ea992e1e1a">
+<span class="eqno">(1)<a class="headerlink" href="#equation-79905512-4084-4e41-b8ac-c6ea992e1e1a" title="Permalink to this equation">#</a></span>\[\begin{align}
     \ket{\psi}\ket{B_{00}} &amp;= (\alpha\ket{0}+\beta\ket{1})(\frac{1}{\sqrt{2}}(\ket{00}+\ket{11})) \\
      &amp;= \frac{1}{\sqrt{2}}(\alpha\ket{000}+\alpha\ket{011}+\beta\ket{100}+\beta\ket{111})
 \end{align}\]</div>
@@ -810,17 +811,7 @@ CNOTゲートは2量子ビットゲートで、入力に制御量子ビットと
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">transpile</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">qiskit_aer</span> <span class="kn">import</span> <span class="n">AerSimulator</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="kn">import</span> <span class="n">plot_histogram</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">sim</span> <span class="o">=</span> <span class="n">AerSimulator</span><span class="p">()</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;qiskit_aer&#39;
-</pre></div>
-</div>
+<img alt="_images/bac3f9cf0e3caaba8bfbd3d7886482060375cf352d54e3d160c8c737ec9d9da9.png" src="_images/bac3f9cf0e3caaba8bfbd3d7886482060375cf352d54e3d160c8c737ec9d9da9.png" />
 </div>
 </div>
 <div class="tip admonition">
@@ -839,7 +830,7 @@ CNOTゲートは2量子ビットゲートで、入力に制御量子ビットと
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/791598183f04cf5c623f094ce67cbe8a849f0a3767a5bfa0e136545a308acc83.png" src="_images/791598183f04cf5c623f094ce67cbe8a849f0a3767a5bfa0e136545a308acc83.png" />
+<img alt="_images/115966fcb336acbbbc8abfe6684c8c82fca1d85143dd597605f1b60e89cf725b.png" src="_images/115966fcb336acbbbc8abfe6684c8c82fca1d85143dd597605f1b60e89cf725b.png" />
 </div>
 </div>
 <p>周辺分布は、理想的な確率にある程度は近いはずです。</p>

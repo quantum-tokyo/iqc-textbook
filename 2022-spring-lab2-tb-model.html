@@ -1,0 +1,1300 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>5点の強結合格子（2022年春 Lab2） &#8212; IBM Quantum Challengeで学ぶ量子コンピューティング</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '2022-spring-lab2-tb-model';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="強結合モデル（2022年春 Lab1）" href="2022-spring-lab1-tb-model.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/quantum-tokyo-icon.jpg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/quantum-tokyo-icon.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    IBM Quantum Challengeで学ぶ量子コンピューティング
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">第１章 はじめてのQiskit</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2023-spring-lab1-sample.html">サンプル問題（2023年春）</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">第２章 量子コンピューターの計算ルール</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2019-w1-adder.html">量子回路における加算器（2019年 Week1）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2020-w1-a-adder.html">量子回路における加算器（2020年 Week1a）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2021-spring-lab1-toffoli.html">トフォリゲート(2021年春 Lab1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-spring-lab2-teleportation.html">量子テレポーテーション（2023年 Lab2）</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">第３章 量子アルゴリズム</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2019-w2-grover.html">Groverのアルゴリズム（2019年 Week2）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2020-w2-b-lights-out-puzzle.html">4-ライツアウトパズル（2020年 Week2b）</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">第４章 量子コンピューターの応用</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2022-spring-lab1-tb-model.html">強結合モデル（2022年春 Lab1）</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5点の強結合格子（2022年春 Lab2）</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/quantum-tokyo/iqc-textbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/quantum-tokyo/iqc-textbook/issues/new?title=Issue%20on%20page%20%2F2022-spring-lab2-tb-model.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/2022-spring-lab2-tb-model.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>5点の強結合格子（2022年春 Lab2）</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">粒子輸送</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-question-2a">Challenge question 2a</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">解答例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-question-2b">Challenge question 2b</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">解答例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-question-2c">Challenge question 2c</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">解答例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hardware-challenge-i">Hardware challenge I</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">アンダーソン局在</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-question-2d">Challenge question 2d</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-question-2e">Challenge question 2e</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hardware-challenge-ii">Hardware challenge II</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lab2">
+<h1>5点の強結合格子（2022年春 Lab2）<a class="headerlink" href="#lab2" title="Permalink to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>このNotebookはQiskit v0.44の仕様に合わせてコードを改変しています。</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+
+<span class="c1"># Importing standard Qiskit libraries</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">transpile</span><span class="p">,</span> <span class="n">Aer</span><span class="p">,</span> <span class="n">IBMQ</span><span class="p">,</span> <span class="n">execute</span>
+<span class="kn">from</span> <span class="nn">qiskit.tools.jupyter</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">from</span> <span class="nn">qiskit.tools.monitor</span> <span class="kn">import</span> <span class="n">job_monitor</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="kn">import</span> <span class="n">Parameter</span>
+<span class="kn">import</span> <span class="nn">qiskit.quantum_info</span> <span class="k">as</span> <span class="nn">qi</span>
+
+<span class="c1"># Suppress warnings</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># Importing standard Qiskit libraries</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">transpile</span><span class="p">,</span> <span class="n">Aer</span><span class="p">,</span> <span class="n">IBMQ</span><span class="p">,</span> <span class="n">execute</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="kn">from</span> <span class="nn">qiskit.tools.jupyter</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span> <span class="nn">qiskit.tools.monitor</span> <span class="kn">import</span> <span class="n">job_monitor</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.11.7</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">qiskit</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">jupyter</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">105</span>
+<span class="g g-Whitespace">    </span><span class="mi">103</span> <span class="kn">from</span> <span class="nn">qiskit.providers.fake_provider</span> <span class="kn">import</span> <span class="n">FakeBackend</span>
+<span class="g g-Whitespace">    </span><span class="mi">104</span> <span class="kn">from</span> <span class="nn">qiskit.utils</span> <span class="kn">import</span> <span class="n">optionals</span> <span class="k">as</span> <span class="n">_optionals</span>
+<span class="ne">--&gt; </span><span class="mi">105</span> <span class="kn">from</span> <span class="nn">.jupyter_magics</span> <span class="kn">import</span> <span class="n">ProgressBarMagic</span><span class="p">,</span> <span class="n">StatusMagic</span>
+<span class="g g-Whitespace">    </span><span class="mi">106</span> <span class="kn">from</span> <span class="nn">.progressbar</span> <span class="kn">import</span> <span class="n">HTMLProgressBar</span>
+<span class="g g-Whitespace">    </span><span class="mi">107</span> <span class="kn">from</span> <span class="nn">.version_table</span> <span class="kn">import</span> <span class="n">VersionTable</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.11.7</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">qiskit</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">jupyter</span><span class="o">/</span><span class="n">jupyter_magics</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">27</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="kn">from</span> <span class="nn">qiskit.tools.events.progressbar</span> <span class="kn">import</span> <span class="n">TextProgressBar</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="kn">from</span> <span class="nn">.progressbar</span> <span class="kn">import</span> <span class="n">HTMLProgressBar</span>
+<span class="ne">---&gt; </span><span class="mi">27</span> <span class="kn">from</span> <span class="nn">.library</span> <span class="kn">import</span> <span class="n">circuit_library_widget</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="k">def</span> <span class="nf">_html_checker</span><span class="p">(</span><span class="n">job_var</span><span class="p">,</span> <span class="n">interval</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">_interval_set</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Internal function that updates the status</span>
+<span class="g g-Whitespace">     </span><span class="mi">32</span><span class="sd">     of a HTML job monitor.</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span><span class="sd">         _interval_set (bool): Was interval set by user?</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span><span class="sd">     &quot;&quot;&quot;</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.11.7</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">qiskit</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">jupyter</span><span class="o">/</span><span class="n">library</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">17</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># This code is part of Qiskit.</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1">#</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># (C) Copyright IBM 2017, 2018.</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> 
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="c1"># pylint: disable=invalid-name,no-name-in-module,ungrouped-imports</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;A circuit library widget module&quot;&quot;&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">17</span> <span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">wid</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;ipywidgets&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># https://github.com/qiskit-community/Quantum-Challenge-Grader/blob/main/qc_grader/challenges/spring_2022/helpers/__init__.py</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="kn">import</span> <span class="n">Instruction</span>
+
+<span class="k">def</span> <span class="nf">generate_ZZ</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Instruction</span><span class="p">:</span>
+    <span class="n">ZZ_qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ZZ_qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">ZZ_qr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;ZZ&#39;</span><span class="p">)</span>
+    <span class="n">ZZ_qc</span><span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">ZZ_qc</span><span class="o">.</span><span class="n">rz</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">t</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">ZZ_qc</span><span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">ZZ</span> <span class="o">=</span> <span class="n">ZZ_qc</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">ZZ</span>
+    
+<span class="k">def</span> <span class="nf">generate_XX</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Instruction</span><span class="p">:</span>
+    <span class="n">ZZ</span> <span class="o">=</span> <span class="n">generate_ZZ</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">XX_qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">XX_qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">XX_qr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;XX&#39;</span><span class="p">)</span>
+    <span class="n">XX_qc</span><span class="o">.</span><span class="n">h</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">XX_qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ZZ</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">XX_qc</span><span class="o">.</span><span class="n">h</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">XX</span> <span class="o">=</span> <span class="n">XX_qc</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">XX</span>
+
+<span class="k">def</span> <span class="nf">generate_YY</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Instruction</span><span class="p">:</span>
+    <span class="n">ZZ</span> <span class="o">=</span> <span class="n">generate_ZZ</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">YY_qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">YY_qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">YY_qr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;YY&#39;</span><span class="p">)</span>
+    <span class="n">YY_qc</span><span class="o">.</span><span class="n">sdg</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">YY_qc</span><span class="o">.</span><span class="n">h</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">YY_qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ZZ</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">YY_qc</span><span class="o">.</span><span class="n">h</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">YY_qc</span><span class="o">.</span><span class="n">s</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">YY</span> <span class="o">=</span> <span class="n">YY_qc</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">YY</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">XX</span> <span class="o">=</span> <span class="n">generate_XX</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="n">YY</span> <span class="o">=</span> <span class="n">generate_YY</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>このExerciseでは、5格子点の強格子結合をシミュレーションします。最初に、全ての点のエネルギーが同じ値の強結合ハミルトニアンについて見てみます。5点の強結合格子は以下のハミルトニアンになることを思い出してください：</p>
+<div class="math notranslate nohighlight">
+\[H_{\rm tb}/\hbar = J \sum^{3}_{i=0} (X_i X_{i+1} + Y_i Y_{i+1})\]</div>
+<p>このChallengeでは、一般性を損なわずに、<span class="math notranslate nohighlight">\(\hbar=1\)</span> で <span class="math notranslate nohighlight">\(J=1\)</span>と設定します。</p>
+<section id="id1">
+<h2>粒子輸送<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>強結合系では、粒子の伝搬は連続時間による量子ランダムウォーク(Quantum  Randm Walk、QRW)で表現できます。量子ランダムウォークは古典のランダムウォークの量子力学的なアナロジーです。ランダムウォークはランダムに動く粒子が始点から動いていく過程です。古典的なランダムウォークの元では、時間<span class="math notranslate nohighlight">\(t\)</span>に始点からの位置<span class="math notranslate nohighlight">\(r\)</span>で粒子を発見する確率は、ガウス分布に従います：</p>
+<div class="math notranslate nohighlight">
+\[ p_{\text{classical}}(r,t) \propto e^{-|r|^2/t} \]</div>
+<p>この確率分布の標準偏差は時間の平方根で増大します：<span class="math notranslate nohighlight">\(\sigma_{\text{classical}}= \sqrt{t}\)</span>.　単一粒子の重ね合わせや干渉などの量子力学的性質は古典と量子ランダムウォークの間に質的な違いをもたらします。量子ランダムウォークの元では、始点からの位置<span class="math notranslate nohighlight">\(r\)</span>において量子を発見する確率は<a class="reference external" href="https://en.wikipedia.org/wiki/Bessel_function">第１種ベッセル関数</a>に従います：</p>
+<div class="math notranslate nohighlight">
+\[ p_{\text{quantum}}(r,t) \propto |J_r(2t)|^2 \]</div>
+<p>この確率分布の標準偏差は時間に対して線形です： <span class="math notranslate nohighlight">\(\sigma_{\text{quantum}} = t\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">jv</span>
+
+<span class="n">t_test</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">101</span><span class="p">)</span>
+<span class="n">gaussian</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">t_test</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">t_test</span><span class="p">))</span>
+<span class="n">bessel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">jv</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">t_test</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">jv</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">t_test</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">gaussian</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Gaussian function&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">bessel</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Bessel function&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Position&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability density&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f7386b7745018cfe1420dfd2da5ba5655fc5d6a5029ac17427ff43a728cc0c94.png" src="_images/f7386b7745018cfe1420dfd2da5ba5655fc5d6a5029ac17427ff43a728cc0c94.png" />
+</div>
+</div>
+<p>格子における粒子の空間伝搬は、初期位置から相対的に、平均二乗変位<span class="math notranslate nohighlight">\(⟨x^2⟩= \sum_i p_i x^2_i\)</span>によって計算されます。ここで、<span class="math notranslate nohighlight">\(p_i\)</span>は位置<span class="math notranslate nohighlight">\(i\)</span>において粒子を発見する確率です。古典のランダムウォークは時間に対して、<span class="math notranslate nohighlight">\(⟨x^2⟩ \propto t\)</span>で拡散伝搬します。一方、QRWは平均二乗変位に対して<span class="math notranslate nohighlight">\(⟨x^2⟩ \propto t^2\)</span>のように弾道伝搬性を示します。</p>
+<p>量子ランダムウォークが古典ランダムウォークと比べて2次のスピードアップがあることは、グローバー探索アルゴリズムが古典の探索に比べて2次のスピードアップがあることと類似しています！</p>
+<section id="challenge-question-2a">
+<h3>Challenge question 2a<a class="headerlink" href="#challenge-question-2a" title="Permalink to this heading">#</a></h3>
+<div class="admonition- admonition">
+<p class="admonition-title">時間発展回路の構築</p>
+<p>強結合のハミルトニアンにおいてトロッター展開の時間発展を作る回路にXXゲートとYYゲートを追加してください。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">num_qubits</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1">## DO NOT EDIT</span>
+
+<span class="n">Trot_tb_qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
+<span class="n">Trot_tb_qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">Trot_tb_qr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Trot&#39;</span><span class="p">)</span>
+
+<span class="c1">###EDIT CODE BELOW</span>
+
+
+
+<span class="c1">###DO NOT EDIT BELOW</span>
+
+<span class="n">Trot_tb_gate</span> <span class="o">=</span> <span class="n">Trot_tb_qc</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span>
+
+<span class="n">Trot_tb_qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h3>解答例<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_qubits</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1">## DO NOT EDIT</span>
+
+<span class="n">Trot_tb_qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
+<span class="n">Trot_tb_qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">Trot_tb_qr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Trot&#39;</span><span class="p">)</span>
+
+<span class="n">Trot_tb_qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">YY</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">Trot_tb_qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">XX</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="n">Trot_tb_qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">YY</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">Trot_tb_qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">XX</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+
+<span class="n">Trot_tb_qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">YY</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">Trot_tb_qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">XX</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+<span class="n">Trot_tb_qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">YY</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="n">Trot_tb_qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">XX</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+
+<span class="n">Trot_tb_gate</span> <span class="o">=</span> <span class="n">Trot_tb_qc</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span>
+
+<span class="n">Trot_tb_qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7c7b9fd5ce853f654143cc8e092bd1ee2457fa7058b28959e6721a44f9b0df99.png" src="_images/7c7b9fd5ce853f654143cc8e092bd1ee2457fa7058b28959e6721a44f9b0df99.png" />
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">解説</p>
+<p>lab1の2.3 トロッター分解の式より、まず最初に偶数量子ビットである<span class="math notranslate nohighlight">\(i=0,~2\)</span>の場合について<span class="math notranslate nohighlight">\(YY\)</span>、<span class="math notranslate nohighlight">\(XX\)</span>をかける。その後、奇数量子ビットである<span class="math notranslate nohighlight">\(i=1,~3\)</span>について同様に<span class="math notranslate nohighlight">\(YY\)</span>、<span class="math notranslate nohighlight">\(XX\)</span>をかけることでTrot_tb_gateが作成できる。</p>
+</div>
+</section>
+<section id="challenge-question-2b">
+<h3>Challenge question 2b<a class="headerlink" href="#challenge-question-2b" title="Permalink to this heading">#</a></h3>
+<div class="admonition- admonition">
+<p class="admonition-title">時間発展回路の構築（2)</p>
+<p>次に、励起した形の粒子を <strong>qubit 0</strong> に追加したいと思います。これは、ハミルトニアンにおける時間発展の前に、𝑋ゲートを適用し、量子ビットの状態を|0⟩ から|1⟩に反転させることで完成します。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">delta_t</span><span class="o">=</span><span class="mf">0.15</span> <span class="c1"># DO NOT EDIT</span>
+<span class="n">time_steps</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># DO NOT EDIT</span>
+
+<span class="n">circuits</span><span class="o">=</span><span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">n_steps</span> <span class="ow">in</span> <span class="n">time_steps</span><span class="p">:</span>
+    
+    <span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
+    <span class="n">cr</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span><span class="n">cr</span><span class="p">)</span>
+
+    <span class="c1">###EDIT CODE BELOW</span>
+    
+    <span class="c1">###DO NOT EDIT BELOW</span>
+    
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Trot_tb_gate</span><span class="p">,</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)])</span>
+        
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">qc</span><span class="o">.</span><span class="n">bind_parameters</span><span class="p">({</span><span class="n">t</span><span class="p">:</span> <span class="n">delta_t</span><span class="p">})</span>
+    
+    <span class="n">circuits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id3">
+<h3>解答例<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delta_t</span><span class="o">=</span><span class="mf">0.15</span> <span class="c1"># DO NOT EDIT</span>
+<span class="n">time_steps</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># DO NOT EDIT</span>
+
+<span class="n">circuits</span><span class="o">=</span><span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">n_steps</span> <span class="ow">in</span> <span class="n">time_steps</span><span class="p">:</span>
+    
+    <span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
+    <span class="n">cr</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span><span class="n">cr</span><span class="p">)</span>
+
+    <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Trot_tb_gate</span><span class="p">,</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)])</span>
+        
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">qc</span><span class="o">.</span><span class="n">bind_parameters</span><span class="p">({</span><span class="n">t</span><span class="p">:</span> <span class="n">delta_t</span><span class="p">})</span>
+    
+    <span class="n">circuits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">解説</p>
+<p>素直に0量子ビット目に<span class="math notranslate nohighlight">\(X\)</span>ゲートをかければよい。</p>
+</div>
+<p>各時間ステップにおいて各量子ビットにおける励起状態を見つける確率の軌跡を辿ることで、粒子の動いた軌跡を書くことができます。</p>
+</section>
+<section id="challenge-question-2c">
+<h3>Challenge question 2c<a class="headerlink" href="#challenge-question-2c" title="Permalink to this heading">#</a></h3>
+<div class="admonition- admonition">
+<p class="admonition-title">粒子のシミュレーション</p>
+<p>はじめに、各量子ビットが各時間において<span class="math notranslate nohighlight">\(|1\rangle\)</span>である確率をstatevector_simulatorの出力状態を使って、抽出してください。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">transpile</span>
+
+<span class="c1"># Use Aer&#39;s statevector simulator</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">Aer</span>
+
+<span class="c1"># Run the quantum circuit on a statevector simulator backend</span>
+<span class="n">backend_sim</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+
+<span class="n">probability_density</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">circ</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">circuits</span><span class="p">):</span>
+
+    <span class="n">transpiled_circ</span><span class="o">=</span><span class="n">transpile</span><span class="p">(</span><span class="n">circ</span><span class="p">,</span> <span class="n">backend_sim</span><span class="p">,</span> <span class="n">optimization_level</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">job_sim</span> <span class="o">=</span> <span class="n">backend_sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transpiled_circ</span><span class="p">)</span>
+
+    <span class="c1"># Grab the results from the job.</span>
+    <span class="n">result_sim</span> <span class="o">=</span> <span class="n">job_sim</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+    <span class="n">outputstate</span> <span class="o">=</span> <span class="n">result_sim</span><span class="o">.</span><span class="n">get_statevector</span><span class="p">(</span><span class="n">transpiled_circ</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    
+    <span class="n">ps</span><span class="o">=</span><span class="p">[]</span>
+    
+    <span class="c1">###EDIT CODE BELOW (Extract the probability of finding the excitation on each qubit)</span>
+    
+    <span class="c1">###DO NOT EDIT BELOW</span>
+    
+    <span class="n">probability_density</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ps</span><span class="p">)</span>
+    
+<span class="n">probability_density</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">probability_density</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id4">
+<h3>解答例<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">transpile</span>
+
+<span class="c1"># Use Aer&#39;s statevector simulator</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">Aer</span>
+
+<span class="c1"># Run the quantum circuit on a statevector simulator backend</span>
+<span class="n">backend_sim</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+
+<span class="n">probability_density</span><span class="o">=</span><span class="p">[]</span>
+<span class="c1"># for circ in tqdm(circuits):</span>
+<span class="k">for</span> <span class="n">circ</span> <span class="ow">in</span> <span class="n">circuits</span><span class="p">:</span>
+
+    <span class="n">transpiled_circ</span><span class="o">=</span><span class="n">transpile</span><span class="p">(</span><span class="n">circ</span><span class="p">,</span> <span class="n">backend_sim</span><span class="p">,</span> <span class="n">optimization_level</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">job_sim</span> <span class="o">=</span> <span class="n">backend_sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transpiled_circ</span><span class="p">)</span>
+
+    <span class="c1"># Grab the results from the job.</span>
+    <span class="n">result_sim</span> <span class="o">=</span> <span class="n">job_sim</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+    <span class="n">outputstate</span> <span class="o">=</span> <span class="n">result_sim</span><span class="o">.</span><span class="n">get_statevector</span><span class="p">(</span><span class="n">transpiled_circ</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    
+    <span class="n">ps</span><span class="o">=</span><span class="p">[]</span>
+    
+    <span class="n">ps</span> <span class="o">=</span> <span class="n">outputstate</span><span class="o">.</span><span class="n">probabilities</span><span class="p">()[[</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)]]</span>
+    
+    <span class="n">probability_density</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ps</span><span class="p">)</span>
+    
+<span class="n">probability_density</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">probability_density</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">解説</p>
+<p>今回は5量子ビットを考えているので、状態ベクトルの大きさは<span class="math notranslate nohighlight">\(2^5=32\)</span>となっている。その中でそれぞれの量子ビットが1となっている状態は<span class="math notranslate nohighlight">\(2^0,~2^1,~2^2,~2^3~2.4\)</span>なので、[[2**i for i in range(num_qubits)]]でそれらの値を取り出すことができる。なおここで括弧[]二つはNumpyのファンシーインデックスである。</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">num_qubits</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">time_steps</span><span class="o">*</span><span class="n">delta_t</span><span class="p">,</span> <span class="n">probability_density</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Qubit index&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Time (1/J)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Time (1/J)&#39;)
+</pre></div>
+</div>
+<img alt="_images/7878849b18118716aad91fbf1f49219e3eb734a80e1b58e6c713bc2c691d8d07.png" src="_images/7878849b18118716aad91fbf1f49219e3eb734a80e1b58e6c713bc2c691d8d07.png" />
+</div>
+</div>
+</section>
+<section id="hardware-challenge-i">
+<h3>Hardware challenge I<a class="headerlink" href="#hardware-challenge-i" title="Permalink to this heading">#</a></h3>
+<div class="admonition- admonition">
+<p class="admonition-title">実機を使った量子ランダムウォーク</p>
+<p>実機のハードウェアで量子ランダムウォークの回路を実行し、各量子ビットにおいて励起状態が見つかる確率を抽出してください。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">experiment_results</span><span class="o">=</span><span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+
+<span class="n">probability_density_exp</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="n">experiment_results</span><span class="o">.</span><span class="n">get_counts</span><span class="p">():</span>
+    <span class="n">ps</span><span class="o">=</span><span class="p">[]</span>
+    
+    <span class="c1">###EDIT CODE BELOW (Extract the probability of finding the excitation on each qubit)</span>
+    
+    <span class="c1">###DO NOT EDIT BELOW</span>
+    
+    <span class="n">probability_density_exp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ps</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">.5</span><span class="p">,</span><span class="n">num_qubits</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">time_steps</span><span class="o">*</span><span class="n">delta_t</span><span class="p">,</span> <span class="n">probability_density_exp</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Qubit index&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Time (1/J)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>以下のコードは実機を扱うためコメントアウトしています。</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># from qiskit.tools.monitor import job_monitor</span>
+<span class="c1"># from qiskit import IBMQ</span>
+
+<span class="c1"># # Loading your IBM Quantum account</span>
+<span class="c1"># IBMQ.load_account()</span>
+<span class="c1"># IBMQ.providers() # see a list of providers you have access to</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Get the special provider assigned to you using information from the output above</span>
+<span class="c1"># hub_name = &#39;YOUR_HUB_NAME&#39; # e.g. &#39;qc-spring-22-1&#39;</span>
+<span class="c1"># group_name = &#39;YOUR_GROUP_NAME&#39; # e.g. &#39;group-2&#39;</span>
+<span class="c1"># project_name = &#39;YOUR_PROJECT_NAME&#39; # e.g. &#39;recPdHH04wfWiNHjG&#39;</span>
+<span class="c1"># provider = IBMQ.get_provider(hub=hub_name, group=group_name, project=project_name)</span>
+
+<span class="c1"># # Get `ibm_nairobi` backend from the provider</span>
+<span class="c1"># backend_name = &#39;ibm_nairobi&#39;</span>
+<span class="c1"># backend = provider.get_backend(backend_name)</span>
+<span class="c1"># backend # See details of the `ibm_nairobi` quantum system</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initial_layout=[0 , 1 , 3 , 5 , 4]</span>
+
+<span class="c1"># hardware_transpiled_circuits=[]</span>
+<span class="c1"># for circ in circuits:</span>
+    
+<span class="c1">#     hardware_circ=deepcopy(circ)</span>
+<span class="c1">#     hardware_circ.barrier()</span>
+<span class="c1">#     hardware_circ.measure(range(num_qubits), range(num_qubits))</span>
+<span class="c1">#     hardware_transpiled_circuits.append(transpile(hardware_circ, backend, initial_layout=initial_layout, optimization_level=3))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># shots=1024</span>
+<span class="c1"># job = execute(hardware_transpiled_circuits, backend=backend, shots=shots)</span>
+<span class="c1"># job_monitor(job)</span>
+<span class="c1"># print(&#39;Job ID&#39;, job.job_id())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># experiment_results=job.result()</span>
+
+<span class="c1"># probability_density_exp=[]</span>
+<span class="c1"># for output in experiment_results.get_counts():</span>
+<span class="c1">#     ps=[]</span>
+    
+<span class="c1">#     ###EDIT CODE BELOW (Extract the probability of finding the excitation on each qubit)</span>
+    
+<span class="c1">#     ###DO NOT EDIT BELOW</span>
+    
+<span class="c1">#     probability_density_exp.append(ps)</span>
+
+<span class="c1"># plt.figure(figsize=(3,5), facecolor=&#39;white&#39;)</span>
+<span class="c1"># plt.pcolormesh(np.arange(-.5,num_qubits,1), time_steps*delta_t, probability_density_exp)</span>
+<span class="c1"># plt.xlabel(&#39;Qubit index&#39;)</span>
+<span class="c1"># plt.ylabel(&#39;Time (1/J)&#39;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="id5">
+<h2>アンダーソン局在<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<p>粒子輸送は、格子のエネルギーの乱れの導入よって大きな影響を受け、アンダーソン局在を導きます。格子の不均一性が散乱の原因となり、量子干渉によって粒子の伝搬を抑止する傾向、つまり局在性の兆候を導きます。局在化された粒子の波動関数は急速に最初の位置から減衰し、粒子は格子の小さな領域に効果的に閉じ込められます。</p>
+<p>フィリップ・アンダーソンは、1958年に初めて、無秩序から生まれる散乱が伝搬を完全に停止する可能性があることを示しました[1]。アンダーソンによる発見以前、科学者たちは、電子を点状の粒子として扱い、電子をランダムに散乱させる摂動として結晶の無秩序性をモデル化していました。この論理は、オームの法則に基づくブラウン運動を媒介とした伝搬として記述されました。しかし、アンダーソンは周期的な結晶中の電子の波動関数の進化に及ぼす無秩序の効果について再検討しました[2]。アンダーソンは、量子力学的領域において問題を分析し、つまり、電子の波の性質の基本的な計算を行なうことで、電子の古典的拡散運動が破錠し、電子の波動関数が、広い範囲の条件下において、指数関数的に局在化することを発見しました。したがって、電子が最初に一つの原子に置かれたとき、その波動関数は時間が経っても結晶全体を覆うようには広がらず、その最初の位置の周りに局在化して残るのです。よって、物質は電荷を通すのをやめ、最終的には、絶縁体になります。この局在化現象は、格子欠陥による電子の多重散乱から生じる異なる経路間の干渉の直接的な結果です。</p>
+<p><img alt="" src="_images/2022-spring-lab2-tb-model.jpg" /></p>
+<p>アンダーソン局在を強結合ハミルトニアンを使って学ぶことができます。格子エネルギーに無秩序性がある場合のハミルトニアンは次の形式を取ります：
+$<span class="math notranslate nohighlight">\(H_{\rm tb}/\hbar = \sum^{3}_{i=0} (X_i X_{i+1} + Y_i Y_{i+1}) + \sum_i \epsilon_i Z_i \)</span>$</p>
+<p><span class="math notranslate nohighlight">\(\epsilon_i\)</span>の値を変えることで、Aubry-Andre (AA) 準結晶を作り、無秩序性を模倣し、アンダーソン局在を導くことができます。この格子モデルでは、<span class="math notranslate nohighlight">\(\epsilon_i=W \rm{cos}(2\pi\beta i)\)</span>であり、<span class="math notranslate nohighlight">\(W\)</span>は無秩序性の強さで、<span class="math notranslate nohighlight">\(\beta\)</span>は準結晶の周期性を決定します。</p>
+<p>[1] https://physicstoday.scitation.org/doi/10.1063/1.3206091?feed=most-cited<br />
+[2] https://www.nature.com/articles/nphoton.2013.30</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">beta</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="c1"># DO NOT EDIT</span>
+<span class="n">AA_patern</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">beta</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">))</span> <span class="c1"># DO NOT EDIT</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">4.5</span><span class="p">,</span><span class="mi">101</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">beta</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">4.5</span><span class="p">,</span><span class="mi">101</span><span class="p">)),</span> <span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">),</span> <span class="n">AA_patern</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\epsilon_i$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Position&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Energy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Aubry-Andre potential&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/efc34575375b58df8a15209d28884233ec681b6420febc4a439963cbcedefd9a.png" src="_images/efc34575375b58df8a15209d28884233ec681b6420febc4a439963cbcedefd9a.png" />
+</div>
+</div>
+<section id="challenge-question-2d">
+<h3>Challenge question 2d<a class="headerlink" href="#challenge-question-2d" title="Permalink to this heading">#</a></h3>
+<div class="admonition- admonition">
+<p class="admonition-title">トロッターステップの修正</p>
+<p>強結合のトロッターステップを修正して、アンダーソン局在をシミュレートするために任意の位相を含むようにしてください。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Trot_qr_disorder</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
+<span class="n">Trot_qc_disorder</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">Trot_qr_disorder</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Trot disorder&#39;</span><span class="p">)</span>
+
+<span class="n">Trot_qc_disorder</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Trot_tb_gate</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="n">deltas</span><span class="o">=</span><span class="p">[</span><span class="n">Parameter</span><span class="p">(</span><span class="s1">&#39;delta_</span><span class="si">{:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">idx</span><span class="p">))</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)]</span>
+
+<span class="c1">###EDIT CODE BELOW (add a parametric disorder to each qubit)</span>
+
+
+<span class="c1">###DO NOT EDIT BELOW</span>
+    
+<span class="c1"># Convert custom quantum circuit into a gate</span>
+<span class="n">Trot_disorder_gate</span> <span class="o">=</span> <span class="n">Trot_qc_disorder</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span>
+
+<span class="n">Trot_qc_disorder</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Trot_qr_disorder</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
+<span class="n">Trot_qc_disorder</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">Trot_qr_disorder</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Trot disorder&#39;</span><span class="p">)</span>
+
+<span class="n">Trot_qc_disorder</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Trot_tb_gate</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="n">deltas</span><span class="o">=</span><span class="p">[</span><span class="n">Parameter</span><span class="p">(</span><span class="s1">&#39;delta_</span><span class="si">{:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">idx</span><span class="p">))</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">):</span>
+    <span class="n">Trot_qc_disorder</span><span class="o">.</span><span class="n">rz</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">deltas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">t</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    
+<span class="c1"># Convert custom quantum circuit into a gate</span>
+<span class="n">Trot_disorder_gate</span> <span class="o">=</span> <span class="n">Trot_qc_disorder</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span>
+
+<span class="n">Trot_qc_disorder</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/da1ec5d8781b0595e213a99cf44628f71fa2465c53111a50904b830e92d09fa8.png" src="_images/da1ec5d8781b0595e213a99cf44628f71fa2465c53111a50904b830e92d09fa8.png" />
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">解説</p>
+<p><span class="math notranslate nohighlight">\(R_Z(\lambda)= \exp (- i \lambda Z / 2)\)</span>よりそれぞれの量子ビットに<span class="math notranslate nohighlight">\(R_Z\)</span>ゲートをかければいい。</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delta_t</span><span class="o">=</span><span class="mf">0.15</span>
+<span class="n">time_steps</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">W</span><span class="o">=</span><span class="mi">2</span> <span class="c1"># DO NOT EDIT</span>
+
+<span class="n">disorders</span><span class="o">=</span><span class="n">W</span><span class="o">*</span><span class="n">AA_patern</span> <span class="c1"># DO NOT EDIT</span>
+
+<span class="n">disorder_circuits</span><span class="o">=</span><span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">n_steps</span> <span class="ow">in</span> <span class="n">time_steps</span><span class="p">:</span>
+
+    <span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
+    <span class="n">cr</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+
+    <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Trot_disorder_gate</span><span class="p">,</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)])</span>
+
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">qc</span><span class="o">.</span><span class="n">bind_parameters</span><span class="p">({</span><span class="n">t</span><span class="p">:</span> <span class="n">delta_t</span><span class="p">})</span>
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">qc</span><span class="o">.</span><span class="n">bind_parameters</span><span class="p">({</span><span class="n">deltas</span><span class="p">[</span><span class="n">idx</span><span class="p">]:</span> <span class="n">disorders</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)})</span>
+
+    <span class="n">disorder_circuits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="challenge-question-2e">
+<h3>Challenge question 2e<a class="headerlink" href="#challenge-question-2e" title="Permalink to this heading">#</a></h3>
+<div class="admonition- admonition">
+<p class="admonition-title">アンダーソン局在のシミュレーション</p>
+<p>最後に、各量子ビットにおいて励起状態を発見する確率を抽出してください。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">transpile</span>
+
+<span class="c1"># Use Aer&#39;s statevector simulator</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">Aer</span>
+
+<span class="c1"># Run the quantum circuit on a statevector simulator backend</span>
+<span class="n">backend_sim</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+
+<span class="n">probability_density_localization</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">circ</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">disorder_circuits</span><span class="p">):</span>
+
+    <span class="n">transpiled_circ</span><span class="o">=</span><span class="n">transpile</span><span class="p">(</span><span class="n">circ</span><span class="p">,</span> <span class="n">backend_sim</span><span class="p">,</span> <span class="n">optimization_level</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">job_sim</span> <span class="o">=</span> <span class="n">backend_sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transpiled_circ</span><span class="p">)</span>
+
+    <span class="c1"># Grab the results from the job.</span>
+    <span class="n">result_sim</span> <span class="o">=</span> <span class="n">job_sim</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+    <span class="n">outputstate</span> <span class="o">=</span> <span class="n">result_sim</span><span class="o">.</span><span class="n">get_statevector</span><span class="p">(</span><span class="n">transpiled_circ</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    
+    <span class="n">ps</span><span class="o">=</span><span class="p">[]</span>
+    
+    <span class="c1">###EDIT CODE BELOW (Extract the probability of finding the excitation on each qubit)</span>
+    
+    <span class="c1">###DO NOT EDIT BELOW</span>
+    
+    <span class="n">probability_density_localization</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ps</span><span class="p">)</span>
+    
+<span class="n">probability_density_localization</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">probability_density_localization</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">transpile</span>
+
+<span class="c1"># Use Aer&#39;s statevector simulator</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">Aer</span>
+
+<span class="c1"># Run the quantum circuit on a statevector simulator backend</span>
+<span class="n">backend_sim</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+
+<span class="n">probability_density_localization</span><span class="o">=</span><span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">circ</span> <span class="ow">in</span> <span class="n">disorder_circuits</span><span class="p">:</span>
+
+    <span class="n">transpiled_circ</span><span class="o">=</span><span class="n">transpile</span><span class="p">(</span><span class="n">circ</span><span class="p">,</span> <span class="n">backend_sim</span><span class="p">,</span> <span class="n">optimization_level</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">job_sim</span> <span class="o">=</span> <span class="n">backend_sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transpiled_circ</span><span class="p">)</span>
+
+    <span class="c1"># Grab the results from the job.</span>
+    <span class="n">result_sim</span> <span class="o">=</span> <span class="n">job_sim</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+    <span class="n">outputstate</span> <span class="o">=</span> <span class="n">result_sim</span><span class="o">.</span><span class="n">get_statevector</span><span class="p">(</span><span class="n">transpiled_circ</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    
+    <span class="n">ps</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">ps</span> <span class="o">=</span> <span class="n">outputstate</span><span class="o">.</span><span class="n">probabilities</span><span class="p">()[[</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)]]</span>
+    
+    <span class="n">probability_density_localization</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ps</span><span class="p">)</span>
+    
+<span class="n">probability_density_localization</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">probability_density_localization</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">解説</p>
+<p>Question 2cと同様にしてそれぞれの量子ビットが1となる確率を抜き出せばいい。</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">num_qubits</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">time_steps</span><span class="o">*</span><span class="n">delta_t</span> <span class="p">,</span><span class="n">probability_density_localization</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Qubit index&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Time (1/J)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Time (1/J)&#39;)
+</pre></div>
+</div>
+<img alt="_images/9b91f1ab7712da1018f393d4fbb4c1aef78372f0832e99ad496bbd918e7049a2.png" src="_images/9b91f1ab7712da1018f393d4fbb4c1aef78372f0832e99ad496bbd918e7049a2.png" />
+</div>
+</div>
+</section>
+<section id="hardware-challenge-ii">
+<h3>Hardware challenge II<a class="headerlink" href="#hardware-challenge-ii" title="Permalink to this heading">#</a></h3>
+<div class="admonition- admonition">
+<p class="admonition-title">量子ランダムウォークの実機シミュレーション</p>
+<p>無秩序性のある量子ランダムウォークの回路を実機ハードウェアで実行し、各量子ビットで励起状態が見つかる確率を抽出してください。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">disorder_experiment_results</span><span class="o">=</span><span class="n">job_disorder</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+
+<span class="n">disorder_probability_density_exp</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="n">disorder_experiment_results</span><span class="o">.</span><span class="n">get_counts</span><span class="p">():</span>
+    <span class="n">ps</span><span class="o">=</span><span class="p">[]</span>
+    
+    <span class="c1">###EDIT CODE BELOW (Extract the probability of finding the excitation on each qubit)</span>
+    
+    <span class="c1">###DO NOT EDIT BELOW</span>
+    
+    <span class="n">disorder_probability_density_exp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ps</span><span class="p">)</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">.5</span><span class="p">,</span><span class="n">num_qubits</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">time_steps</span><span class="o">*</span><span class="n">delta_t</span><span class="p">,</span> <span class="n">disorder_probability_density_exp</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Qubit index&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Time (1/J)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>以下のコードは実機を扱うためコメントアウトしています。</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># from qiskit.tools.monitor import job_monitor</span>
+
+<span class="c1"># provider = IBMQ.load_account()</span>
+<span class="c1"># provider = IBMQ.get_provider(hub=&#39;qc-spring-2022&#39;, group=&#39;group-1&#39;, project=&#39;project-1&#39;)</span>
+<span class="c1"># backend = provider.get_backend(&#39;ibm_nairobi&#39;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initial_layout=[0 , 1 , 3 , 5 , 4]</span>
+
+<span class="c1"># hardware_transpiled_circuits_disordered=[]</span>
+<span class="c1"># for circ in disorder_circuits:</span>
+    
+<span class="c1">#     hardware_circ=deepcopy(circ)</span>
+<span class="c1">#     hardware_circ.barrier()</span>
+<span class="c1">#     hardware_circ.measure(range(num_qubits), range(num_qubits))</span>
+<span class="c1">#     hardware_transpiled_circuits_disordered.append(transpile(hardware_circ, backend, initial_layout=initial_layout, optimization_level=3))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># shots=1024</span>
+<span class="c1"># job_disorder = execute(hardware_transpiled_circuits_disordered, backend=backend, shots=shots)</span>
+<span class="c1"># job_monitor(job_disorder)</span>
+<span class="c1"># print(&#39;Job ID&#39;, job_disorder.job_id())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># disorder_experiment_results=job_disorder.result()</span>
+
+<span class="c1"># disorder_probability_density_exp=[]</span>
+<span class="c1"># for output in disorder_experiment_results.get_counts():</span>
+<span class="c1">#     ps=[]</span>
+    
+<span class="c1">#     ###EDIT CODE BELOW (Extract the probability of finding the excitation on each qubit)</span>
+    
+<span class="c1">#     ###DO NOT EDIT BELOW</span>
+    
+<span class="c1">#     disorder_probability_density_exp.append(ps)</span>
+    
+<span class="c1"># plt.figure(figsize=(3,5), facecolor=&#39;white&#39;)</span>
+<span class="c1"># plt.pcolormesh(np.arange(-.5,num_qubits,1), time_steps*delta_t, disorder_probability_density_exp)</span>
+<span class="c1"># plt.xlabel(&#39;Qubit index&#39;)</span>
+<span class="c1"># plt.ylabel(&#39;Time (1/J)&#39;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2022-spring-lab1-tb-model.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">強結合モデル（2022年春 Lab1）</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">粒子輸送</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-question-2a">Challenge question 2a</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">解答例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-question-2b">Challenge question 2b</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">解答例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-question-2c">Challenge question 2c</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">解答例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hardware-challenge-i">Hardware challenge I</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">アンダーソン局在</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-question-2d">Challenge question 2d</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-question-2e">Challenge question 2e</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hardware-challenge-ii">Hardware challenge II</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Quantum Tokyo
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
