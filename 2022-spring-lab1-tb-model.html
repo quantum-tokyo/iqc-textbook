@@ -1,0 +1,973 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>強結合モデル（2022年春 Lab1） &#8212; IBM Quantum Challengeで学ぶ量子コンピューティング</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="application/vnd.jupyter.widget-state+json">{"state": {"0c483fa795074734a4438f783612f993": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "0c959e9c602c475b8c3a7dc74af6453f": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "0df97dd3cf7e498391891455fa2751ec": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"margin": "0px 0px 0px 37px", "width": "600px"}}, "0ec1011cbbf74f5d88cf5e1759331c70": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "0f0ec96ecd8b4faabe2c584f33e9aab9": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ProgressStyleModel", "state": {"description_width": ""}}, "24d28162797f4e7b83df9a061aa9e9ca": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HBoxModel", "state": {"children": ["IPY_MODEL_e77ce67e91d14f6fa3a4a218bfcb1410", "IPY_MODEL_97def456febd412f97cc873d5ea034a9", "IPY_MODEL_734f00c97cfa4c289e1c2be0080a46ea"], "layout": "IPY_MODEL_46eceb81c12743a6898a582f90294a56"}}, "2931b31b79cc4ebbbde0ced6a11ba1f8": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ProgressStyleModel", "state": {"description_width": ""}}, "29b4c120877941d78811b503879af65f": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "353adce794e5401687280c312e16b92d": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_3d1873b60b61472c87c40329350dfa41", "style": "IPY_MODEL_7eb1187a9a394e2587de3e9abb9c8d07", "value": "<p style='font-family: IBM Plex Sans, Arial, Helvetica, sans-serif; font-size: 20px; font-weight: medium;'>Circuit Properties</p>"}}, "368b00e874de40ba96182271d708c0f1": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_e500245cfba94dcf80863dcac37eca37", "style": "IPY_MODEL_68c56cd392b84945b93c7d730ef58772", "value": "<h5>Job ID</h5>"}}, "3d1873b60b61472c87c40329350dfa41": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"margin": "0px 0px 10px 0px"}}, "4014730e8d98443d83266804bdb6c7e7": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "427610b60a30424c9be6fb0f53f70e9d": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_825ac7520f4143d38c2cfc8da03ab4ef", "style": "IPY_MODEL_4014730e8d98443d83266804bdb6c7e7", "value": "<h5>Status</h5>"}}, "46eceb81c12743a6898a582f90294a56": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "47361345d7f0466ab597904171772447": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "502246c4efe64fad91782d89d8b7b680": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "5223cdd7927e417e93d654cac1e0cb5e": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ButtonModel", "state": {"button_style": "primary", "description": "Clear", "layout": "IPY_MODEL_c922b501179244369ba1ef28ee109076", "style": "IPY_MODEL_a0d4f41cc2194a918b30dd08cec56c25"}}, "68c56cd392b84945b93c7d730ef58772": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "6972bf5add64431d8f92e02b8905439b": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"width": "145px"}}, "6f3db15465a74627a8804e959c33adf9": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "734f00c97cfa4c289e1c2be0080a46ea": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_812831f6aa3343b29945ec03e30cf6e9", "style": "IPY_MODEL_b275fa73dc5e460088c0a30b200fb755", "value": " 50/50 [00:27&lt;00:00,  1.03s/it]"}}, "78fc9d0291454c4ea49b98f00b2d51a3": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_6972bf5add64431d8f92e02b8905439b", "style": "IPY_MODEL_e8a21e98e83c45c1aeac57d162c38eb7", "value": "<h5>Backend</h5>"}}, "7eb1187a9a394e2587de3e9abb9c8d07": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "812831f6aa3343b29945ec03e30cf6e9": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "825ac7520f4143d38c2cfc8da03ab4ef": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"width": "95px"}}, "849a8b0fb1ad432e95d34a9526143bca": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "GridBoxModel", "state": {"children": ["IPY_MODEL_5223cdd7927e417e93d654cac1e0cb5e"], "layout": "IPY_MODEL_caebbce6b63f40709db7dfeb18babfe3"}}, "89d97be8b9634fd882e3d7bdbc2f9962": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "97def456febd412f97cc873d5ea034a9": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "FloatProgressModel", "state": {"bar_style": "success", "layout": "IPY_MODEL_0c483fa795074734a4438f783612f993", "max": 50, "style": "IPY_MODEL_2931b31b79cc4ebbbde0ced6a11ba1f8", "value": 50}}, "9a1253ea80e940239e9e06c62c07e980": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "FloatProgressModel", "state": {"bar_style": "success", "layout": "IPY_MODEL_89d97be8b9634fd882e3d7bdbc2f9962", "style": "IPY_MODEL_0f0ec96ecd8b4faabe2c584f33e9aab9", "value": 100}}, "a0d4f41cc2194a918b30dd08cec56c25": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ButtonStyleModel", "state": {}}, "a25f8037e4ce40fea66bb8c43eebaaab": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_47361345d7f0466ab597904171772447", "style": "IPY_MODEL_0c959e9c602c475b8c3a7dc74af6453f", "value": "100%"}}, "b0fb1f8f1860493cb49892f8602c54df": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "b275fa73dc5e460088c0a30b200fb755": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "b41363c48f3b4224806a2a01f351cd63": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_d1f2f6aff6ed48dea8e8ed76ad38fe35", "style": "IPY_MODEL_502246c4efe64fad91782d89d8b7b680", "value": "<h5>Queue</h5>"}}, "b58ae55e3cfe467893a38faec366e2a1": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "c4735f29a61a4ca8ae8abab1319eb069": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "c922b501179244369ba1ef28ee109076": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"grid_area": "right", "padding": "0px 0px 0px 0px", "width": "70px"}}, "cadcdc271cab455690cd3025757df860": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HBoxModel", "state": {"children": ["IPY_MODEL_a25f8037e4ce40fea66bb8c43eebaaab", "IPY_MODEL_9a1253ea80e940239e9e06c62c07e980", "IPY_MODEL_d1ac4fed695146aea89e8b6bea5cec17"], "layout": "IPY_MODEL_b0fb1f8f1860493cb49892f8602c54df"}}, "caebbce6b63f40709db7dfeb18babfe3": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"grid_template_areas": "\n                                       \". . . . right \"\n                                        ", "grid_template_columns": "20% 20% 20% 20% 20%", "width": "100%"}}, "d1ac4fed695146aea89e8b6bea5cec17": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_29b4c120877941d78811b503879af65f", "style": "IPY_MODEL_0ec1011cbbf74f5d88cf5e1759331c70", "value": " 100/100 [00:55&lt;00:00,  1.04s/it]"}}, "d1f2f6aff6ed48dea8e8ed76ad38fe35": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"width": "70px"}}, "d8910b7ceb514d0596058cbb33e08054": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "dfd948bc9f844bfebb27e22e59a6fbe9": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_6f3db15465a74627a8804e959c33adf9", "style": "IPY_MODEL_d8910b7ceb514d0596058cbb33e08054", "value": "<h5>Message</h5>"}}, "e500245cfba94dcf80863dcac37eca37": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"width": "190px"}}, "e77ce67e91d14f6fa3a4a218bfcb1410": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_c4735f29a61a4ca8ae8abab1319eb069", "style": "IPY_MODEL_b58ae55e3cfe467893a38faec366e2a1", "value": "100%"}}, "e8a21e98e83c45c1aeac57d162c38eb7": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "f1938b252c0a44a0be8f26830e6d0874": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HBoxModel", "state": {"children": ["IPY_MODEL_368b00e874de40ba96182271d708c0f1", "IPY_MODEL_78fc9d0291454c4ea49b98f00b2d51a3", "IPY_MODEL_427610b60a30424c9be6fb0f53f70e9d", "IPY_MODEL_b41363c48f3b4224806a2a01f351cd63", "IPY_MODEL_dfd948bc9f844bfebb27e22e59a6fbe9"], "layout": "IPY_MODEL_0df97dd3cf7e498391891455fa2751ec"}}}, "version_major": 2, "version_minor": 0}</script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script crossorigin="anonymous" data-jupyter-widgets-cdn="https://cdn.jsdelivr.net/npm/" src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@1.0.6/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '2022-spring-lab1-tb-model';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="サンプル問題（2023年春）" href="sample-2023-spring-lab1-ja.html" />
+    <link rel="prev" title="4-ライツアウトパズル（2020年 Week2b）" href="2020-w2-b-lights-out-puzzle.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">IBM Quantum Challengeで学ぶ量子コンピューティング</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to IQC Textbook
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">第２章 量子コンピューターの計算ルール</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2019-w1-adder.html">量子回路における加算器（2019年 Week1）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2020-w1-a-adder.html">量子回路における加算器（2020年 Week1a）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2021-spring-lab1-toffoli.html">トフォリゲート(2021年春 Lab1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-spring-lab2-teleportation.html">量子テレポーテーション（2023年 Lab2）</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">第３章 量子アルゴリズム</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2019-w2-grover.html">Groverのアルゴリズム（2019年 Week2）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2020-w2-b-lights-out-puzzle.html">4-ライツアウトパズル（2020年 Week2b）</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">第4章 量子コンピューターの応用</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">強結合モデル（2022年春 Lab1）</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Test: 2023Spring</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="sample-2023-spring-lab1-ja.html">サンプル問題（2023年春）</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/quantum-tokyo/iqc-textbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/quantum-tokyo/iqc-textbook/issues/new?title=Issue%20on%20page%20%2F2022-spring-lab1-tb-model.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/2022-spring-lab1-tb-model.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>強結合モデル（2022年春 Lab1）</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">強結合ハミルトニアンにおける時間発展</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">トロッター分解</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">個々のパウリのユニタリー演算子の構築</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">クリフォードゲート</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-question-1a">Challenge question 1a</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">解答例</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-question-1b">Challenge question 1b</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">解答例</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">トロッター分解回路の構築</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-question-1c">Challenge question 1c</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">解答例</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lab1">
+<h1>強結合モデル（2022年春 Lab1）<a class="headerlink" href="#lab1" title="Permalink to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>このNotebookはQiskit v0.44の仕様に合わせてコードを改変しています。</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Importing standard Qiskit libraries</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">transpile</span><span class="p">,</span> <span class="n">Aer</span><span class="p">,</span> <span class="n">IBMQ</span><span class="p">,</span> <span class="n">execute</span>
+<span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">from</span> <span class="nn">qiskit.tools.monitor</span> <span class="kn">import</span> <span class="n">job_monitor</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="kn">import</span> <span class="n">Parameter</span>
+<span class="kn">import</span> <span class="nn">qiskit.quantum_info</span> <span class="k">as</span> <span class="nn">qi</span>
+
+<span class="c1"># Suppress warnings</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="" src="_images/2022-spring-lab1-tb-model.png" /></p>
+<p>強結合モデルは、固体材料の中の電子のコンダクタンスを表す量子力学的描像です。このモデルでは、各原子は格子点として扱われ、粒子はその格子点を占有するためにエネルギー<span class="math notranslate nohighlight">\(\epsilon_i\)</span>が必要です。電子は、格子点から隣の格子点に<span class="math notranslate nohighlight">\(J\)</span>のエネルギーコストでトンネル移動することができます。以下のハミルトニアンがこのモデルを表しています。</p>
+<div class="math notranslate nohighlight">
+\[H_{\rm tb}/\hbar = \sum_i \epsilon_i Z_i + J \sum_{\langle i,j \rangle} (X_i X_j + Y_i Y_j)\]</div>
+<p>ハミルトニアンの最初の項は、各格子点のon-siteエネルギーを表し、二項目は隣り合う格子点同士の相互作用エネルギーを表します。周期格子ポテンシャルがある場合、与えられた量子的粒子の波動関数は隣の格子点にまたがり、拡張的ブロッホ波動関数を導きます。一様な格子の場合、つまり、全ての格子点エネルギーが等しい(<span class="math notranslate nohighlight">\(\epsilon_i=0\)</span>)場合、電子の伝搬は時間に対して線形で、連続な時間の量子ランダムウォークによって表されます。これは、古典的な拡散輸送とは異なり、伝搬が時間に対して2次関数的に遅くなります。</p>
+<p>この系のハミルトニアンは、量子状態が時間に対してどのように進化するか記述してくれます。この時間発展は、次のシュレディンガー方程式によって支配されています：</p>
+<div class="math notranslate nohighlight">
+\[ i \hbar \frac{\partial}{\partial t}|\psi(t)\rangle = H |\psi(t)\rangle \]</div>
+<p>時間に依存しないハミルトニアンの場合（時間によってハミルトニアンが変化しない場合）、シュレディンガー方程式の解は以下の形になります：</p>
+<div class="math notranslate nohighlight">
+\[ |\psi(t)\rangle = e^{-i H t / \hbar} |\psi(0)\rangle \]</div>
+<p>このExerciseでは、強結合ハミルトニアンにおける時間ダイナミクスを学び、その時間発展におけるトロッター回路を構築します。</p>
+<section id="id1">
+<h2>強結合ハミルトニアンにおける時間発展<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>最初に、3つの格子点を持つ強結合ハミルトニアンにおける時間発展について考えます。ここで<span class="math notranslate nohighlight">\(J=1\)</span>とし、一様な格子になるように<span class="math notranslate nohighlight">\(\epsilon_i=0\)</span>とします。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import Pauli operators (I, X, Y, Z)</span>
+<span class="kn">from</span> <span class="nn">qiskit.opflow</span> <span class="kn">import</span> <span class="n">I</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span>
+
+<span class="n">J</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># tight-binding Hamiltonian</span>
+<span class="k">def</span> <span class="nf">H_tb</span><span class="p">():</span>
+    <span class="c1"># Interactions (I is the identity matrix; X and Y are Pauli matricies; ^ is a tensor product)</span>
+    <span class="n">XXs</span> <span class="o">=</span> <span class="p">(</span><span class="n">I</span><span class="o">^</span><span class="n">X</span><span class="o">^</span><span class="n">X</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">X</span><span class="o">^</span><span class="n">X</span><span class="o">^</span><span class="n">I</span><span class="p">)</span>
+    <span class="n">YYs</span> <span class="o">=</span> <span class="p">(</span><span class="n">I</span><span class="o">^</span><span class="n">Y</span><span class="o">^</span><span class="n">Y</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">Y</span><span class="o">^</span><span class="n">Y</span><span class="o">^</span><span class="n">I</span><span class="p">)</span>
+    
+    <span class="c1"># Sum interactions</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">J</span><span class="o">*</span><span class="p">(</span><span class="n">XXs</span> <span class="o">+</span> <span class="n">YYs</span><span class="p">)</span>
+    
+    <span class="c1"># Return Hamiltonian</span>
+    <span class="k">return</span> <span class="n">H</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Unitary evolution under the tight-binding Hamiltonian</span>
+<span class="k">def</span> <span class="nf">U_tb</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">H_tb</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">t</span> <span class="o">*</span> <span class="n">H</span><span class="p">)</span><span class="o">.</span><span class="n">exp_i</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>系を<span class="math notranslate nohighlight">\(|100\rangle\)</span>に初期化し、状態<span class="math notranslate nohighlight">\(|100\rangle, |010\rangle, |001\rangle\)</span>の確率の軌跡を出します。　これらの値は、問題としている格子の各格子点における粒子の存在確率に相当します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import qubit states Zero (|0&gt;) and One (|1&gt;)</span>
+<span class="kn">from</span> <span class="nn">qiskit.opflow</span> <span class="kn">import</span> <span class="n">Zero</span><span class="p">,</span> <span class="n">One</span>
+
+<span class="c1"># Define array of time points</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="c1"># DO NOT CHANGE THIS</span>
+
+<span class="n">initial_state</span><span class="o">=</span><span class="n">One</span><span class="o">^</span><span class="n">Zero</span><span class="o">^</span><span class="n">Zero</span>
+
+<span class="n">state_t</span><span class="o">=</span><span class="p">[</span><span class="n">U_tb</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="o">@</span> <span class="n">initial_state</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">ts</span><span class="p">]</span>
+
+<span class="n">p_100</span><span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span> <span class="p">(</span><span class="o">~</span><span class="p">(</span><span class="n">One</span><span class="o">^</span><span class="n">Zero</span><span class="o">^</span><span class="n">Zero</span><span class="p">)</span> <span class="o">@</span> <span class="n">state</span><span class="p">)</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span> <span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">state_t</span><span class="p">]</span>
+<span class="n">p_010</span><span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span> <span class="p">(</span><span class="o">~</span><span class="p">(</span><span class="n">Zero</span><span class="o">^</span><span class="n">One</span><span class="o">^</span><span class="n">Zero</span><span class="p">)</span> <span class="o">@</span> <span class="n">state</span><span class="p">)</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span> <span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">state_t</span><span class="p">]</span>
+<span class="n">p_001</span><span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span> <span class="p">(</span><span class="o">~</span><span class="p">(</span><span class="n">Zero</span><span class="o">^</span><span class="n">Zero</span><span class="o">^</span><span class="n">One</span><span class="p">)</span> <span class="o">@</span> <span class="n">state</span><span class="p">)</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span> <span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">state_t</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">p_100</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$p_</span><span class="si">{100}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">p_010</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$p_</span><span class="si">{010}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">p_001</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$p_</span><span class="si">{001}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Time (1/J)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Population&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/70670cd1d37ada8161e16fdc1ff81093de51a9220591b9a1d91e36eb97b2f6a3.png" src="_images/70670cd1d37ada8161e16fdc1ff81093de51a9220591b9a1d91e36eb97b2f6a3.png" />
+</div>
+</div>
+</section>
+<section id="id2">
+<h2>トロッター分解<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p><a class="reference external" href="https://qiskit.org/documentation/apidoc/circuit.html">circuit model</a>でユニタリー時間発展を実行するために、<span class="math notranslate nohighlight">\(U_{\text{tb}}(t)\)</span>を量子コンピューターのネイティブゲートである、1量子ビットゲートと2量子ビットゲートに分解しなければなりません。これを実現する一つの方法は<a class="reference external" href="https://en.wikipedia.org/wiki/Hamiltonian_simulation#Product_Formulas">トロッター分解</a>です（または鈴木-トロッター分解としても知られています）。</p>
+<p>以下に[1-2]に述べられているトロッター分解の例の概要を示します。</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Pauli_matrices#Commutation_relations">パウリ演算子はお互いに交換しない</a> ので、指数関数<span class="math notranslate nohighlight">\(U_{\text{tb}}(t)\)</span>は単なる指数関数の積には分解できません。しかし、トロッター分解によって指数関数の積として<span class="math notranslate nohighlight">\(U_{\text{tb}}(t)\)</span>を近似することができます。3スピンの系に含まれる2スピン-1/2粒子の部分系を考えてみましょう。スピン<span class="math notranslate nohighlight">\(i\)</span> と<span class="math notranslate nohighlight">\(j\)</span> (<span class="math notranslate nohighlight">\(i,j \in \{0,1,2\}\)</span>)のハミルトニアンは、<span class="math notranslate nohighlight">\(H^{(i,j)}_{\text{tb}} = \sigma_x^{(i)}\sigma_x^{(j)} + \sigma_y^{(i)}\sigma_y^{(j)} + \sigma_z^{(i)}\sigma_z^{(j)}\)</span>になるでしょう。<span class="math notranslate nohighlight">\(U_{\text{tb}}(t)\)</span> をシミュレートしようと思っている合計<span class="math notranslate nohighlight">\(N=3\)</span>の系において取りうる２つの部分系の項に書き換えると、</p>
+<div class="math notranslate nohighlight">
+\[
+U_{\text{tb}}(t) = \exp\left[-i t \left(H^{(0,1)}_{\text{tb}} + H^{(1,2)}_{\text{tb}} \right)\right].
+\]</div>
+<p><span class="math notranslate nohighlight">\(H^{(0,1)}_{\text{tb}}\)</span> と <span class="math notranslate nohighlight">\(H^{(1,2)}_{\text{tb}}\)</span>は交換しないので、<span class="math notranslate nohighlight">\(U_{\text{tb}}(t) \neq \exp\left(-i t H^{(0,1)}_{\text{tb}}\right) \exp\left(-i t H^{(1,2)}_{\text{tb}} \right)\)</span>です。しかし、この積の分解は、<span class="math notranslate nohighlight">\(U_{\text{tb}}(t)\)</span>が<span class="math notranslate nohighlight">\(H^{(0,1)}_{\text{tb}}\)</span>の短い時間発展 (time = <span class="math notranslate nohighlight">\(t/n\)</span>)と<span class="math notranslate nohighlight">\(H^{(1,2)}_{\text{tb}}\)</span>の短い時間発展 (time = <span class="math notranslate nohighlight">\(t/n\)</span>)を<span class="math notranslate nohighlight">\(n\)</span>回繰り返すというトロッター分解によって近似されます。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+U_{\text{tb}}(t) &amp;= \exp\left[-i t \left(H^{(0,1)}_{\text{tb}} + H^{(1,2)}_{\text{tb}} \right)\right] \\
+U_{\text{tb}}(t) &amp;\approx \left[\exp\left(\dfrac{-it}{n}H^{(0,1)}_{\text{tb}}\right) \exp\left(\dfrac{-it}{n}H^{(1,2)}_{\text{tb}} \right)\right]^n.
+\end{align}
+\end{split}\]</div>
+<p>ここで、<span class="math notranslate nohighlight">\(n\)</span> はトロッターステップの回数で、<span class="math notranslate nohighlight">\(n\)</span>が増加するにつれ、その近似は正確になっていきます。(トロッター分解でユニタリー演算が部分系に分割される方法は、必ずしも一意ではないことに注意してください。)分解はさらに進みます。2スピンの部分系において、パウリ演算子のペア(<span class="math notranslate nohighlight">\(\sigma_x^{(i)}\sigma_x^{(j)}\)</span>、<span class="math notranslate nohighlight">\(\sigma_y^{(i)}\sigma_y^{(j)}\)</span>、<span class="math notranslate nohighlight">\(\sigma_z^{(i)}\sigma_z^{(j)}\)</span>)は交換可能です。このことは、部分系のハミルトニアン(<span class="math notranslate nohighlight">\(H^{(i,j)}_{\text{tb}}\)</span>) の指数関数を単なる指数関数の積に分解できることを意味し、<span class="math notranslate nohighlight">\(U_{\text{tb}}(t)\)</span>のゲート実装に近付きます。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+U_{\text{tb}}(t) &amp;\approx \left[\exp\left(\dfrac{-it}{n}H^{(0,1)}_{\text{tb}}\right) \exp\left(\dfrac{-it}{n}H^{(1,2)}_{\text{tb}} \right)\right]^n \\
+U_{\text{tb}}(t) &amp;\approx \left[\exp\left(\dfrac{-it}{n}\left(\sigma_x^{(0)}\sigma_x^{(1)} + \sigma_y^{(0)}\sigma_y^{(1)} \right)\right) \exp\left(\dfrac{-it}{n}\left(\sigma_x^{(1)}\sigma_x^{(2)} + \sigma_y^{(1)}\sigma_y^{(2)} \right)\right)\right]^{n} \\
+U_{\text{tb}}(t) &amp;\approx \left[\exp\left(\dfrac{-it}{n}\sigma_x^{(0)}\sigma_x^{(1)}\right) \exp\left(\dfrac{-it}{n}\sigma_y^{(0)}\sigma_y^{(1)}\right) \exp\left(\dfrac{-it}{n}\sigma_x^{(1)}\sigma_x^{(2)}\right) \exp\left(\dfrac{-it}{n}\sigma_y^{(1)}\sigma_y^{(2)}\right) \right]^{n}
+\end{align}
+\end{split}\]</div>
+<p>簡単のために、またより一般的な表記を使うために、積の形式を<span class="math notranslate nohighlight">\(XX(2t) = \exp\left(-it \sigma_x\sigma_x\right)\)</span>、<span class="math notranslate nohighlight">\(YY(2t) = \exp\left(-it \sigma_y\sigma_y\right)\)</span>と書き換え、トロッター分解された<span class="math notranslate nohighlight">\(U_{\text{tb}}(t)\)</span>を書き換えます。</p>
+<div class="math notranslate nohighlight">
+\[
+U_{\text{tb}}(t) \approx \left[XX\left(\frac{2t}{n}\right)^{(0,1)} YY\left(\frac{2t}{n}\right)^{(0,1)}  XX\left(\frac{2t}{n}\right)^{(1,2)} YY\left(\frac{2t}{n}\right)^{(1,2)}\right]^{n}
+\]</div>
+<p>これでできました！<span class="math notranslate nohighlight">\(U_{\text{tb}}(t)\)</span>の分解のおおよその形を2量子ビットゲートの<span class="math notranslate nohighlight">\(XX(t)\)</span> と<span class="math notranslate nohighlight">\(YY(t)\)</span>で書くことができました。これらのゲートは、超電導量子ビットではネイティブゲートではありませんが、2章でネイティブの１量子ビットゲートと2量子ビットゲートにさらに分解します。<em>より詳しい解説は補足資料をご覧ください。</em></p>
+<p>[1] Y. Salathe, et al., <em>Digital Quantum Simulation of Spin Models with Circuit Quantum Electrodynamics</em>, <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevX.5.021027">Phys. Rev. X <strong>5</strong>, 021027 (2015)</a></p>
+<p>[2] F. Tacchino, et al., <em>Quantum Computers as Universal Quantum Simulators: State-of-the-Art and Perspectives</em>, <a class="reference external" href="https://doi.org/10.1002/qute.201900052">Adv. Quantum Technol. <em>3</em> 3 (2020)</a> [<a class="reference external" href="https://arxiv.org/abs/1907.03505">free arxiv version</a>]</p>
+<section id="id3">
+<h3>個々のパウリのユニタリー演算子の構築<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<p>この章では、ZZ(t)、XX(t)、YY(t)演算を１量子ビットゲートと2量子ビットゲートで構築します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build a subcircuit for ZZ(t) from single- and two-qubit gates</span>
+
+<span class="n">ZZ_qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ZZ_qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">ZZ_qr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;ZZ&#39;</span><span class="p">)</span>
+
+<span class="n">ZZ_qc</span><span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ZZ_qc</span><span class="o">.</span><span class="n">rz</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">t</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ZZ_qc</span><span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Convert custom quantum circuit into a gate</span>
+<span class="n">ZZ</span> <span class="o">=</span> <span class="n">ZZ_qc</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span>
+
+<span class="n">ZZ_qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4a64238e5d4ea440aba3f8a32d5ba8ee5ec168c035d7ef12af7f314143a270bf.png" src="_images/4a64238e5d4ea440aba3f8a32d5ba8ee5ec168c035d7ef12af7f314143a270bf.png" />
+</div>
+</div>
+</section>
+<section id="id4">
+<h3>クリフォードゲート<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>クリフォードゲートは、パウリ演算子を他のパウリ演算子に変換する量子演算子です。アダマールゲート (<span class="math notranslate nohighlight">\(H\)</span>) と位相ゲート(<span class="math notranslate nohighlight">\(S\)</span>)は、１量子ビットのクリフォードゲートの例の一部です。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}H=\frac{1}{\sqrt{2}}\begin{pmatrix} 1 &amp; 1 \\1 &amp; -1\\ \end{pmatrix}\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(HZH^\dagger=X\)</span>であり、<span class="math notranslate nohighlight">\(HXH^\dagger=Z\)</span>です。アダマールゲートは、エルミート演算子なので、<span class="math notranslate nohighlight">\(H=H^\dagger\)</span>です。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}S=\begin{pmatrix} 1 &amp; 0 \\0 &amp; i\\ \end{pmatrix}\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(SXS^\dagger=Y\)</span>であり、<span class="math notranslate nohighlight">\(SYS^\dagger=-X\)</span>です。</p>
+<p>クリフォードゲートを使うと、<span class="math notranslate nohighlight">\(e^{i ZZ t}\)</span> を<span class="math notranslate nohighlight">\(e^{i XX t}\)</span> と<span class="math notranslate nohighlight">\(e^{i YY t}\)</span>に変換できます。</p>
+<section id="challenge-question-1a">
+<h4>Challenge question 1a<a class="headerlink" href="#challenge-question-1a" title="Permalink to this heading">#</a></h4>
+<div class="admonition-xx-t admonition">
+<p class="admonition-title"><span class="math notranslate nohighlight">\(XX(t)\)</span>の構築</p>
+<p>XX(t)のための部分回路を１量子ビットゲートと2量子ビットゲートで構築してください。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="n">XX_qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">XX_qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">XX_qr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;XX&#39;</span><span class="p">)</span>
+
+<span class="c1">###EDIT CODE BELOW (add Clifford operator)</span>
+
+<span class="c1">###DO NOT EDIT BELOW</span>
+
+<span class="n">XX_qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ZZ</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1">###EDIT CODE BELOW (add Clifford operator)</span>
+
+<span class="c1">###DO NOT EDIT BELOW</span>
+
+<span class="c1"># Convert custom quantum circuit into a gate</span>
+<span class="n">XX</span> <span class="o">=</span> <span class="n">XX_qc</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span>
+
+<span class="n">XX_qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id5">
+<h4>解答例<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">XX_qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">XX_qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">XX_qr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;XX&#39;</span><span class="p">)</span>
+
+<span class="c1">###EDIT CODE BELOW (add Clifford operator)</span>
+
+<span class="c1">###DO NOT EDIT BELOW</span>
+
+<span class="n">XX_qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ZZ</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">XX_qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">XX_qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">XX_qr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;XX&#39;</span><span class="p">)</span>
+
+<span class="n">XX_qc</span><span class="o">.</span><span class="n">h</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">XX_qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ZZ</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">XX_qc</span><span class="o">.</span><span class="n">h</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="n">XX</span> <span class="o">=</span> <span class="n">XX_qc</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span>
+
+<span class="n">XX_qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+
+<span class="c1"># Convert custom quantum circuit into a gate</span>
+<span class="n">XX</span> <span class="o">=</span> <span class="n">XX_qc</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span>
+
+<span class="n">XX_qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0b06a57856fde02427c473848cb6106b5a9d36dc66d7aa06827ddf42262d0722.png" src="_images/0b06a57856fde02427c473848cb6106b5a9d36dc66d7aa06827ddf42262d0722.png" />
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">解説</p>
+<p><span class="math notranslate nohighlight">\(ZZ\)</span>ゲート、<span class="math notranslate nohighlight">\(XX\)</span>ゲートはそれぞれ行列を用いて表すと</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}ZZ = \begin{pmatrix} cos t - i \sin t Z &amp; 0\\  0 &amp; \cos t + i \sin t Z \end{pmatrix},~ XX = \begin{pmatrix} cos t &amp; - i \sin t X \\ - i \sin t X &amp; cos t \end{pmatrix}\end{split}\]</div>
+<p>となります。したがって、<span class="math notranslate nohighlight">\(HZH^\dagger=HZH=X\)</span>の性質を用いてそれぞれの量子ビットについて<span class="math notranslate nohighlight">\(ZZ\)</span>ゲートを<span class="math notranslate nohighlight">\(H\)</span>ゲートで挟むと</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\frac{1}{2} \begin{pmatrix} H &amp; H\\ H &amp; -H \end{pmatrix} \cdot ZZ \cdot \begin{pmatrix} H &amp; H\\ H &amp; -H \end{pmatrix}
+= XX
+\end{split}\]</div>
+<p>となり<span class="math notranslate nohighlight">\(XX\)</span>ゲートが得られます。</p>
+</div>
+</section>
+<section id="challenge-question-1b">
+<h4>Challenge question 1b<a class="headerlink" href="#challenge-question-1b" title="Permalink to this heading">#</a></h4>
+<div class="admonition-yy-t admonition">
+<p class="admonition-title"><span class="math notranslate nohighlight">\(YY(t)\)</span>の構築</p>
+<p>YY(t)のための部分回路を１量子ビットゲートと2量子ビットゲートで構築してください。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="n">YY_qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">YY_qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">YY_qr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;YY&#39;</span><span class="p">)</span>
+
+<span class="c1">###EDIT CODE BELOW (add Clifford operator)</span>
+
+
+<span class="c1">###DO NOT EDIT BELOW</span>
+
+<span class="n">YY_qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ZZ</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1">###EDIT CODE BELOW (add Clifford operator)</span>
+
+
+<span class="c1">###DO NOT EDIT BELOW</span>
+
+<span class="c1"># Convert custom quantum circuit into a gate</span>
+<span class="n">YY</span> <span class="o">=</span> <span class="n">YY_qc</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span>
+
+<span class="n">YY_qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id6">
+<h4>解答例<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">YY_qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">YY_qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">YY_qr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;YY&#39;</span><span class="p">)</span>
+
+<span class="n">YY_qc</span><span class="o">.</span><span class="n">s</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># XXゲート</span>
+<span class="n">YY_qc</span><span class="o">.</span><span class="n">h</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">YY_qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ZZ</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">YY_qc</span><span class="o">.</span><span class="n">h</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="n">YY_qc</span><span class="o">.</span><span class="n">sdg</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># Convert custom quantum circuit into a gate</span>
+<span class="n">YY</span> <span class="o">=</span> <span class="n">YY_qc</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span>
+
+<span class="n">YY_qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+
+<span class="n">YY_qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ZZ</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;qiskit.circuit.instructionset.InstructionSet at 0x7f8177626fe0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">解説</p>
+<p>Challenge question 1aと同様にして、<span class="math notranslate nohighlight">\(SXS^\dagger=Y\)</span>の性質を用いてそれぞれの量子ビットについて<span class="math notranslate nohighlight">\(XX\)</span>ゲートを<span class="math notranslate nohighlight">\(S\)</span>ゲートと<span class="math notranslate nohighlight">\(S^\dagger\)</span>で挟むと<span class="math notranslate nohighlight">\(YY\)</span>ゲートが得られます。</p>
+</div>
+</section>
+</section>
+<section id="id7">
+<h3>トロッター分解回路の構築<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<p><span class="math notranslate nohighlight">\(X_iX_j\)</span>演算子と<span class="math notranslate nohighlight">\(Y_iY_j\)</span>演算子は交換可能です：</p>
+<div class="math notranslate nohighlight">
+\[[X_iX_j, Y_iY_j]= X_iX_j.Y_iY_j - Y_iY_j.X_iX_j = Z_iZ_j-(-Z_i)(-Z_j)=0.\]</div>
+<p>したがって、<span class="math notranslate nohighlight">\(e^{i t (X_iX_j + Y_iY_j)}\)</span>を <span class="math notranslate nohighlight">\(e^{i t X_iX_j} e^{i t Y_iY_j}\)</span>に分解できます。更に、<span class="math notranslate nohighlight">\(i\neq j \neq k \neq l\)</span>の場合、<span class="math notranslate nohighlight">\([X_iX_j,X_kX_l]=0\)</span>です。このため、トロッター分解の各時間発展を2つのブロックに分解できます。</p>
+<div class="math notranslate nohighlight">
+\[U(\Delta t) \approx \Big(\prod_{i \in \rm{odd}} e^{-i \Delta t X_iX_{i+1}} e^{-i \Delta t Y_iY_{i+1}} \Big)  \Big(\prod_{i \in \rm{even}} e^{-i \Delta t X_iX_{i+1}} e^{-i \Delta t Y_iY_{i+1}} \Big)\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_qubits</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">Trot_qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
+<span class="n">Trot_qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">Trot_qr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Trot&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_qubits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">Trot_qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">YY</span><span class="p">,</span> <span class="p">[</span><span class="n">Trot_qr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">Trot_qr</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]])</span>
+    <span class="n">Trot_qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">XX</span><span class="p">,</span> <span class="p">[</span><span class="n">Trot_qr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">Trot_qr</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]])</span>
+
+<span class="c1"># Convert custom quantum circuit into a gate</span>
+<span class="n">Trot_gate</span> <span class="o">=</span> <span class="n">Trot_qc</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span>
+
+<span class="n">Trot_qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/eef7b44d6d12f6fc63cbd968b7dec03044474c28454697a632d8450a5b305051.png" src="_images/eef7b44d6d12f6fc63cbd968b7dec03044474c28454697a632d8450a5b305051.png" />
+</div>
+</div>
+<section id="challenge-question-1c">
+<h4>Challenge question 1c<a class="headerlink" href="#challenge-question-1c" title="Permalink to this heading">#</a></h4>
+<div class="admonition- admonition">
+<p class="admonition-title">トロッター回路の構築</p>
+<p>トロッター分解の回路を作成し、その回路に関連付いたユニタリー演算を出力してください。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">U_trotterize</span><span class="p">(</span><span class="n">t_target</span><span class="p">,</span> <span class="n">trotter_steps</span><span class="p">):</span>
+    <span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">)</span>
+
+    <span class="c1">###EDIT CODE BELOW (Create the trotterized circuit with various number of trotter steps)</span>
+
+    
+    <span class="c1">###DO NOT EDIT BELOW</span>
+        
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">qc</span><span class="o">.</span><span class="n">bind_parameters</span><span class="p">({</span><span class="n">t</span><span class="p">:</span> <span class="n">t_target</span><span class="o">/</span><span class="n">trotter_steps</span><span class="p">})</span>
+    
+    <span class="k">return</span> <span class="n">qi</span><span class="o">.</span><span class="n">Operator</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id8">
+<h4>解答例<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">U_trotterize</span><span class="p">(</span><span class="n">t_target</span><span class="p">,</span> <span class="n">trotter_steps</span><span class="p">):</span>
+    <span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">trotter_steps</span><span class="p">):</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Trot_gate</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">qc</span><span class="o">.</span><span class="n">bind_parameters</span><span class="p">({</span><span class="n">t</span><span class="p">:</span> <span class="n">t_target</span><span class="o">/</span><span class="n">trotter_steps</span><span class="p">})</span>
+    
+    <span class="k">return</span> <span class="n">qi</span><span class="o">.</span><span class="n">Operator</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">解説</p>
+<p>3-qubitの量子回路に対して作成したTrot_gateをtrotter_steps回かけることで求めるユニタリー演算が得られる。</p>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>下記のコードを実行することで結果の表示が可能ですが、実行に時間がかかるため結果のみ掲載します。</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">実行する場合はコメントを外してください</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1"># t_target = 0.5</span>
+<span class="c1"># U_target = U_tb(t_target)</span>
+
+<span class="c1"># steps=np.arange(1,101,2)  ## DO NOT EDIT</span>
+
+<span class="c1"># fidelities=[]</span>
+
+<span class="c1"># for n in steps:</span>
+<span class="c1">#     U_trotter = U_trotterize(t_target, trotter_steps=n)</span>
+<span class="c1">#     fidelity = qi.process_fidelity(U_trotter, target=U_target)</span>
+<span class="c1">#     fidelities.append(fidelity)</span>
+
+<span class="c1"># plt.figure(facecolor=&#39;white&#39;)</span>
+<span class="c1"># plt.loglog(steps, 1-np.array(fidelities))</span>
+<span class="c1"># plt.ylabel(&#39;Trotter error&#39;)</span>
+<span class="c1"># plt.xlabel(&#39;Trotter steps&#39;)</span>
+<span class="c1"># plt.show()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;\n実行する場合はコメントを外してください\n&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="" src="_images/2022-spring-lab1_trotter.png" /></p>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2020-w2-b-lights-out-puzzle.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">4-ライツアウトパズル（2020年 Week2b）</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="sample-2023-spring-lab1-ja.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">サンプル問題（2023年春）</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">強結合ハミルトニアンにおける時間発展</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">トロッター分解</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">個々のパウリのユニタリー演算子の構築</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">クリフォードゲート</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-question-1a">Challenge question 1a</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">解答例</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-question-1b">Challenge question 1b</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">解答例</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">トロッター分解回路の構築</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-question-1c">Challenge question 1c</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">解答例</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Quantum Tokyo
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
