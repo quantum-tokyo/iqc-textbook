@@ -18,7 +18,7 @@ parts:
   - caption: "第３章 量子アルゴリズム"
     chapters:
       - file: 2019-w2-grover
-  #   - file: 2020-w1-b-grover
+      - file: 2020-w1-b-grover_bk
       - file: 2020-w2-a-lights-out-puzzle_bk
       - file: 2020-w2-b-lights-out-puzzle_bk
       - file: 2020-w3-false-asteroids_bk
