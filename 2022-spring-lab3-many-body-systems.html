@@ -1,0 +1,1072 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>多体系量子力学（2022年春 Lab3） &#8212; IBM Quantum Challengeで学ぶ量子コンピューティング</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="application/vnd.jupyter.widget-state+json">{"state": {"1c285db2a79a48cfa3df3c6eedf709c1": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"grid_area": "right", "padding": "0px 0px 0px 0px", "width": "70px"}}, "1d3308859d814b48967bc296e156cc49": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "225e3e886a8e4a05b1d557410d8d2f7d": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "GridBoxModel", "state": {"children": ["IPY_MODEL_438c420e88b0466f99c5b6478009937b"], "layout": "IPY_MODEL_560c05b76c3c4774a57157123a2ef602"}}, "314897b457ad4bb8a83c0f94756ad0ac": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_4e138c02b7a44500a353703ec0356e63", "style": "IPY_MODEL_80d4ec67b41b4bc0ad5f6b8ac4a8985a", "value": "<h5>Backend</h5>"}}, "3410da806db942ba806f8f69cf19987e": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"margin": "0px 0px 10px 0px"}}, "357a3c4ad55b4dc4a0c4466b1cd0b31a": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ButtonStyleModel", "state": {}}, "3e7eafb5631840ddbe7f487abed01530": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HBoxModel", "state": {"children": ["IPY_MODEL_ab161ee5dc814fffa81bd582cb88a191", "IPY_MODEL_314897b457ad4bb8a83c0f94756ad0ac", "IPY_MODEL_8774c96b6e074e60bea0db42e3939461", "IPY_MODEL_e2d5b8c36da44580a5ca2e029dcffd01", "IPY_MODEL_cc7b89e49db540db8f23db7c47c1248f"], "layout": "IPY_MODEL_6733c053c01f4c0986cc613890ea998e"}}, "438c420e88b0466f99c5b6478009937b": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ButtonModel", "state": {"button_style": "primary", "description": "Clear", "layout": "IPY_MODEL_1c285db2a79a48cfa3df3c6eedf709c1", "style": "IPY_MODEL_357a3c4ad55b4dc4a0c4466b1cd0b31a"}}, "4e138c02b7a44500a353703ec0356e63": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"width": "145px"}}, "560c05b76c3c4774a57157123a2ef602": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"grid_template_areas": "\n                                       \". . . . right \"\n                                        ", "grid_template_columns": "20% 20% 20% 20% 20%", "width": "100%"}}, "6733c053c01f4c0986cc613890ea998e": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"margin": "0px 0px 0px 37px", "width": "600px"}}, "80d4ec67b41b4bc0ad5f6b8ac4a8985a": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "82d9481b88b6403681d83238fefb9822": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_3410da806db942ba806f8f69cf19987e", "style": "IPY_MODEL_1d3308859d814b48967bc296e156cc49", "value": "<p style='font-family: IBM Plex Sans, Arial, Helvetica, sans-serif; font-size: 20px; font-weight: medium;'>Circuit Properties</p>"}}, "86d30b611f3842e2ac56083c13f5cdb2": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "8774c96b6e074e60bea0db42e3939461": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_8e2d2bb8cb664fee8e92cbcb92037a34", "style": "IPY_MODEL_f3f0282976c64ddf969e8a0b7c64017e", "value": "<h5>Status</h5>"}}, "8e2d2bb8cb664fee8e92cbcb92037a34": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"width": "95px"}}, "9027743494584fde831af0bfa574315b": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"width": "70px"}}, "9d8dce191d4f44cf8a10a44c941f833d": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "ab161ee5dc814fffa81bd582cb88a191": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_af16e39862994a8fa70c9f0b17669856", "style": "IPY_MODEL_cbc5f269675f4aa1b066b52b7c5e23c9", "value": "<h5>Job ID</h5>"}}, "af16e39862994a8fa70c9f0b17669856": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"width": "190px"}}, "cbc5f269675f4aa1b066b52b7c5e23c9": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "cc7b89e49db540db8f23db7c47c1248f": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_9d8dce191d4f44cf8a10a44c941f833d", "style": "IPY_MODEL_f2b9689cdd6243a89f082505850e3d10", "value": "<h5>Message</h5>"}}, "e2d5b8c36da44580a5ca2e029dcffd01": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_9027743494584fde831af0bfa574315b", "style": "IPY_MODEL_86d30b611f3842e2ac56083c13f5cdb2", "value": "<h5>Queue</h5>"}}, "f2b9689cdd6243a89f082505850e3d10": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "f3f0282976c64ddf969e8a0b7c64017e": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}}, "version_major": 2, "version_minor": 0}</script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script crossorigin="anonymous" data-jupyter-widgets-cdn="https://cdn.jsdelivr.net/npm/" src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@1.0.6/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '2022-spring-lab3-many-body-systems';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="自治体のコンビニ出店プラン（2019年 Week4）" href="2019-w3-maxcut_bk.html" />
+    <link rel="prev" title="5点の強結合格子（2022年春 Lab2）" href="2022-spring-lab2-tb-model.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/quantum-tokyo-icon.jpg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/quantum-tokyo-icon.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    IBM Quantum Challengeで学ぶ量子コンピューティング
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">第１章 はじめてのQiskit</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2023-spring-lab1-sample.html">サンプル問題（2023年春）</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">第２章 量子コンピューターの計算ルール</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2019-w1-adder.html">量子回路における加算器（2019年 Week1）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2020-w1-a-adder.html">量子回路における加算器（2020年 Week1a）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2021-spring-lab1-toffoli.html">トフォリゲート(2021年春 Lab1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-spring-lab2-teleportation.html">量子テレポーテーション（2023年 Lab2）</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">第３章 量子アルゴリズム</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2019-w2-grover.html">Groverのアルゴリズム（2019年 Week2）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2020-w1-b-grover_bk.html">Groverのアルゴリズム（2020年 Week1b）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2020-w2-a-lights-out-puzzle_bk.html">ライツアウトパズル（2020年 Week2a）</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="2020-w2-b-lights-out-puzzle_bk.html">4-ライツアウトパズル（2020年 Week2b）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2020-w3-false-asteroids_bk.html">作り損ねた惑星問題（2020年 Week3）</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">第４章 量子コンピューターの応用</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2021-autumn-lab1-portfolio_bk.html">ポートフォリオ最適化（2021年秋 Lab1）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-spring-lab1-tb-model.html">強結合モデル（2022年春 Lab1）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-spring-lab2-tb-model.html">5点の強結合格子（2022年春 Lab2）</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">多体系量子力学（2022年春 Lab3）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2019-w3-maxcut_bk.html">自治体のコンビニ出店プラン（2019年 Week4）</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/quantum-tokyo/iqc-textbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/quantum-tokyo/iqc-textbook/issues/new?title=Issue%20on%20page%20%2F2022-spring-lab3-many-body-systems.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/2022-spring-lab3-many-body-systems.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>多体系量子力学（2022年春 Lab3）</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">はじめに</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-question-3a">Challenge question 3a</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">12量子ビット鎖において多体量子力学を調べる</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-question-3b">Challenge question 3b</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-question-3c-3d">Challenge question 3c,3d</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lab3">
+<h1>多体系量子力学（2022年春 Lab3）<a class="headerlink" href="#lab3" title="Permalink to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>このNotebookはQiskit v0.44の仕様に合わせてコードを改変しています。</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Importing standard Qiskit libraries</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">transpile</span><span class="p">,</span> <span class="n">Aer</span><span class="p">,</span> <span class="n">IBMQ</span><span class="p">,</span> <span class="n">execute</span>
+<span class="kn">from</span> <span class="nn">qiskit.tools.jupyter</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">from</span> <span class="nn">qiskit.tools.monitor</span> <span class="kn">import</span> <span class="n">job_monitor</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="kn">import</span> <span class="n">Parameter</span>
+<span class="kn">import</span> <span class="nn">qiskit.quantum_info</span> <span class="k">as</span> <span class="nn">qi</span>
+
+<span class="c1"># from qc_grader.challenges.spring_2022.helpers import generate_disordered_tb_instruction</span>
+
+<span class="c1"># Suppress warnings</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Importing standard Qiskit libraries</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">transpile</span><span class="p">,</span> <span class="n">Aer</span><span class="p">,</span> <span class="n">IBMQ</span><span class="p">,</span> <span class="n">execute</span>
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="kn">from</span> <span class="nn">qiskit.tools.jupyter</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">from</span> <span class="nn">qiskit.tools.monitor</span> <span class="kn">import</span> <span class="n">job_monitor</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.11.7</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">qiskit</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">jupyter</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">105</span>
+<span class="g g-Whitespace">    </span><span class="mi">103</span> <span class="kn">from</span> <span class="nn">qiskit.providers.fake_provider</span> <span class="kn">import</span> <span class="n">FakeBackend</span>
+<span class="g g-Whitespace">    </span><span class="mi">104</span> <span class="kn">from</span> <span class="nn">qiskit.utils</span> <span class="kn">import</span> <span class="n">optionals</span> <span class="k">as</span> <span class="n">_optionals</span>
+<span class="ne">--&gt; </span><span class="mi">105</span> <span class="kn">from</span> <span class="nn">.jupyter_magics</span> <span class="kn">import</span> <span class="n">ProgressBarMagic</span><span class="p">,</span> <span class="n">StatusMagic</span>
+<span class="g g-Whitespace">    </span><span class="mi">106</span> <span class="kn">from</span> <span class="nn">.progressbar</span> <span class="kn">import</span> <span class="n">HTMLProgressBar</span>
+<span class="g g-Whitespace">    </span><span class="mi">107</span> <span class="kn">from</span> <span class="nn">.version_table</span> <span class="kn">import</span> <span class="n">VersionTable</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.11.7</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">qiskit</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">jupyter</span><span class="o">/</span><span class="n">jupyter_magics</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">27</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="kn">from</span> <span class="nn">qiskit.tools.events.progressbar</span> <span class="kn">import</span> <span class="n">TextProgressBar</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="kn">from</span> <span class="nn">.progressbar</span> <span class="kn">import</span> <span class="n">HTMLProgressBar</span>
+<span class="ne">---&gt; </span><span class="mi">27</span> <span class="kn">from</span> <span class="nn">.library</span> <span class="kn">import</span> <span class="n">circuit_library_widget</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="k">def</span> <span class="nf">_html_checker</span><span class="p">(</span><span class="n">job_var</span><span class="p">,</span> <span class="n">interval</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">_interval_set</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Internal function that updates the status</span>
+<span class="g g-Whitespace">     </span><span class="mi">32</span><span class="sd">     of a HTML job monitor.</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span><span class="sd">         _interval_set (bool): Was interval set by user?</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span><span class="sd">     &quot;&quot;&quot;</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.11.7</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">qiskit</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">jupyter</span><span class="o">/</span><span class="n">library</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">17</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># This code is part of Qiskit.</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1">#</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># (C) Copyright IBM 2017, 2018.</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> 
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="c1"># pylint: disable=invalid-name,no-name-in-module,ungrouped-imports</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;A circuit library widget module&quot;&quot;&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">17</span> <span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">wid</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;ipywidgets&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># https://github.com/qiskit-community/Quantum-Challenge-Grader/blob/main/qc_grader/challenges/spring_2022/helpers/__init__.py</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="kn">import</span> <span class="n">Instruction</span>
+
+<span class="k">def</span> <span class="nf">generate_ZZ</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Instruction</span><span class="p">:</span>
+    <span class="n">ZZ_qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ZZ_qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">ZZ_qr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;ZZ&#39;</span><span class="p">)</span>
+    <span class="n">ZZ_qc</span><span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">ZZ_qc</span><span class="o">.</span><span class="n">rz</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">t</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">ZZ_qc</span><span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">ZZ</span> <span class="o">=</span> <span class="n">ZZ_qc</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">ZZ</span>
+
+
+<span class="k">def</span> <span class="nf">generate_XX</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Instruction</span><span class="p">:</span>
+    <span class="n">ZZ</span> <span class="o">=</span> <span class="n">generate_ZZ</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">XX_qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">XX_qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">XX_qr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;XX&#39;</span><span class="p">)</span>
+    <span class="n">XX_qc</span><span class="o">.</span><span class="n">h</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">XX_qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ZZ</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">XX_qc</span><span class="o">.</span><span class="n">h</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">XX</span> <span class="o">=</span> <span class="n">XX_qc</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">XX</span>
+
+
+<span class="k">def</span> <span class="nf">generate_YY</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Instruction</span><span class="p">:</span>
+    <span class="n">ZZ</span> <span class="o">=</span> <span class="n">generate_ZZ</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">YY_qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">YY_qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">YY_qr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;YY&#39;</span><span class="p">)</span>
+    <span class="n">YY_qc</span><span class="o">.</span><span class="n">sdg</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">YY_qc</span><span class="o">.</span><span class="n">h</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">YY_qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ZZ</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">YY_qc</span><span class="o">.</span><span class="n">h</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">YY_qc</span><span class="o">.</span><span class="n">s</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">YY</span> <span class="o">=</span> <span class="n">YY_qc</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">YY</span>
+    
+<span class="k">def</span> <span class="nf">generate_tb_trotter_instruction</span><span class="p">(</span>
+    <span class="n">t</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">,</span>
+    <span class="n">num_qubits</span><span class="p">:</span> <span class="nb">int</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Instruction</span><span class="p">:</span>
+    <span class="n">XX</span> <span class="o">=</span> <span class="n">generate_XX</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">YY</span> <span class="o">=</span> <span class="n">generate_YY</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+    <span class="n">Trot_qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
+    <span class="n">Trot_qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">Trot_qr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Trot&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_qubits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">Trot_qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">YY</span><span class="p">,</span> <span class="p">[</span><span class="n">Trot_qr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">Trot_qr</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]])</span>
+        <span class="n">Trot_qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">XX</span><span class="p">,</span> <span class="p">[</span><span class="n">Trot_qr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">Trot_qr</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]])</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_qubits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">Trot_qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">YY</span><span class="p">,</span> <span class="p">[</span><span class="n">Trot_qr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">Trot_qr</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]])</span>
+        <span class="n">Trot_qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">XX</span><span class="p">,</span> <span class="p">[</span><span class="n">Trot_qr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">Trot_qr</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]])</span>
+    <span class="n">Trot_gate</span> <span class="o">=</span> <span class="n">Trot_qc</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">Trot_gate</span>
+
+<span class="k">def</span> <span class="nf">generate_disordered_tb_instruction</span><span class="p">(</span>
+    <span class="n">t</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">,</span>
+    <span class="n">deltas</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+    <span class="n">num_qubits</span><span class="p">:</span> <span class="nb">int</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Instruction</span><span class="p">:</span>
+    <span class="n">Trot_qr_disorder</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
+    <span class="n">Trot_qc_disorder</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">Trot_qr_disorder</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Trot disorder&#39;</span><span class="p">)</span>
+
+    <span class="n">tb_trotter_instruction</span> <span class="o">=</span> <span class="n">generate_tb_trotter_instruction</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">)</span>
+    <span class="n">Trot_qc_disorder</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tb_trotter_instruction</span><span class="p">,</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)])</span>
+
+    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">):</span>
+        <span class="n">Trot_qc_disorder</span><span class="o">.</span><span class="n">rz</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">t</span> <span class="o">*</span> <span class="n">deltas</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">idx</span><span class="p">)</span>
+
+    <span class="c1"># Convert custom quantum circuit into a gate</span>
+    <span class="n">Trot_disorder_gate</span> <span class="o">=</span> <span class="n">Trot_qc_disorder</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">Trot_disorder_gate</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id1">
+<h2>はじめに<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>このExerciseでは、格子の無秩序性（乱れ）と格子間の相互作用を調べていきます。
+非平衡に初期化された閉じた量子多体系では、それ自身のダイナミクスの下で熱化と呼ばれる平衡状態に到達します。この振る舞いは、統計力学の法則による結果として、ホットコーヒーを置きっぱなしにしたとき、冷めていって周囲の温度に到達するのと同じです。</p>
+<p>しかし、格子の乱れの存在により、系がエルゴード熱平衡状態へ変化するのが妨げられます。
+これによって、乱れと粒子の相互作用との間での相互作用の結果、多体局在( many-body localization, MBL)となり、つまり、系が常に初期状態を記憶しておくことになります。MBLについてのより詳細な情報は[1]を参照ください。</p>
+<p>任意の格子エネルギーにおける強結合ハミルトニアンを再び考えます：</p>
+<div class="math notranslate nohighlight">
+\[H_{\rm tb}/\hbar = \sum^{3}_{i=0} (X_i X_{i+1} + Y_i Y_{i+1}) + \sum_i \epsilon_i Z_i \]</div>
+<p>Exercise 2で学んだように、この系における無秩序性を<span class="math notranslate nohighlight">\(\epsilon_i=W \rm{cos}(2\pi\beta i)\)</span>とおくことで模倣することができます。ここで、<span class="math notranslate nohighlight">\(W\)</span>は無秩序性の強さ、<span class="math notranslate nohighlight">\(\beta\)</span>は準結晶の周期性を決定します。
+系に複数の粒子を追加するには、ユニタリー時間発展の前に粒子を<span class="math notranslate nohighlight">\(|1\rangle\)</span>状態に初期化します。
+<span class="math notranslate nohighlight">\(H_{\rm tb}\)</span>の下では、各格子点は、それぞれ一つの格子で占有され、その結果、粒子の反発相互作用が生じます。</p>
+<p>[1] https://arxiv.org/abs/1804.11065</p>
+<p>熱平衡化の破れの兆候の一つは、 <strong>不均衡</strong> が生じることです。
+熱平衡システムにおいては、平衡状態に到達すると、各格子点は等しい平均粒子数によって占有されることが期待されますが、相互作用のある系に乱れを加えると、各格子点で観測された熱の値から偏差が発生します。この系の不均衡は、以下の式によって定量化できます。</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{I}= \langle (N_e-N_o)/(N_e+N_o) \rangle\]</div>
+<p>ここで、<span class="math notranslate nohighlight">\(N_e\)</span> と <span class="math notranslate nohighlight">\(N_o\)</span>は、系の偶数の格子と奇数の格子の占有数です。熱平衡システムでは、<span class="math notranslate nohighlight">\(\mathcal{I}=0\)</span>となり、系の乱れがこの値からの偏差を生じます。</p>
+<p>いくつかの例を考えてみましょう：</p>
+<ol class="arabic">
+<li><p><span class="math notranslate nohighlight">\( |\psi\rangle = |0111\rangle \)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+   \langle \psi | N_e | \psi \rangle &amp;= 1 \\
+   \langle \psi | N_o | \psi \rangle &amp;= 2 \\
+   \mathcal{I} = \langle \psi |  (N_e-N_o)/(N_e+N_o) | \psi \rangle &amp;= -1/3
+   \end{align*}\]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\( |\psi\rangle = \sqrt{2/3} |0111\rangle + \sqrt{1/3} |1011\rangle \)</span>:
+$<span class="math notranslate nohighlight">\( \langle \psi |  \mathcal{I} | \psi \rangle = 2/3 * \langle 0111 |  \mathcal{I} |0111\rangle + 1/3 * \langle 1011 |  \mathcal{I} |1011\rangle \)</span>$</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+   \langle 0111 |  \mathcal{I} |0111\rangle &amp;= -1/3 \\
+   \langle 1011 |  \mathcal{I} |1011\rangle &amp;= 1/3 \\
+    \langle \psi |  \mathcal{I} | \psi \rangle &amp;= -1/9
+   \end{align*}\]</div>
+</li>
+</ol>
+<section id="challenge-question-3a">
+<h3>Challenge question 3a<a class="headerlink" href="#challenge-question-3a" title="Permalink to this heading">#</a></h3>
+<div class="admonition- admonition">
+<p class="admonition-title">量子状態の不均衡</p>
+<p>量子状態の不均衡を出力する関数を書いてください。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_imbalance</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+    <span class="c1">###EDIT CODE BELOW</span>
+    <span class="c1">### HINT: MAKE SURE TO SKIP CALCULATING IMBALANCE OF THE |00...0&gt; STATE</span>
+    <span class="n">imbalance_val</span><span class="o">=</span><span class="mi">0</span>
+    
+    
+    <span class="c1">###DO NOT EDIT BELOW</span>
+    
+    <span class="k">return</span> <span class="n">imbalance_val</span>
+</pre></div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_imbalance</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+    <span class="c1">### HINT: MAKE SURE TO SKIP CALCULATING IMBALANCE OF THE |00...0&gt; STATE</span>
+    <span class="n">imbalance_val</span><span class="o">=</span><span class="mi">0</span>
+
+    <span class="n">props</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">probabilities_dict</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">_state</span><span class="p">,</span> <span class="n">probability</span> <span class="ow">in</span> <span class="n">props</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">ne</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">no</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">_state</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+                    <span class="n">ne</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">no</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="n">ne</span> <span class="o">+</span> <span class="n">no</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="k">continue</span>
+
+        <span class="n">imbalance_val</span> <span class="o">+=</span> <span class="n">probability</span> <span class="o">*</span> <span class="p">(</span><span class="n">ne</span> <span class="o">-</span> <span class="n">no</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">ne</span> <span class="o">+</span> <span class="n">no</span><span class="p">)</span>
+    
+    <span class="c1">###DO NOT EDIT BELOW</span>
+    
+    <span class="k">return</span> <span class="n">imbalance_val</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">解説</p>
+<p>状態に対して0量子ビット目から1かどうかを確認して<span class="math notranslate nohighlight">\(N_e\)</span>、<span class="math notranslate nohighlight">\(N_o\)</span>をカウントしていき不均衡の式にしたがって計算することで答えが得られる。ただし、Qiskitでは後ろから第0量子ビット、第1量子ビットと数えていくため、先頭を第0量子ビットとする場合には、量子ビットの個数が偶数の時不均衡の符号が反転する。Quantum Challengeが開催された際には後者でgraderが通ったため、そちらを採用した。</p>
+</div>
+<p>次に、量子情報とエンタングルメント・エントロピーが系においてどのように成長するかを考えます。
+エンタングルした系では、系がそのままでいるための情報を無視することで部分系を異なる数の状態の混合状態になります。 部分系<span class="math notranslate nohighlight">\(A\)</span>と残りの系の間のエンタングルメントの度合いに洞察を得ることで<strong>フォン・ノイマン・エントロピー</strong> を調べられます：</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{S}_{\rm vn}(\rho_A)= -\rm{tr}(\rho_A \rm{ln} \rho_A)\]</div>
+<p>ここで、<span class="math notranslate nohighlight">\(\rho_A= \rm{tr}_{\bar{A}} \rho\)</span>は、系の残りをトレースアウトしたときの部分系<span class="math notranslate nohighlight">\(A\)</span>を記述する縮約密度行列です。部分系<span class="math notranslate nohighlight">\(A\)</span>が、系の残りと完全にエンタングルしているとき、<span class="math notranslate nohighlight">\(\mathcal{S}_{\rm vn}(\rho_A) = \rm{ln}2\)</span>となり、またその環境において（積状態において）完全に分解できるとき<span class="math notranslate nohighlight">\(\mathcal{S}_{\rm vn}(\rho_A)=0\)</span>です。以下の例を考えてみてください：</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bell_state</span> <span class="o">=</span> <span class="n">qi</span><span class="o">.</span><span class="n">Statevector</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="n">rho_0</span> <span class="o">=</span> <span class="n">qi</span><span class="o">.</span><span class="n">partial_trace</span><span class="p">(</span><span class="n">bell_state</span><span class="p">,[</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># We trance out qubit 1</span>
+<span class="n">rho_1</span> <span class="o">=</span> <span class="n">qi</span><span class="o">.</span><span class="n">partial_trace</span><span class="p">(</span><span class="n">bell_state</span><span class="p">,[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># We trace out qubit 0</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;QB0 vn entropy: &#39;</span><span class="p">,</span> <span class="n">qi</span><span class="o">.</span><span class="n">entropy</span><span class="p">(</span><span class="n">rho_0</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;QB1 vn entropy: &#39;</span><span class="p">,</span> <span class="n">qi</span><span class="o">.</span><span class="n">entropy</span><span class="p">(</span><span class="n">rho_1</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>QB0 vn entropy:  0.6931471805599454
+QB1 vn entropy:  0.6931471805599454
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="id2">
+<h2>12量子ビット鎖において多体量子力学を調べる<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>Exerciseのこのパートでは、Exercise 2で調べた格子の乱れのパターンと同じものを使います。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_qubits</span><span class="o">=</span><span class="mi">12</span>
+<span class="n">deltas</span><span class="o">=</span><span class="p">[</span><span class="n">Parameter</span><span class="p">(</span><span class="s1">&#39;delta_</span><span class="si">{:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">idx</span><span class="p">))</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)]</span>
+<span class="n">disorder_trot_step</span><span class="o">=</span><span class="n">generate_disordered_tb_instruction</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">deltas</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Here we define the disorder pattern</span>
+
+<span class="n">beta</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="c1"># DO NOT EDIT</span>
+<span class="n">AA_pattern</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">beta</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">))</span> <span class="c1"># DO NOT EDIT</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="challenge-question-3b">
+<h3>Challenge question 3b<a class="headerlink" href="#challenge-question-3b" title="Permalink to this heading">#</a></h3>
+<div class="admonition- admonition">
+<p class="admonition-title">系の初期化</p>
+<p>qubits 0, 4, 8 を<span class="math notranslate nohighlight">\(|1\rangle\)</span>に設定することで系を初期化してください。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">delta_t</span><span class="o">=</span><span class="mf">0.1</span>
+<span class="n">time_steps</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">21</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">circuits</span><span class="o">=</span><span class="p">{}</span>
+<span class="n">Ws</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">W</span> <span class="ow">in</span> <span class="n">Ws</span><span class="p">:</span>
+    <span class="n">disorders</span><span class="o">=</span><span class="n">W</span><span class="o">*</span><span class="n">AA_pattern</span>
+    
+    <span class="n">circuits</span><span class="p">[</span><span class="n">W</span><span class="p">]</span><span class="o">=</span><span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">n_steps</span> <span class="ow">in</span> <span class="n">time_steps</span><span class="p">:</span>
+
+        <span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
+        <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">)</span>
+
+        <span class="c1">###EDIT CODE BELOW</span>
+        
+        
+        <span class="c1">###DO NOT EDIT BELOW     </span>
+
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">disorder_trot_step</span><span class="p">,</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)])</span>
+        
+        <span class="k">if</span> <span class="n">n_steps</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">qc</span> <span class="o">=</span> <span class="n">qc</span><span class="o">.</span><span class="n">bind_parameters</span><span class="p">({</span><span class="n">t</span><span class="p">:</span> <span class="n">delta_t</span><span class="p">})</span>
+            <span class="n">qc</span> <span class="o">=</span> <span class="n">qc</span><span class="o">.</span><span class="n">bind_parameters</span><span class="p">({</span><span class="n">deltas</span><span class="p">[</span><span class="n">idx</span><span class="p">]:</span> <span class="n">disorders</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)})</span>
+
+        <span class="n">circuits</span><span class="p">[</span><span class="n">W</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delta_t</span><span class="o">=</span><span class="mf">0.1</span>
+<span class="n">time_steps</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">21</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">circuits</span><span class="o">=</span><span class="p">{}</span>
+<span class="n">Ws</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">W</span> <span class="ow">in</span> <span class="n">Ws</span><span class="p">:</span>
+    <span class="n">disorders</span><span class="o">=</span><span class="n">W</span><span class="o">*</span><span class="n">AA_pattern</span>
+    
+    <span class="n">circuits</span><span class="p">[</span><span class="n">W</span><span class="p">]</span><span class="o">=</span><span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">n_steps</span> <span class="ow">in</span> <span class="n">time_steps</span><span class="p">:</span>
+
+        <span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
+        <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">)</span>
+
+        <span class="c1">###EDIT CODE BELOW</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+        
+        
+        <span class="c1">###DO NOT EDIT BELOW     </span>
+
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">disorder_trot_step</span><span class="p">,</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)])</span>
+        
+        <span class="k">if</span> <span class="n">n_steps</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">qc</span> <span class="o">=</span> <span class="n">qc</span><span class="o">.</span><span class="n">bind_parameters</span><span class="p">({</span><span class="n">t</span><span class="p">:</span> <span class="n">delta_t</span><span class="p">})</span>
+            <span class="n">qc</span> <span class="o">=</span> <span class="n">qc</span><span class="o">.</span><span class="n">bind_parameters</span><span class="p">({</span><span class="n">deltas</span><span class="p">[</span><span class="n">idx</span><span class="p">]:</span> <span class="n">disorders</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)})</span>
+
+        <span class="n">circuits</span><span class="p">[</span><span class="n">W</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">解説</p>
+<p>指示通りに<span class="math notranslate nohighlight">\(X\)</span>ゲートをかけて0,4,8番目の量子ビットを1にすればよい。</p>
+</div>
+</section>
+<section id="challenge-question-3c-3d">
+<h3>Challenge question 3c,3d<a class="headerlink" href="#challenge-question-3c-3d" title="Permalink to this heading">#</a></h3>
+<div class="admonition- admonition">
+<p class="admonition-title">フォン・ノイマン・エントロピー</p>
+<p>乱れの強さを変化させ、それぞれの時間発展のステップにおいて、qubit 0 のフォン・ノイマン・エントロピーを取り出してください。<br />
+また、乱れの強さを変化させ、それぞれの時間発展のステップにおいて、格子の不平衡を取り出してください。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">transpile</span>
+
+<span class="c1"># Use Aer&#39;s statevector simulator</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">Aer</span>
+
+<span class="c1"># Run the quantum circuit on a statevector simulator backend</span>
+<span class="n">backend_sim</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+
+<span class="n">probability_densities</span><span class="o">=</span><span class="p">{}</span>
+<span class="n">state_vector_imbalances</span><span class="o">=</span><span class="p">{}</span>
+<span class="n">vn_entropies</span><span class="o">=</span><span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">W</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">Ws</span><span class="p">):</span>
+    <span class="n">probability_densities</span><span class="p">[</span><span class="n">W</span><span class="p">]</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">state_vector_imbalances</span><span class="p">[</span><span class="n">W</span><span class="p">]</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">vn_entropies</span><span class="p">[</span><span class="n">W</span><span class="p">]</span><span class="o">=</span><span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">circ</span> <span class="ow">in</span> <span class="n">circuits</span><span class="p">[</span><span class="n">W</span><span class="p">]:</span>
+
+        <span class="n">transpiled_circ</span><span class="o">=</span><span class="n">transpile</span><span class="p">(</span><span class="n">circ</span><span class="p">,</span> <span class="n">backend_sim</span><span class="p">,</span> <span class="n">optimization_level</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+        <span class="n">job_sim</span> <span class="o">=</span> <span class="n">backend_sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transpiled_circ</span><span class="p">)</span>
+
+        <span class="c1"># Grab the results from the job.</span>
+        <span class="n">result_sim</span> <span class="o">=</span> <span class="n">job_sim</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+        <span class="n">outputstate</span> <span class="o">=</span> <span class="n">result_sim</span><span class="o">.</span><span class="n">get_statevector</span><span class="p">(</span><span class="n">transpiled_circ</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+        <span class="n">ps</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">):</span>
+            <span class="n">ps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">qi</span><span class="o">.</span><span class="n">partial_trace</span><span class="p">(</span><span class="n">outputstate</span><span class="p">,[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span><span class="o">!=</span><span class="n">idx</span><span class="p">]))[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        
+        <span class="n">entropy</span><span class="o">=</span><span class="mi">0</span>
+        <span class="c1">### EDIT CODE BELOW (extract the density matrix of qubit 0 by tracing out all other qubits)</span>
+        
+        
+        <span class="c1">###DO NOT EDIT BELOW </span>
+        
+        <span class="n">imbalance</span><span class="o">=</span><span class="mi">0</span>
+        <span class="c1">### EDIT CODE BELOW </span>
+        
+        
+        <span class="c1">###DO NOT EDIT BELOW</span>
+        
+        
+        <span class="n">vn_entropies</span><span class="p">[</span><span class="n">W</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entropy</span><span class="p">)</span>
+        <span class="n">probability_densities</span><span class="p">[</span><span class="n">W</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ps</span><span class="p">)</span>
+        <span class="n">state_vector_imbalances</span><span class="p">[</span><span class="n">W</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">imbalance</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">transpile</span>
+
+<span class="c1"># Use Aer&#39;s statevector simulator</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">Aer</span>
+
+<span class="c1"># Run the quantum circuit on a statevector simulator backend</span>
+<span class="n">backend_sim</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+
+<span class="n">probability_densities</span><span class="o">=</span><span class="p">{}</span>
+<span class="n">state_vector_imbalances</span><span class="o">=</span><span class="p">{}</span>
+<span class="n">vn_entropies</span><span class="o">=</span><span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">W</span> <span class="ow">in</span> <span class="n">Ws</span><span class="p">:</span>
+    <span class="n">probability_densities</span><span class="p">[</span><span class="n">W</span><span class="p">]</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">state_vector_imbalances</span><span class="p">[</span><span class="n">W</span><span class="p">]</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">vn_entropies</span><span class="p">[</span><span class="n">W</span><span class="p">]</span><span class="o">=</span><span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">circ</span> <span class="ow">in</span> <span class="n">circuits</span><span class="p">[</span><span class="n">W</span><span class="p">]:</span>
+
+        <span class="n">transpiled_circ</span><span class="o">=</span><span class="n">transpile</span><span class="p">(</span><span class="n">circ</span><span class="p">,</span> <span class="n">backend_sim</span><span class="p">,</span> <span class="n">optimization_level</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+        <span class="n">job_sim</span> <span class="o">=</span> <span class="n">backend_sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transpiled_circ</span><span class="p">)</span>
+
+        <span class="c1"># Grab the results from the job.</span>
+        <span class="n">result_sim</span> <span class="o">=</span> <span class="n">job_sim</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+        <span class="n">outputstate</span> <span class="o">=</span> <span class="n">result_sim</span><span class="o">.</span><span class="n">get_statevector</span><span class="p">(</span><span class="n">transpiled_circ</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+        <span class="n">ps</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">):</span>
+            <span class="n">ps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">qi</span><span class="o">.</span><span class="n">partial_trace</span><span class="p">(</span><span class="n">outputstate</span><span class="p">,[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span><span class="o">!=</span><span class="n">idx</span><span class="p">]))[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        
+        <span class="n">entropy</span><span class="o">=</span><span class="mi">0</span>
+
+        <span class="n">extract_qubit_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputstate</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">)]</span>
+        <span class="n">rho</span> <span class="o">=</span> <span class="n">qi</span><span class="o">.</span><span class="n">partial_trace</span><span class="p">(</span><span class="n">outputstate</span><span class="p">,</span> <span class="n">extract_qubit_list</span><span class="p">)</span>
+        <span class="n">entropy</span> <span class="o">=</span> <span class="n">qi</span><span class="o">.</span><span class="n">entropy</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        
+        <span class="n">imbalance</span><span class="o">=</span><span class="mi">0</span>
+        <span class="n">imbalance</span> <span class="o">+=</span> <span class="n">get_imbalance</span><span class="p">(</span><span class="n">outputstate</span><span class="p">)</span>
+        
+        <span class="n">vn_entropies</span><span class="p">[</span><span class="n">W</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entropy</span><span class="p">)</span>
+        <span class="n">probability_densities</span><span class="p">[</span><span class="n">W</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ps</span><span class="p">)</span>
+        <span class="n">state_vector_imbalances</span><span class="p">[</span><span class="n">W</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">imbalance</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">解説</p>
+<p>0量子ビットのフォン・ノイマン・エントロピーを取り出すので、0量子ビット以外、つまり1量子ビット目以降の量子ビットをトレースアウトして縮約密度行列を求める。その状態に対してqi.entropy()でエントロピーを計算することでentropy変数が求まる。不均衡についてはChallenge 3aで定義したget_imbalance関数を用いることで計算することができる。</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">W</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">Ws</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">num_qubits</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">time_steps</span><span class="o">*</span><span class="n">delta_t</span> <span class="p">,</span><span class="n">probability_densities</span><span class="p">[</span><span class="n">W</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Qubit index&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">num_qubits</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Time (1/J)&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/05f232084b685c1234aa065024d1057c6bb2e607946d5e45a9a607ce462a47ca.png" src="_images/05f232084b685c1234aa065024d1057c6bb2e607946d5e45a9a607ce462a47ca.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">W</span> <span class="ow">in</span> <span class="n">Ws</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_steps</span><span class="o">*</span><span class="n">delta_t</span><span class="p">,</span><span class="n">vn_entropies</span><span class="p">[</span><span class="n">W</span><span class="p">],</span> <span class="s1">&#39;--o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;W=</span><span class="si">{:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">W</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Time (1/J)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\mathcal</span><span class="si">{S}</span><span class="s1">_{\rm vn}(\rho_0)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/20057481eaf96e384983c67773c39f3636b4d59978c27f1d982ca89abea3936d.png" src="_images/20057481eaf96e384983c67773c39f3636b4d59978c27f1d982ca89abea3936d.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">W</span> <span class="ow">in</span> <span class="n">Ws</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_steps</span><span class="o">*</span><span class="n">delta_t</span><span class="p">,</span><span class="n">state_vector_imbalances</span><span class="p">[</span><span class="n">W</span><span class="p">],</span> <span class="s1">&#39;--o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;W=</span><span class="si">{:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">W</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Time (1/J)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\mathcal</span><span class="si">{I}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3048aab7692049b8ce70c0a7f9089819b1ebc7585bef85ab8b9be9df013c43a6.png" src="_images/3048aab7692049b8ce70c0a7f9089819b1ebc7585bef85ab8b9be9df013c43a6.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2022-spring-lab2-tb-model.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">5点の強結合格子（2022年春 Lab2）</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="2019-w3-maxcut_bk.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">自治体のコンビニ出店プラン（2019年 Week4）</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">はじめに</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-question-3a">Challenge question 3a</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">12量子ビット鎖において多体量子力学を調べる</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-question-3b">Challenge question 3b</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-question-3c-3d">Challenge question 3c,3d</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Quantum Tokyo
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -18,35 +18,34 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# 不要な警告を取り除きます
-import warnings
-from matplotlib.cbook import MatplotlibDeprecationWarning
-warnings.filterwarnings('ignore', category=MatplotlibDeprecationWarning)
+import numpy as np
+import matplotlib.pyplot as plt
 
-# Qiskitの標準的なライブラリーをインポートします
-from qiskit import QuantumCircuit, execute, Aer, IBMQ, QuantumRegister, ClassicalRegister
-from qiskit.compiler import transpile, assemble
+# Importing standard Qiskit libraries
+from qiskit import QuantumCircuit, QuantumRegister, transpile, Aer, IBMQ, execute
 from qiskit.tools.jupyter import *
 from qiskit.visualization import *
 
-# piを設定しておくと便利です
-import math
-pi=math.pi
+from qiskit.tools.monitor import job_monitor
+from qiskit.circuit import Parameter
+import qiskit.quantum_info as qi
+
+# from qc_grader.challenges.spring_2022.helpers import generate_disordered_tb_instruction
+
+# Suppress warnings
+import warnings
+warnings.filterwarnings('ignore')
 ------------------
 
------ stderr -----
-/tmp/ipykernel_2034/1182467571.py:3: MatplotlibDeprecationWarning: MatplotlibDeprecationWarning was deprecated in Matplotlib 3.6 and will be removed two minor releases later. Use matplotlib.MatplotlibDeprecationWarning instead.
-  from matplotlib.cbook import MatplotlibDeprecationWarning
-------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [0;32mIn[1], line 9[0m
-[1;32m      7[0m [38;5;28;01mfrom[39;00m [38;5;21;01mqiskit[39;00m [38;5;28;01mimport[39;00m QuantumCircuit, execute, Aer, IBMQ, QuantumRegister, ClassicalRegister
-[1;32m      8[0m [38;5;28;01mfrom[39;00m [38;5;21;01mqiskit[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcompiler[39;00m [38;5;28;01mimport[39;00m transpile, assemble
-[0;32m----> 9[0m [38;5;28;01mfrom[39;00m [38;5;21;01mqiskit[39;00m[38;5;21;01m.[39;00m[38;5;21;01mtools[39;00m[38;5;21;01m.[39;00m[38;5;21;01mjupyter[39;00m [38;5;28;01mimport[39;00m [38;5;241m*[39m
-[1;32m     10[0m [38;5;28;01mfrom[39;00m [38;5;21;01mqiskit[39;00m[38;5;21;01m.[39;00m[38;5;21;01mvisualization[39;00m [38;5;28;01mimport[39;00m [38;5;241m*[39m
-[1;32m     12[0m [38;5;66;03m# piを設定しておくと便利です[39;00m
+Cell [0;32mIn[1], line 6[0m
+[1;32m      4[0m [38;5;66;03m# Importing standard Qiskit libraries[39;00m
+[1;32m      5[0m [38;5;28;01mfrom[39;00m [38;5;21;01mqiskit[39;00m [38;5;28;01mimport[39;00m QuantumCircuit, QuantumRegister, transpile, Aer, IBMQ, execute
+[0;32m----> 6[0m [38;5;28;01mfrom[39;00m [38;5;21;01mqiskit[39;00m[38;5;21;01m.[39;00m[38;5;21;01mtools[39;00m[38;5;21;01m.[39;00m[38;5;21;01mjupyter[39;00m [38;5;28;01mimport[39;00m [38;5;241m*[39m
+[1;32m      7[0m [38;5;28;01mfrom[39;00m [38;5;21;01mqiskit[39;00m[38;5;21;01m.[39;00m[38;5;21;01mvisualization[39;00m [38;5;28;01mimport[39;00m [38;5;241m*[39m
+[1;32m      9[0m [38;5;28;01mfrom[39;00m [38;5;21;01mqiskit[39;00m[38;5;21;01m.[39;00m[38;5;21;01mtools[39;00m[38;5;21;01m.[39;00m[38;5;21;01mmonitor[39;00m [38;5;28;01mimport[39;00m job_monitor
 
 File [0;32m/opt/hostedtoolcache/Python/3.11.7/x64/lib/python3.11/site-packages/qiskit/tools/jupyter/__init__.py:105[0m
 [1;32m    103[0m [38;5;28;01mfrom[39;00m [38;5;21;01mqiskit[39;00m[38;5;21;01m.[39;00m[38;5;21;01mproviders[39;00m[38;5;21;01m.[39;00m[38;5;21;01mfake_provider[39;00m [38;5;28;01mimport[39;00m FakeBackend
