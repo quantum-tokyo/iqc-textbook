@@ -1,0 +1,1376 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>反復位相推定（2023年春 Lab3） &#8212; IBM Quantum Challengeで学ぶ量子コンピューティング</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '2023-spring-lab3-iqpe';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ポートフォリオ最適化（2021年秋 Lab1）" href="2021-autumn-lab1-portfolio_bk.html" />
+    <link rel="prev" title="作り損ねた惑星問題（2020年 Week3）" href="2020-w3-false-asteroids_bk.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/quantum-tokyo-icon.jpg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/quantum-tokyo-icon.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    IBM Quantum Challengeで学ぶ量子コンピューティング
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">第１章 はじめてのQiskit</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2023-spring-lab1-sample.html">サンプル問題（2023年春）</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">第２章 量子コンピューターの計算ルール</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2019-w1-adder.html">量子回路における加算器（2019年 Week1）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2020-w1-a-adder.html">量子回路における加算器（2020年 Week1a）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2021-spring-lab1-toffoli.html">トフォリゲート(2021年春 Lab1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-spring-lab2-teleportation.html">量子テレポーテーション（2023年 Lab2）</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">第３章 量子アルゴリズム</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2019-w2-grover.html">Groverのアルゴリズム（2019年 Week2）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2020-w1-b-grover_bk.html">Groverのアルゴリズム（2020年 Week1b）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2020-w2-a-lights-out-puzzle_bk.html">ライツアウトパズル（2020年 Week2a）</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="2020-w2-b-lights-out-puzzle_bk.html">4-ライツアウトパズル（2020年 Week2b）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2020-w3-false-asteroids_bk.html">作り損ねた惑星問題（2020年 Week3）</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">反復位相推定（2023年春 Lab3）</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">第４章 量子コンピューターの応用</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2021-autumn-lab1-portfolio_bk.html">ポートフォリオ最適化（2021年秋 Lab1）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-spring-lab1-tb-model.html">強結合モデル（2022年春 Lab1）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-spring-lab2-tb-model.html">5点の強結合格子（2022年春 Lab2）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-spring-lab3-many-body-systems.html">多体系量子力学（2022年春 Lab3）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2019-w3-maxcut_bk.html">自治体のコンビニ出店プラン（2019年 Week4）</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/quantum-tokyo/iqc-textbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/quantum-tokyo/iqc-textbook/issues/new?title=Issue%20on%20page%20%2F2023-spring-lab3-iqpe.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/2023-spring-lab3-iqpe.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>反復位相推定（2023年春 Lab3）</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">背景</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">アルゴリズム</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">実装</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">ステップ 1</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1 問題</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Exercise 1 解答例</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">ステップ 2</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2 問題</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Exercise 2 解答例</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">シミュレーターで実行</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exersise-3">Exersise 3 問題</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Exersise 3 解答例</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">位相が正確な2進数展開を持たない場合</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4">Exercise 4 問題</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">Exercise 4 解答例</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5">Exercise 5 問題</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">Exercise 5 解答例</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">ハードウェアでの実行</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lab3">
+<h1>反復位相推定（2023年春 Lab3）<a class="headerlink" href="#lab3" title="Permalink to this heading">#</a></h1>
+<p>量子位相推定（Quantum phase estimation, QPE）アルゴリズムは、最も重要で有名な量子アルゴリズムの1つです。Shorの因数分解アルゴリズムの重要なサブルーチンであり、量子シミュレーションのアルゴリズムでもあります。このアルゴリズムのテキストブックのバージョンは、精度に応じて数がスケールする補助量子ビットを使用するため、今日のノイズのあるデバイスでは量子ビットの数や接続性が限られていることから、実行が困難な回路となっています。</p>
+<p>反復位相推定（Iterative phase estimation, IPE）は、1つの補助量子ビットしか必要としないQPEの変種です。IPEでは、補助量子ビットを繰り返し測定し、測定結果をその後の量子演算の補助として利用します。Dynamic circuit(動的回路)が導入されるまで、このような古典的なフィードフォワードは、IBMの量子ハードウェアでは実行不可能でした。</p>
+<p>ここでは、最近実装されたDynamic circuitの機能を使って、IPEを実装します。</p>
+<section id="id1">
+<h2>背景<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>他の位相推定アルゴリズムと同じように、IPEは以下の問題を解くために設計されています：</p>
+<p><strong>問題文:</strong> ユニタリー行列 <span class="math notranslate nohighlight">\(U\)</span> と 未知の固有値 <span class="math notranslate nohighlight">\(e^{i 2\pi \varphi}\)</span> を持つ <span class="math notranslate nohighlight">\(U\)</span> の固有状態 <span class="math notranslate nohighlight">\(|\Psi\rangle\)</span> が与えられたとき、 <span class="math notranslate nohighlight">\(\varphi\)</span> の値を推定せよ。</p>
+<p>この問題文では、いくつかの重要な詳細を明らかにする必要があります。すなわち、 <span class="math notranslate nohighlight">\(U\)</span> と <span class="math notranslate nohighlight">\(|\Psi\rangle\)</span> がどのように指定されるかです。 <span class="math notranslate nohighlight">\(U\)</span> は <span class="math notranslate nohighlight">\(U\)</span> を実装した量子回路として与えられ、実際に、正の整数 <span class="math notranslate nohighlight">\(t\)</span> に対して <em>制御</em>  <span class="math notranslate nohighlight">\(U^{2^t}\)</span> という演算を効率よく実装できる能力があると仮定します。これは、オリジナルのQPEアルゴリズムで用いられたものと同じ仮定です。固有状態も量子回路として与えられます：つまり、 <span class="math notranslate nohighlight">\(|\Psi\rangle\)</span> を効率的に準備できると仮定します。</p>
+<p>まず、簡単のために、 <span class="math notranslate nohighlight">\(\varphi\)</span> が正確なバイナリー展開できると仮定しましょう。つまり、次のように書くことができると仮定します。</p>
+<div class="math notranslate nohighlight">
+\[
+\varphi = \varphi_1/2 + \varphi_2/4 + \cdots + \varphi_m/2^m = 0.\varphi_1 \varphi_2 \cdots \varphi_m
+\]</div>
+<p>ここで、最後の等式では、二進数の「小数」表記を使用しています。簡単のために、 <span class="math notranslate nohighlight">\(U\)</span> が1つの量子ビットに作用するユニタリー演算子であるとします（ここで述べていることはすべて、 <span class="math notranslate nohighlight">\(U\)</span> が複数の量子ビットに作用する場合にも適用されます）。IPEは補助量子ビットを必要とするので、 <span class="math notranslate nohighlight">\(q_0\)</span> と <span class="math notranslate nohighlight">\(q_1\)</span> という2つの量子ビットのシステムが必要であり、 <span class="math notranslate nohighlight">\(q_0\)</span> は補助量子ビット、 <span class="math notranslate nohighlight">\(q_1\)</span> は <span class="math notranslate nohighlight">\(U\)</span> が作用する物理系を表します。</p>
+<p>ここで、 <span class="math notranslate nohighlight">\(q_0\)</span> を <span class="math notranslate nohighlight">\(|+\rangle = \frac{|0\rangle + |1\rangle}{\sqrt{2}}\)</span> の状態に、 <span class="math notranslate nohighlight">\(q_1\)</span> を <span class="math notranslate nohighlight">\(|\Psi \rangle\)</span> の状態に初期化するとします。  <span class="math notranslate nohighlight">\(q_0\)</span> をコントロール、 <span class="math notranslate nohighlight">\(q_1\)</span> をターゲットとして、 <em>制御</em> <span class="math notranslate nohighlight">\(U^{2^t}\)</span> ゲートを適用するとどうなるでしょうか?  <span class="math notranslate nohighlight">\(|\Psi \rangle\)</span> は固有値  <span class="math notranslate nohighlight">\(e^{i 2\pi \varphi}\)</span> を持つ <span class="math notranslate nohighlight">\(U\)</span> の固有状態であるため、次のようになります。
+$$</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a3d1101b-4c23-40fa-9aa4-f7a0011b516f">
+<span class="eqno">(2)<a class="headerlink" href="#equation-a3d1101b-4c23-40fa-9aa4-f7a0011b516f" title="Permalink to this equation">#</a></span>\[\begin{align}
+|+\rangle |\Psi \rangle &amp;= \left(\frac{|0\rangle + |1\rangle}{\sqrt{2}}\right) |\Psi \rangle \\
+&amp;= \frac{|0\rangle |\Psi \rangle + |1\rangle |\Psi \rangle}{\sqrt{2}} \\
+&amp;\xrightarrow{\text{controlled-}U^{2^t}} \frac{|0\rangle |\Psi \rangle + e^{i 2 \pi 2^{t} \varphi} |1\rangle |\Psi \rangle}{\sqrt{2}} \\
+&amp;= \left(\frac{|0\rangle  + e^{i 2 \pi 2^{t} \varphi} |1\rangle}{\sqrt{2}}\right) |\Psi \rangle.
+\end{align}\]</div>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}つまり、システム量子ビットの状態は変化しませんが、位相 $e^{i 2 \pi 2^{t} \varphi}$ が補助量子ビットの状態に「キックバック」されました。\\ここで、次のことに注意してください。\end{aligned}\end{align} \]</div>
+<p>e^{i 2 \pi 2^{t} \varphi} = e^{i 2 \pi 2^{t} (0.\varphi_1 \varphi_2 \cdots \varphi_m)}
+= e^{i 2 \pi (\varphi_1 \cdots \varphi_t . \varphi_{t + 1} \cdots \varphi_m)}
+= e^{i 2 \pi (0. \varphi_{t + 1} \cdots \varphi_m)},
+$$</p>
+<p>ここで、最後の等式では、任意の整数 <span class="math notranslate nohighlight">\(n\)</span> に対して  <span class="math notranslate nohighlight">\(e^{i 2\pi n} = 1\)</span>  であるため、位相の「小数」表現の整数部分が消えています。 例えば：</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(t=0\)</span> の場合、位相は <span class="math notranslate nohighlight">\(e^{i 2 \pi 2^{0} \varphi} = e^{i 2 \pi \varphi} = e^{i 2 \pi 0.\varphi_1 \varphi_2 ... \varphi_m}\)</span> になります。</p></li>
+<li><p><span class="math notranslate nohighlight">\(t=1\)</span> の場合、位相は <span class="math notranslate nohighlight">\(e^{i 2 \pi 2^{1} \varphi}= e^{i 2 \pi \varphi_1} e^{i 2 \pi 0.\varphi_2 \varphi_3 ... \varphi_m} = e^{i 2 \pi 0.\varphi_2 \varphi_3 ... \varphi_m}\)</span> になります。</p></li>
+<li><p><span class="math notranslate nohighlight">\(t=2\)</span> の場合、位相は <span class="math notranslate nohighlight">\(e^{i 2 \pi 2^{2} \varphi} = e^{i 2 \pi 0.\varphi_3 \varphi_4 ... \varphi_m}\)</span> になります。</p></li>
+<li><p><span class="math notranslate nohighlight">\(t=m-1\)</span> の場合、位相は <span class="math notranslate nohighlight">\(e^{i 2 \pi 2^{m-1} \varphi} = e^{i 2 \pi 0.\varphi_m}\)</span> になります。</p></li>
+</ul>
+<p><span class="math notranslate nohighlight">\(t = m - 1\)</span> の最後のケースでは、位相は <span class="math notranslate nohighlight">\(e^{i 2 \pi 0.\varphi_m}\)</span> で、 <span class="math notranslate nohighlight">\(\varphi_m = 0\)</span> の場合は <span class="math notranslate nohighlight">\(1\)</span> 、 <span class="math notranslate nohighlight">\(\varphi_m = 1\)</span> の場合は <span class="math notranslate nohighlight">\(-1\)</span> に等しくなります。 最初のケースでは、補助量子ビット <span class="math notranslate nohighlight">\(q_0\)</span> は  <span class="math notranslate nohighlight">\(|+\rangle = \frac{|0\rangle + |1\rangle}{\sqrt{2}}\)</span> の状態になり、2 番目のケースでは <span class="math notranslate nohighlight">\(|-\rangle = \frac{|0\rangle - |1\rangle}{\sqrt{2}}\)</span> の状態になります。 したがって、パウリの <span class="math notranslate nohighlight">\(X\)</span> 基底で量子ビットを測定すると、これらのケースを 100% の成功率で区別できます。 これは、量子ビットを測定する前に量子ビットに対してアダマール ゲートを実行することによって行われます。 最初のケースでは 0 を測定し、2 番目のケースでは 1 を測定します。 言い換えれば、測定されたビットは <span class="math notranslate nohighlight">\(\varphi_m\)</span> と等しくなります。</p>
+<section id="id2">
+<h3>アルゴリズム<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<p>IPE アルゴリズムの最初のステップでは、上記で説明したように 2 量子ビットレジスターを初期化 ( <span class="math notranslate nohighlight">\(q_0 \rightarrow |+\rangle\)</span> と <span class="math notranslate nohighlight">\(q_1 \rightarrow |\Psi \rangle\)</span> )し、<em>制御</em> <span class="math notranslate nohighlight">\(U^{2^{m-1}}\)</span> を実行することで、位相<span class="math notranslate nohighlight">\(\varphi\)</span>の最下位ビット<span class="math notranslate nohighlight">\(\varphi_m\)</span>を直接測定し、パウリの <span class="math notranslate nohighlight">\(X\)</span> 基底で <span class="math notranslate nohighlight">\(q_0\)</span> を測定します。</p>
+<p>2 番目のステップでは、同じ方法でシステムを初期化し、<em>制御</em> <span class="math notranslate nohighlight">\(U^{2^{m-2}}\)</span> 演算を適用します。 これらの操作後の <span class="math notranslate nohighlight">\(q_0\)</span> の相対位相は <span class="math notranslate nohighlight">\(e^{i 2 \pi 0.\varphi_{m-1}\varphi_{m}}= e^{i 2 \pi 0.\varphi_{m-1}} e^{i 2 \pi \varphi_m/4}\)</span> になります。 位相ビット <span class="math notranslate nohighlight">\(\varphi_{m-1}\)</span> を抽出するには、まず <span class="math notranslate nohighlight">\(Z\)</span> 軸の周りを角度 <span class="math notranslate nohighlight">\(-2 \pi \varphi_m/4=-\pi \varphi_m/2\)</span> だけ回転させて位相補正を実行します。その結果、<span class="math notranslate nohighlight">\(q_0\)</span> の状態は <span class="math notranslate nohighlight">\(|0\rangle + e^{i 2 \pi 0.\varphi_{m-1}} | 1 \rangle\)</span> になります。 パウリの <span class="math notranslate nohighlight">\(X\)</span> 基底で <span class="math notranslate nohighlight">\(q_0\)</span> の測定を実行し、位相ビット <span class="math notranslate nohighlight">\(\varphi_{m-1}\)</span> を取得します。</p>
+<p>したがって、 <span class="math notranslate nohighlight">\(\varphi_{m-k+1}\)</span> を取得する IPE の <span class="math notranslate nohighlight">\(k\)</span> 番目のステップは、レジスターの初期化 (<span class="math notranslate nohighlight">\(q_0\)</span> を <span class="math notranslate nohighlight">\(|+\rangle\)</span> に、 <span class="math notranslate nohighlight">\(q_1\)</span> を <span class="math notranslate nohighlight">\(|\Psi\rangle\)</span> に)、<em>制御</em> <span class="math notranslate nohighlight">\(U^{2^{m-k}}\)</span> の適用、および<span class="math notranslate nohighlight">\(Z\)</span> 軸周りの角度  <span class="math notranslate nohighlight">\(\omega_k = -2 \pi 0.0\varphi_{m-k+2} ... \varphi_m\)</span> の回転とパウリの <span class="math notranslate nohighlight">\(X\)</span> 基底での <span class="math notranslate nohighlight">\(q_0\)</span> の測定(つまり、 <span class="math notranslate nohighlight">\(q_0\)</span> をアダマール変換後、計算基底で <span class="math notranslate nohighlight">\(q_0\)</span> を測定)、から構成されます。 <span class="math notranslate nohighlight">\(q_1\)</span> はアルゴリズム全体を通じて状態 <span class="math notranslate nohighlight">\(|\Psi\rangle\)</span> のままであることに注意してください。</p>
+</section>
+</section>
+<section id="id3">
+<h2>実装<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>このLabでは、単一量子ビットの <span class="math notranslate nohighlight">\(S\)</span> ゲートのIPEを行います。 <span class="math notranslate nohighlight">\(S\)</span> ゲートは、次の行列で与えられます。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} S =
+\begin{bmatrix}
+1 &amp; 0\\\\
+0 &amp; e^{i\pi / 2}\\\\
+\end{bmatrix}\end{split}\]</div>
+<p>固有値 <span class="math notranslate nohighlight">\(e^{i\pi / 2}= e^{i2\pi \cdot 1/4}\)</span> を持つ、固有ベクトル <span class="math notranslate nohighlight">\(|\Psi\rangle = |1\rangle\)</span> を使います。よって、 <span class="math notranslate nohighlight">\(\varphi = 1/4 = 0.01 = 0.\varphi_1 \varphi_2\)</span> となります。 <span class="math notranslate nohighlight">\(\varphi\)</span> は2ビットで完全に表現できるため、結果を格納するための2ビットの古典ビットを持つ量子回路を使います。</p>
+<p>制御 <span class="math notranslate nohighlight">\(S\)</span> ゲートは、制御位相ゲート(Qiskitでは <code class="docutils literal notranslate"><span class="pre">CPhaseGate</span></code> )を使って実装でき、 <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code> の <code class="docutils literal notranslate"><span class="pre">cp</span></code> メソッドを呼び出すことでも適用できます。制御位相ゲートは角度 <span class="math notranslate nohighlight">\(\theta\)</span> でパラメーター化され、次の行列を持ちます。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+        \text{CPhase}(\theta) =
+            \begin{pmatrix}
+                1 &amp; 0 &amp; 0 &amp; 0 \\
+                0 &amp; 1 &amp; 0 &amp; 0 \\
+                0 &amp; 0 &amp; 1 &amp; 0 \\
+                0 &amp; 0 &amp; 0 &amp; e^{i\theta}
+            \end{pmatrix}
+\end{split}\]</div>
+<section id="id4">
+<h3>ステップ 1<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>アルゴリズムの最初のステップで、 <span class="math notranslate nohighlight">\(\varphi\)</span>の最下位ビットを測定します。</p>
+<p>そのためには以下のステップを実行します。：</p>
+<ol class="arabic simple">
+<li><p>量子ビットを初期化します:</p>
+<ul class="simple">
+<li><p>補助量子ビットにアダマールゲートを適用。</p></li>
+<li><p>Xゲートをシステムの量子ビットに適用し、 <span class="math notranslate nohighlight">\(|1\rangle\)</span> の状態にする。</p></li>
+</ul>
+</li>
+<li><p>適当な角度の <code class="docutils literal notranslate"><span class="pre">CPhaseGate</span></code> を適用することで、<em>制御</em> <span class="math notranslate nohighlight">\(S^{2}\)</span> ゲートを適用します。</p></li>
+<li><p><span class="math notranslate nohighlight">\(X\)</span> 基底で補助量子ビットを測定します:</p>
+<ul class="simple">
+<li><p>補助量子ビットにアダマールゲートを適用。</p></li>
+<li><p>計算基底で上記を測定。</p></li>
+</ul>
+</li>
+</ol>
+<p>その結果回路は、以下のようになるはずです：</p>
+<p><img alt="step1-circuit" src="_images/2023-spring-step1circuit.png" /></p>
+</section>
+</section>
+<section id="exercise-1">
+<h2>Exercise 1 問題<a class="headerlink" href="#exercise-1" title="Permalink to this heading">#</a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">ステップ1の実装</p>
+<p>ステップ1の実行をQiskitで実装してみましょう。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">QuantumRegister</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="k">def</span> <span class="nf">step_1_circuit</span><span class="p">(</span><span class="n">qr</span><span class="p">:</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">cr</span><span class="p">:</span> <span class="n">ClassicalRegister</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QuantumCircuit</span><span class="p">:</span>
+    <span class="c1"># qr is a quantum register with 2 qubits</span>
+    <span class="c1"># cr is a classical register with 2 bits</span>
+
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+
+    <span class="c1">####### your code goes here #######</span>
+
+    <span class="k">return</span> <span class="n">qc</span>
+
+
+<span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;q&quot;</span><span class="p">)</span>
+<span class="n">cr</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">step_1_circuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id5">
+<h2>Exercise 1 解答例<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">QuantumRegister</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="k">def</span> <span class="nf">step_1_circuit</span><span class="p">(</span><span class="n">qr</span><span class="p">:</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">cr</span><span class="p">:</span> <span class="n">ClassicalRegister</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QuantumCircuit</span><span class="p">:</span>
+    <span class="c1"># qrは2量子ビットレジスタ</span>
+    <span class="c1"># crは2古典ビットレジスタ</span>
+
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+
+    <span class="c1">##1. 量子ビットを初期化</span>
+    <span class="n">q0</span><span class="p">,</span> <span class="n">q1</span> <span class="o">=</span> <span class="n">qr</span>
+    <span class="c1"># 補助量子ビット（q0）にアダマールゲートを適用</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
+    <span class="c1"># Xゲートをシステムの量子ビットに適用し、|1&gt;の状態にする。</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span>
+
+    <span class="c1">##2. 制御位相ゲートを適用する。</span>
+    <span class="c1"># 制御Sゲートは位相πのCPhaseと等しい</span>
+    <span class="n">s_angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="c1"># 制御Sゲートを2^k回適用する。</span>
+    <span class="c1"># 今回は2量子ビットであり、ステップ1なので、k=2-1=1</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">cphase_angle</span> <span class="o">=</span> <span class="n">s_angle</span> <span class="o">*</span> <span class="mi">2</span><span class="o">**</span><span class="n">k</span>
+    <span class="c1"># 制御位相ゲートを適用</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cp</span><span class="p">(</span><span class="n">cphase_angle</span><span class="p">,</span> <span class="n">q0</span><span class="p">,</span> <span class="n">q1</span><span class="p">)</span>
+
+    <span class="c1">##3. X基底で補助量子ビットを測定する。</span>
+    <span class="c1"># 補助量子ビット（q0）にアダマールゲートを適用</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
+    <span class="c1"># 測定し、結果をc0に格納</span>
+    <span class="n">c0</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">cr</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q0</span><span class="p">,</span> <span class="n">c0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">qc</span>
+
+
+<span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;q&quot;</span><span class="p">)</span>
+<span class="n">cr</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">step_1_circuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bff18818fb5a4824736e12a54df47ec1cd9a3994e49c13de5b3b7c0cb5558bc0.png" src="_images/bff18818fb5a4824736e12a54df47ec1cd9a3994e49c13de5b3b7c0cb5558bc0.png" />
+</div>
+</div>
+<section id="id6">
+<h3>ステップ 2<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<p>ステップ 1では、最下位ビット <span class="math notranslate nohighlight">\(\varphi_2\)</span> を測定しました。ステップ 2（最終ステップ）では、次のビット <span class="math notranslate nohighlight">\(\varphi_1\)</span> を抽出します。このとき、 <span class="math notranslate nohighlight">\(\varphi_2\)</span> からの位相寄与を打ち消すために位相補正を適用することになります。この位相補正は、 <span class="math notranslate nohighlight">\(\varphi_2\)</span> を保持する古典レジスターの値に依存します。この古典的なフィードバックを行うには、Dynamic circuitが必要です！位相補正は、 <code class="docutils literal notranslate"><span class="pre">PhaseGate</span></code> を使うか、QuantumCircuitの <code class="docutils literal notranslate"><span class="pre">p</span></code> メソッドを直接呼び出すことで適用することができます。</p>
+<p>具体的には、ステップ1に続き以下のステップを実行することで、 <span class="math notranslate nohighlight">\(\varphi\)</span> の次のビットを得ることができます：</p>
+<ol class="arabic simple">
+<li><p>補助量子ビットをリセットして再初期化する。</p></li>
+<li><p>制御ユニタリーゲートを適用する。</p></li>
+<li><p>補助量子ビットを <span class="math notranslate nohighlight">\(X\)</span> 基底で測定する。</p></li>
+</ol>
+<p>その結果回路は、以下のようになるはずです：</p>
+<p><img alt="step1-circuit" src="_images/2023-spring-step2circuit.png" /></p>
+</section>
+</section>
+<section id="exercise-2">
+<h2>Exercise 2 問題<a class="headerlink" href="#exercise-2" title="Permalink to this heading">#</a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">ステップ2の実装</p>
+<p>ステップ2の実行をQiskitで実装してみましょう。
+このExerciseでは、Exercise1で作成したステップ1の回路から始めます。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">step_2_circuit</span><span class="p">(</span><span class="n">qr</span><span class="p">:</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">cr</span><span class="p">:</span> <span class="n">ClassicalRegister</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QuantumCircuit</span><span class="p">:</span>
+    <span class="c1"># qr is a quantum register with 2 qubits</span>
+    <span class="c1"># cr is a classical register with 2 bits</span>
+
+    <span class="c1"># begin with the circuit from Step 1</span>
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">step_1_circuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+
+    <span class="c1">####### your code goes here #######</span>
+
+    <span class="k">return</span> <span class="n">qc</span>
+
+
+<span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;q&quot;</span><span class="p">)</span>
+<span class="n">cr</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">step_2_circuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id7">
+<h2>Exercise 2 解答例<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">step_2_circuit</span><span class="p">(</span><span class="n">qr</span><span class="p">:</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">cr</span><span class="p">:</span> <span class="n">ClassicalRegister</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QuantumCircuit</span><span class="p">:</span>
+    <span class="c1"># qrは2量子ビットレジスタ</span>
+    <span class="c1"># crは2古典ビットレジスタ</span>
+
+    <span class="c1"># Exercise1で作成したステップ1の回路から始める。</span>
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">step_1_circuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+
+    <span class="c1">####### your code goes here #######</span>
+
+    <span class="c1">##1. 補助量子ビットをリセットして再初期化する。</span>
+    <span class="n">q0</span><span class="p">,</span> <span class="n">q1</span> <span class="o">=</span> <span class="n">qr</span>
+    <span class="c1"># 補助量子ビットのリセット（|0&gt;）</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
+    <span class="c1"># アダマールゲートを適用し初期化</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
+
+    <span class="c1">##2. φ_2の位相寄与を打ち消すために位相補正を適用</span>
+    <span class="n">c0</span><span class="p">,</span> <span class="n">c1</span> <span class="o">=</span> <span class="n">cr</span>
+    <span class="c1"># 位相寄与は|1&gt;のみに出るので、|0&gt;のみについて位相補正を適用</span>
+    <span class="k">with</span> <span class="n">qc</span><span class="o">.</span><span class="n">if_test</span><span class="p">((</span><span class="n">c0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="k">as</span> <span class="n">else_</span><span class="p">:</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">p</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">q0</span><span class="p">)</span>
+
+    
+    <span class="c1">##3. 制御位相ゲートを適用する。</span>
+    <span class="c1"># 制御Sゲートは位相πのCPhaseと等しい</span>
+    <span class="n">s_angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="c1"># 制御Sゲートを2^k回適用する。</span>
+    <span class="c1"># 今回は2量子ビットであり、ステップ2なので、k=2-2=0</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">cphase_angle</span> <span class="o">=</span> <span class="n">s_angle</span> <span class="o">*</span> <span class="mi">2</span><span class="o">**</span><span class="n">k</span>
+    <span class="c1"># 制御位相ゲートを適用</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cp</span><span class="p">(</span><span class="n">cphase_angle</span><span class="p">,</span> <span class="n">q0</span><span class="p">,</span> <span class="n">q1</span><span class="p">)</span>
+
+    <span class="c1">##4. X基底で補助量子ビットを測定する。</span>
+    <span class="c1"># 補助量子ビット（q0）にアダマールゲートを適用</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
+    <span class="c1"># 測定し、結果をc1に格納</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q0</span><span class="p">,</span> <span class="n">c1</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">qc</span>
+
+
+<span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;q&quot;</span><span class="p">)</span>
+<span class="n">cr</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">step_2_circuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/65a6135df4c3eb715284fb3d8383faa447e2dbfb5896d265e7ab98e303c7688e.png" src="_images/65a6135df4c3eb715284fb3d8383faa447e2dbfb5896d265e7ab98e303c7688e.png" />
+</div>
+</div>
+</section>
+<section id="id8">
+<h2>シミュレーターで実行<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<p>回路が完成したので、まずローカルシミュレーターで動かしてみましょう。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit_aer</span> <span class="kn">import</span> <span class="n">AerSimulator</span>
+
+<span class="n">sim</span> <span class="o">=</span> <span class="n">AerSimulator</span><span class="p">()</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="n">counts</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;01&#39;: 1000}
+</pre></div>
+</div>
+</div>
+</div>
+<p>回路が正しければ、100%の確率でビット列 <code class="docutils literal notranslate"><span class="pre">01</span></code> が得られるはずです。この値は、2進数で <span class="math notranslate nohighlight">\(\varphi = 0.01 = 1/4\)</span> と書かれた位相に対応します。実際、これが正しい位相です！</p>
+</section>
+<section id="exersise-3">
+<h2>Exersise 3 問題<a class="headerlink" href="#exersise-3" title="Permalink to this heading">#</a></h2>
+<div class="admonition-t admonition">
+<p class="admonition-title">Tゲートの位相推定回路</p>
+<p>以下で与えられる行列を持つ、Tゲートの位相を推定するIPE回路を構築してください。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} T =
+\begin{bmatrix}
+1 &amp; 0\\\\
+0 &amp; e^{i\pi / 4}\\\\
+\end{bmatrix}\end{split}\]</div>
+<p>この場合、位相を表すのに必要なビットは何ビットですか？</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">QuantumRegister</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="k">def</span> <span class="nf">t_gate_ipe_circuit</span><span class="p">(</span><span class="n">qr</span><span class="p">:</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">cr</span><span class="p">:</span> <span class="n">ClassicalRegister</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QuantumCircuit</span><span class="p">:</span>
+    <span class="c1"># qr is a quantum register with 2 qubits</span>
+    <span class="c1"># cr is a classical register with 3 bits</span>
+
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+
+    <span class="c1">####### your code goes here #######</span>
+
+    <span class="k">return</span> <span class="n">qc</span>
+
+
+<span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;q&quot;</span><span class="p">)</span>
+<span class="n">cr</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">t_gate_ipe_circuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id9">
+<h2>Exersise 3 解答例<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">QuantumRegister</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="k">def</span> <span class="nf">t_gate_ipe_circuit</span><span class="p">(</span><span class="n">qr</span><span class="p">:</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">cr</span><span class="p">:</span> <span class="n">ClassicalRegister</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QuantumCircuit</span><span class="p">:</span>
+    <span class="c1"># qrは2量子ビットレジスタ</span>
+    <span class="c1"># crは3古典ビットレジスタ</span>
+
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+
+    <span class="c1"># 初期化する</span>
+    <span class="n">q0</span><span class="p">,</span> <span class="n">q1</span> <span class="o">=</span> <span class="n">qr</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span>
+
+    <span class="c1"># 最下位の位相ビットを取得するために必要なだけ制御ユニタリ演算子を適用する</span>
+    <span class="n">t_angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">cphase_angle</span> <span class="o">=</span> <span class="n">t_angle</span> <span class="o">*</span> <span class="mi">2</span><span class="o">**</span><span class="n">k</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cp</span><span class="p">(</span><span class="n">cphase_angle</span><span class="p">,</span> <span class="n">q0</span><span class="p">,</span> <span class="n">q1</span><span class="p">)</span>
+
+    <span class="c1"># X基底で補助量子ビットを測定する</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
+    <span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span> <span class="o">=</span> <span class="n">cr</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q0</span><span class="p">,</span> <span class="n">c0</span><span class="p">)</span>
+
+    <span class="c1"># 補助量子ビットをリセットし、アダマールゲートで再初期化する</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
+
+    <span class="c1"># 最初の古典ビットを条件として位相補正を適用する</span>
+    <span class="k">with</span> <span class="n">qc</span><span class="o">.</span><span class="n">if_test</span><span class="p">((</span><span class="n">c0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)):</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">p</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">q0</span><span class="p">)</span>
+
+    <span class="c1"># 次の位相ビットを取得するために必要なだけ制御ユニタリ演算子を適用する</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">cphase_angle</span> <span class="o">=</span> <span class="n">t_angle</span> <span class="o">*</span> <span class="mi">2</span><span class="o">**</span><span class="n">k</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cp</span><span class="p">(</span><span class="n">cphase_angle</span><span class="p">,</span> <span class="n">q0</span><span class="p">,</span> <span class="n">q1</span><span class="p">)</span>
+
+    <span class="c1">#  X基底で補助量子ビットを測定し、2番目の古典ビットに格納する</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q0</span><span class="p">,</span> <span class="n">c1</span><span class="p">)</span>
+
+    <span class="c1"># 補助量子ビットをリセットし、アダマールゲートで再初期化する</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
+
+    <span class="c1"># 一番目と二番目の古典ビットを条件として位相補正を適用する</span>
+    <span class="k">with</span> <span class="n">qc</span><span class="o">.</span><span class="n">if_test</span><span class="p">((</span><span class="n">c0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)):</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">p</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">,</span> <span class="n">q0</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">qc</span><span class="o">.</span><span class="n">if_test</span><span class="p">((</span><span class="n">c1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)):</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">p</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">q0</span><span class="p">)</span>
+
+    <span class="c1"># さらに次の位相ビットを取得するために必要なだけ制御ユニタリ演算子を適用する</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">cphase_angle</span> <span class="o">=</span> <span class="n">t_angle</span> <span class="o">*</span> <span class="mi">2</span><span class="o">**</span><span class="n">k</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cp</span><span class="p">(</span><span class="n">cphase_angle</span><span class="p">,</span> <span class="n">q0</span><span class="p">,</span> <span class="n">q1</span><span class="p">)</span>
+
+    <span class="c1">#  X基底で補助量子ビットを測定し、3番目の古典ビットに格納する</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q0</span><span class="p">,</span> <span class="n">c2</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">qc</span>
+
+
+<span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;q&quot;</span><span class="p">)</span>
+<span class="n">cr</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">t_gate_ipe_circuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/9e7c1529dc8d7b1d185f2cc1960c2a4ddc26ea13ba7d6ac224e6b27057c734de.png" src="_images/9e7c1529dc8d7b1d185f2cc1960c2a4ddc26ea13ba7d6ac224e6b27057c734de.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit_aer</span> <span class="kn">import</span> <span class="n">AerSimulator</span>
+
+<span class="n">sim</span> <span class="o">=</span> <span class="n">AerSimulator</span><span class="p">()</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="n">counts</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;001&#39;: 1000}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id10">
+<h2>位相が正確な2進数展開を持たない場合<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
+<p>位相が正確な2進数展開をしない場合、例えば <span class="math notranslate nohighlight">\(\varphi = 1/3\)</span> の場合を考えてみましょう。
+この場合、1量子ビットゲートは、次のユニタリー行列になります。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} U =
+\begin{bmatrix}
+1 &amp; 0\\\\
+0 &amp; e^{i2\pi / 3}\\\\
+\end{bmatrix}
+\end{split}\]</div>
+<p>角度 <span class="math notranslate nohighlight">\(\varphi = 1/3\)</span> は正確な有限なバイナリー展開を持たず、無限のバイナリー展開となります。</p>
+<div class="math notranslate nohighlight">
+\[
+1/3 = 0.010101\ldots
+\]</div>
+<p>実際には、決まったビット数の精度で作業するので、そのビット数で表現できる最も近い値を得ることが目標になります。次の例では、2ビットの精度を使用することにします。この場合、最も近い値は <span class="math notranslate nohighlight">\(0.01 = 1/4\)</span>です。この値は正確な位相を表していないため、より精度の低い別の結果が得られる可能性があります。</p>
+<p>次のコードセルで、このゲートの位相を測定するIPE回路を構築し、シミュレーションを行います。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">QuantumRegister</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="k">def</span> <span class="nf">u_circuit</span><span class="p">(</span><span class="n">qr</span><span class="p">:</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">cr</span><span class="p">:</span> <span class="n">ClassicalRegister</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QuantumCircuit</span><span class="p">:</span>
+    <span class="c1"># qrは2量子ビットレジスタ</span>
+    <span class="c1"># crは2古典ビットレジスタ</span>
+
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+
+    <span class="c1"># 初期化する</span>
+    <span class="n">q0</span><span class="p">,</span> <span class="n">q1</span> <span class="o">=</span> <span class="n">qr</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span>
+
+    <span class="c1"># 最下位の位相ビットを取得するために必要なだけ制御ユニタリ演算子を適用する</span>
+    <span class="n">u_angle</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">3</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">cphase_angle</span> <span class="o">=</span> <span class="n">u_angle</span> <span class="o">*</span> <span class="mi">2</span><span class="o">**</span><span class="n">k</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cp</span><span class="p">(</span><span class="n">cphase_angle</span><span class="p">,</span> <span class="n">q0</span><span class="p">,</span> <span class="n">q1</span><span class="p">)</span>
+
+    <span class="c1"># X基底で補助量子ビットを測定する</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
+    <span class="n">c0</span><span class="p">,</span> <span class="n">c1</span> <span class="o">=</span> <span class="n">cr</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q0</span><span class="p">,</span> <span class="n">c0</span><span class="p">)</span>
+
+    <span class="c1"># 補助量子ビットをリセットし、アダマールゲートで再初期化する</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
+
+    <span class="c1"># 最初の古典ビットを条件として位相補正を適用する</span>
+    <span class="k">with</span> <span class="n">qc</span><span class="o">.</span><span class="n">if_test</span><span class="p">((</span><span class="n">c0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)):</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">p</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">q0</span><span class="p">)</span>
+
+    <span class="c1"># 次の位相ビットを取得するために必要なだけ制御ユニタリ演算子を適用する</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">cphase_angle</span> <span class="o">=</span> <span class="n">u_angle</span> <span class="o">*</span> <span class="mi">2</span><span class="o">**</span><span class="n">k</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cp</span><span class="p">(</span><span class="n">cphase_angle</span><span class="p">,</span> <span class="n">q0</span><span class="p">,</span> <span class="n">q1</span><span class="p">)</span>
+
+    <span class="c1"># X基底で補助量子ビットを測定し、2番目の古典ビットに格納する</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q0</span><span class="p">,</span> <span class="n">c1</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">qc</span>
+
+
+<span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;q&quot;</span><span class="p">)</span>
+<span class="n">cr</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">u_circuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ccd02f72a2502bde6e34fe7aa8ad125c81e8ead78f4f90e91edc25ee6fbba39c.png" src="_images/ccd02f72a2502bde6e34fe7aa8ad125c81e8ead78f4f90e91edc25ee6fbba39c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit_aer</span> <span class="kn">import</span> <span class="n">AerSimulator</span>
+
+<span class="n">sim</span> <span class="o">=</span> <span class="n">AerSimulator</span><span class="p">()</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+<span class="n">success_probability</span> <span class="o">=</span> <span class="n">counts</span><span class="p">[</span><span class="s2">&quot;01&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">counts</span><span class="o">.</span><span class="n">shots</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Success probability: </span><span class="si">{</span><span class="n">success_probability</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;11&#39;: 60, &#39;00&#39;: 64, &#39;10&#39;: 191, &#39;01&#39;: 685}
+Success probability: 0.685
+</pre></div>
+</div>
+</div>
+</div>
+<p>ご覧のように、今回は期待通りの結果を得ることが保証されているわけではありません。自然な疑問ですが、どうすれば成功確率を上げられるでしょうか？</p>
+<p>アルゴリズムが失敗する方法の1つは、最初に測定したビットが正しくないことです。この場合、2番目のビットを測定する前に適用される位相補正も不正確であるため、残りのビットも不正確である可能性が高くなります。この問題を軽減する簡単な方法は、最初の数ビットの測定を何度か繰り返し、多数決でビットを正しく測定する可能性を高めることです。この手順を1つの回路内に実装するには、測定した結果に対して演算を行う必要があります。Qiskitの一時的な制限により、現在、測定したビットに対して演算を行い、その結果に基づいて将来の回路動作を条件付けることはできません。そこで、ここでは各ビットを別々の回路で測定することにします。</p>
+<p>以下のコードセルで、位相の1ビット目だけを測定するためのIPE回路を構成し、シミュレーションを行います。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">QuantumRegister</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="k">def</span> <span class="nf">u_circuit</span><span class="p">(</span><span class="n">qr</span><span class="p">:</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">cr</span><span class="p">:</span> <span class="n">ClassicalRegister</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QuantumCircuit</span><span class="p">:</span>
+    <span class="c1"># qrは2量子ビットレジスタ</span>
+    <span class="c1"># crは1古典ビットレジスタ</span>
+
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+
+    <span class="c1"># 初期化する</span>
+    <span class="n">q0</span><span class="p">,</span> <span class="n">q1</span> <span class="o">=</span> <span class="n">qr</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span>
+
+    <span class="c1"># 最下位の位相ビットを取得するために必要なだけ制御ユニタリ演算子を適用する</span>
+    <span class="n">u_angle</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">3</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">cphase_angle</span> <span class="o">=</span> <span class="n">u_angle</span> <span class="o">*</span> <span class="mi">2</span><span class="o">**</span><span class="n">k</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cp</span><span class="p">(</span><span class="n">cphase_angle</span><span class="p">,</span> <span class="n">q0</span><span class="p">,</span> <span class="n">q1</span><span class="p">)</span>
+
+    <span class="c1"># X基底で補助量子ビットを測定する</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">c0</span><span class="p">,)</span> <span class="o">=</span> <span class="n">cr</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q0</span><span class="p">,</span> <span class="n">c0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">qc</span>
+
+
+<span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;q&quot;</span><span class="p">)</span>
+<span class="n">cr</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">u_circuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/c3a6b75dc36c86c3d8e58abdd5af68db6736e9ff3eeb1b1e1b67f07d1f423636.png" src="_images/c3a6b75dc36c86c3d8e58abdd5af68db6736e9ff3eeb1b1e1b67f07d1f423636.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;1&#39;: 15}
+</pre></div>
+</div>
+</div>
+</div>
+<p>正しいビットが測定されることが多くなってくれたことを期待します。</p>
+</section>
+<section id="exercise-4">
+<h2>Exercise 4 問題<a class="headerlink" href="#exercise-4" title="Permalink to this heading">#</a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">最下位ビットの値の決定</p>
+<p>最後のコードセルの出力の counts ディクショナリーを調べます。最初のビットの正しい値は何ですか？測定される頻度は高くなりましたか？もしそうでないなら、そうなるまで最後のコードセルを再実行してください。</p>
+<p>そして、以下のコードセルに、変数 <code class="docutils literal notranslate"><span class="pre">step1_bit</span></code> を、最も多く測定されたビットの値に等しくするコードを書いてください。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">step1_bit</span><span class="p">:</span> <span class="nb">int</span>
+
+<span class="c1">####### your code goes here #######</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">step1_bit</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id11">
+<h2>Exercise 4 解答例<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">step1_bit</span><span class="p">:</span> <span class="nb">int</span>
+
+<span class="n">step1_bit</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">counts</span><span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">counts</span><span class="p">[</span><span class="s2">&quot;0&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="mi">0</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">step1_bit</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">step1_bit</span><span class="p">:</span> <span class="nb">int</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">step1_bit</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">counts</span><span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">counts</span><span class="p">[</span><span class="s2">&quot;0&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="mi">0</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="nb">print</span><span class="p">(</span><span class="n">step1_bit</span><span class="p">)</span>
+
+<span class="ne">KeyError</span>: &#39;0&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-5">
+<h2>Exercise 5 問題<a class="headerlink" href="#exercise-5" title="Permalink to this heading">#</a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">2ビット目の位相測定回路の実装</p>
+<p>次に、位相の2ビット目を測定するための回路を構築してください。この回路の最初のステージを、補助ビットを上記で測定した値に設定するだけのものに置き換えることで、位相の最初のビットについて常に正しい値を測定するようにします。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">QuantumRegister</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="k">def</span> <span class="nf">u_circuit</span><span class="p">(</span><span class="n">qr</span><span class="p">:</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">cr</span><span class="p">:</span> <span class="n">ClassicalRegister</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QuantumCircuit</span><span class="p">:</span>
+    <span class="c1"># qr is a quantum register with 2 qubits</span>
+    <span class="c1"># cr is a classical register with 2 bits</span>
+
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+
+    <span class="c1">####### your code goes here #######</span>
+
+    <span class="k">return</span> <span class="n">qc</span>
+
+
+<span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;q&quot;</span><span class="p">)</span>
+<span class="n">cr</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">u_circuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id12">
+<h2>Exercise 5 解答例<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">QuantumRegister</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="k">def</span> <span class="nf">u_circuit</span><span class="p">(</span><span class="n">qr</span><span class="p">:</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">cr</span><span class="p">:</span> <span class="n">ClassicalRegister</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QuantumCircuit</span><span class="p">:</span>
+    <span class="c1"># qrは2量子ビットレジスタ</span>
+    <span class="c1"># crは2古典ビットレジスタ</span>
+
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+
+    <span class="c1"># 初期化</span>
+    <span class="n">q0</span><span class="p">,</span> <span class="n">q1</span> <span class="o">=</span> <span class="n">qr</span>
+    <span class="k">if</span> <span class="n">step1_bit</span><span class="p">:</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span>
+
+    <span class="c1"># 補助量子ビットを測定する</span>
+    <span class="n">c0</span><span class="p">,</span> <span class="n">c1</span> <span class="o">=</span> <span class="n">cr</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q0</span><span class="p">,</span> <span class="n">c0</span><span class="p">)</span>
+
+    <span class="c1"># 補助量子ビットをリセットし、アダマールゲートで再初期化する</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
+
+    <span class="c1"># 最初の古典ビットを条件として位相補正を適用する</span>
+    <span class="k">with</span> <span class="n">qc</span><span class="o">.</span><span class="n">if_test</span><span class="p">((</span><span class="n">c0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)):</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">p</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">q0</span><span class="p">)</span>
+
+    <span class="c1"># 次の位相ビットを取得するために必要なだけ制御ユニタリ演算子を適用する</span>
+    <span class="n">u_angle</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">3</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">cphase_angle</span> <span class="o">=</span> <span class="n">u_angle</span> <span class="o">*</span> <span class="mi">2</span><span class="o">**</span><span class="n">k</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">cp</span><span class="p">(</span><span class="n">cphase_angle</span><span class="p">,</span> <span class="n">q0</span><span class="p">,</span> <span class="n">q1</span><span class="p">)</span>
+
+    <span class="c1"># X基底で補助量子ビットを測定し、2番目の古典ビットに格納する</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q0</span><span class="p">,</span> <span class="n">c1</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">qc</span>
+
+
+<span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;q&quot;</span><span class="p">)</span>
+<span class="n">cr</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">u_circuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bbfd17a633613f1cc840306adf3bdd2c55bee619a91681704cd4a72361225ba8.png" src="_images/bbfd17a633613f1cc840306adf3bdd2c55bee619a91681704cd4a72361225ba8.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit_aer</span> <span class="kn">import</span> <span class="n">AerSimulator</span>
+
+<span class="n">sim</span> <span class="o">=</span> <span class="n">AerSimulator</span><span class="p">()</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+<span class="n">success_probability</span> <span class="o">=</span> <span class="n">counts</span><span class="p">[</span><span class="s2">&quot;01&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">counts</span><span class="o">.</span><span class="n">shots</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Success probability: </span><span class="si">{</span><span class="n">success_probability</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;11&#39;: 67, &#39;01&#39;: 933}
+Success probability: 0.933
+</pre></div>
+</div>
+</div>
+</div>
+<p>今度は、成功確率が以前よりずっと高くなりました!</p>
+</section>
+<section id="id13">
+<h2>ハードウェアでの実行<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h2>
+<p>最後に、実際のハードウェアでいくつかの回路を実行します！以下のコードセルは、Lab2で作成した <span class="math notranslate nohighlight">\(S\)</span> ゲートの位相を測定する回路を初期化して実行します。現在の量子ハードウェアはノイズがあるため、シミュレーターで得られた結果ほど良いものではありません。このLabで作成したその他の回路も自由に実行してみてください。ただし、 <span class="math notranslate nohighlight">\(T\)</span> ゲートの位相を測定する Exercise 3 のような大規模な回路では、さらに多くのノイズが発生することに注意してください</p>
+<p>なお、以下のコードの実行にはIBM QuantumのAPIトークンが必要です。
+コメントアウトを解除し、<code class="docutils literal notranslate"><span class="pre">token</span></code>に用意したAPIトークンを格納してください。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># from qiskit_ibm_provider import IBMProvider</span>
+
+<span class="c1"># token = &quot;PASTE_YOUR_TOKEN_HERE&quot; # ここにAPIトークンをペーストする</span>
+<span class="c1"># IBMProvider.save_account(token=token, overwrite=True)</span>
+
+<span class="c1"># provider = IBMProvider()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># hub = &quot;YOUR_HUB&quot;</span>
+<span class="c1"># group = &quot;YOUR_GROUP&quot;</span>
+<span class="c1"># project = &quot;YOUR_PROJECT&quot;</span>
+
+<span class="c1"># backend_name = &quot;ibm_peekskill&quot;</span>
+<span class="c1"># backend = provider.get_backend(backend_name, instance=f&quot;{hub}/{group}/{project}&quot;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># from qiskit import transpile</span>
+
+<span class="c1"># qr = QuantumRegister(2, &quot;q&quot;)</span>
+<span class="c1"># cr = ClassicalRegister(2, &quot;c&quot;)</span>
+<span class="c1"># qc = QuantumCircuit(qr, cr)</span>
+<span class="c1"># qc = step_2_circuit(qr, cr)</span>
+<span class="c1"># qc_transpiled = transpile(qc, backend)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># job = backend.run(qc_transpiled, shots=1000, dynamic=True)</span>
+<span class="c1"># job_id = job.job_id()</span>
+<span class="c1"># print(job_id)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># retrieve_job = provider.retrieve_job(job_id)</span>
+<span class="c1"># retrieve_job.status()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># from qiskit.tools.visualization import plot_histogram</span>
+
+<span class="c1"># counts = retrieve_job.result().get_counts()</span>
+<span class="c1"># plot_histogram(counts)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>このLabは、反復的位相推定に関する<a class="reference external" href="https://learn.qiskit.org/course/ch-labs/lab-6-iterative-phase-estimation-algorithm">QiskitテキストブックのLab</a> と、<a class="reference external" href="https://quantum-computing.ibm.com/services/resources/docs/resources/manage/systems/dynamic-circuits/Getting-started-with-Dynamic-Circuits">Dynamic circuit ドキュメント</a>の資料を参考にしました。</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2020-w3-false-asteroids_bk.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">作り損ねた惑星問題（2020年 Week3）</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="2021-autumn-lab1-portfolio_bk.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">ポートフォリオ最適化（2021年秋 Lab1）</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">背景</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">アルゴリズム</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">実装</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">ステップ 1</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1 問題</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Exercise 1 解答例</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">ステップ 2</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2 問題</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Exercise 2 解答例</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">シミュレーターで実行</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exersise-3">Exersise 3 問題</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Exersise 3 解答例</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">位相が正確な2進数展開を持たない場合</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4">Exercise 4 問題</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">Exercise 4 解答例</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5">Exercise 5 問題</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">Exercise 5 解答例</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">ハードウェアでの実行</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Quantum Tokyo
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
