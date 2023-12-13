@@ -432,8 +432,8 @@ document.write(`
 <p>ここで、最後の等式では、二進数の「小数」表記を使用しています。簡単のために、 <span class="math notranslate nohighlight">\(U\)</span> が1つの量子ビットに作用するユニタリー演算子であるとします（ここで述べていることはすべて、 <span class="math notranslate nohighlight">\(U\)</span> が複数の量子ビットに作用する場合にも適用されます）。IPEは補助量子ビットを必要とするので、 <span class="math notranslate nohighlight">\(q_0\)</span> と <span class="math notranslate nohighlight">\(q_1\)</span> という2つの量子ビットのシステムが必要であり、 <span class="math notranslate nohighlight">\(q_0\)</span> は補助量子ビット、 <span class="math notranslate nohighlight">\(q_1\)</span> は <span class="math notranslate nohighlight">\(U\)</span> が作用する物理系を表します。</p>
 <p>ここで、 <span class="math notranslate nohighlight">\(q_0\)</span> を <span class="math notranslate nohighlight">\(|+\rangle = \frac{|0\rangle + |1\rangle}{\sqrt{2}}\)</span> の状態に、 <span class="math notranslate nohighlight">\(q_1\)</span> を <span class="math notranslate nohighlight">\(|\Psi \rangle\)</span> の状態に初期化するとします。  <span class="math notranslate nohighlight">\(q_0\)</span> をコントロール、 <span class="math notranslate nohighlight">\(q_1\)</span> をターゲットとして、 <em>制御</em> <span class="math notranslate nohighlight">\(U^{2^t}\)</span> ゲートを適用するとどうなるでしょうか?  <span class="math notranslate nohighlight">\(|\Psi \rangle\)</span> は固有値  <span class="math notranslate nohighlight">\(e^{i 2\pi \varphi}\)</span> を持つ <span class="math notranslate nohighlight">\(U\)</span> の固有状態であるため、次のようになります。
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a3d1101b-4c23-40fa-9aa4-f7a0011b516f">
-<span class="eqno">(2)<a class="headerlink" href="#equation-a3d1101b-4c23-40fa-9aa4-f7a0011b516f" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-02e5b627-46ec-4fa0-8a28-b10665fb36d9">
+<span class="eqno">(2)<a class="headerlink" href="#equation-02e5b627-46ec-4fa0-8a28-b10665fb36d9" title="Permalink to this equation">#</a></span>\[\begin{align}
 |+\rangle |\Psi \rangle &amp;= \left(\frac{|0\rangle + |1\rangle}{\sqrt{2}}\right) |\Psi \rangle \\
 &amp;= \frac{|0\rangle |\Psi \rangle + |1\rangle |\Psi \rangle}{\sqrt{2}} \\
 &amp;\xrightarrow{\text{controlled-}U^{2^t}} \frac{|0\rangle |\Psi \rangle + e^{i 2 \pi 2^{t} \varphi} |1\rangle |\Psi \rangle}{\sqrt{2}} \\
@@ -937,8 +937,8 @@ $$</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;11&#39;: 60, &#39;00&#39;: 64, &#39;10&#39;: 191, &#39;01&#39;: 685}
-Success probability: 0.685
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;11&#39;: 64, &#39;00&#39;: 61, &#39;10&#39;: 184, &#39;01&#39;: 691}
+Success probability: 0.691
 </pre></div>
 </div>
 </div>
@@ -999,7 +999,7 @@ Success probability: 0.685
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;1&#39;: 15}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;0&#39;: 2, &#39;1&#39;: 13}
 </pre></div>
 </div>
 </div>
@@ -1034,14 +1034,7 @@ Success probability: 0.685
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">step1_bit</span><span class="p">:</span> <span class="nb">int</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">step1_bit</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">counts</span><span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">counts</span><span class="p">[</span><span class="s2">&quot;0&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="mi">0</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="nb">print</span><span class="p">(</span><span class="n">step1_bit</span><span class="p">)</span>
-
-<span class="ne">KeyError</span>: &#39;0&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
 </pre></div>
 </div>
 </div>
@@ -1130,7 +1123,7 @@ Success probability: 0.685
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/bbfd17a633613f1cc840306adf3bdd2c55bee619a91681704cd4a72361225ba8.png" src="_images/bbfd17a633613f1cc840306adf3bdd2c55bee619a91681704cd4a72361225ba8.png" />
+<img alt="_images/ff9e3c54d8da8388115e5857421b6b775b247c4dd744fd1e59cdf7a54d39a41b.png" src="_images/ff9e3c54d8da8388115e5857421b6b775b247c4dd744fd1e59cdf7a54d39a41b.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1148,8 +1141,8 @@ Success probability: 0.685
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;11&#39;: 67, &#39;01&#39;: 933}
-Success probability: 0.933
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;11&#39;: 74, &#39;01&#39;: 926}
+Success probability: 0.926
 </pre></div>
 </div>
 </div>
