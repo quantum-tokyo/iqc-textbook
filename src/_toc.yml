@@ -19,7 +19,7 @@ parts:
   #   - file: 2020-w2-b-lights-out-puzzle
   #   - file: 2020-w3-false-asteroids
   #   - file: 2021-spring-lab2-shor
-    - file: 2023-spring-lab3-iqpe
+      - file: 2023-spring-lab3-iqpe
   # - caption: "第4章 量子コンピューターの応用"
   #   chapters:
   #   - file: 2021-autumn-lab1-portfolio
