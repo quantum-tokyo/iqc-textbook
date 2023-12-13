@@ -454,15 +454,14 @@ document.write(`
 <p>IBMの量子システムの基本ゲートセット(CX, RZ, SX, Xゲート)を使ってトフォリゲートを構築します。s!
 ``iv&gt;</p>
 </div>
-<div class="highlight-{admonition}目的 notranslate"><div class="highlight"><pre><span></span>:class: tip
-この演習では、量子ゲートの基本的な概念を学び、量子回路の構築方法を学ぶことが目的です。
-    
-1. Circuit Composerウィジェットを使って視覚的に学びます。
-1. Qiskitを使ってプログラミングを学びます。
-
-    
-すでに量子ゲートとQiskitに慣れている場合は、直接、&lt;a href=#problem&gt;問題&lt;/a&gt; に飛ぶことができます。
-</pre></div>
+<div class="tip admonition">
+<p class="admonition-title">目的</p>
+<p>この演習では、量子ゲートの基本的な概念を学び、量子回路の構築方法を学ぶことが目的です。</p>
+<ol class="arabic simple">
+<li><p>Circuit Composerウィジェットを使って視覚的に学びます。</p></li>
+<li><p>Qiskitを使ってプログラミングを学びます。</p></li>
+</ol>
+<p>すでに量子ゲートとQiskitに慣れている場合は、直接、<a href=#problem>問題</a> に飛ぶことができます。</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -474,7 +473,6 @@ document.write(`
 <span class="c1"># Qiskitの標準的なライブラリーをインポートします</span>
 <span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">execute</span><span class="p">,</span> <span class="n">Aer</span><span class="p">,</span> <span class="n">IBMQ</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">ClassicalRegister</span>
 <span class="kn">from</span> <span class="nn">qiskit.compiler</span> <span class="kn">import</span> <span class="n">transpile</span><span class="p">,</span> <span class="n">assemble</span>
-<span class="kn">from</span> <span class="nn">qiskit.tools.jupyter</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="c1"># piを設定しておくと便利です</span>
@@ -484,51 +482,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2065/1182467571.py:3: MatplotlibDeprecationWarning: MatplotlibDeprecationWarning was deprecated in Matplotlib 3.6 and will be removed two minor releases later. Use matplotlib.MatplotlibDeprecationWarning instead.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2018/3800019171.py:3: MatplotlibDeprecationWarning: MatplotlibDeprecationWarning was deprecated in Matplotlib 3.6 and will be removed two minor releases later. Use matplotlib.MatplotlibDeprecationWarning instead.
   from matplotlib.cbook import MatplotlibDeprecationWarning
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">9</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">execute</span><span class="p">,</span> <span class="n">Aer</span><span class="p">,</span> <span class="n">IBMQ</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">ClassicalRegister</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">qiskit.compiler</span> <span class="kn">import</span> <span class="n">transpile</span><span class="p">,</span> <span class="n">assemble</span>
-<span class="ne">----&gt; </span><span class="mi">9</span> <span class="kn">from</span> <span class="nn">qiskit.tools.jupyter</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="c1"># piを設定しておくと便利です</span>
-
-<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.11.7</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">qiskit</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">jupyter</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">105</span>
-<span class="g g-Whitespace">    </span><span class="mi">103</span> <span class="kn">from</span> <span class="nn">qiskit.providers.fake_provider</span> <span class="kn">import</span> <span class="n">FakeBackend</span>
-<span class="g g-Whitespace">    </span><span class="mi">104</span> <span class="kn">from</span> <span class="nn">qiskit.utils</span> <span class="kn">import</span> <span class="n">optionals</span> <span class="k">as</span> <span class="n">_optionals</span>
-<span class="ne">--&gt; </span><span class="mi">105</span> <span class="kn">from</span> <span class="nn">.jupyter_magics</span> <span class="kn">import</span> <span class="n">ProgressBarMagic</span><span class="p">,</span> <span class="n">StatusMagic</span>
-<span class="g g-Whitespace">    </span><span class="mi">106</span> <span class="kn">from</span> <span class="nn">.progressbar</span> <span class="kn">import</span> <span class="n">HTMLProgressBar</span>
-<span class="g g-Whitespace">    </span><span class="mi">107</span> <span class="kn">from</span> <span class="nn">.version_table</span> <span class="kn">import</span> <span class="n">VersionTable</span>
-
-<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.11.7</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">qiskit</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">jupyter</span><span class="o">/</span><span class="n">jupyter_magics</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">27</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="kn">from</span> <span class="nn">qiskit.tools.events.progressbar</span> <span class="kn">import</span> <span class="n">TextProgressBar</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="kn">from</span> <span class="nn">.progressbar</span> <span class="kn">import</span> <span class="n">HTMLProgressBar</span>
-<span class="ne">---&gt; </span><span class="mi">27</span> <span class="kn">from</span> <span class="nn">.library</span> <span class="kn">import</span> <span class="n">circuit_library_widget</span>
-<span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="k">def</span> <span class="nf">_html_checker</span><span class="p">(</span><span class="n">job_var</span><span class="p">,</span> <span class="n">interval</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">_interval_set</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Internal function that updates the status</span>
-<span class="g g-Whitespace">     </span><span class="mi">32</span><span class="sd">     of a HTML job monitor.</span>
-<span class="g g-Whitespace">     </span><span class="mi">33</span><span class="sd"> </span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">     </span><span class="mi">39</span><span class="sd">         _interval_set (bool): Was interval set by user?</span>
-<span class="g g-Whitespace">     </span><span class="mi">40</span><span class="sd">     &quot;&quot;&quot;</span>
-
-<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.11.7</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">qiskit</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">jupyter</span><span class="o">/</span><span class="n">library</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">17</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># This code is part of Qiskit.</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1">#</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># (C) Copyright IBM 2017, 2018.</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> 
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="c1"># pylint: disable=invalid-name,no-name-in-module,ungrouped-imports</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;A circuit library widget module&quot;&quot;&quot;</span>
-<span class="ne">---&gt; </span><span class="mi">17</span> <span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">wid</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;ipywidgets&#39;
 </pre></div>
 </div>
 </div>
@@ -1102,30 +1057,12 @@ Cost = 10 N_{CNOT} + N_{other}
 <div class="tip admonition">
 <p class="admonition-title">解説</p>
 <!-- TODO: Qiskit Textbookの移行が完了したらURLを紐づけ -->
-<p>トフォリゲートの構築はいくつかの説明が可能ですが、 <span class="xref myst">Qiskit Textbook(移行中につきリンク切れの可能性あり)</span>にそのうちの一つである最も簡易なアダマールゲートとTゲートから構成する方法が掲載されています。</p>
+<p>トフォリゲートの構築はいくつかの説明が可能ですが、 Qiskit Textbookにそのうちの一つである最も簡易なアダマールゲートとTゲートから構成する方法が掲載されています。</p>
 <p><img alt="トフォリゲートのイラスト" src="_images/2021-spring-lab1_toffoli.png" /></p>
 <p>この回路の最後に2つのSWAP操作があることがわかります。これは<code class="docutils literal notranslate"><span class="pre">q0</span></code>が<code class="docutils literal notranslate"><span class="pre">q1</span></code>と接続されていないことに起因し、一般的には実機のカップリング・マップに依存するので、SWAPを省く(CXとTダガーは<code class="docutils literal notranslate"><span class="pre">q2</span></code>ではなく<code class="docutils literal notranslate"><span class="pre">q1</span></code>にある）ことができます。</p>
 <p>SWAPを除くと、回路は4つのゲート（アダマール、CX、TとTの共役転置）で構成されていることがわかります。Tゲートを調べると、実際にはZ軸周りに<span class="math notranslate nohighlight">\(\pi/4\)</span>の回転であり、<span class="math notranslate nohighlight">\(\phi=\pi/4\)</span>のRz(<span class="math notranslate nohighlight">\(\phi\)</span>)ゲートとみなせます。Tダガーを構成するには、逆の回転を持つRzゲートを用います。</p>
 <p>また、アダマールゲートは2つのRzゲートと1つのSXゲートを使って構成できます。以上、すべてのアダマールゲートとTゲート、Tダガーゲートを4つのゲートに分解すると回答のような回路が得られます。</p>
 <p>今回はQiskit Textbookの説明を元にトフォリゲートを構成しましたが、コストを最小化するより効率的な回路は多数存在します。ぜひご自身でチャレンジしてみてください。</p>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # 以下のコードで答えをチェックしてください</span>
-<span class="c1"># from qc_grader import grade_ex1</span>
-<span class="c1"># grade_ex1(qc)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # 回答を提出してください。何度でも再提出可能です。</span>
-<span class="c1"># from qc_grader import submit_ex1</span>
-<span class="c1"># submit_ex1(qc)</span>
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="additional-information">
