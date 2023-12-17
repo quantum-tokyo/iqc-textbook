@@ -5,12 +5,11 @@ title: IBM Quantum Challengeで学ぶ量子コンピューティング
 author: Quantum Tokyo
 logo: ./resources/quantum-tokyo-icon.jpg
 
-# Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
-  execute_notebooks: force
+  execute_notebooks: auto
   exclude_patterns:
-    - '*_bk'
+    - '*_bk*'
 
 only_build_toc_files: true
 
