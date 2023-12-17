@@ -34,7 +34,7 @@ parts:
   #   - file: 2021-autumn-lab4-battery
   #   - file: 2022-autumn-lab3-optimization
   #   - file: 2021-autumn-lab3-img-classification
-      - file: 2022-autumn-lab2-quantum-kernel
+      - file: 2022-autumn-lab2-quantum-kernel_bk
   # - caption: "第5章 量子コンピューターのエラー訂正・緩和"
   #   chapters:
   #   - file: 2022-autumn-lab1-runtime
