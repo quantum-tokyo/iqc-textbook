@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="127 量子ビットを使う（2023年春 Lab5）" href="2023-spring-lab5-127qubits_bk.html" />
-    <link rel="prev" title="Qiskit Runtimeを使った量子カーネル学習（2022秋 Lab2）" href="2022-autumn-lab2-quantum-kernel_bk.html" />
+    <link rel="prev" title="Qiskit RuntimeにおけるPrimitives入門（2022年秋 Lab1）" href="2022-autumn-lab1-runtime.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -190,6 +190,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">第５章 量子コンピューターのエラー訂正・緩和</span></p>
 <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2022-autumn-lab1-runtime.html">Qiskit RuntimeにおけるPrimitives入門（2022年秋 Lab1）</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">エラー訂正（2023年春 Lab4）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-spring-lab5-127qubits_bk.html">127 量子ビットを使う（2023年春 Lab5）</a></li>
 </ul>
@@ -1092,7 +1093,7 @@ Percent chance the 000 message has 2 or 3 errors: 2.8000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c496e084ab2b670c214eb2d80be7ceba34a35ebfac0b6549f4cbc3811b474439.png" src="_images/c496e084ab2b670c214eb2d80be7ceba34a35ebfac0b6549f4cbc3811b474439.png" />
+<img alt="_images/0991c4674b77514f366e3e440b259094d221f28c8a9e4e15a70c29ec1ac0c920.png" src="_images/0991c4674b77514f366e3e440b259094d221f28c8a9e4e15a70c29ec1ac0c920.png" />
 </div>
 </div>
 <p>間違った結果も出ますが、全体としてはほとんどの結果が正しいです。これは良い兆候であり、ノイズがあっても我々のコードが動作することを意味します。</p>
@@ -1117,7 +1118,7 @@ Percent chance the 000 message has 2 or 3 errors: 2.8000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/dc6175f6f21a1c965fe625bca984c57236b0c8418c366b234ef6c7ac1587700c.png" src="_images/dc6175f6f21a1c965fe625bca984c57236b0c8418c366b234ef6c7ac1587700c.png" />
+<img alt="_images/21708faf6cb4a2b9434a84930d4b0fc4d8b47b112ec42c903e42d783fde3f311.png" src="_images/21708faf6cb4a2b9434a84930d4b0fc4d8b47b112ec42c903e42d783fde3f311.png" />
 </div>
 </div>
 <p>結果はほぼ同じか、あるいは若干悪くなっていることがわかります。これはエンコード量子ビットを作成後、使用していないためです。</p>
@@ -1293,7 +1294,7 @@ Rx(\theta)\ket{1} = \cos{(\theta/2)}\ket{1} - i\sin{(\theta/2)}\ket{0}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c4b5700707a98a021189227df76fe2a1adc77926d30872e6e15294564718e05f.png" src="_images/c4b5700707a98a021189227df76fe2a1adc77926d30872e6e15294564718e05f.png" />
+<img alt="_images/7b27cc3384fd37da0173385e1c5a2dca5410fc99283726124ab54828b7533802.png" src="_images/7b27cc3384fd37da0173385e1c5a2dca5410fc99283726124ab54828b7533802.png" />
 </div>
 </div>
 <p>結果は悪化してしまいましたが、ほとんどの場合、<code class="docutils literal notranslate"><span class="pre">001</span></code>が取得出来ていることが分かります。</p>
@@ -1340,7 +1341,7 @@ https://github.com/Qiskit/textbook/blob/main/notebooks/ch-labs/Lab10_QEC.ipynb</
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e858dc54704d44bd16e35326cd2cf170ff345e9f19d38782010ebaf3e5007fe7.png" src="_images/e858dc54704d44bd16e35326cd2cf170ff345e9f19d38782010ebaf3e5007fe7.png" />
+<img alt="_images/3bf715184c610562e083b55a29578ac95ef56fbcff0fe8e622bc2c1820a8ae03.png" src="_images/3bf715184c610562e083b55a29578ac95ef56fbcff0fe8e622bc2c1820a8ae03.png" />
 </div>
 </div>
 <p>完璧なレイアウトはありません。特に、3つの量子ビットをエンタングルさせるために、最初のうちはエラー訂正とは異なる接続が必要なためです。</p>
@@ -1393,12 +1394,12 @@ https://github.com/Qiskit/textbook/blob/main/notebooks/ch-labs/Lab10_QEC.ipynb</
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="2022-autumn-lab2-quantum-kernel_bk.html"
+       href="2022-autumn-lab1-runtime.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Qiskit Runtimeを使った量子カーネル学習（2022秋 Lab2）</p>
+        <p class="prev-next-title">Qiskit RuntimeにおけるPrimitives入門（2022年秋 Lab1）</p>
       </div>
     </a>
     <a class="right-next"

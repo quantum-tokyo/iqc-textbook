@@ -190,6 +190,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">第５章 量子コンピューターのエラー訂正・緩和</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2022-autumn-lab1-runtime.html">Qiskit RuntimeにおけるPrimitives入門（2022年秋 Lab1）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-spring-lab4-error-correction.html">エラー訂正（2023年春 Lab4）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-spring-lab5-127qubits_bk.html">127 量子ビットを使う（2023年春 Lab5）</a></li>
 </ul>
@@ -438,8 +439,8 @@ document.write(`
 <p>ここで、最後の等式では、二進数の「小数」表記を使用しています。簡単のために、 <span class="math notranslate nohighlight">\(U\)</span> が1つの量子ビットに作用するユニタリー演算子であるとします（ここで述べていることはすべて、 <span class="math notranslate nohighlight">\(U\)</span> が複数の量子ビットに作用する場合にも適用されます）。IPEは補助量子ビットを必要とするので、 <span class="math notranslate nohighlight">\(q_0\)</span> と <span class="math notranslate nohighlight">\(q_1\)</span> という2つの量子ビットのシステムが必要であり、 <span class="math notranslate nohighlight">\(q_0\)</span> は補助量子ビット、 <span class="math notranslate nohighlight">\(q_1\)</span> は <span class="math notranslate nohighlight">\(U\)</span> が作用する物理系を表します。</p>
 <p>ここで、 <span class="math notranslate nohighlight">\(q_0\)</span> を <span class="math notranslate nohighlight">\(|+\rangle = \frac{|0\rangle + |1\rangle}{\sqrt{2}}\)</span> の状態に、 <span class="math notranslate nohighlight">\(q_1\)</span> を <span class="math notranslate nohighlight">\(|\Psi \rangle\)</span> の状態に初期化するとします。  <span class="math notranslate nohighlight">\(q_0\)</span> をコントロール、 <span class="math notranslate nohighlight">\(q_1\)</span> をターゲットとして、 <em>制御</em> <span class="math notranslate nohighlight">\(U^{2^t}\)</span> ゲートを適用するとどうなるでしょうか?  <span class="math notranslate nohighlight">\(|\Psi \rangle\)</span> は固有値  <span class="math notranslate nohighlight">\(e^{i 2\pi \varphi}\)</span> を持つ <span class="math notranslate nohighlight">\(U\)</span> の固有状態であるため、次のようになります。
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0a9d2fc8-3de1-4e2f-b66e-8d3336f6b218">
-<span class="eqno">(2)<a class="headerlink" href="#equation-0a9d2fc8-3de1-4e2f-b66e-8d3336f6b218" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-55077451-7dd5-43c9-9152-b66b513532f6">
+<span class="eqno">(2)<a class="headerlink" href="#equation-55077451-7dd5-43c9-9152-b66b513532f6" title="Permalink to this equation">#</a></span>\[\begin{align}
 |+\rangle |\Psi \rangle &amp;= \left(\frac{|0\rangle + |1\rangle}{\sqrt{2}}\right) |\Psi \rangle \\
 &amp;= \frac{|0\rangle |\Psi \rangle + |1\rangle |\Psi \rangle}{\sqrt{2}} \\
 &amp;\xrightarrow{\text{controlled-}U^{2^t}} \frac{|0\rangle |\Psi \rangle + e^{i 2 \pi 2^{t} \varphi} |1\rangle |\Psi \rangle}{\sqrt{2}} \\
@@ -948,8 +949,8 @@ $$</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;11&#39;: 50, &#39;00&#39;: 73, &#39;10&#39;: 196, &#39;01&#39;: 681}
-Success probability: 0.681
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;11&#39;: 50, &#39;01&#39;: 684, &#39;00&#39;: 64, &#39;10&#39;: 202}
+Success probability: 0.684
 </pre></div>
 </div>
 </div>
@@ -1152,8 +1153,8 @@ Success probability: 0.681
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;11&#39;: 62, &#39;01&#39;: 938}
-Success probability: 0.938
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;01&#39;: 932, &#39;11&#39;: 68}
+Success probability: 0.932
 </pre></div>
 </div>
 </div>

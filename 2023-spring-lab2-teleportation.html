@@ -190,6 +190,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">第５章 量子コンピューターのエラー訂正・緩和</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2022-autumn-lab1-runtime.html">Qiskit RuntimeにおけるPrimitives入門（2022年秋 Lab1）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-spring-lab4-error-correction.html">エラー訂正（2023年春 Lab4）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-spring-lab5-127qubits_bk.html">127 量子ビットを使う（2023年春 Lab5）</a></li>
 </ul>
@@ -523,8 +524,8 @@ document.write(`
 CNOTゲートは2量子ビットゲートで、入力に制御量子ビットとターゲット量子ビットを指定する必要があります。<br />
 ここではアリスのもつ量子ビットを制御量子ビットに、ボブのもつ量子ビットをターゲット量子ビットに設定します。</p>
 <p>ここで、メッセージ量子ビット<span class="math notranslate nohighlight">\(s\)</span>の状態を<span class="math notranslate nohighlight">\(\ket{\psi}\)</span>とおくと、3量子ビットの量子状態は以下のように表すことが出来ます。</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e3951229-50bc-4b2a-82b1-cf36accad32d">
-<span class="eqno">(1)<a class="headerlink" href="#equation-e3951229-50bc-4b2a-82b1-cf36accad32d" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-5513a438-bef4-4b3a-b92d-5c8187237e90">
+<span class="eqno">(1)<a class="headerlink" href="#equation-5513a438-bef4-4b3a-b92d-5c8187237e90" title="Permalink to this equation">#</a></span>\[\begin{align}
     \ket{\psi}\ket{B_{00}} &amp;= (\alpha\ket{0}+\beta\ket{1})(\frac{1}{\sqrt{2}}(\ket{00}+\ket{11})) \\
      &amp;= \frac{1}{\sqrt{2}}(\alpha\ket{000}+\alpha\ket{011}+\beta\ket{100}+\beta\ket{111})
 \end{align}\]</div>
@@ -825,7 +826,7 @@ CNOTゲートは2量子ビットゲートで、入力に制御量子ビットと
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/cbe85aace94f670fd173783a95b30d8b228fc83d67b82e57e2bf60ac883063c9.png" src="_images/cbe85aace94f670fd173783a95b30d8b228fc83d67b82e57e2bf60ac883063c9.png" />
+<img alt="_images/87dbc0aef4716c663fafaeec76be9551d129120dbae3ecbd7e9d869ea1c63f83.png" src="_images/87dbc0aef4716c663fafaeec76be9551d129120dbae3ecbd7e9d869ea1c63f83.png" />
 </div>
 </div>
 <div class="tip admonition">
@@ -844,7 +845,7 @@ CNOTゲートは2量子ビットゲートで、入力に制御量子ビットと
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/896ac420c7ffd2dcd1cb0b1a03561d55d3828958e9f7a18854b6eb507f003359.png" src="_images/896ac420c7ffd2dcd1cb0b1a03561d55d3828958e9f7a18854b6eb507f003359.png" />
+<img alt="_images/2ee9254edaae3114413488de404a5cb2073f51d69c007edda4f1f5b7102eee6f.png" src="_images/2ee9254edaae3114413488de404a5cb2073f51d69c007edda4f1f5b7102eee6f.png" />
 </div>
 </div>
 <p>周辺分布は、理想的な確率にある程度は近いはずです。</p>
