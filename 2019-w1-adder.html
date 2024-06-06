@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
@@ -15,19 +15,19 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
@@ -38,8 +38,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -77,19 +78,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -111,12 +116,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -131,9 +144,11 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="intro.html">
+  
   
   
   
@@ -143,8 +158,8 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="_static/quantum-tokyo-icon.jpg" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/quantum-tokyo-icon.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/quantum-tokyo-icon.jpg" class="logo__image only-light" alt="IBM Quantum Challengeで学ぶ量子コンピューティング - Home"/>
+    <script>document.write(`<img src="_static/quantum-tokyo-icon.jpg" class="logo__image only-dark" alt="IBM Quantum Challengeで学ぶ量子コンピューティング - Home"/>`);</script>
   
   
 </a></div>
@@ -190,7 +205,6 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">第５章 量子コンピューターのエラー訂正・緩和</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="2022-autumn-lab1-runtime.html">Qiskit RuntimeにおけるPrimitives入門（2022年秋 Lab1）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-spring-lab4-error-correction.html">エラー訂正（2023年春 Lab4）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-spring-lab5-127qubits_bk.html">127 量子ビットを使う（2023年春 Lab5）</a></li>
 </ul>
@@ -208,7 +222,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -217,7 +231,7 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
@@ -346,20 +360,22 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -419,7 +435,7 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="week1">
 <h1>量子回路における加算器（2019年 Week1）<a class="headerlink" href="#week1" title="Permalink to this heading">#</a></h1>
@@ -600,7 +616,7 @@ document.write(`
 <section id="not">
 <h3>NOTゲート<a class="headerlink" href="#not" title="Permalink to this heading">#</a></h3>
 <p>先述の通り、XゲートをNOTゲートとみなすことができます。 真理値表は以下のようになります。</p>
-<table class="table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>入力</p></th>
 <th class="head"><p>出力</p></th>
@@ -615,6 +631,7 @@ document.write(`
 </tr>
 </tbody>
 </table>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -634,7 +651,7 @@ document.write(`
 <section id="and">
 <h3>ANDゲート<a class="headerlink" href="#and" title="Permalink to this heading">#</a></h3>
 <p>ANDゲートの真理値表は以下のようなものです。</p>
-<table class="table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>入力A</p></th>
 <th class="head"><p>入力B</p></th>
@@ -660,6 +677,7 @@ document.write(`
 </tr>
 </tbody>
 </table>
+</div>
 <p>CCXゲートを用いると、制御量子ビット2つに対するANDゲートの結果をターゲット量子ビットに得られます。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -680,7 +698,7 @@ document.write(`
 <section id="nand">
 <h3>NANDゲート<a class="headerlink" href="#nand" title="Permalink to this heading">#</a></h3>
 <p>NANDゲートはANDゲートにNOTゲートを適用したものと捉えることができます。</p>
-<table class="table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>入力A</p></th>
 <th class="head"><p>入力B</p></th>
@@ -706,6 +724,7 @@ document.write(`
 </tr>
 </tbody>
 </table>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -725,7 +744,7 @@ document.write(`
 </section>
 <section id="or">
 <h3>ORゲート<a class="headerlink" href="#or" title="Permalink to this heading">#</a></h3>
-<table class="table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>入力A</p></th>
 <th class="head"><p>入力B</p></th>
@@ -751,6 +770,7 @@ document.write(`
 </tr>
 </tbody>
 </table>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -772,7 +792,7 @@ document.write(`
 </section>
 <section id="xor">
 <h3>XORゲート<a class="headerlink" href="#xor" title="Permalink to this heading">#</a></h3>
-<table class="table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>入力A</p></th>
 <th class="head"><p>入力B</p></th>
@@ -798,6 +818,7 @@ document.write(`
 </tr>
 </tbody>
 </table>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -817,7 +838,7 @@ document.write(`
 </section>
 <section id="nor">
 <h3>NORゲート<a class="headerlink" href="#nor" title="Permalink to this heading">#</a></h3>
-<table class="table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>入力A</p></th>
 <th class="head"><p>入力B</p></th>
@@ -843,6 +864,7 @@ document.write(`
 </tr>
 </tbody>
 </table>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -875,7 +897,7 @@ document.write(`
 1ビットの情報2つ(入力A,B)が入力として与えられ、桁上げ出力(Carry out)、出力（Sum、和）の２つを出力に持ちます。
 この桁上げ出力の情報は、後述の全加算器の入力の１つとして１つ上の位の値を求めるために用いられます。</p>
 <p>半加算器は以下の様な真理値表の論理回路で表すことができます。</p>
-<table class="table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>入力A</p></th>
 <th class="head"><p>入力B</p></th>
@@ -906,6 +928,7 @@ document.write(`
 </tr>
 </tbody>
 </table>
+</div>
 <p>この真理値表を見ると、桁上げ出力Cは入力Aと入力Bに対してANDを適用したものであること、出力Sは入力Aと入力Bに対してXORを適用したものであることがわかります。
 ANDとXORに関してはすでに作成済みなので、以下のように組み合わせて半加算器の量子回路が作成できます。</p>
 <p>なお、量子レジスタをq, 古典レジスタcとし、入力A, Bをq[0],q[1]に、桁上げ出力C,出力Sをq[2], q[3]に割り振ります。
@@ -1075,7 +1098,7 @@ ANDとXORに関してはすでに作成済みなので、以下のように組�
 <p class="admonition-title">全加算器の構築</p>
 <p>全加算器は、下の位からの桁上げを含む加算器である。
 全加算器を量子回路で表現せよ。なお、真理値表は以下のようになる。</p>
-<table class="table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>入力A</p></th>
 <th class="head"><p>入力B</p></th>
@@ -1135,6 +1158,7 @@ ANDとXORに関してはすでに作成済みなので、以下のように組�
 </tr>
 </tbody>
 </table>
+</div>
 <p>なお、量子レジスタをq, 古典レジスタcとする。また、入力A, B, 桁上げ入力Xをそれぞれq[0], q[1], q[2]に与えられるものとし、測定結果のc[0]に桁上げ出力C、c[1]に出力Sが出力されるようにすること。</p>
 <p>入力000から111までの出力結果をカンマで区切ったものと、入力000の全加算器に対してunrollerを用いて単一量子ビットゲート(u3)とCXに分解した結果を出力せよ<br />
 例<br />
@@ -1302,11 +1326,10 @@ A, B, Xの入力値を決める(inputdata = [x,x,x]を任意の値にしてif-el
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer d-print-none">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="2023-spring-lab1-sample.html"
@@ -1326,10 +1349,7 @@ A, B, Xの入力値を決める(inputdata = [x,x,x]を任意の値にしてif-el
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -1337,6 +1357,7 @@ A, B, Xの入力値を決める(inputdata = [x,x,x]を任意の値にしてif-el
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1389,6 +1410,7 @@ By Quantum Tokyo
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2022.
@@ -1415,8 +1437,8 @@ By Quantum Tokyo
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
 
   <footer class="bd-footer">
   </footer>
