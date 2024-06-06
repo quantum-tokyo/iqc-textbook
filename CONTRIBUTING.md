@@ -97,7 +97,7 @@ parts:
 本リポジトリに Pull Request を送る前に正しく Web ページが表示されるか確認する。
 
 ```
-jupyter-book build ./src/
+bash script/build.sh
 ```
 
 コマンド実行後、`src/_build`にビルド済みファイルが生成されるためブラウザ等で自身が編集したページが正しく反映されているかを確認する。
