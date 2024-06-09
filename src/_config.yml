@@ -9,7 +9,7 @@ logo: ./resources/quantum-tokyo-icon.jpg
 execute:
   execute_notebooks: auto
   exclude_patterns:
-    - '*_bk*'
+  - '*_bk*'
 
 only_build_toc_files: true
 
@@ -20,19 +20,20 @@ latex:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/quantum-tokyo/iqc-textbook  # Online location of your book
+  url: https://github.com/quantum-tokyo/iqc-textbook # Online location of your book
   # path_to_book: docs  # Optional path to your book, relative to the repository root
-  branch: master  # Which branch of the repository should be used when creating links (optional)
+  branch: master # Which branch of the repository should be used when creating links (optional)
 
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
 html:
   use_issues_button: true
   use_repository_button: true
+  announcement: '本ページはQiskit 0.44に対応しています。Qiskit 1.0 ver.は<a href="https://quantum-tokyo.github.io/ibm-quantum-challenge-textbook/">こちら</a>(移行後本ページはCloseします)'
 
 parse:
   myst_enable_extensions:
-    # don't forget to list any other extensions you want enabled,
-    # including those that are enabled by default!
-    - amsmath
-    - dollarmath
+  # don't forget to list any other extensions you want enabled,
+  # including those that are enabled by default!
+  - amsmath
+  - dollarmath
